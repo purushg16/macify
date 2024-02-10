@@ -5,7 +5,6 @@ import theme from "./components/elements/theme";
 import { RouterProvider } from "react-router-dom";
 import router from "./components/router";
 import "./index.css";
-import "@bitnoi.se/react-scheduler/dist/style.css";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 

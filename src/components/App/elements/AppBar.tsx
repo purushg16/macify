@@ -9,6 +9,7 @@ const AppBar = () => {
 
   return (
     <Box
+      zIndex={10}
       pos="fixed"
       bottom={0}
       py={6}
