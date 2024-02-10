@@ -13,7 +13,10 @@ const LayoutPage = () => {
       <Show above="md">
         <Navbar />
       </Show>
-      <Outlet />
+
+      <Box p={4}>
+        <Outlet />
+      </Box>
 
       <Show below="md">
         <AppBar />
