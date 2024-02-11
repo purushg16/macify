@@ -7,9 +7,9 @@ const LayoutPage = () => {
   //   const { colorMode, toggleColorMode } = useColorMode();
   //   if (colorMode === "light") toggleColorMode();
   //   if (colorMode === "dark") toggleColorMode();
-
+  // bg="#eff1ef"
   return (
-    <Box bg="#eff1ef">
+    <Box>
       <Show above="md">
         <Navbar />
       </Show>
