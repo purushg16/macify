@@ -1,20 +1,12 @@
 import { Box, Flex, HStack, Heading, Show, Spacer } from "@chakra-ui/react";
+import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
 import Btn from "../../Brand/elements/Button";
 import { NavButton } from "./AppButton";
-import { TbLayoutBoard, TbCalendar, TbBuilding } from "react-icons/tb";
 
 const Navbar = () => {
   return (
-    <Box pos="relative">
-      <Flex
-        zIndex={2}
-        alignItems="center"
-        pos="fixed"
-        px={{ base: 8, md: 16 }}
-        py={4}
-        w="100%"
-        top={0}
-      >
+    <Box zIndex={20} pos="sticky" top={0} bg="white">
+      <Flex alignItems="center" px={{ base: 8, md: 16 }} py={4} w="100%">
         <Heading fontSize="xl"> Macify </Heading>
 
         <Show above="lg">

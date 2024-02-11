@@ -19,6 +19,7 @@ const LayoutPage = () => {
       </Box>
 
       <Show below="md">
+        <Box py={8} />
         <AppBar />
       </Show>
     </Box>

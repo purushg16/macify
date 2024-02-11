@@ -1,12 +1,28 @@
-import { Box, Divider, Flex } from "@chakra-ui/react";
-import DateBlock from "./DateBlock";
+import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import DateGenerator from "../../../generator/scheduleTimeline";
+import DateBlock from "./DateBlock";
 
-const Schedular = () => {
+interface Props {
+  propertyName: string;
+  propertyNumber?: string;
+}
+
+const Schedular = ({ propertyName, propertyNumber }: Props) => {
   const dateGenerator = DateGenerator({ months: 6 });
 
   return (
-    <Box>
+    <Box borderTop="1px solid" borderColor="gray.200" bg="gray.50">
+      <Text
+        py={2}
+        fontSize="md"
+        mb={4}
+        pl={2}
+        borderLeft="5px solid #7edf9a"
+        bg="gray.100"
+      >
+        {propertyName} - {propertyNumber && `  Room ${propertyNumber}`}
+      </Text>
+
       <Flex
         w="100%"
         overflowX="auto"
