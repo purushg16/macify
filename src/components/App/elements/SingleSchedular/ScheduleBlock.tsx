@@ -31,9 +31,7 @@ const ScheduleBlock = ({ date, index }: Props) => {
 
         {date in scheduleData && (
           <ScheduleTimeline
-            desc={scheduleData[date].title}
-            startDate={scheduleData[date].start}
-            endDate={scheduleData[date].end}
+            data={scheduleData[date]}
             current={scheduleData[date].start === firstData.start}
             upcoming={scheduleData[date].start === secondData.start}
           />

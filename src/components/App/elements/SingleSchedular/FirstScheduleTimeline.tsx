@@ -3,14 +3,10 @@ import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
 import { durationCalculator } from "../../../generator/durationCalculator";
 import { fIRST_SCHEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
+import schedule from "../../../entities/schedule";
 
 interface Props {
-  data: {
-    id: number;
-    start: Date;
-    end: Date;
-    title: string;
-  };
+  data: schedule;
 }
 
 const FirstScheduleTimeline = ({ data }: Props) => {

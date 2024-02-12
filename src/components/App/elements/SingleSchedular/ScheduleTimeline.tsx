@@ -3,22 +3,23 @@ import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
 import { durationCalculator } from "../../../generator/durationCalculator";
 import { SHCEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
+import schedule from "../../../entities/schedule";
 
 interface Props {
-  desc: string;
-  startDate: Date;
-  endDate: Date;
+  data: schedule;
   current?: boolean;
   upcoming?: boolean;
 }
 
 const ScheduleTimeline = ({
-  desc,
-  startDate,
-  endDate,
+  data,
   current = false,
   upcoming = false,
 }: Props) => {
+  const desc = data.title;
+  const startDate = data.start;
+  const endDate = data.end;
+
   const scheduleBlockWidth =
     durationCalculator(startDate.getTime(), endDate.getTime()) *
     SHCEDULE_BLOCK_MULTIPLIER;
