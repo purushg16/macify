@@ -16,8 +16,9 @@ const CalendarPage = () => {
         sx={{ "&::-webkit-scrollbar": { height: 0 } }}
       >
         <Flex>
-          {dates.map((date) => (
+          {dates.map((date, i) => (
             <DateBlock
+              key={i}
               date={date.toDateString().split(" ").slice(1, 3).join(" ")}
             />
           ))}

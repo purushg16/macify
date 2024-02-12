@@ -6,19 +6,24 @@ interface Props {
   desc: string;
   startDate: Date;
   endDate: Date;
-  first?: boolean;
+  current?: boolean;
+  upcoming?: boolean;
 }
 
 const ScheduleTimeline = ({
   desc,
   startDate,
   endDate,
-  first = false,
+  current = false,
+  upcoming = false,
 }: Props) => {
   const duration =
     Math.ceil(
       (endDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)
     ) * 2;
+
+  const bg = current ? "#D3EBDA" : upcoming ? "#e0d0fb" : "#FAF5E0";
+  const border = current ? "#7edf9a" : upcoming ? "#b793f3" : "#ffe36e";
 
   return (
     <Box
@@ -29,8 +34,8 @@ const ScheduleTimeline = ({
       }
       w={{ base: 29 * duration, md: 54 * duration, lg: 79 * duration }}
       border="1px solid"
-      borderColor={first ? "#7edf9a" : "#ffe36e"}
-      bg={first ? "#D3EBDA" : "#FAF5E0"}
+      borderColor={border}
+      bg={bg}
       cursor="pointer"
       p={2}
     >
