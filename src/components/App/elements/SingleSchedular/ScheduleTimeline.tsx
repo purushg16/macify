@@ -28,17 +28,13 @@ const ScheduleTimeline = ({
         alert(`Title: ${desc}\n Start: ${startDate}\n End: ${endDate}`)
       }
       w={{ base: 29 * duration, md: 54 * duration, lg: 79 * duration }}
-      h={90}
       border="1px solid"
       borderColor={first ? "#7edf9a" : "#ffe36e"}
       bg={first ? "#D3EBDA" : "#FAF5E0"}
-      opacity={1}
       cursor="pointer"
-      p={{ base: 2, md: 3, lg: 5 }}
+      p={2}
     >
-      <Text fontWeight={700}> {desc} </Text>
-
-      <HStack mt={2} alignItems="center">
+      <HStack alignItems="center">
         <Text display="contents">
           <Icon as={BsPersonFill} color="gray" /> 3
         </Text>
