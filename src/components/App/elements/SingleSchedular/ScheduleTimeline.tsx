@@ -47,13 +47,18 @@ const ScheduleTimeline = ({
     >
       <HStack alignItems="center">
         <Text display="contents">
-          <Icon as={BsPersonFill} color="gray" /> 3
+          <Icon
+            as={BsPersonFill}
+            color="gray"
+            boxSize={{ sm: 1, md: 1, lg: 4 }}
+          />
+          3
         </Text>
 
         <Text px={{ base: 0, md: 1 }}>|</Text>
 
         <Text display="contents">
-          <Icon as={FaMoon} boxSize={3} color="gray" /> 3
+          <Icon as={FaMoon} color="gray" boxSize={{ sm: 1, md: 1, lg: 3 }} />3
         </Text>
       </HStack>
     </Box>
