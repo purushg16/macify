@@ -1,19 +1,15 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 
-interface Props {
-  date: string;
+interface DateBlockProps {
+  currentDate: Date;
 }
 
-const DateBlock = ({ date }: Props) => {
+const DateBlock = ({ currentDate }: DateBlockProps) => {
+  const month = currentDate.toDateString().split(" ").slice(1, 3)[0];
+  const date = currentDate.toDateString().split(" ").slice(1, 3)[1];
+
   return (
-    <Box
-      minW={{ base: 61, md: 110, lg: 160 }}
-      // minH={150}
-      display="flex"
-      flexDir="column"
-      // gap={5}
-    >
-      {/* date */}
+    <Box minW={{ base: 61, md: 110, lg: 160 }} display="flex" flexDir="column">
       <SimpleGrid
         pos="relative"
         id="date-block"
@@ -21,7 +17,7 @@ const DateBlock = ({ date }: Props) => {
         pb={5}
       >
         <Text textAlign="center" fontWeight={700} fontSize="md" opacity={0.7}>
-          {date.split(" ")[0]}
+          {month} {/* month */}
         </Text>
         <Text
           textAlign="center"
@@ -29,7 +25,7 @@ const DateBlock = ({ date }: Props) => {
           fontSize="2xl"
           lineHeight="normal"
         >
-          {date.split(" ")[1]}
+          {date} {/* date */}
         </Text>
       </SimpleGrid>
     </Box>

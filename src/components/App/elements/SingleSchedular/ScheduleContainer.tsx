@@ -12,15 +12,14 @@ const ScheduleContainer = () => {
       overflowX="auto"
       sx={{ "&::-webkit-scrollbar": { height: 0 } }}
     >
+      {/* Redering Date Blocks */}
       <Flex>
         {dates.map((date, i) => (
-          <DateBlock
-            key={i}
-            date={date.toDateString().split(" ").slice(1, 3).join(" ")}
-          />
+          <DateBlock key={i} currentDate={date} />
         ))}
       </Flex>
 
+      {/* Rendering List of Properties Schedules */}
       <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
         <Schedular propertyName="Ganga" propertyNumber="8" dates={dates} />
         <Schedular propertyName="Yamuna" propertyNumber="9" dates={dates} />
