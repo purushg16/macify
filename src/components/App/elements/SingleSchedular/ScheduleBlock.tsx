@@ -4,12 +4,12 @@ import FirstScheduleTimeline from "./FirstScheduleTimeline";
 import ScheduleTimeline from "./ScheduleTimeline";
 import { isDateBetween } from "../../../functions/dateChecker";
 
-interface Props {
+interface ScheduleBlockProps {
   date: string;
   index: number;
 }
 
-const ScheduleBlock = ({ date, index }: Props) => {
+const ScheduleBlock = ({ date, index }: ScheduleBlockProps) => {
   const firstData = Object.values(scheduleData)[0];
   const secondData = Object.values(scheduleData)[1];
 

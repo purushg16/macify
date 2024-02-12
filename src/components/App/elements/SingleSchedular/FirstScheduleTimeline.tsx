@@ -5,11 +5,11 @@ import { durationCalculator } from "../../../generator/durationCalculator";
 import { fIRST_SCHEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
 import schedule from "../../../entities/schedule";
 
-interface Props {
+interface FirstScheduleTimelineProps {
   data: schedule;
 }
 
-const FirstScheduleTimeline = ({ data }: Props) => {
+const FirstScheduleTimeline = ({ data }: FirstScheduleTimelineProps) => {
   const blockWidth =
     durationCalculator(data.start.getTime(), data.end.getTime()) *
     fIRST_SCHEDULE_BLOCK_MULTIPLIER;

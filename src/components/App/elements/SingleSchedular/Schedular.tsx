@@ -1,13 +1,13 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import ScheduleBlock from "./ScheduleBlock";
 
-interface Props {
+interface SchedularProps {
   dates: Date[];
   propertyName: string;
   propertyNumber?: string;
 }
 
-const Schedular = ({ propertyName, propertyNumber, dates }: Props) => {
+const Schedular = ({ propertyName, propertyNumber, dates }: SchedularProps) => {
   return (
     <Box
       borderTop="1px solid"

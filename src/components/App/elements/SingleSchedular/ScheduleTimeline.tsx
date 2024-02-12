@@ -5,7 +5,7 @@ import { durationCalculator } from "../../../generator/durationCalculator";
 import { SHCEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
 import schedule from "../../../entities/schedule";
 
-interface Props {
+interface ScheduleTimelineProps {
   data: schedule;
   current?: boolean;
   upcoming?: boolean;
@@ -15,7 +15,7 @@ const ScheduleTimeline = ({
   data,
   current = false,
   upcoming = false,
-}: Props) => {
+}: ScheduleTimelineProps) => {
   const desc = data.title;
   const startDate = data.start;
   const endDate = data.end;
