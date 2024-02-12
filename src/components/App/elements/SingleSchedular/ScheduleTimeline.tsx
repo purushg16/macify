@@ -1,6 +1,8 @@
 import { Box, HStack, Icon, Text } from "@chakra-ui/react";
 import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
+import { durationCalculator } from "../../../generator/durationCalculator";
+import { SHCEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
 
 interface Props {
   desc: string;
@@ -17,10 +19,9 @@ const ScheduleTimeline = ({
   current = false,
   upcoming = false,
 }: Props) => {
-  const duration =
-    Math.ceil(
-      (endDate.getTime() - startDate.getTime()) / (24 * 60 * 60 * 1000)
-    ) * 2;
+  const scheduleBlockWidth =
+    durationCalculator(startDate.getTime(), endDate.getTime()) *
+    SHCEDULE_BLOCK_MULTIPLIER;
 
   const bg = current ? "#D3EBDA" : upcoming ? "#e0d0fb" : "#FAF5E0";
   const border = current ? "#7edf9a" : upcoming ? "#b793f3" : "#ffe36e";
@@ -32,7 +33,11 @@ const ScheduleTimeline = ({
       onClick={() =>
         alert(`Title: ${desc}\n Start: ${startDate}\n End: ${endDate}`)
       }
-      w={{ base: 29 * duration, md: 54 * duration, lg: 79 * duration }}
+      w={{
+        base: 29 * scheduleBlockWidth,
+        md: 54 * scheduleBlockWidth,
+        lg: 79 * scheduleBlockWidth,
+      }}
       border="1px solid"
       borderColor={border}
       bg={bg}

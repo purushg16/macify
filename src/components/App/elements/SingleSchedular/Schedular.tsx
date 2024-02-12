@@ -15,6 +15,7 @@ const Schedular = ({ propertyName, propertyNumber, dates }: Props) => {
       bg="gray.50"
       w="fit-content"
     >
+      {/* Propert Name with Number */}
       <Text
         width="100vw"
         position="sticky"

@@ -2,6 +2,9 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import scheduleData from "../../../data/scheduleData";
 import FirstScheduleTimeline from "./FirstScheduleTimeline";
 import ScheduleTimeline from "./ScheduleTimeline";
+import { durationCalculator } from "../../../generator/durationCalculator";
+import { fIRST_SCHEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
+import { isDateBetween } from "../../../functions/dateChecker";
 
 interface Props {
   date: string;
@@ -12,20 +15,9 @@ const ScheduleBlock = ({ date, index }: Props) => {
   const firstData = Object.values(scheduleData)[0];
   const secondData = Object.values(scheduleData)[1];
 
-  const duration =
-    Math.ceil(
-      (firstData.end.getTime() - firstData.start.getTime()) /
-        (24 * 60 * 60 * 1000)
-    ) * 1.5;
-
-  function isDateBetween(startDate: Date, endDate: Date) {
-    const currentDate = new Date().toJSON().slice(0, 10);
-    const today = new Date(currentDate);
-    return (
-      startDate.getTime() <= today.getTime() &&
-      today.getTime() <= endDate.getTime()
-    );
-  }
+  const firstScheduleBlockWidth =
+    durationCalculator(firstData.start.getTime(), firstData.end.getTime()) *
+    fIRST_SCHEDULE_BLOCK_MULTIPLIER;
 
   return (
     <Box
@@ -36,10 +28,14 @@ const ScheduleBlock = ({ date, index }: Props) => {
       <SimpleGrid columns={2} pos="relative">
         <Box w={{ base: 29, md: 54, lg: 79 }} />
 
+        {/* For Booking Details happened before present date (or first date) */}
         {index === 0 &&
           !(date in scheduleData) &&
           isDateBetween(firstData.start, firstData.end) && (
-            <FirstScheduleTimeline duration={duration} data={firstData} />
+            <FirstScheduleTimeline
+              blockWidth={firstScheduleBlockWidth}
+              data={firstData}
+            />
           )}
 
         {date in scheduleData && (

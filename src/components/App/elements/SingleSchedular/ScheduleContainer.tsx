@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import DateBlock from "./DateBlock";
 import Schedular from "./Schedular";
-import DateGenerator from "../../../generator/scheduleTimeline";
+import DateGenerator from "../../../generator/dateGenerator";
 
 const ScheduleContainer = () => {
   const dates = DateGenerator({ months: 6 });

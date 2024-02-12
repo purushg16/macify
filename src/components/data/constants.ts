@@ -1,0 +1,2 @@
+export const fIRST_SCHEDULE_BLOCK_MULTIPLIER = 1.5;
+export const SHCEDULE_BLOCK_MULTIPLIER = 1.5;

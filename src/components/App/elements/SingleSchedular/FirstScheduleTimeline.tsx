@@ -3,20 +3,20 @@ import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
 
 interface Props {
-  duration: number;
+  blockWidth: number;
   data: {
     id: number;
-    start: Date; // Example: 3 days after the first meeting
-    end: Date; // Example: 5 days after the first meeting
+    start: Date;
+    end: Date;
     title: string;
   };
 }
 
-const FirstScheduleTimeline = ({ duration, data }: Props) => {
+const FirstScheduleTimeline = ({ blockWidth, data }: Props) => {
   return (
     <Box
       borderRadius="0px 10px 10px 0"
-      w={{ base: 29 * duration, md: 54 * duration, lg: 79 * duration }}
+      w={{ base: 29 * blockWidth, md: 54 * blockWidth, lg: 79 * blockWidth }}
       pos="absolute"
       py={2}
       border="1px solid"
