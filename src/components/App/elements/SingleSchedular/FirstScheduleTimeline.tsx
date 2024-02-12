@@ -1,9 +1,10 @@
 import { HStack, Icon, Box, Text } from "@chakra-ui/react";
 import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
+import { durationCalculator } from "../../../generator/durationCalculator";
+import { fIRST_SCHEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
 
 interface Props {
-  blockWidth: number;
   data: {
     id: number;
     start: Date;
@@ -12,7 +13,11 @@ interface Props {
   };
 }
 
-const FirstScheduleTimeline = ({ blockWidth, data }: Props) => {
+const FirstScheduleTimeline = ({ data }: Props) => {
+  const blockWidth =
+    durationCalculator(data.start.getTime(), data.end.getTime()) *
+    fIRST_SCHEDULE_BLOCK_MULTIPLIER;
+
   return (
     <Box
       borderRadius="0px 10px 10px 0"

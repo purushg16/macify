@@ -2,8 +2,6 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import scheduleData from "../../../data/scheduleData";
 import FirstScheduleTimeline from "./FirstScheduleTimeline";
 import ScheduleTimeline from "./ScheduleTimeline";
-import { durationCalculator } from "../../../generator/durationCalculator";
-import { fIRST_SCHEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
 import { isDateBetween } from "../../../functions/dateChecker";
 
 interface Props {
@@ -14,10 +12,6 @@ interface Props {
 const ScheduleBlock = ({ date, index }: Props) => {
   const firstData = Object.values(scheduleData)[0];
   const secondData = Object.values(scheduleData)[1];
-
-  const firstScheduleBlockWidth =
-    durationCalculator(firstData.start.getTime(), firstData.end.getTime()) *
-    fIRST_SCHEDULE_BLOCK_MULTIPLIER;
 
   return (
     <Box
@@ -32,10 +26,7 @@ const ScheduleBlock = ({ date, index }: Props) => {
         {index === 0 &&
           !(date in scheduleData) &&
           isDateBetween(firstData.start, firstData.end) && (
-            <FirstScheduleTimeline
-              blockWidth={firstScheduleBlockWidth}
-              data={firstData}
-            />
+            <FirstScheduleTimeline data={firstData} />
           )}
 
         {date in scheduleData && (
