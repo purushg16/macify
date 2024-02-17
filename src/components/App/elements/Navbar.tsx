@@ -2,6 +2,7 @@ import { Box, Flex, HStack, Heading, Show, Spacer } from "@chakra-ui/react";
 import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
 import Btn from "../../Brand/elements/Button";
 import { NavButton } from "./AppButton";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -12,9 +13,15 @@ const Navbar = () => {
         <Show above="lg">
           <Spacer />
           <HStack gap={4}>
-            <NavButton title="Calender" icon={TbCalendar} />
-            <NavButton title="Property" icon={TbBuilding} />
-            <NavButton title="Caretaker" icon={TbLayoutBoard} />
+            <Link to="/app/calender">
+              <NavButton title="Calender" icon={TbCalendar} />
+            </Link>
+            <Link to="/app/property">
+              <NavButton title="Property" icon={TbBuilding} />
+            </Link>
+            <Link to="/app/caretaker">
+              <NavButton title="Caretaker" icon={TbLayoutBoard} />
+            </Link>
           </HStack>
         </Show>
 
