@@ -14,7 +14,7 @@ const LayoutPage = () => {
         <Navbar />
       </Show>
 
-      <Box p={4}>
+      <Box py={4} px={{ base: 4, md: 4, lg: 6 }}>
         <Outlet />
       </Box>
 

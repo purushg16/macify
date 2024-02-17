@@ -3,7 +3,7 @@ import ScheduleContainer from "../elements/SingleSchedular/ScheduleContainer";
 
 const CalendarPage = () => {
   return (
-    <Flex flexDir="column" gap={8} px={{ base: 0, md: 2, lg: 6 }}>
+    <Flex flexDir="column" gap={8}>
       <Heading> Calendar </Heading>
       <ScheduleContainer />
     </Flex>

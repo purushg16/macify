@@ -7,6 +7,8 @@ import DashBoardPage from "./App/pages/DashBoardPage";
 import CalendarPage from "./App/pages/CalendarPage";
 import PropertyPage from "./App/pages/PropertyPage";
 import CaretakerPage from "./App/pages/CaretakerPage";
+import HotelBooking from "./App/pages/Booking/HotelBooking";
+import BookingLayout from "./App/pages/Booking/BookingLayout";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,11 @@ const router = createBrowserRouter([
       { path: "property", element: <PropertyPage /> },
       { path: "caretaker", element: <CaretakerPage /> },
     ],
+  },
+  {
+    path: "/booking",
+    element: <BookingLayout />,
+    children: [{ index: true, element: <HotelBooking /> }],
   },
 ]);
 

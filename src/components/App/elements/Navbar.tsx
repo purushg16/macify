@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <Box zIndex={20} pos="sticky" top={0} bg="white">
-      <Flex alignItems="center" px={{ base: 8, md: 16 }} py={4} w="100%">
+      <Flex alignItems="center" px={{ md: 6 }} py={4} w="100%">
         <Heading fontSize="xl"> Macify </Heading>
 
         <Show above="lg">
