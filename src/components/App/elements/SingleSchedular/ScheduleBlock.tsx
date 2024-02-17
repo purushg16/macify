@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import scheduleData from "../../../data/scheduleData";
+import scheduleData from "../../../data/bookings";
 import FirstScheduleTimeline from "./FirstScheduleTimeline";
 import ScheduleTimeline from "./ScheduleTimeline";
 import { isDateBetween } from "../../../functions/dateChecker";
@@ -16,6 +16,7 @@ const ScheduleBlock = ({ date, index }: ScheduleBlockProps) => {
   return (
     <Box
       minW={{ base: 61, md: 110, lg: 160 }}
+      minH={{ base: 35, md: 58 }}
       py={2}
       borderRight="1px solid #e1e1e1"
     >
@@ -29,6 +30,7 @@ const ScheduleBlock = ({ date, index }: ScheduleBlockProps) => {
             <FirstScheduleTimeline data={firstData} />
           )}
 
+        {/* Normal bookings after present date */}
         {date in scheduleData && (
           <ScheduleTimeline
             data={scheduleData[date]}

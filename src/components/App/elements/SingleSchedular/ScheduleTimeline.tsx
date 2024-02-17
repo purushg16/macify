@@ -1,9 +1,8 @@
-import { Box, HStack, Icon, Text } from "@chakra-ui/react";
+import { Box, HStack, Icon, Show, Text } from "@chakra-ui/react";
 import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
-import { durationCalculator } from "../../../generator/durationCalculator";
-import { SHCEDULE_BLOCK_MULTIPLIER } from "../../../data/constants";
 import schedule from "../../../entities/schedule";
+import { durationCalculator } from "../../../generator/durationCalculator";
 
 interface ScheduleTimelineProps {
   data: schedule;
@@ -20,24 +19,31 @@ const ScheduleTimeline = ({
   const startDate = data.start;
   const endDate = data.end;
 
-  const scheduleBlockWidth =
-    durationCalculator(startDate.getTime(), endDate.getTime()) *
-    SHCEDULE_BLOCK_MULTIPLIER;
+  const scheduleBlockWidth = durationCalculator(
+    startDate.getTime(),
+    endDate.getTime()
+  );
 
   const bg = current ? "#D3EBDA" : upcoming ? "#e0d0fb" : "#FAF5E0";
   const border = current ? "#7edf9a" : upcoming ? "#b793f3" : "#ffe36e";
 
   return (
     <Box
+      pos="absolute"
+      left={{
+        base: 8,
+        md: 14,
+        lg: 20,
+      }} // 20 is perfect centre day
       borderRadius={10}
       zIndex={10}
       onClick={() =>
         alert(`Title: ${desc}\n Start: ${startDate}\n End: ${endDate}`)
       }
       w={{
-        base: 29 * scheduleBlockWidth,
-        md: 54 * scheduleBlockWidth,
-        lg: 79 * scheduleBlockWidth,
+        base: 31 * scheduleBlockWidth,
+        md: 56 * scheduleBlockWidth,
+        lg: 81 * scheduleBlockWidth,
       }}
       border="1px solid"
       borderColor={border}
@@ -45,22 +51,24 @@ const ScheduleTimeline = ({
       cursor="pointer"
       p={2}
     >
-      <HStack alignItems="center">
-        <Text display="contents">
-          <Icon
-            as={BsPersonFill}
-            color="gray"
-            boxSize={{ sm: 1, md: 1, lg: 4 }}
-          />
-          3
-        </Text>
+      <Show above="md">
+        <HStack alignItems="center">
+          <Text display="contents">
+            <Icon
+              as={BsPersonFill}
+              color="gray"
+              boxSize={{ sm: 2, md: 2, lg: 4 }}
+            />
+            3
+          </Text>
 
-        <Text px={{ base: 0, md: 1 }}>|</Text>
+          <Text px={{ base: 2, md: 2 }}>|</Text>
 
-        <Text display="contents">
-          <Icon as={FaMoon} color="gray" boxSize={{ sm: 1, md: 1, lg: 3 }} />3
-        </Text>
-      </HStack>
+          <Text display="contents">
+            <Icon as={FaMoon} color="gray" boxSize={{ sm: 2, md: 2, lg: 3 }} />3
+          </Text>
+        </HStack>
+      </Show>
     </Box>
   );
 };
