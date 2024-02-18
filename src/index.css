@@ -3,7 +3,6 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -11,9 +10,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* body { */
-/* background-color: #eff1ef !important; */
-/* } */
+/* html,
+body {
+  background: rgba(246, 241, 255, 0.415) !important;
+} */
 
 * {
   font-family: "Public Sans", sans-serif !important;

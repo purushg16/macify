@@ -1,6 +1,6 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { SmallButton } from "./AppButton";
 import { BsPersonCircle } from "react-icons/bs";
 
@@ -11,43 +11,42 @@ const AppBar = () => {
     <Box
       zIndex={10}
       pos="fixed"
-      bottom={0}
-      py={6}
       px={2}
-      w="100%"
-      bg="gray.100"
-      borderRadius="20px 20px 0 0"
+      py={6}
+      w="95%"
+      left={3}
+      bottom={0}
+      borderRadius={"25px 25px 0px 0px"}
+      bg="blackAlpha.100"
+      backdropFilter="blur(15px)"
+      boxShadow="rgb(130 140 229 / 43%) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;"
     >
       <SimpleGrid columns={4} spacingX={2}>
-        <Link to="/app/dashboard">
-          <SmallButton
-            title="Dashboard"
-            icon={TbLayoutBoard}
-            active={location.pathname === "/app/dashboard"}
-          />
-        </Link>
+        <SmallButton
+          title="Dashboard"
+          icon={TbLayoutBoard}
+          active={location.pathname === "/app/dashboard"}
+          route="/app/dashboard"
+        />
 
-        <Link to="/app/calender">
-          <SmallButton
-            title="Calender"
-            icon={TbCalendar}
-            active={location.pathname === "/app/calender"}
-          />
-        </Link>
-        <Link to="/app/property">
-          <SmallButton
-            title="Property"
-            icon={TbBuilding}
-            active={location.pathname === "/app/property"}
-          />
-        </Link>
-        <Link to="/app/caretaker">
-          <SmallButton
-            title="Caretaker"
-            icon={BsPersonCircle}
-            active={location.pathname === "/app/caretaker"}
-          />
-        </Link>
+        <SmallButton
+          title="Calender"
+          icon={TbCalendar}
+          active={location.pathname === "/app/calender"}
+          route="/app/calender"
+        />
+        <SmallButton
+          title="Property"
+          icon={TbBuilding}
+          active={location.pathname === "/app/property"}
+          route="/app/property"
+        />
+        <SmallButton
+          title="Caretaker"
+          icon={BsPersonCircle}
+          active={location.pathname === "/app/caretaker"}
+          route="/app/caretaker"
+        />
       </SimpleGrid>
     </Box>
   );
