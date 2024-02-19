@@ -1,53 +1,93 @@
 import {
   Box,
+  Button,
+  Flex,
+  HStack,
   Heading,
-  Icon,
-  IconButton,
   List,
   ListItem,
+  Text,
 } from "@chakra-ui/react";
-import { FileWithPath } from "react-dropzone";
 import FileTile from "./FileTile";
-import { TbClearAll } from "react-icons/tb";
+import useBookingStore from "../../../store/bookingStore";
+import { FileWithPath, useDropzone } from "react-dropzone";
+import AnimateMove from "../../../motions/Move";
 
-interface UploadedFilesProps {
-  files: FileWithPath[];
-}
+const UploadedFiles = () => {
+  const guestsCount = useBookingStore((s) => s.numberOfGuests)!;
+  const files = useBookingStore((s) => s.filesUploaded)!;
+  const addFiles = useBookingStore((s) => s.addFiles);
 
-const UploadedFiles = ({ files }: UploadedFilesProps) => {
-  const clearSelection = () => {
-    files.length = 0;
-  };
+  const { getRootProps } = useDropzone({
+    accept: { "application/pdf": [], "image/png": [".png"] },
+    maxFiles: guestsCount,
+    onDrop: (files: FileWithPath[]) => {
+      if (files.length > 0) addFiles(files);
+    },
+  });
 
   return (
-    <Box textAlign="left">
-      <Heading
-        fontSize="lg"
-        color="gray"
-        mx={0}
-        mb={4}
-        display="flex"
-        width="100%"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        Uploaded Files
-        {files.length !== 0 && (
-          <IconButton
-            aria-label="Clear"
-            icon={<Icon as={TbClearAll} />}
-            onClick={clearSelection}
-          />
-        )}
-      </Heading>
-      <List spacing={4} my={4}>
-        {files.map((file: FileWithPath) => (
-          <ListItem key={file.path}>
-            <FileTile file={file} />
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+    <>
+      <AnimateMove delay={0.2}>
+        <Box textAlign="left" bg="gray.50" borderRadius={20} w="100%">
+          <List
+            py={4}
+            mx={6}
+            spacing={4}
+            my={4}
+            minH={350}
+            maxH={350}
+            overflowY="auto"
+            overflowX="hidden"
+            borderRadius={10}
+            css={{
+              "&::-webkit-scrollbar": {
+                width: "1px", // Set the width of the scrollbar
+              },
+              "&::-webkit-scrollbar-thumb": {
+                borderRadius: "1px", // Set the border radius of the thumb
+              },
+              "&::-webkit-scrollbar-track": {
+                borderRadius: "1px", // Set the border radius of the track
+              },
+            }}
+          >
+            {files.map((file, index) => (
+              <ListItem key={file.path}>
+                <AnimateMove delay={0.2 * (index + 1)}>
+                  <FileTile file={file} />
+                </AnimateMove>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </AnimateMove>
+
+      <Flex flexDir="column" w="100%" gap={4}>
+        <AnimateMove delay={0.4}>
+          <Box>
+            <Heading fontSize="xl">Uploaded Files</Heading>
+            <Text color="gray" my={2}>
+              Preview & manage your documents here <br />
+              <span style={{ fontStyle: "italic" }}>
+                Click a file to remove
+              </span>
+            </Text>
+          </Box>
+        </AnimateMove>
+
+        <AnimateMove delay={0.6}>
+          <HStack justify="center">
+            {files.length === guestsCount && <Button> Continue </Button>}
+            {files.length !== guestsCount && (
+              <Button {...getRootProps()} colorScheme="orange">
+                Add
+              </Button>
+            )}
+          </HStack>
+        </AnimateMove>
+      </Flex>
+    </>
   );
 };
 
