@@ -12,11 +12,13 @@ import FileTile from "./FileTile";
 import useBookingStore from "../../../store/bookingStore";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import AnimateMove from "../../../motions/Move";
+import fetchFileDetails from "../../../generator/fetchFileDetails";
 
 const UploadedFiles = () => {
   const guestsCount = useBookingStore((s) => s.numberOfGuests)!;
   const files = useBookingStore((s) => s.filesUploaded)!;
   const addFiles = useBookingStore((s) => s.addFiles);
+  const uploadedFiles = useBookingStore((s) => s.filesUploaded);
 
   const { getRootProps } = useDropzone({
     accept: { "application/pdf": [], "image/png": [".png"] },
@@ -25,6 +27,10 @@ const UploadedFiles = () => {
       if (files.length > 0) addFiles(files);
     },
   });
+
+  const extractDetails = () => {
+    fetchFileDetails(uploadedFiles!).then((res) => console.log(res));
+  };
 
   return (
     <>
@@ -54,7 +60,7 @@ const UploadedFiles = () => {
           >
             {files.map((file, index) => (
               <ListItem key={file.path}>
-                <AnimateMove delay={0.2 * (index + 1)}>
+                <AnimateMove delay={0.2 * (index + 1)} direction="x">
                   <FileTile file={file} />
                 </AnimateMove>
               </ListItem>
@@ -78,7 +84,9 @@ const UploadedFiles = () => {
 
         <AnimateMove delay={0.6}>
           <HStack justify="center">
-            {files.length === guestsCount && <Button> Continue </Button>}
+            {files.length === guestsCount && (
+              <Button onClick={() => extractDetails()}>Continue</Button>
+            )}
             {files.length !== guestsCount && (
               <Button {...getRootProps()} colorScheme="orange">
                 Add
