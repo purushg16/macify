@@ -50,7 +50,7 @@ const DropZone = () => {
         <br /> or
         <br />
         <Button
-          colorScheme="orange"
+          colorScheme="primary"
           mt={2}
           boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px;"
         >

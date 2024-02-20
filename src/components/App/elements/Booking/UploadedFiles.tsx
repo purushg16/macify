@@ -88,7 +88,7 @@ const UploadedFiles = () => {
               <Button onClick={() => extractDetails()}>Continue</Button>
             )}
             {files.length !== guestsCount && (
-              <Button {...getRootProps()} colorScheme="orange">
+              <Button {...getRootProps()} colorScheme="primary">
                 Add
               </Button>
             )}

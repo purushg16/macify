@@ -82,7 +82,7 @@ const FileTile = ({ file }: SelectedFilesProps) => {
               No
             </Button>
             <Button
-              colorScheme="orange"
+              colorScheme="primary"
               ml={3}
               onClick={() => {
                 if (fileToRemove) remove(fileToRemove);

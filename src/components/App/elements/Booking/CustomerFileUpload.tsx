@@ -28,7 +28,7 @@ function CustomerFileUpload() {
                   styles={{
                     fontWeight: 700,
                     borderRadius: 99,
-                    bg: "orange.100",
+                    bg: "primary.100",
                     px: 2,
                     mx: 1,
                   }}

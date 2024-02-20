@@ -94,7 +94,7 @@ const NumberOfGuestsForm = () => {
           <Button
             isDisabled={!(valueAsNumber >= 1)}
             ml={4}
-            colorScheme="orange"
+            colorScheme="primary"
             onClick={() => {
               setNumberOfGuests(valueAsNumber);
               isNumberOfGuestsSelected(true);
