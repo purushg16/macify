@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./Brand/pages/HomePage";
 import Layout from "./Brand/pages/Layout";
-import LayoutPage from "./App/pages/LayoutPage";
+import AdminPage from "./Layouts/AdminLayout";
 import LandingPage from "./App/pages/LandingPage";
 import DashBoardPage from "./App/pages/DashBoardPage";
 import CalendarPage from "./App/pages/CalendarPage";
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/app",
-    element: <LayoutPage />,
+    element: <AdminPage />,
     children: [
       { index: true, element: <LandingPage /> },
       { path: "dashboard", element: <DashBoardPage /> },

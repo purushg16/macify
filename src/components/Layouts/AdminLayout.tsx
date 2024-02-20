@@ -1,9 +1,9 @@
 import { Box, Show } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
-import AppBar from "../elements/AppBar";
-import Navbar from "../elements/Navbar";
+import AppBar from "../App/elements/AppBar";
+import Navbar from "../App/elements/Navbar";
 
-const LayoutPage = () => {
+const AdminPage = () => {
   //   const { colorMode, toggleColorMode } = useColorMode();
   //   if (colorMode === "light") toggleColorMode();
   //   if (colorMode === "dark") toggleColorMode();
@@ -26,4 +26,4 @@ const LayoutPage = () => {
   );
 };
 
-export default LayoutPage;
+export default AdminPage;
