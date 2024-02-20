@@ -32,8 +32,8 @@ const AppBar = () => {
         <SmallButton
           title="Calender"
           icon={TbCalendar}
-          active={location.pathname === "/admin/calender"}
-          route="/admin/calender"
+          active={location.pathname === "/admin/calendar"}
+          route="/admin/calendar"
         />
         <SmallButton
           title="Property"

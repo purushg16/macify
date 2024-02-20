@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <LandingPage /> },
       { path: "dashboard", element: <DashBoardPage /> },
-      { path: "calender", element: <CalendarPage /> },
+      { path: "calendar", element: <CalendarPage /> },
       { path: "properties", element: <PropertyPage /> },
       { path: "caretaker", element: <CaretakerPage /> },
     ],

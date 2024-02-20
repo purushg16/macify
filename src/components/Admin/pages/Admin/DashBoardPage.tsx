@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Highlight, Text } from "@chakra-ui/react";
 
 const DashBoardPage = () => {
   return (
-    <Flex flexDir="column" px={{ base: 4, md: 8 }} w="100%">
+    <Flex flexDir="column" w="100%">
       <Box>
         <Heading>
           Hello,{" "}
