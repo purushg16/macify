@@ -25,27 +25,27 @@ const AppBar = () => {
         <SmallButton
           title="Dashboard"
           icon={TbLayoutBoard}
-          active={location.pathname === "/app/dashboard"}
-          route="/app/dashboard"
+          active={location.pathname === "/admin/dashboard"}
+          route="/admin/dashboard"
         />
 
         <SmallButton
           title="Calender"
           icon={TbCalendar}
-          active={location.pathname === "/app/calender"}
-          route="/app/calender"
+          active={location.pathname === "/admin/calender"}
+          route="/admin/calender"
         />
         <SmallButton
           title="Property"
           icon={TbBuilding}
-          active={location.pathname === "/app/property"}
-          route="/app/property"
+          active={location.pathname === "/admin/properties"}
+          route="/admin/properties"
         />
         <SmallButton
           title="Caretaker"
           icon={BsPersonCircle}
-          active={location.pathname === "/app/caretaker"}
-          route="/app/caretaker"
+          active={location.pathname === "/admin/caretaker"}
+          route="/admin/caretaker"
         />
       </SimpleGrid>
     </Box>
