@@ -17,8 +17,8 @@ const AppBar = () => {
       left={3}
       bottom={0}
       borderRadius={"25px 25px 0px 0px"}
-      bg="blackAlpha.100"
-      backdropFilter="blur(15px)"
+      bg="secondary.50"
+      backdropFilter="blur(2em)"
       boxShadow="rgb(130 140 229 / 43%) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;"
     >
       <SimpleGrid columns={4} spacingX={2}>

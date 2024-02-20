@@ -41,7 +41,7 @@ const SmallButton = ({ active = false, icon, route }: Props) => {
         as={icon}
         p={2}
         borderRadius={999}
-        bg={active ? "white" : "none"}
+        bg={active ? "primary.100" : "none"}
         transform={active ? "scale(1.1)" : "scale(1)"}
         pos="absolute"
         transition="all 0.7s"
