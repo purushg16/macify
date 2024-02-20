@@ -31,6 +31,18 @@ const theme = extendTheme({
       800: "#1910DF",
       900: "#070FDB",
     },
+    secondary: {
+      50: "#F2F2F2",
+      100: "#E5E5E5",
+      200: "#D9D9D9", // the provided color
+      300: "#CCCCCC",
+      400: "#BFBFBF",
+      500: "#B0B8FF", // the previously provided color
+      600: "#A6A6A6",
+      700: "#999999",
+      800: "#8C8C8C",
+      900: "#808080",
+    },
   },
 });
 

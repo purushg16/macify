@@ -34,7 +34,10 @@ const BookingLayout = () => {
           my={{ base: 8, md: 16 }}
           p={8}
           borderRadius={20}
-          boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;"
+          border="1px solid"
+          borderColor="secondary.100"
+          bg="secondary.50"
+          // boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;"
         >
           <Flex
             w="100%"
