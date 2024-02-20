@@ -7,7 +7,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
-import TabCard from "../elements/TabCard";
+import TabCard from "../../elements/TabCard";
 
 const DashBoardPage = () => {
   return (

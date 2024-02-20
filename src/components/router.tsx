@@ -1,19 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./Brand/pages/HomePage";
-import Layout from "./Brand/pages/Layout";
+import BrandLayout from "./Layouts/BrandLayout";
 import AdminPage from "./Layouts/AdminLayout";
-import LandingPage from "./App/pages/LandingPage";
-import DashBoardPage from "./App/pages/DashBoardPage";
-import CalendarPage from "./App/pages/CalendarPage";
-import PropertyPage from "./App/pages/PropertyPage";
-import CaretakerPage from "./App/pages/CaretakerPage";
+import LandingPage from "./App/pages/Admin/LandingPage";
+import DashBoardPage from "./App/pages/Admin/DashBoardPage";
+import CalendarPage from "./App/pages/Admin/CalendarPage";
+import PropertyPage from "./App/pages/Admin/PropertyPage";
+import CaretakerPage from "./App/pages/Admin/CaretakerPage";
 import HotelBooking from "./App/pages/Booking/HotelBooking";
 import BookingLayout from "./App/pages/Booking/BookingLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <BrandLayout />,
     // errorElement: <ErrorPage />,
     children: [{ index: true, element: <HomePage /> }],
   },

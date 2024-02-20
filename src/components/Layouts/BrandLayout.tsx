@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 
-const Layout = () => {
+const BrandLayout = () => {
   // const { colorMode, toggleColorMode } = useColorMode();
   // if (colorMode === "light") toggleColorMode();
   // if (colorMode === "dark") toggleColorMode();
@@ -13,4 +13,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default BrandLayout;
