@@ -1,25 +1,19 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Highlight,
-  Show,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
-import TabCard from "../../elements/TabCard";
+import { Box, Flex, Heading, Highlight, Text } from "@chakra-ui/react";
 
 const DashBoardPage = () => {
   return (
-    <Flex flexDir="column" p={8} gap={8} w="100%">
-      <Heading>
-        Hello,{" "}
-        <Highlight query="Dayalan S" styles={{ color: "primary.500" }}>
-          Dayalan S
-        </Highlight>
-      </Heading>
+    <Flex flexDir="column" px={{ base: 4, md: 8 }} w="100%">
+      <Box>
+        <Heading>
+          Hello,{" "}
+          <Highlight query="Dayalan S" styles={{ color: "primary.500" }}>
+            Dayalan S
+          </Highlight>
+        </Heading>
+        <Text color="gray"> What a day to enter earning! </Text>
+      </Box>
 
-      <SimpleGrid
+      {/* <SimpleGrid
         spacing={{ base: 4, md: 4 }}
         columns={{ base: 2, md: 2, lg: 4 }}
       >
@@ -27,9 +21,9 @@ const DashBoardPage = () => {
         <TabCard title="Calender" icon={TbCalendar} />
         <TabCard title="Property" icon={TbBuilding} />
         <TabCard title="Caretaker" icon={TbLayoutBoard} />
-      </SimpleGrid>
+      </SimpleGrid> */}
 
-      <Flex gap={4}>
+      {/* <Flex gap={4}>
         <Box flex={1} py={4}>
           <Heading> Lorem, ipsum dolor. </Heading>
         </Box>
@@ -42,7 +36,7 @@ const DashBoardPage = () => {
             <TabCard title="Caretaker" icon={TbLayoutBoard} />
           </SimpleGrid>
         </Show>
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 };
