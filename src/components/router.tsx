@@ -9,6 +9,9 @@ import PropertyPage from "./Admin/pages/Admin/PropertyPage";
 import CaretakerPage from "./Admin/pages/Admin/CaretakerPage";
 import HotelBooking from "./Admin/pages/Booking/HotelBooking";
 import BookingLayout from "./Admin/pages/Booking/BookingLayout";
+import AddLayoutPage from "./Layouts/AddLayoutPage";
+import AddHomePage from "./Admin/pages/Admin/add/AddHomePage";
+import AddPropertyPage from "./Admin/pages/Admin/AddPropertyPage";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +29,15 @@ const router = createBrowserRouter([
       { path: "calendar", element: <CalendarPage /> },
       { path: "properties", element: <PropertyPage /> },
       { path: "caretaker", element: <CaretakerPage /> },
+
+      {
+        path: "add",
+        element: <AddLayoutPage />,
+        children: [
+          { index: true, element: <AddHomePage /> },
+          { path: "property", element: <AddPropertyPage /> },
+        ],
+      },
     ],
   },
   {
