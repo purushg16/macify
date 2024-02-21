@@ -8,7 +8,9 @@ interface AddTitleProps {
 const AddTitle = ({ heading, subtitle }: AddTitleProps) => {
   return (
     <Box textAlign="center">
-      <Heading fontSize="xl"> {heading} </Heading>
+      <Heading fontSize="xl" fontWeight={500}>
+        {heading}
+      </Heading>
       <Text color="gray"> {subtitle} </Text>
     </Box>
   );

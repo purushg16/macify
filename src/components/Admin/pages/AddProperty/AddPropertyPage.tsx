@@ -1,9 +1,11 @@
 import { Box, Button } from "@chakra-ui/react";
 import Stepper from "../../elements/Stepper";
+import NamePage from "./NamePage";
 
 const AddPropertyPage = () => {
   return (
     <Stepper numberOfSteps={2}>
+      <NamePage />
       <Step1 />
       <Step2 />
     </Stepper>

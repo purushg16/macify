@@ -37,6 +37,14 @@ textarea {
   /* font-family: "Plus Jakarta Sans", sans-serif !important; */
 }
 
+button#extra {
+  padding: 0 3rem !important;
+}
+
+input {
+  border: none !important;
+}
+
 button,
 input {
   font-weight: 500 !important;

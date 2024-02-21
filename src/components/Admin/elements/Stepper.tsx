@@ -22,10 +22,10 @@ const Stepper = ({ children, numberOfSteps }: StepperProps) => {
     if (currentStep != 0) setCurrentStep((prevStep) => prevStep - 1);
   };
   return (
-    <Tabs index={currentStep} onChange={setCurrentStep}>
-      <TabPanels>
+    <Tabs index={currentStep} onChange={setCurrentStep} h="100%" p={0}>
+      <TabPanels h="100%" p={0}>
         {React.Children.map(children, (child, index) => (
-          <TabPanel key={index}>
+          <TabPanel key={index} h="100%" p={0}>
             {React.isValidElement(child) &&
               React.cloneElement(child as React.ReactElement<StepProps>, {
                 forward,
