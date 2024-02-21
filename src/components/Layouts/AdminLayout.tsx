@@ -5,9 +5,6 @@ import AppBar from "../Admin/elements/AppBar";
 import { Outlet } from "react-router-dom";
 
 const AdminPage = () => {
-  //   const { colorMode, toggleColorMode } = useColorMode();
-  //   if (colorMode === "light") toggleColorMode();
-  //   if (colorMode === "dark") toggleColorMode();
   return (
     <>
       <Grid
@@ -25,6 +22,7 @@ const AdminPage = () => {
         gap={1}
         rowGap={{ base: 2, md: 4, lg: 8 }}
         color="blackAlpha.700"
+        h="100vh" // Set the height of the grid to the viewport height
       >
         <GridItem area={"header"}>
           <AdminNavbar />
@@ -36,8 +34,15 @@ const AdminPage = () => {
           </GridItem>
         </Show>
 
-        <GridItem area={"main"} w="100%" maxW="100%" overflowX="auto">
-          <Box px={{ base: 4, md: 8 }}>
+        <GridItem
+          area={"main"}
+          w="100%"
+          maxW="100%"
+          overflowX="auto"
+          maxH="100%"
+          overflowY="scroll"
+        >
+          <Box px={{ base: 4, md: 8 }} h="100%">
             <Outlet />
           </Box>
         </GridItem>

@@ -9,9 +9,8 @@ import PropertyPage from "./Admin/pages/Admin/PropertyPage";
 import CaretakerPage from "./Admin/pages/Admin/CaretakerPage";
 import HotelBooking from "./Admin/pages/Booking/HotelBooking";
 import BookingLayout from "./Admin/pages/Booking/BookingLayout";
-import AddLayoutPage from "./Layouts/AddLayoutPage";
-import AddHomePage from "./Admin/pages/Admin/add/AddHomePage";
-import AddPropertyPage from "./Admin/pages/Admin/AddPropertyPage";
+import AddPropertyPage from "./Admin/pages/Admin/AddProperty/AddPropertyPage";
+import AddFormLayoutPage from "./Layouts/AddFormLayoutPage";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +31,8 @@ const router = createBrowserRouter([
 
       {
         path: "add",
-        element: <AddLayoutPage />,
-        children: [
-          { index: true, element: <AddHomePage /> },
-          { path: "property", element: <AddPropertyPage /> },
-        ],
+        element: <AddFormLayoutPage />,
+        children: [{ path: "property", element: <AddPropertyPage /> }],
       },
     ],
   },
