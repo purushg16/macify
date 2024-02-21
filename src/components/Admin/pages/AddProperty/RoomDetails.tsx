@@ -17,7 +17,7 @@ const RoomDetailsPage = ({ backward, forward }: RoomDetailsPageProps) => {
           heading="Room Details"
           subtitle="Enter individual room name & numbers "
         />
-        <Text w="90%" textAlign="center" m="auto">
+        <Text w="90%" textAlign="center">
           You can assign each room its name and capacity by tapping on the room
           card
         </Text>

@@ -23,6 +23,7 @@ const AdminPage = () => {
         rowGap={{ base: 2, md: 4, lg: 8 }}
         color="blackAlpha.700"
         h="100vh" // Set the height of the grid to the viewport height
+        overflowY="hidden"
       >
         <GridItem area={"header"}>
           <AdminNavbar />
@@ -45,12 +46,13 @@ const AdminPage = () => {
           <Box px={{ base: 4, md: 8 }} h="100%">
             <Outlet />
           </Box>
+
+          <Show below="lg">
+            <Box py={8} />
+            <AppBar />
+          </Show>
         </GridItem>
       </Grid>
-      <Show below="lg">
-        <Box py={8} />
-        <AppBar />
-      </Show>
     </>
   );
 };
