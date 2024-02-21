@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Image, Input, VStack } from "@chakra-ui/react";
 import AddTitle from "../../elements/AddTitle";
-import i from "../../../../assets/app/building.png";
+import building from "../../../../assets/app/building.png";
 
 interface NamePageProps {
   forward?: () => void;
@@ -9,7 +9,7 @@ interface NamePageProps {
 const NamePage = ({ forward }: NamePageProps) => {
   return (
     <Flex h="100%" flexDir="column" gap={8} alignItems="center">
-      <Image src={i} alt="" w={350} />
+      <Image src={building} alt="" w={350} />
 
       <AddTitle
         heading="Add New Property"

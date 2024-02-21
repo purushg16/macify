@@ -45,6 +45,10 @@ input {
   border: none !important;
 }
 
+::placeholder {
+  opacity: 0.5;
+}
+
 button,
 input {
   font-weight: 500 !important;

@@ -11,7 +11,9 @@ const AddTitle = ({ heading, subtitle }: AddTitleProps) => {
       <Heading fontSize="xl" fontWeight={500}>
         {heading}
       </Heading>
-      <Text color="gray"> {subtitle} </Text>
+      <Text color="gray" fontSize="sm">
+        {subtitle}
+      </Text>
     </Box>
   );
 };
