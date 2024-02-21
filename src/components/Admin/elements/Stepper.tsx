@@ -1,4 +1,4 @@
-import { TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
+import { Flex, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 import React, { ReactNode, useState } from "react";
 
 interface StepProps {
@@ -26,11 +26,13 @@ const Stepper = ({ children, numberOfSteps }: StepperProps) => {
       <TabPanels h="100%" p={0}>
         {React.Children.map(children, (child, index) => (
           <TabPanel key={index} h="100%" p={0}>
-            {React.isValidElement(child) &&
-              React.cloneElement(child as React.ReactElement<StepProps>, {
-                forward,
-                backward,
-              })}
+            <Flex h="100%" flexDir="column" gap={8} alignItems="center">
+              {React.isValidElement(child) &&
+                React.cloneElement(child as React.ReactElement<StepProps>, {
+                  forward,
+                  backward,
+                })}
+            </Flex>
           </TabPanel>
         ))}
       </TabPanels>

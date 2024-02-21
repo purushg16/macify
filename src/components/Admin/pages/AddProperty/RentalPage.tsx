@@ -1,6 +1,5 @@
 import {
   Button,
-  Flex,
   Input,
   VStack,
   Image,
@@ -22,7 +21,7 @@ const RentalPage = ({ backward, forward }: RentalPageProps) => {
   const [rentInside, setRentInside] = useState(false);
 
   return (
-    <Flex h="100%" flexDir="column" gap={8} alignItems="center">
+    <>
       <Image src={building} alt="" w={350} />
 
       <AddTitle
@@ -57,7 +56,7 @@ const RentalPage = ({ backward, forward }: RentalPageProps) => {
           Next
         </Button>
       </HStack>
-    </Flex>
+    </>
   );
 };
 

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Icon,
-  Image,
-  Input,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Icon, Image, Input, VStack } from "@chakra-ui/react";
 import building from "../../../../assets/app/building.png";
 import AddTitle from "../../elements/AddTitle";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
@@ -19,7 +11,7 @@ interface NamePageProps {
 
 const NamePage = ({ forward }: NamePageProps) => {
   return (
-    <Flex h="100%" flexDir="column" gap={8} alignItems="center">
+    <>
       <AnimateMove delay={0.2}>
         <Image src={building} alt="" w={350} />
       </AnimateMove>
@@ -70,7 +62,7 @@ const NamePage = ({ forward }: NamePageProps) => {
           </Button>
         </Box>
       </AnimateMove>
-    </Flex>
+    </>
   );
 };
 
