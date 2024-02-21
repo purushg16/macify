@@ -1,5 +1,5 @@
 import { Box, Button } from "@chakra-ui/react";
-import Stepper from "../../../elements/Stepper";
+import Stepper from "../../elements/Stepper";
 
 const AddPropertyPage = () => {
   return (

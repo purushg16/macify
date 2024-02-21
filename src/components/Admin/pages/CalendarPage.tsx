@@ -1,5 +1,5 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import ScheduleContainer from "../../elements/SingleSchedular/ScheduleContainer";
+import ScheduleContainer from "../elements/SingleSchedular/ScheduleContainer";
 
 const CalendarPage = () => {
   return (
