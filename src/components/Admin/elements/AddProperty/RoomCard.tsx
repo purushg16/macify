@@ -1,9 +1,15 @@
-import { Box, HStack, Icon, Text } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text, useDisclosure } from "@chakra-ui/react";
 import { BsPeopleFill } from "react-icons/bs";
+import { useLongPress } from "@uidotdev/usehooks";
+import RoomDetailsEditModal from "./RoomDetailsEditModal";
 
 const RoomCard = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const attrs = useLongPress(() => onOpen());
+
   return (
     <Box
+      {...attrs}
       borderRadius="20px 20px 0px 0px"
       m="auto"
       w="100%"
@@ -24,6 +30,7 @@ const RoomCard = () => {
         <Text fontSize="lg"> 10 </Text>
         <Icon as={BsPeopleFill} boxSize={3} />
       </HStack>
+      <RoomDetailsEditModal isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

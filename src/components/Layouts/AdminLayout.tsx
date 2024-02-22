@@ -43,7 +43,7 @@ const AdminPage = () => {
           maxH="100%"
           overflowY="scroll"
         >
-          <Box px={{ base: 4, md: 8 }} h="100%">
+          <Box px={{ base: 4, md: 8 }} h="100%" mb={8}>
             <Outlet />
           </Box>
 

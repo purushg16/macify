@@ -23,8 +23,8 @@ const RoomDetailsPage = () => {
           subtitle="Enter individual room name & numbers "
         />
         <Text w="85%" textAlign="center" m="auto">
-          You can assign each room its name and capacity by tapping on the room
-          card
+          You can assign each room its name and capacity by long pressing on the
+          room card
         </Text>
       </Box>
 
