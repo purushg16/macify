@@ -1,9 +1,7 @@
 import {
-  Button,
   Input,
   VStack,
   Image,
-  HStack,
   InputGroup,
   InputRightElement,
   Switch,
@@ -12,12 +10,7 @@ import AddTitle from "../../elements/AddTitle";
 import building from "../../../../assets/app/building.png";
 import { useState } from "react";
 
-interface RentalPageProps {
-  backward?: () => void;
-  forward?: () => void;
-}
-
-const RentalPage = ({ backward, forward }: RentalPageProps) => {
+const RentalPage = () => {
   const [rentInside, setRentInside] = useState(false);
 
   return (
@@ -47,15 +40,6 @@ const RentalPage = ({ backward, forward }: RentalPageProps) => {
           isDisabled={!rentInside}
         />
       </VStack>
-
-      <HStack>
-        <Button onClick={backward} id="extra">
-          Back
-        </Button>
-        <Button onClick={forward} id="extra" colorScheme="primary">
-          Next
-        </Button>
-      </HStack>
     </>
   );
 };

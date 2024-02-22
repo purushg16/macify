@@ -1,23 +1,34 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import RoomCard from "./RoomCard";
 
 const RoomCardGrid = () => {
   return (
     <SimpleGrid
-      columns={{ base: 2, md: 3 }}
-      gap={4}
+      w={{ base: "90%", md: "80%", lg: "70%" }}
+      columns={{ base: 2, md: 3, lg: 4 }}
+      gap={{ base: 2, md: 4 }}
+      spacingX={6}
       bg="#f6f6f6"
-      p={5}
+      p={{ base: 3, md: 3, lg: 5 }}
       borderRadius={20}
-      maxH={300}
+      maxH={350}
       overflowY="auto"
     >
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
-      <RoomCard />
+      <GridItem>
+        <RoomCard />
+      </GridItem>
+      <GridItem>
+        <RoomCard />
+      </GridItem>
+      <GridItem>
+        <RoomCard />
+      </GridItem>
+      <GridItem>
+        <RoomCard />
+      </GridItem>
+      <GridItem>
+        <RoomCard />
+      </GridItem>
     </SimpleGrid>
   );
 };

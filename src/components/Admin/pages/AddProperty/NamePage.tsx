@@ -5,11 +5,7 @@ import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { TbChevronsDown } from "react-icons/tb";
 import AnimateMove from "../../../motions/Move";
 
-interface NamePageProps {
-  forward?: () => void;
-}
-
-const NamePage = ({ forward }: NamePageProps) => {
+const NamePage = () => {
   return (
     <>
       <AnimateMove delay={0.2}>
@@ -53,14 +49,6 @@ const NamePage = ({ forward }: NamePageProps) => {
             </Menu>
           </Box>
         </VStack>
-      </AnimateMove>
-
-      <AnimateMove delay={0.8}>
-        <Box>
-          <Button onClick={forward} id="extra" colorScheme="primary">
-            Next
-          </Button>
-        </Box>
       </AnimateMove>
     </>
   );

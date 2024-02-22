@@ -1,13 +1,18 @@
-import { Box, Button, HStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Switch,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import AddTitle from "../../elements/AddTitle";
 import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
 
-interface RoomDetailsPageProps {
-  backward?: () => void;
-  forward?: () => void;
-}
-
-const RoomDetailsPage = ({ backward, forward }: RoomDetailsPageProps) => {
+const RoomDetailsPage = () => {
   return (
     <>
       <RoomCardGrid />
@@ -23,14 +28,29 @@ const RoomDetailsPage = ({ backward, forward }: RoomDetailsPageProps) => {
         </Text>
       </Box>
 
-      <HStack>
-        <Button onClick={backward} id="extra">
-          Back
-        </Button>
-        <Button onClick={forward} id="extra" colorScheme="primary">
-          Next
-        </Button>
-      </HStack>
+      <VStack gap={4} w="100%">
+        <Flex gap={2}>
+          <Input placeholder="Starting Room Number" bg="gray.50" flex={1} />
+
+          <Button w={130}>
+            <Switch colorScheme="primary" mr={2} />
+            Serialize
+          </Button>
+        </Flex>
+
+        <Flex gap={2}>
+          <Input placeholder="Capacity" bg="gray.50" flex={1} />
+
+          <Button w={130}>
+            <Switch colorScheme="primary" mr={2} />
+            Apply All
+          </Button>
+        </Flex>
+
+        <InputGroup size="md" bg="gray.50" borderRadius={99}>
+          <InputRightElement width="3.5rem"></InputRightElement>
+        </InputGroup>
+      </VStack>
     </>
   );
 };
