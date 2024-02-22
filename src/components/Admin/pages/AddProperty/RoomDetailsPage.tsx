@@ -39,6 +39,15 @@ const RoomDetailsPage = () => {
         </Flex>
 
         <Flex gap={2}>
+          <Input placeholder="Number of beds" bg="gray.50" flex={1} />
+
+          <Button w={130}>
+            <Switch colorScheme="primary" mr={2} />
+            Apply All
+          </Button>
+        </Flex>
+
+        <Flex gap={2}>
           <Input placeholder="Capacity" bg="gray.50" flex={1} />
 
           <Button w={130}>

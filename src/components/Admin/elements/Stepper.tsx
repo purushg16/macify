@@ -24,6 +24,7 @@ const Stepper = ({ children, numberOfSteps }: StepperProps) => {
   const backward = () => {
     if (currentStep != 0) setCurrentStep((prevStep) => prevStep - 1);
   };
+
   return (
     <Tabs index={currentStep} onChange={setCurrentStep} h="100%" p={0}>
       <TabPanels h="100%" p={0}>
@@ -39,7 +40,7 @@ const Stepper = ({ children, numberOfSteps }: StepperProps) => {
                     </Button>
                   )}
                   <Button onClick={forward} id="extra" colorScheme="primary">
-                    Next
+                    {currentStep + 1 == numberOfSteps ? "Finish" : "Next"}
                   </Button>
                 </HStack>
               </AnimateMove>

@@ -29,18 +29,18 @@ const RoomDetailsEditModal = ({
         motionPreset="slideInBottom"
       >
         <ModalOverlay />
-        <ModalContent h={300} borderRadius={20} bg="gray.50">
-          <ModalBody
-            h="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Flex flexDir="column" gap={6}>
+        <ModalContent borderRadius={20} bg="gray.50" py={8}>
+          <ModalBody display="flex" alignItems="center" justifyContent="center">
+            <Flex flexDir="column" gap={8}>
               <Box>
                 <Text> Room Name: </Text>
                 <Input bg="gray.100" placeholder="Room 1" />
               </Box>
+              <Box>
+                <Text> Number Of Beds: </Text>
+                <Input bg="gray.100" placeholder="Beds" />
+              </Box>
+
               <Box>
                 <Text> Capacity: </Text>
                 <Input bg="gray.100" placeholder="Capacity" />
