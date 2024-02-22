@@ -7,7 +7,7 @@ const RoomCard = () => {
       borderRadius="20px 20px 0px 0px"
       m="auto"
       w="100%"
-      h={120}
+      h={140}
       bg="primary.100"
       pos="relative"
       display="flex"

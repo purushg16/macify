@@ -1,7 +1,7 @@
 import Stepper from "../../elements/Stepper";
 import NamePage from "./NamePage";
 import RentalPage from "./RentalPage";
-import RoomDetailsPage from "./RoomDetails";
+import RoomDetailsPage from "./RoomDetailsPage";
 
 const AddPropertyPage = () => {
   return (
