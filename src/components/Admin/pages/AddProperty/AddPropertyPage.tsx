@@ -6,10 +6,11 @@ import NamePage from "./NamePage";
 import PropertyAddressPage from "./PropertyAddressPage";
 import RentalPage from "./RentalPage";
 import RoomDetailsPage from "./RoomDetailsPage";
+import SuccessfulPage from "./SuccessfulPage";
 
 const AddPropertyPage = () => {
   return (
-    <Stepper numberOfSteps={7}>
+    <Stepper numberOfSteps={8}>
       <NamePage />
       <RentalPage />
       <RoomDetailsPage />
@@ -17,6 +18,7 @@ const AddPropertyPage = () => {
       <AmenitiesPages />
       <PropertyAddressPage />
       <ManagerPage />
+      <SuccessfulPage />
     </Stepper>
   );
 };
