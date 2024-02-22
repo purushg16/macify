@@ -40,7 +40,7 @@ const Stepper = ({ children, numberOfSteps }: StepperProps) => {
                     </Button>
                   )}
                   <Button onClick={forward} id="extra" colorScheme="primary">
-                    {currentStep + 1 == numberOfSteps ? "Finish" : "Next"}
+                    {currentStep + 1 == numberOfSteps ? "Dashoard" : "Next"}
                   </Button>
                 </HStack>
               </AnimateMove>

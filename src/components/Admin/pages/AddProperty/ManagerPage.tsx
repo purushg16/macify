@@ -21,7 +21,7 @@ const ManagerPage = () => {
         flexDir="column"
         gap={4}
         borderRadius={20}
-        maxW={700}
+        maxW={600}
       >
         <Flex w="100%">
           <Text> Select Manager </Text>
