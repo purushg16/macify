@@ -17,7 +17,7 @@ const RoomCard = () => {
       borderColor="gray.100"
       borderBottom="none"
     >
-      <Text pos="absolute" top={1} left={3}>
+      <Text pos="absolute" top={1} left={3} color="white">
         Room 1
       </Text>
       <HStack bg="white" borderRadius={99} px={2} mr={2}>
