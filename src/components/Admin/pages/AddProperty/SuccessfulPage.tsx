@@ -19,7 +19,7 @@ const SuccessfulPage = () => {
         />
       </Box>
       <AddTitle
-        heading="Successfully Created"
+        heading="Successfully Created 🎉"
         subtitle="A new Property has been now added to dashboard"
       />
     </>

@@ -5,6 +5,7 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
 } from "@chakra-ui/react";
 import { ReactNode, useState } from "react";
 import AnimateMove from "../../motions/Move";
@@ -31,6 +32,10 @@ const Stepper = ({ children, numberOfSteps }: StepperProps) => {
         {children.map((child, index) => (
           <TabPanel key={index} h="100%" p={0}>
             <Flex h="100%" flexDir="column" gap={8} alignItems="center">
+              <Text>
+                Step 0{currentStep + 1} of 0{numberOfSteps}
+              </Text>
+
               {child}
               <AnimateMove delay={0.8}>
                 <HStack>

@@ -20,7 +20,7 @@ const AdminButton = ({ text, link }: AdminButtonProps) => {
         };
       }}
     >
-      <Button fontSize="xl" variant="text">
+      <Button fontSize="xl" variant="text" px={0}>
         {text}
       </Button>
     </NavLink>
