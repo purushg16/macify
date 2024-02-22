@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  Image,
   Input,
   InputGroup,
   InputRightElement,
@@ -11,20 +10,21 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import AddTitle from "../../elements/AddTitle";
-import building from "../../../../assets/app/building.png";
+import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
 
 const RoomDetailsPage = () => {
   return (
     <>
-      <Image src={building} alt="" w={350} />
+      <RoomCardGrid />
+
       <Box>
         <AddTitle
           heading="Room Details"
           subtitle="Enter individual room name & numbers "
         />
         <Text w="85%" textAlign="center" m="auto">
-          If you have rooms with different serial of numbers and different
-          capacities, press “Next”
+          You can assign each room its name and capacity by tapping on the room
+          card
         </Text>
       </Box>
 
