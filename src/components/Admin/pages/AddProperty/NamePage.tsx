@@ -4,8 +4,18 @@ import AddTitle from "../../elements/AddTitle";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { TbChevronsDown } from "react-icons/tb";
 import AnimateMove from "../../../motions/Move";
+import useAddPropertyStore, {
+  PropertyType,
+} from "../../../store/admin/addPropertyStore";
+
+const PropertyTypes = ["Hostel", "Flat", "Villa"];
 
 const NamePage = () => {
+  const name = useAddPropertyStore((s) => s.propertyName);
+  const type = useAddPropertyStore((s) => s.propertyType);
+  const setName = useAddPropertyStore((s) => s.setPropertyName);
+  const setType = useAddPropertyStore((s) => s.setPropertyType);
+
   return (
     <>
       <AnimateMove delay={0.2}>
@@ -21,10 +31,15 @@ const NamePage = () => {
 
       <AnimateMove delay={0.6}>
         <VStack gap={4}>
-          <Input bg="gray.50" placeholder="Property Name" />
+          <Input
+            bg="gray.50"
+            placeholder="Property Name"
+            value={name}
+            onChange={() => setName(name)}
+          />
 
           <Box position="relative">
-            <Input placeholder="Property Type" bg="gray.50" />
+            <Input placeholder="Property Type" bg="gray.50" value={type} />
             <Menu>
               <MenuButton
                 _hover={{ bg: "gray.700" }}
@@ -40,11 +55,14 @@ const NamePage = () => {
                 <Icon as={TbChevronsDown} p={0} />
               </MenuButton>
               <MenuList p={1} borderRadius={20}>
-                <MenuItem>Download</MenuItem>
-                <MenuItem>Create a Copy</MenuItem>
-                <MenuItem>Mark as Draft</MenuItem>
-                <MenuItem>Delete</MenuItem>
-                <MenuItem>Attend a Workshop</MenuItem>
+                {PropertyTypes.map((pType) => (
+                  <MenuItem
+                    key={pType}
+                    onClick={() => setType(pType as PropertyType)}
+                  >
+                    {pType}
+                  </MenuItem>
+                ))}
               </MenuList>
             </Menu>
           </Box>

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import Manager from "../../entities/manager";
 
-type PropertyType = "Hostel" | "Flat" | "Villa" | undefined;
+export type PropertyType = "Hostel" | "Flat" | "Villa" | undefined;
 
 interface AddPropertyStore {
   propertyName: string | undefined;

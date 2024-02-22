@@ -8,10 +8,14 @@ import {
 } from "@chakra-ui/react";
 import AddTitle from "../../elements/AddTitle";
 import building from "../../../../assets/app/building.png";
-import { useState } from "react";
+import useAddPropertyStore from "../../../store/admin/addPropertyStore";
 
 const RentalPage = () => {
-  const [rentInside, setRentInside] = useState(false);
+  const numberOfRooms = useAddPropertyStore((s) => s.numberOfRooms);
+  const setNumberOfRooms = useAddPropertyStore((s) => s.setNumberOfRooms);
+
+  const rentWithin = useAddPropertyStore((s) => s.rentWithin);
+  const setRentWithin = useAddPropertyStore((s) => s.setRentWithin);
 
   return (
     <>
@@ -24,11 +28,11 @@ const RentalPage = () => {
 
       <VStack gap={4}>
         <InputGroup size="md" bg="gray.50" borderRadius={99}>
-          <Input placeholder="Rental Within" />
+          <Input placeholder="Rental Within" pointerEvents="none" />
           <InputRightElement width="4.5rem">
             <Switch
               colorScheme="primary"
-              onChange={() => setRentInside(!rentInside)}
+              onChange={() => setRentWithin(!rentWithin)}
             />
           </InputRightElement>
         </InputGroup>
@@ -37,7 +41,9 @@ const RentalPage = () => {
           type="number"
           bg="gray.50"
           placeholder="Number of rooms available"
-          isDisabled={!rentInside}
+          isDisabled={!rentWithin}
+          value={numberOfRooms}
+          onChange={(event) => setNumberOfRooms(parseInt(event.target.value))}
         />
       </VStack>
     </>
