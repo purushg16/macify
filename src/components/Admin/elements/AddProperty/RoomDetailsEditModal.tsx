@@ -11,6 +11,8 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Room from "../../../entities/room";
+import { useState } from "react";
+import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
 
 interface RoomDetailsEditModalProps {
   isOpen: boolean;
@@ -23,6 +25,14 @@ const RoomDetailsEditModal = ({
   onClose,
   room,
 }: RoomDetailsEditModalProps) => {
+  const [newRoom, editNewRoom] = useState<Room>(room);
+  const editRoom = useAddPropertyRoomStore((s) => s.editRoom);
+
+  const submit = () => {
+    editRoom(newRoom);
+    onClose();
+  };
+
   return (
     <>
       <Modal
@@ -37,16 +47,42 @@ const RoomDetailsEditModal = ({
             <Flex flexDir="column" gap={8}>
               <Box>
                 <Text> Room Name: </Text>
-                <Input bg="gray.100" defaultValue={room.roomName} />
+                <Input
+                  bg="gray.100"
+                  value={newRoom.roomName}
+                  onChange={(e) =>
+                    editNewRoom({ ...newRoom, roomName: e.target.value })
+                  }
+                />
               </Box>
               <Box>
                 <Text> Number Of Beds: </Text>
-                <Input bg="gray.100" defaultValue={room.capacity} />
+                <Input
+                  type="number"
+                  bg="gray.100"
+                  value={newRoom.capacity}
+                  onChange={(e) =>
+                    editNewRoom({
+                      ...newRoom,
+                      capacity: parseInt(e.target.value),
+                    })
+                  }
+                />
               </Box>
 
               <Box>
                 <Text> Capacity: </Text>
-                <Input bg="gray.100" defaultValue={room.capacity} />
+                <Input
+                  type="number"
+                  bg="gray.100"
+                  value={newRoom.capacity}
+                  onChange={(e) =>
+                    editNewRoom({
+                      ...newRoom,
+                      capacity: parseInt(e.target.value),
+                    })
+                  }
+                />
               </Box>
 
               <HStack textAlign="center" mt={6}>
@@ -56,7 +92,7 @@ const RoomDetailsEditModal = ({
                 <Button
                   colorScheme="primary"
                   mr={3}
-                  onClick={onClose}
+                  onClick={submit}
                   id="extra"
                 >
                   Done

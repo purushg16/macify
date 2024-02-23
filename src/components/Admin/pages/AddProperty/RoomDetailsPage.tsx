@@ -15,9 +15,28 @@ import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
 import AnimateMove from "../../../motions/Move";
 import { Link } from "react-router-dom";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
+import { useState } from "react";
+import roomSerializer from "../../../generator/roomSerializer";
+import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
 
 const RoomDetailsPage = () => {
+  const [startingNumber, setStartingNumber] = useState<number>();
+  const [serialize, isSerialized] = useState<boolean>(false);
+  const [applyAll, isAppliedAll] = useState<boolean>(false);
+
   const propertyType = useAddPropertyStore((s) => s.propertyType);
+  const numberOfRooms = useAddPropertyRoomStore((s) => s.numberOfRooms);
+  const addPropertyRooms = useAddPropertyRoomStore((s) => s.addPropertyRooms);
+
+  const doSerialize = () => {
+    if (!serialize)
+      addPropertyRooms(roomSerializer(startingNumber!, numberOfRooms!));
+    else addPropertyRooms(roomSerializer(1, numberOfRooms!));
+    isSerialized(!serialize);
+  };
+  const doApplyAll = () => {
+    if (applyAll) isAppliedAll(!applyAll);
+  };
 
   return (
     <>
@@ -41,10 +60,25 @@ const RoomDetailsPage = () => {
       <AnimateMove delay={0.4}>
         <VStack gap={4} w="100%">
           <Flex gap={2}>
-            <Input placeholder="Starting Room Number" bg="gray.50" flex={1} />
+            <Input
+              type="number"
+              placeholder="Starting Room Number"
+              bg="gray.50"
+              flex={1}
+              value={startingNumber}
+              onChange={(e) => {
+                isSerialized(false);
+                setStartingNumber(parseInt(e.target.value || ""));
+              }}
+            />
 
             <Button w={130}>
-              <Switch colorScheme="primary" mr={2} />
+              <Switch
+                colorScheme="primary"
+                mr={2}
+                isChecked={serialize}
+                onChange={doSerialize}
+              />
               Serialize
             </Button>
           </Flex>
@@ -55,7 +89,12 @@ const RoomDetailsPage = () => {
                 <Input placeholder="Number of beds" bg="gray.50" flex={1} />
 
                 <Button w={130}>
-                  <Switch colorScheme="primary" mr={2} />
+                  <Switch
+                    colorScheme="primary"
+                    mr={2}
+                    isChecked={applyAll}
+                    onChange={doApplyAll}
+                  />
                   Apply All
                 </Button>
               </>
