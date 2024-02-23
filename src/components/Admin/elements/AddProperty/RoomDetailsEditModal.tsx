@@ -25,7 +25,12 @@ const RoomDetailsEditModal = ({
   onClose,
   room,
 }: RoomDetailsEditModalProps) => {
-  const [newRoom, editNewRoom] = useState<Room>(room);
+  const [newRoom, editNewRoom] = useState<Room>({
+    roomName: room.roomName,
+    roomId: room.roomId,
+    capacity: room.capacity,
+  });
+
   const editRoom = useAddPropertyRoomStore((s) => s.editRoom);
 
   const submit = () => {

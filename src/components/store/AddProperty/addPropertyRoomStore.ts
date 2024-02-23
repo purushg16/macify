@@ -30,7 +30,7 @@ const useAddPropertyRoomStore = create<
     set((store) => ({
       propertyRooms: store.propertyRooms?.map((r) => {
         return r.roomId === room.roomId
-          ? { roomName: room.roomName, capacity: room.capacity }
+          ? { ...r, roomName: room.roomName, capacity: room.capacity }
           : r;
       }),
     })),

@@ -10,13 +10,13 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import AddTitle from "../../elements/AddTitle";
-import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
-import AnimateMove from "../../../motions/Move";
-import { Link } from "react-router-dom";
-import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import AnimateMove from "../../../motions/Move";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
+import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
+import AddTitle from "../../elements/AddTitle";
 
 const RoomDetailsPage = () => {
   const [startingNumber, setStartingNumber] = useState<number>();
