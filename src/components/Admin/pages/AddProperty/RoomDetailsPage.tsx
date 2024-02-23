@@ -14,8 +14,11 @@ import AddTitle from "../../elements/AddTitle";
 import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
 import AnimateMove from "../../../motions/Move";
 import { Link } from "react-router-dom";
+import useAddPropertyStore from "../../../store/admin/addPropertyStore";
 
 const RoomDetailsPage = () => {
+  const propertyType = useAddPropertyStore((s) => s.propertyType);
+
   return (
     <>
       <AnimateMove noWidth delay={0.2}>
@@ -47,21 +50,25 @@ const RoomDetailsPage = () => {
           </Flex>
 
           <Flex gap={2}>
-            <Input placeholder="Number of beds" bg="gray.50" flex={1} />
+            {propertyType === "Hostel" ? (
+              <>
+                <Input placeholder="Number of beds" bg="gray.50" flex={1} />
 
-            <Button w={130}>
-              <Switch colorScheme="primary" mr={2} />
-              Apply All
-            </Button>
-          </Flex>
+                <Button w={130}>
+                  <Switch colorScheme="primary" mr={2} />
+                  Apply All
+                </Button>
+              </>
+            ) : (
+              <>
+                <Input placeholder="Capacity" bg="gray.50" flex={1} />
 
-          <Flex gap={2}>
-            <Input placeholder="Capacity" bg="gray.50" flex={1} />
-
-            <Button w={130}>
-              <Switch colorScheme="primary" mr={2} />
-              Apply All
-            </Button>
+                <Button w={130}>
+                  <Switch colorScheme="primary" mr={2} />
+                  Apply All
+                </Button>
+              </>
+            )}
           </Flex>
 
           <InputGroup size="md" bg="gray.50" borderRadius={99}>

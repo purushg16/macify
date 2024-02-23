@@ -1,29 +1,13 @@
-import {
-  Box,
-  Button,
-  HStack,
-  Icon,
-  Image,
-  Input,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, HStack, Image, Input, VStack } from "@chakra-ui/react";
 import building from "../../../../assets/app/building.png";
 import AddTitle from "../../elements/AddTitle";
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { TbChevronsDown } from "react-icons/tb";
 import AnimateMove from "../../../motions/Move";
-import useAddPropertyStore, {
-  PropertyType,
-} from "../../../store/admin/addPropertyStore";
+import useAddPropertyStore from "../../../store/admin/addPropertyStore";
 import { Link } from "react-router-dom";
-
-const PropertyTypes = ["Hostel", "Flat", "Villa"];
 
 const NamePage = () => {
   const name = useAddPropertyStore((s) => s.propertyName);
-  const type = useAddPropertyStore((s) => s.propertyType);
   const setName = useAddPropertyStore((s) => s.setPropertyName);
-  const setType = useAddPropertyStore((s) => s.setPropertyType);
 
   return (
     <>
@@ -44,37 +28,8 @@ const NamePage = () => {
             bg="gray.50"
             placeholder="Property Name"
             value={name}
-            onChange={() => setName(name)}
+            onChange={(e) => setName(e.target.value)}
           />
-
-          <Box position="relative">
-            <Input placeholder="Property Type" bg="gray.50" value={type} />
-            <Menu>
-              <MenuButton
-                _hover={{ bg: "gray.700" }}
-                as={Button}
-                pos="absolute"
-                right={2}
-                top={1}
-                p={0}
-                bg="black"
-                color="white"
-                size="sm"
-              >
-                <Icon as={TbChevronsDown} p={0} />
-              </MenuButton>
-              <MenuList p={1} borderRadius={20}>
-                {PropertyTypes.map((pType) => (
-                  <MenuItem
-                    key={pType}
-                    onClick={() => setType(pType as PropertyType)}
-                  >
-                    {pType}
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
-          </Box>
         </VStack>
       </AnimateMove>
 
@@ -84,7 +39,11 @@ const NamePage = () => {
             <Button id="extra"> Cancel </Button>
           </Link>
           <Link to="/admin/add/property/2">
-            <Button id="extra" colorScheme="primary">
+            <Button
+              id="extra"
+              colorScheme="primary"
+              isDisabled={!!name && !!name ? false : true}
+            >
               Next
             </Button>
           </Link>

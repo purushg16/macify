@@ -1,18 +1,19 @@
 import {
-  Input,
-  VStack,
+  Button,
+  HStack,
   Image,
+  Input,
   InputGroup,
   InputRightElement,
   Switch,
-  Button,
-  HStack,
+  VStack,
 } from "@chakra-ui/react";
-import AddTitle from "../../elements/AddTitle";
-import building from "../../../../assets/app/building.png";
-import useAddPropertyStore from "../../../store/admin/addPropertyStore";
-import AnimateMove from "../../../motions/Move";
 import { Link } from "react-router-dom";
+import building from "../../../../assets/app/building.png";
+import AnimateMove from "../../../motions/Move";
+import useAddPropertyStore from "../../../store/admin/addPropertyStore";
+import PropertyTypeSelector from "../../elements/AddProperty/PropertyTypeSelector";
+import AddTitle from "../../elements/AddTitle";
 
 const RentalPage = () => {
   const numberOfRooms = useAddPropertyStore((s) => s.numberOfRooms);
@@ -20,6 +21,8 @@ const RentalPage = () => {
 
   const rentWithin = useAddPropertyStore((s) => s.rentWithin);
   const setRentWithin = useAddPropertyStore((s) => s.setRentWithin);
+
+  const propertyType = useAddPropertyStore((s) => s.propertyType);
 
   return (
     <>
@@ -36,12 +39,19 @@ const RentalPage = () => {
 
       <AnimateMove delay={0.4}>
         <VStack gap={4}>
+          <PropertyTypeSelector />
+
           <InputGroup size="md" bg="gray.50" borderRadius={99}>
-            <Input placeholder="Rental Within" pointerEvents="none" />
+            <Input value="Rental Within" pointerEvents="none" />
             <InputRightElement width="4.5rem">
               <Switch
+                isChecked={rentWithin}
+                isDisabled={propertyType !== "Villa"}
                 colorScheme="primary"
-                onChange={() => setRentWithin(!rentWithin)}
+                onChange={() => {
+                  if (rentWithin) setNumberOfRooms(1);
+                  setRentWithin(!rentWithin);
+                }}
               />
             </InputRightElement>
           </InputGroup>
@@ -63,7 +73,19 @@ const RentalPage = () => {
             <Button id="extra"> Back </Button>
           </Link>
           <Link to="/admin/add/property/3">
-            <Button id="extra" colorScheme="primary">
+            <Button
+              id="extra"
+              colorScheme="primary"
+              isDisabled={
+                propertyType
+                  ? rentWithin
+                    ? numberOfRooms
+                      ? false
+                      : true
+                    : false
+                  : true
+              }
+            >
               Next
             </Button>
           </Link>
