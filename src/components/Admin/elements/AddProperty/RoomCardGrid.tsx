@@ -4,6 +4,7 @@ import RoomCard from "./RoomCard";
 const RoomCardGrid = () => {
   return (
     <SimpleGrid
+      mx="auto"
       w={{ base: "90%", md: "80%", lg: "70%" }}
       columns={{ base: 2, md: 3, lg: 3 }}
       spacingX={4}

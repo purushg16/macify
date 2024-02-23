@@ -11,6 +11,14 @@ import HotelBooking from "./Booking/HotelBooking";
 import BookingLayout from "./Booking/BookingLayout";
 import AddPropertyPage from "./Admin/pages/AddProperty/AddPropertyPage";
 import AddFormLayoutPage from "./Layouts/AddFormLayoutPage";
+import NamePage from "./Admin/pages/AddProperty/NamePage";
+import AmenitiesPages from "./Admin/pages/AddProperty/AmenitiesPages";
+import CheckingTimePage from "./Admin/pages/AddProperty/CheckingTimePage";
+import ManagerPage from "./Admin/pages/AddProperty/ManagerPage";
+import PropertyAddressPage from "./Admin/pages/AddProperty/PropertyAddressPage";
+import RentalPage from "./Admin/pages/AddProperty/RentalPage";
+import RoomDetailsPage from "./Admin/pages/AddProperty/RoomDetailsPage";
+import SuccessfulPage from "./Admin/pages/AddProperty/SuccessfulPage";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +40,22 @@ const router = createBrowserRouter([
       {
         path: "add",
         element: <AddFormLayoutPage />,
-        children: [{ path: "property", element: <AddPropertyPage /> }],
+        children: [
+          {
+            path: "property",
+            element: <AddPropertyPage />,
+            children: [
+              { index: true, element: <NamePage /> },
+              { path: "2", element: <RentalPage /> },
+              { path: "3", element: <RoomDetailsPage /> },
+              { path: "4", element: <CheckingTimePage /> },
+              { path: "5", element: <AmenitiesPages /> },
+              { path: "6", element: <PropertyAddressPage /> },
+              { path: "7", element: <ManagerPage /> },
+              { path: "8", element: <SuccessfulPage /> },
+            ],
+          },
+        ],
       },
     ],
   },

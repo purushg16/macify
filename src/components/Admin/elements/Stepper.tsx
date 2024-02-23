@@ -58,9 +58,3 @@ const Stepper = ({ children, numberOfSteps }: StepperProps) => {
 };
 
 export default Stepper;
-
-// {React.isValidElement(child) &&
-//   React.cloneElement(child as React.ReactElement<StepProps>, {
-//     forward,
-//     backward,
-//   })}

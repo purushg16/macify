@@ -6,11 +6,17 @@ interface Props {
   children: ReactNode;
   direction?: "x" | "y";
   delay?: number;
+  noWidth?: boolean;
 }
 
-const AnimateMove = ({ children, direction = "y", delay = 0.1 }: Props) => {
+const AnimateMove = ({
+  children,
+  direction = "y",
+  delay = 0.1,
+  noWidth = false,
+}: Props) => {
   return (
-    <Box>
+    <Box w={noWidth ? "100%" : "auto"}>
       <motion.div
         className="box"
         initial={{ opacity: 0, [direction]: 20 }}

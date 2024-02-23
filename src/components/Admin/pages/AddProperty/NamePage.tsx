@@ -1,4 +1,12 @@
-import { Box, Button, Icon, Image, Input, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  HStack,
+  Icon,
+  Image,
+  Input,
+  VStack,
+} from "@chakra-ui/react";
 import building from "../../../../assets/app/building.png";
 import AddTitle from "../../elements/AddTitle";
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
@@ -7,6 +15,7 @@ import AnimateMove from "../../../motions/Move";
 import useAddPropertyStore, {
   PropertyType,
 } from "../../../store/admin/addPropertyStore";
+import { Link } from "react-router-dom";
 
 const PropertyTypes = ["Hostel", "Flat", "Villa"];
 
@@ -29,7 +38,7 @@ const NamePage = () => {
         />
       </AnimateMove>
 
-      <AnimateMove delay={0.6}>
+      <AnimateMove delay={0.4}>
         <VStack gap={4}>
           <Input
             bg="gray.50"
@@ -67,6 +76,19 @@ const NamePage = () => {
             </Menu>
           </Box>
         </VStack>
+      </AnimateMove>
+
+      <AnimateMove delay={0.4}>
+        <HStack>
+          <Link to="/admin/properties">
+            <Button id="extra"> Cancel </Button>
+          </Link>
+          <Link to="/admin/add/property/2">
+            <Button id="extra" colorScheme="primary">
+              Next
+            </Button>
+          </Link>
+        </HStack>
       </AnimateMove>
     </>
   );

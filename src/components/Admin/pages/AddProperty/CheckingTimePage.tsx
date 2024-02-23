@@ -1,5 +1,6 @@
 import {
   Button,
+  HStack,
   Icon,
   Image,
   Input,
@@ -15,6 +16,8 @@ import { BsClockFill } from "react-icons/bs";
 import img from "../../../../assets/app/checking-in.png";
 import AddTitle from "../../elements/AddTitle";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import AnimateMove from "../../../motions/Move";
 
 const timeList = [
   "00:00",
@@ -73,74 +76,93 @@ const CheckingTimePage = () => {
 
   return (
     <>
-      <Image src={img} alt="checking" />
+      <AnimateMove delay={0.2}>
+        <Image src={img} alt="checking" />
+      </AnimateMove>
 
-      <AddTitle
-        heading="Reporting Time Details"
-        subtitle="Enter reporting time details for this property"
-      />
+      <AnimateMove delay={0.4}>
+        <AddTitle
+          heading="Reporting Time Details"
+          subtitle="Enter reporting time details for this property"
+        />
+      </AnimateMove>
 
-      <VStack gap={4}>
-        <InputGroup>
-          <Input
-            bg="gray.50"
-            placeholder="CheckIn Time"
-            size="md"
-            value={checkIn}
-          />
-          <InputRightElement cursor="pointer">
-            <Menu placement="top">
-              <MenuButton
-                as={Button}
-                bg="none"
-                p={0}
-                _hover={{ bg: "none" }}
-                _active={{ bg: "none", outline: "none", border: "none" }}
-              >
-                <Icon as={BsClockFill} />
-              </MenuButton>
-              <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
-                {timeList.map((time, i) => (
-                  <MenuItem key={i} onClick={() => setCheckIn(time)}>
-                    {" "}
-                    {time}{" "}
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
-          </InputRightElement>
-        </InputGroup>
+      <AnimateMove delay={0.4}>
+        <VStack gap={4}>
+          <InputGroup>
+            <Input
+              bg="gray.50"
+              placeholder="CheckIn Time"
+              size="md"
+              value={checkIn}
+            />
+            <InputRightElement cursor="pointer">
+              <Menu placement="top">
+                <MenuButton
+                  as={Button}
+                  bg="none"
+                  p={0}
+                  _hover={{ bg: "none" }}
+                  _active={{ bg: "none", outline: "none", border: "none" }}
+                >
+                  <Icon as={BsClockFill} />
+                </MenuButton>
+                <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
+                  {timeList.map((time, i) => (
+                    <MenuItem key={i} onClick={() => setCheckIn(time)}>
+                      {" "}
+                      {time}{" "}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </Menu>
+            </InputRightElement>
+          </InputGroup>
 
-        <InputGroup>
-          <Input
-            bg="gray.50"
-            placeholder="CheckOut Time"
-            size="md"
-            value={checkOut}
-          />
-          <InputRightElement cursor="pointer">
-            <Menu placement="top">
-              <MenuButton
-                as={Button}
-                bg="none"
-                p={0}
-                _hover={{ bg: "none" }}
-                _active={{ bg: "none", outline: "none", border: "none" }}
-              >
-                <Icon as={BsClockFill} />
-              </MenuButton>
-              <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
-                {timeList.map((time, i) => (
-                  <MenuItem key={i} onClick={() => setCheckOut(time)}>
-                    {" "}
-                    {time}{" "}
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
-          </InputRightElement>
-        </InputGroup>
-      </VStack>
+          <InputGroup>
+            <Input
+              bg="gray.50"
+              placeholder="CheckOut Time"
+              size="md"
+              value={checkOut}
+            />
+            <InputRightElement cursor="pointer">
+              <Menu placement="top">
+                <MenuButton
+                  as={Button}
+                  bg="none"
+                  p={0}
+                  _hover={{ bg: "none" }}
+                  _active={{ bg: "none", outline: "none", border: "none" }}
+                >
+                  <Icon as={BsClockFill} />
+                </MenuButton>
+                <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
+                  {timeList.map((time, i) => (
+                    <MenuItem key={i} onClick={() => setCheckOut(time)}>
+                      {" "}
+                      {time}{" "}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </Menu>
+            </InputRightElement>
+          </InputGroup>
+        </VStack>
+      </AnimateMove>
+
+      <AnimateMove delay={0.4}>
+        <HStack>
+          <Link to="/admin/add/property/3">
+            <Button id="extra">Back</Button>
+          </Link>
+          <Link to="/admin/add/property/5">
+            <Button id="extra" colorScheme="primary">
+              Next
+            </Button>
+          </Link>
+        </HStack>
+      </AnimateMove>
     </>
   );
 };
