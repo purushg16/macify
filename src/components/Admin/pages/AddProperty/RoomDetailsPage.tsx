@@ -16,7 +16,6 @@ import AnimateMove from "../../../motions/Move";
 import { Link } from "react-router-dom";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import { useState } from "react";
-import roomSerializer from "../../../generator/roomSerializer";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
 
 const RoomDetailsPage = () => {
@@ -26,14 +25,13 @@ const RoomDetailsPage = () => {
   const [applyAll, isAppliedAll] = useState<boolean>(false);
 
   const propertyType = useAddPropertyStore((s) => s.propertyType);
-  const numberOfRooms = useAddPropertyRoomStore((s) => s.numberOfRooms);
-  const addPropertyRooms = useAddPropertyRoomStore((s) => s.addPropertyRooms);
+  const performSerialize = useAddPropertyRoomStore((s) => s.serialize);
   const capacityApplyAll = useAddPropertyRoomStore((s) => s.capacityApplyAll);
 
   const doSerialize = () => {
     if (!serialize && !!startingNumber) {
-      addPropertyRooms(roomSerializer(startingNumber, numberOfRooms!));
-    } else addPropertyRooms(roomSerializer(1, numberOfRooms!));
+      performSerialize(startingNumber);
+    } else performSerialize(1);
     isSerialized(!serialize);
   };
 

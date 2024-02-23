@@ -12,6 +12,8 @@ interface AddPropertyRoomStoreActions {
   setNumberOfRooms: (numberOfRooms: number | undefined) => void;
   addPropertyRooms: (rooms: Room[] | undefined) => void;
   editRoom: (room: Room) => void;
+
+  serialize: (startingNumber: number) => void;
   capacityApplyAll: (capacity: number) => void;
 }
 
@@ -31,6 +33,14 @@ const useAddPropertyRoomStore = create<
           ? { roomName: room.roomName, capacity: room.capacity }
           : r;
       }),
+    })),
+
+  serialize: (startingNumber) =>
+    set((store) => ({
+      propertyRooms: store.propertyRooms?.map((r, index) => ({
+        ...r,
+        roomName: `room${startingNumber + index}`,
+      })),
     })),
 
   capacityApplyAll: (capacity) =>
