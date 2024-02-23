@@ -19,8 +19,8 @@ const RoomCardGrid = () => {
       overflowY="auto"
     >
       {propertyRooms?.map((room) => (
-        <GridItem>
-          <RoomCard room={room} key={room.roomName} />
+        <GridItem key={room.roomName}>
+          <RoomCard room={room} />
         </GridItem>
       ))}
     </SimpleGrid>

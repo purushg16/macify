@@ -45,7 +45,7 @@ const RoomCard = ({ room }: { room: Room }) => {
           <Icon as={BsPeopleFill} boxSize={4} />
         </HStack>
       </VStack>
-      <RoomDetailsEditModal isOpen={isOpen} onClose={onClose} />
+      <RoomDetailsEditModal isOpen={isOpen} onClose={onClose} room={room} />
     </Box>
   );
 };

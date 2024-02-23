@@ -10,15 +10,18 @@ import {
   Text,
   HStack,
 } from "@chakra-ui/react";
+import Room from "../../../entities/room";
 
 interface RoomDetailsEditModalProps {
   isOpen: boolean;
   onClose: () => void;
+  room: Room;
 }
 
 const RoomDetailsEditModal = ({
   isOpen,
   onClose,
+  room,
 }: RoomDetailsEditModalProps) => {
   return (
     <>
@@ -34,16 +37,16 @@ const RoomDetailsEditModal = ({
             <Flex flexDir="column" gap={8}>
               <Box>
                 <Text> Room Name: </Text>
-                <Input bg="gray.100" placeholder="Room 1" />
+                <Input bg="gray.100" defaultValue={room.roomName} />
               </Box>
               <Box>
                 <Text> Number Of Beds: </Text>
-                <Input bg="gray.100" placeholder="Beds" />
+                <Input bg="gray.100" defaultValue={room.capacity} />
               </Box>
 
               <Box>
                 <Text> Capacity: </Text>
-                <Input bg="gray.100" placeholder="Capacity" />
+                <Input bg="gray.100" defaultValue={room.capacity} />
               </Box>
 
               <HStack textAlign="center" mt={6}>

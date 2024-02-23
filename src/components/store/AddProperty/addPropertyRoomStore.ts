@@ -11,6 +11,7 @@ interface AddPropertyRoomStore {
 interface AddPropertyRoomStoreActions {
   setNumberOfRooms: (numberOfRooms: number | undefined) => void;
   addPropertyRooms: (rooms: Room[] | undefined) => void;
+  editRoom: (room: Room) => void;
 }
 
 const useAddPropertyRoomStore = create<
@@ -21,6 +22,15 @@ const useAddPropertyRoomStore = create<
 
   propertyRooms: undefined,
   addPropertyRooms: (rooms) => set(() => ({ propertyRooms: rooms })),
+
+  editRoom: (room) =>
+    set((store) => ({
+      propertyRooms: store.propertyRooms?.map((r) => {
+        return r.roomId === room.roomId
+          ? { roomName: room.roomName, capacity: room.capacity }
+          : r;
+      }),
+    })),
 }));
 
 export default useAddPropertyRoomStore;

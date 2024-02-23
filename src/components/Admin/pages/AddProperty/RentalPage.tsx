@@ -17,6 +17,7 @@ import AddTitle from "../../elements/AddTitle";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
 import Room from "../../../entities/room";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const RentalPage = () => {
   const numberOfRooms = useAddPropertyRoomStore((s) => s.numberOfRooms);
@@ -35,7 +36,11 @@ const RentalPage = () => {
     const propertyRooms = [] as Room[];
 
     for (let index = 0; index < numberOfRooms!; index++)
-      propertyRooms.push({ roomName: `room${index + 1}`, capacity: 4 });
+      propertyRooms.push({
+        roomId: uuidv4(),
+        roomName: `Room${index + 1}`,
+        capacity: 4,
+      });
 
     addPropertyRooms(propertyRooms);
     setLoading(false);
