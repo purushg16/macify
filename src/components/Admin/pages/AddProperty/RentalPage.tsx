@@ -8,22 +8,39 @@ import {
   Switch,
   VStack,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import building from "../../../../assets/app/building.png";
 import AnimateMove from "../../../motions/Move";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import PropertyTypeSelector from "../../elements/AddProperty/PropertyTypeSelector";
 import AddTitle from "../../elements/AddTitle";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
+import Room from "../../../entities/room";
+import { useState } from "react";
 
 const RentalPage = () => {
   const numberOfRooms = useAddPropertyRoomStore((s) => s.numberOfRooms);
   const setNumberOfRooms = useAddPropertyRoomStore((s) => s.setNumberOfRooms);
+  const addPropertyRooms = useAddPropertyRoomStore((s) => s.addPropertyRooms);
 
   const rentWithin = useAddPropertyStore((s) => s.rentWithin);
   const setRentWithin = useAddPropertyStore((s) => s.setRentWithin);
 
   const propertyType = useAddPropertyStore((s) => s.propertyType);
+
+  const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
+  const createRooms = () => {
+    setLoading(true);
+    const propertyRooms = [] as Room[];
+
+    for (let index = 0; index < numberOfRooms!; index++)
+      propertyRooms.push({ roomName: `room${index + 1}`, capacity: 4 });
+
+    addPropertyRooms(propertyRooms);
+    setLoading(false);
+    navigate("/admin/add/property/3");
+  };
 
   return (
     <>
@@ -43,7 +60,7 @@ const RentalPage = () => {
           <PropertyTypeSelector />
 
           <InputGroup size="md" bg="gray.50" borderRadius={99}>
-            <Input value="Rental Within" pointerEvents="none" />
+            <Input defaultValue="Rental Within" pointerEvents="none" />
             <InputRightElement width="4.5rem">
               <Switch
                 isChecked={rentWithin}
@@ -62,7 +79,7 @@ const RentalPage = () => {
             bg="gray.50"
             placeholder="Number of rooms available"
             isDisabled={!rentWithin}
-            value={numberOfRooms}
+            value={numberOfRooms || ""}
             onChange={(event) => setNumberOfRooms(parseInt(event.target.value))}
           />
         </VStack>
@@ -73,23 +90,24 @@ const RentalPage = () => {
           <Link to="/admin/add/property">
             <Button id="extra"> Back </Button>
           </Link>
-          <Link to="/admin/add/property/3">
-            <Button
-              id="extra"
-              colorScheme="primary"
-              isDisabled={
-                propertyType
-                  ? rentWithin
-                    ? numberOfRooms
-                      ? false
-                      : true
-                    : false
-                  : true
-              }
-            >
-              Next
-            </Button>
-          </Link>
+
+          <Button
+            id="extra"
+            colorScheme="primary"
+            onClick={createRooms}
+            isLoading={isLoading}
+            isDisabled={
+              propertyType
+                ? rentWithin
+                  ? numberOfRooms
+                    ? false
+                    : true
+                  : false
+                : true
+            }
+          >
+            Next
+          </Button>
         </HStack>
       </AnimateMove>
     </>

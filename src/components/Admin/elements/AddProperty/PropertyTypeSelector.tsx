@@ -23,7 +23,11 @@ const PropertyTypeSelector = () => {
 
   return (
     <InputGroup size="md" bg="gray.50" borderRadius={99} zIndex={2}>
-      <Input placeholder="Property Type" value={type} pointerEvents="none" />
+      <Input
+        placeholder="Property Type"
+        defaultValue={type || ""}
+        pointerEvents="none"
+      />
       <InputRightElement width="4.5rem">
         <Menu>
           <MenuButton

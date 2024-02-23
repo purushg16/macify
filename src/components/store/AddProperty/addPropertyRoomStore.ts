@@ -5,7 +5,7 @@ export type PropertyType = "Hostel" | "Flat" | "Villa" | undefined;
 
 interface AddPropertyRoomStore {
   numberOfRooms: number | undefined;
-  propertyRoomsArray: Room[] | undefined;
+  propertyRooms: Room[] | undefined;
 }
 
 interface AddPropertyRoomStoreActions {
@@ -19,8 +19,8 @@ const useAddPropertyRoomStore = create<
   numberOfRooms: undefined,
   setNumberOfRooms: (numberOfRooms) => set({ numberOfRooms }),
 
-  propertyRoomsArray: undefined,
-  addPropertyRooms: (rooms) => set(() => ({ propertyRoomsArray: rooms })),
+  propertyRooms: undefined,
+  addPropertyRooms: (rooms) => set(() => ({ propertyRooms: rooms })),
 }));
 
 export default useAddPropertyRoomStore;

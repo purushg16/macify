@@ -1,7 +1,10 @@
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import RoomCard from "./RoomCard";
+import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
 
 const RoomCardGrid = () => {
+  const propertyRooms = useAddPropertyRoomStore((s) => s.propertyRooms);
+
   return (
     <SimpleGrid
       mx="auto"
@@ -15,24 +18,11 @@ const RoomCardGrid = () => {
       maxH={350}
       overflowY="auto"
     >
-      <GridItem>
-        <RoomCard />
-      </GridItem>
-      <GridItem>
-        <RoomCard />
-      </GridItem>
-      <GridItem>
-        <RoomCard />
-      </GridItem>
-      <GridItem>
-        <RoomCard />
-      </GridItem>
-      <GridItem>
-        <RoomCard />
-      </GridItem>
-      <GridItem>
-        <RoomCard />
-      </GridItem>
+      {propertyRooms?.map((room) => (
+        <GridItem>
+          <RoomCard room={room} key={room.roomName} />
+        </GridItem>
+      ))}
     </SimpleGrid>
   );
 };

@@ -10,8 +10,9 @@ import { BsPeopleFill } from "react-icons/bs";
 import { useLongPress } from "@uidotdev/usehooks";
 import RoomDetailsEditModal from "./RoomDetailsEditModal";
 import { TbBed } from "react-icons/tb";
+import Room from "../../../entities/room";
 
-const RoomCard = () => {
+const RoomCard = ({ room }: { room: Room }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const attrs = useLongPress(() => onOpen());
 
@@ -32,15 +33,15 @@ const RoomCard = () => {
       borderBottom="none"
     >
       <Text pos="absolute" top={1} left={3} color="white">
-        Room 1
+        {room.roomName}
       </Text>
       <VStack>
         <HStack bg="white" borderRadius={99} px={2} mr={2}>
-          <Text fontSize="lg"> 10 </Text>
+          <Text fontSize="lg"> {room.capacity} </Text>
           <Icon as={TbBed} boxSize={4} />
         </HStack>
         <HStack bg="white" borderRadius={99} px={2} mr={2}>
-          <Text fontSize="lg"> 10 </Text>
+          <Text fontSize="lg"> {room.capacity} </Text>
           <Icon as={BsPeopleFill} boxSize={4} />
         </HStack>
       </VStack>

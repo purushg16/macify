@@ -2,8 +2,8 @@ import { Button, HStack, Image, Input, VStack } from "@chakra-ui/react";
 import building from "../../../../assets/app/building.png";
 import AddTitle from "../../elements/AddTitle";
 import AnimateMove from "../../../motions/Move";
-import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import { Link } from "react-router-dom";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const NamePage = () => {
   const name = useAddPropertyStore((s) => s.propertyName);
@@ -27,7 +27,7 @@ const NamePage = () => {
           <Input
             bg="gray.50"
             placeholder="Property Name"
-            value={name}
+            value={name || ""}
             onChange={(e) => setName(e.target.value)}
           />
         </VStack>
