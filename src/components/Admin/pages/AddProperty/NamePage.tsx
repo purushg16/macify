@@ -2,7 +2,7 @@ import { Button, HStack, Image, Input, VStack } from "@chakra-ui/react";
 import building from "../../../../assets/app/building.png";
 import AddTitle from "../../elements/AddTitle";
 import AnimateMove from "../../../motions/Move";
-import useAddPropertyStore from "../../../store/admin/addPropertyStore";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import { Link } from "react-router-dom";
 
 const NamePage = () => {

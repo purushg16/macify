@@ -14,7 +14,7 @@ import AddTitle from "../../elements/AddTitle";
 import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
 import AnimateMove from "../../../motions/Move";
 import { Link } from "react-router-dom";
-import useAddPropertyStore from "../../../store/admin/addPropertyStore";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const RoomDetailsPage = () => {
   const propertyType = useAddPropertyStore((s) => s.propertyType);

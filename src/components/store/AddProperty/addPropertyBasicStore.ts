@@ -7,7 +7,6 @@ interface AddPropertyStore {
   propertyName: string | undefined;
   propertyType: PropertyType;
   rentWithin: boolean;
-  numberOfRooms: number | undefined;
   checkInTime: string | undefined;
   checkOutTime: string | undefined;
   amenities: string[] | undefined;
@@ -22,7 +21,6 @@ interface AddPropertyStoreActions {
   setPropertyName: (propertyName: string | undefined) => void;
   setPropertyType: (propertyType: PropertyType | undefined) => void;
   setRentWithin: (rentWithin: boolean) => void;
-  setNumberOfRooms: (numberOfRooms: number | undefined) => void;
   setCheckInTime: (checkInTime: string | undefined) => void;
   setCheckOutTime: (checkOutTime: string | undefined) => void;
   setAmenities: (amenities: string[] | undefined) => void;
@@ -38,7 +36,6 @@ const useAddPropertyStore = create<AddPropertyStore & AddPropertyStoreActions>(
     propertyName: undefined,
     propertyType: undefined,
     rentWithin: false,
-    numberOfRooms: undefined,
     checkInTime: undefined,
     checkOutTime: undefined,
     amenities: undefined,
@@ -50,7 +47,6 @@ const useAddPropertyStore = create<AddPropertyStore & AddPropertyStoreActions>(
     setPropertyName: (propertyName) => set({ propertyName }),
     setPropertyType: (propertyType) => set({ propertyType }),
     setRentWithin: (rentWithin) => set({ rentWithin }),
-    setNumberOfRooms: (numberOfRooms) => set({ numberOfRooms }),
     setCheckInTime: (checkInTime) => set({ checkInTime }),
     setCheckOutTime: (checkOutTime) => set({ checkOutTime }),
     setAmenities: (amenities) => set({ amenities }),

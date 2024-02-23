@@ -11,13 +11,14 @@ import {
 import { Link } from "react-router-dom";
 import building from "../../../../assets/app/building.png";
 import AnimateMove from "../../../motions/Move";
-import useAddPropertyStore from "../../../store/admin/addPropertyStore";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import PropertyTypeSelector from "../../elements/AddProperty/PropertyTypeSelector";
 import AddTitle from "../../elements/AddTitle";
+import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
 
 const RentalPage = () => {
-  const numberOfRooms = useAddPropertyStore((s) => s.numberOfRooms);
-  const setNumberOfRooms = useAddPropertyStore((s) => s.setNumberOfRooms);
+  const numberOfRooms = useAddPropertyRoomStore((s) => s.numberOfRooms);
+  const setNumberOfRooms = useAddPropertyRoomStore((s) => s.setNumberOfRooms);
 
   const rentWithin = useAddPropertyStore((s) => s.rentWithin);
   const setRentWithin = useAddPropertyStore((s) => s.setRentWithin);
