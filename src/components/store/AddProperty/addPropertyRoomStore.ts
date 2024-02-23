@@ -12,6 +12,7 @@ interface AddPropertyRoomStoreActions {
   setNumberOfRooms: (numberOfRooms: number | undefined) => void;
   addPropertyRooms: (rooms: Room[] | undefined) => void;
   editRoom: (room: Room) => void;
+  capacityApplyAll: (capacity: number) => void;
 }
 
 const useAddPropertyRoomStore = create<
@@ -30,6 +31,14 @@ const useAddPropertyRoomStore = create<
           ? { roomName: room.roomName, capacity: room.capacity }
           : r;
       }),
+    })),
+
+  capacityApplyAll: (capacity) =>
+    set((store) => ({
+      propertyRooms: store.propertyRooms?.map((room) => ({
+        ...room,
+        capacity: capacity,
+      })),
     })),
 }));
 

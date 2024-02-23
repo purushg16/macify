@@ -21,21 +21,25 @@ import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomS
 
 const RoomDetailsPage = () => {
   const [startingNumber, setStartingNumber] = useState<number>();
+  const [capacity, setCapacity] = useState<number>();
   const [serialize, isSerialized] = useState<boolean>(false);
   const [applyAll, isAppliedAll] = useState<boolean>(false);
 
   const propertyType = useAddPropertyStore((s) => s.propertyType);
   const numberOfRooms = useAddPropertyRoomStore((s) => s.numberOfRooms);
   const addPropertyRooms = useAddPropertyRoomStore((s) => s.addPropertyRooms);
+  const capacityApplyAll = useAddPropertyRoomStore((s) => s.capacityApplyAll);
 
   const doSerialize = () => {
-    if (!serialize)
-      addPropertyRooms(roomSerializer(startingNumber!, numberOfRooms!));
-    else addPropertyRooms(roomSerializer(1, numberOfRooms!));
+    if (!serialize && !!startingNumber) {
+      addPropertyRooms(roomSerializer(startingNumber, numberOfRooms!));
+    } else addPropertyRooms(roomSerializer(1, numberOfRooms!));
     isSerialized(!serialize);
   };
+
   const doApplyAll = () => {
-    if (applyAll) isAppliedAll(!applyAll);
+    if (!applyAll) capacityApplyAll(capacity!);
+    isAppliedAll(!applyAll);
   };
 
   return (
@@ -65,17 +69,18 @@ const RoomDetailsPage = () => {
               placeholder="Starting Room Number"
               bg="gray.50"
               flex={1}
-              value={startingNumber}
+              value={startingNumber || ""}
               onChange={(e) => {
                 isSerialized(false);
                 setStartingNumber(parseInt(e.target.value || ""));
               }}
             />
 
-            <Button w={130}>
+            <Button w={130} onChange={doSerialize}>
               <Switch
                 colorScheme="primary"
                 mr={2}
+                isDisabled={!startingNumber}
                 isChecked={serialize}
                 onChange={doSerialize}
               />
@@ -86,21 +91,38 @@ const RoomDetailsPage = () => {
           <Flex gap={2}>
             {propertyType === "Hostel" ? (
               <>
-                <Input placeholder="Number of beds" bg="gray.50" flex={1} />
+                <Input
+                  placeholder="Number of beds"
+                  bg="gray.50"
+                  flex={1}
+                  value={capacity || ""}
+                  onChange={(e) => {
+                    isAppliedAll(false);
+                    setCapacity(parseInt(e.target.value));
+                  }}
+                />
 
-                <Button w={130}>
+                <Button w={130} onChange={doApplyAll}>
                   <Switch
                     colorScheme="primary"
                     mr={2}
                     isChecked={applyAll}
                     onChange={doApplyAll}
+                    isDisabled={!capacity}
                   />
                   Apply All
                 </Button>
               </>
             ) : (
               <>
-                <Input placeholder="Capacity" bg="gray.50" flex={1} />
+                <Input
+                  placeholder="Capacity"
+                  bg="gray.50"
+                  flex={1}
+                  type="number"
+                  value={capacity || ""}
+                  onChange={(e) => setCapacity(parseInt(e.target.value))}
+                />
 
                 <Button w={130}>
                   <Switch colorScheme="primary" mr={2} />
