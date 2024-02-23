@@ -1,15 +1,16 @@
 import { create } from "zustand";
+import Room from "../../entities/room";
 
 export type PropertyType = "Hostel" | "Flat" | "Villa" | undefined;
 
 interface AddPropertyRoomStore {
   numberOfRooms: number | undefined;
-  propertyRoomsArray: string[] | undefined;
+  propertyRoomsArray: Room[] | undefined;
 }
 
 interface AddPropertyRoomStoreActions {
   setNumberOfRooms: (numberOfRooms: number | undefined) => void;
-  addPropertyRooms: (rooms: string[] | undefined) => void;
+  addPropertyRooms: (rooms: Room[] | undefined) => void;
 }
 
 const useAddPropertyRoomStore = create<
