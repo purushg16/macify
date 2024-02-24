@@ -10,9 +10,20 @@ import {
   VStack,
   Input,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import Manager from "../../../entities/manager";
 
 const AddManagerModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [newManager, editNewManager] = useState<Manager>({
+    name: "",
+    phone: parseInt(""),
+    email: "",
+  });
+
+  const addNewManager = () => {};
+
   return (
     <>
       <Button onClick={onOpen} colorScheme="primary" size="sm">
@@ -30,9 +41,35 @@ const AddManagerModal = () => {
           <ModalBody px={16}>
             <Text mb={4}>Add Manager</Text>
             <VStack gap={6}>
-              <Input bg="gray.100" placeholder="Name" />
-              <Input bg="gray.100" placeholder="Phone" type="number" />
-              <Input bg="gray.100" placeholder="Email" type="email" />
+              <Input
+                bg="gray.100"
+                placeholder="Name"
+                value={newManager.name}
+                onChange={(e) =>
+                  editNewManager({ ...newManager, name: e.target.value })
+                }
+              />
+              <Input
+                bg="gray.100"
+                placeholder="Phone"
+                type="number"
+                value={newManager.phone}
+                onChange={(e) =>
+                  editNewManager({
+                    ...newManager,
+                    phone: parseInt(e.target.value || ""),
+                  })
+                }
+              />
+              <Input
+                bg="gray.100"
+                placeholder="Email"
+                type="email"
+                value={newManager.email}
+                onChange={(e) =>
+                  editNewManager({ ...newManager, email: e.target.value })
+                }
+              />
             </VStack>
           </ModalBody>
 
@@ -40,7 +77,9 @@ const AddManagerModal = () => {
             <Button colorScheme="gray" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme="primary"> Create </Button>
+            <Button colorScheme="primary" onClick={addNewManager}>
+              Create
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
