@@ -1,4 +1,4 @@
-import { Flex, Input, Button, Switch } from "@chakra-ui/react";
+import { Button, Flex, Input, Switch } from "@chakra-ui/react";
 import { useState } from "react";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
@@ -38,16 +38,18 @@ const CapacityApplyInput = () => {
           onChange={(e) => setCapacity(parseInt(e.target.value))}
         />
       )}
-      <Button w={130} onChange={doApplyAll}>
-        <Switch
-          colorScheme="primary"
-          mr={2}
-          isChecked={applyAll}
-          onChange={doApplyAll}
-          isDisabled={!capacity}
-        />
+      <Switch
+        as={Button}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        colorScheme="primary"
+        isChecked={applyAll}
+        onChange={doApplyAll}
+        isDisabled={!capacity}
+      >
         Apply All
-      </Button>
+      </Switch>
     </Flex>
   );
 };

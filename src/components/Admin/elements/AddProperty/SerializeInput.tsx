@@ -28,17 +28,19 @@ const SerializeInput = () => {
           setStartingNumber(parseInt(e.target.value || ""));
         }}
       />
-
-      <Button w={130} onChange={doSerialize}>
-        <Switch
-          colorScheme="primary"
-          mr={2}
-          isDisabled={!startingNumber}
-          isChecked={serialize}
-          onChange={doSerialize}
-        />
+      <Switch
+        w={130}
+        as={Button}
+        colorScheme="primary"
+        isDisabled={!startingNumber}
+        isChecked={serialize}
+        onChange={doSerialize}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
         Serialize
-      </Button>
+      </Switch>
     </Flex>
   );
 };
