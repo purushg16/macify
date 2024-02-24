@@ -1,17 +1,9 @@
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Input,
-  Spacer,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import AddTitle from "../../elements/AddTitle";
-import AddManagerModal from "../../elements/AddProperty/AddManagerModal";
+import { Button, Flex, HStack, Input, Spacer, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
+import AddManagerModal from "../../elements/AddProperty/AddManagerModal";
+import ManagersList from "../../elements/AddProperty/ManagersList";
+import AddTitle from "../../elements/AddTitle";
 
 const ManagerPage = () => {
   return (
@@ -35,29 +27,7 @@ const ManagerPage = () => {
           </Flex>
 
           <Input placeholder="Search" bg="gray.50" />
-
-          <Box maxH={250} overflowY="auto" p={4} bg="white" borderRadius={20}>
-            <VStack gap={4}>
-              <Button colorScheme="gray" justifyContent="left" w="100%">
-                Manager 1
-              </Button>
-              <Button colorScheme="gray" justifyContent="left" w="100%">
-                Manager 1
-              </Button>
-              <Button colorScheme="gray" justifyContent="left" w="100%">
-                Manager 1
-              </Button>
-              <Button colorScheme="gray" justifyContent="left" w="100%">
-                Manager 1
-              </Button>
-              <Button colorScheme="gray" justifyContent="left" w="100%">
-                Manager 1
-              </Button>
-              <Button colorScheme="gray" justifyContent="left" w="100%">
-                Manager 1
-              </Button>
-            </VStack>
-          </Box>
+          <ManagersList />
         </Flex>
       </AnimateMove>
 
