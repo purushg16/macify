@@ -3,8 +3,10 @@ import AmenitiesGrid from "../../elements/AddProperty/AmenitiesGrid";
 import AddTitle from "../../elements/AddTitle";
 import { HStack, Button } from "@chakra-ui/react";
 import AnimateMove from "../../../motions/Move";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const AmenitiesPages = () => {
+  const amenities = useAddPropertyStore((s) => s.amenities);
   return (
     <>
       <AnimateMove delay={0.2}>
@@ -14,7 +16,7 @@ const AmenitiesPages = () => {
       <AnimateMove delay={0.4}>
         <AddTitle
           heading="Choose Amenities"
-          subtitle="Select all the amenities available "
+          subtitle="Select all the amenities available. Select atleast one!"
         />
       </AnimateMove>
 
@@ -24,7 +26,11 @@ const AmenitiesPages = () => {
             <Button id="extra">Back</Button>
           </Link>
           <Link to="/admin/add/property/6">
-            <Button id="extra" colorScheme="primary">
+            <Button
+              id="extra"
+              colorScheme="primary"
+              isDisabled={!amenities || amenities.length === 0}
+            >
               Next
             </Button>
           </Link>
