@@ -5,7 +5,7 @@ import { SmallButton } from "./AppButton";
 import { BsPersonCircle } from "react-icons/bs";
 
 const AppBar = () => {
-  const location = useLocation();
+  const location = useLocation().pathname.split("/")[2];
 
   return (
     <Box
@@ -25,26 +25,26 @@ const AppBar = () => {
         <SmallButton
           title="Dashboard"
           icon={TbLayoutBoard}
-          active={location.pathname === "/admin/dashboard"}
+          active={location === "dashboard"}
           route="/admin/dashboard"
         />
 
         <SmallButton
           title="Calender"
           icon={TbCalendar}
-          active={location.pathname === "/admin/calendar"}
+          active={location === "calendar"}
           route="/admin/calendar"
         />
         <SmallButton
           title="Property"
           icon={TbBuilding}
-          active={location.pathname === "/admin/properties"}
+          active={location === "properties"}
           route="/admin/properties"
         />
         <SmallButton
           title="Caretaker"
           icon={BsPersonCircle}
-          active={location.pathname === "/admin/caretaker"}
+          active={location === "caretaker"}
           route="/admin/caretaker"
         />
       </SimpleGrid>
