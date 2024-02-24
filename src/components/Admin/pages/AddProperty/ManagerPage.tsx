@@ -75,7 +75,7 @@ const ManagerPage = () => {
             <Button id="extra">Back</Button>
           </Link>
           <Link to="/admin/add/property/8">
-            <Button id="extra" colorScheme="primary">
+            <Button id="extra" colorScheme="primary" isDisabled={!manager}>
               Next
             </Button>
           </Link>
