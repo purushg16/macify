@@ -40,6 +40,7 @@ const PropertyAddressPage = () => {
             onChange={(e) => setCity(e.target.value)}
           />
           <Input
+            type="number"
             bg="gray.50"
             placeholder="Zip Cope"
             value={zipCode || ""}
@@ -67,7 +68,11 @@ const PropertyAddressPage = () => {
             <Button id="extra">Back</Button>
           </Link>
           <Link to="/admin/add/property/7">
-            <Button id="extra" colorScheme="primary">
+            <Button
+              id="extra"
+              colorScheme="primary"
+              isDisabled={!address || !city || !zipCode || !country}
+            >
               Next
             </Button>
           </Link>
