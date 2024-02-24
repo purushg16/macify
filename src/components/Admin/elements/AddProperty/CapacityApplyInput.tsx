@@ -39,6 +39,7 @@ const CapacityApplyInput = () => {
         />
       )}
       <Switch
+        w={130}
         as={Button}
         display="flex"
         alignItems="center"

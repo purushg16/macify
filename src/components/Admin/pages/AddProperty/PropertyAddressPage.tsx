@@ -20,11 +20,16 @@ const PropertyAddressPage = () => {
   return (
     <>
       <AnimateMove delay={0.2}>
-        <VStack gap={8} bg="#f5f5f5" p={6} borderRadius={20}>
+        <VStack
+          gap={8}
+          bg="#f5f5f5"
+          p={6}
+          borderRadius={20}
+          w={{ base: 400, md: 400, lg: 500 }}
+        >
           <Textarea
             bg="gray.50"
             placeholder="Address"
-            w={300}
             value={address || ""}
             onChange={(e) => setAddress(e.target.value)}
           />
