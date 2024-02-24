@@ -76,7 +76,7 @@ const ManagerPage = () => {
           </Link>
           <Link to="/admin/add/property/8">
             <Button id="extra" colorScheme="primary" isDisabled={!manager}>
-              Next
+              Finish
             </Button>
           </Link>
         </HStack>
