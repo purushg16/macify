@@ -18,46 +18,36 @@ const CapacityApplyInput = () => {
   return (
     <Flex gap={2}>
       {propertyType === "Hostel" ? (
-        <>
-          <Input
-            placeholder="Number of beds"
-            bg="gray.50"
-            flex={1}
-            value={capacity || ""}
-            onChange={(e) => {
-              isAppliedAll(false);
-              setCapacity(parseInt(e.target.value));
-            }}
-          />
-
-          <Button w={130} onChange={doApplyAll}>
-            <Switch
-              colorScheme="primary"
-              mr={2}
-              isChecked={applyAll}
-              onChange={doApplyAll}
-              isDisabled={!capacity}
-            />
-            Apply All
-          </Button>
-        </>
+        <Input
+          placeholder="Number of beds"
+          bg="gray.50"
+          flex={1}
+          value={capacity || ""}
+          onChange={(e) => {
+            isAppliedAll(false);
+            setCapacity(parseInt(e.target.value));
+          }}
+        />
       ) : (
-        <>
-          <Input
-            placeholder="Capacity"
-            bg="gray.50"
-            flex={1}
-            type="number"
-            value={capacity || ""}
-            onChange={(e) => setCapacity(parseInt(e.target.value))}
-          />
-
-          <Button w={130}>
-            <Switch colorScheme="primary" mr={2} />
-            Apply All
-          </Button>
-        </>
+        <Input
+          placeholder="Capacity"
+          bg="gray.50"
+          flex={1}
+          type="number"
+          value={capacity || ""}
+          onChange={(e) => setCapacity(parseInt(e.target.value))}
+        />
       )}
+      <Button w={130} onChange={doApplyAll}>
+        <Switch
+          colorScheme="primary"
+          mr={2}
+          isChecked={applyAll}
+          onChange={doApplyAll}
+          isDisabled={!capacity}
+        />
+        Apply All
+      </Button>
     </Flex>
   );
 };
