@@ -22,10 +22,10 @@ const AmenitiesPages = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/add/property/4">
+          <Link to="/admin/properties/add/4">
             <Button id="extra">Back</Button>
           </Link>
-          <Link to="/admin/add/property/6">
+          <Link to="/admin/properties/add/6">
             <Button
               id="extra"
               colorScheme="primary"

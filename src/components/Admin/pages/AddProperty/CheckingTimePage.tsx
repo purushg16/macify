@@ -34,10 +34,10 @@ const CheckingTimePage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/add/property/3">
+          <Link to="/admin/properties/add/3">
             <Button id="extra">Back</Button>
           </Link>
-          <Link to="/admin/add/property/5">
+          <Link to="/admin/properties/add/5">
             <Button
               id="extra"
               colorScheme="primary"

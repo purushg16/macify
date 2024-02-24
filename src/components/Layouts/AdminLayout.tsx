@@ -4,7 +4,7 @@ import AdminLinkStack from "../Admin/elements/AdminLinkStack";
 import AppBar from "../Admin/elements/AppBar";
 import { Outlet } from "react-router-dom";
 
-const AdminPage = () => {
+const AdminLayout = () => {
   return (
     <>
       <Grid
@@ -58,4 +58,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminLayout;

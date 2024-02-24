@@ -32,7 +32,7 @@ const SuccessfulPage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/add/property">
+          <Link to="/admin/properties/add">
             <Button id="extra"> Add Another</Button>
           </Link>
           <Link to="/admin">

@@ -44,7 +44,7 @@ const RentalPage = () => {
 
     addPropertyRooms(propertyRooms);
     setLoading(false);
-    navigate("/admin/add/property/3");
+    navigate("/admin/properties/add/3");
   };
 
   return (

@@ -71,10 +71,10 @@ const ManagerPage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/add/property/6">
+          <Link to="/admin/properties/add/6">
             <Button id="extra">Back</Button>
           </Link>
-          <Link to="/admin/add/property/8">
+          <Link to="/admin/properties/add/8">
             <Button id="extra" colorScheme="primary" isDisabled={!manager}>
               Finish
             </Button>

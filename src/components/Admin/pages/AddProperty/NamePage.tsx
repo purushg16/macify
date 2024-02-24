@@ -38,7 +38,7 @@ const NamePage = () => {
           <Link to="/admin/properties">
             <Button id="extra"> Cancel </Button>
           </Link>
-          <Link to="/admin/add/property/2">
+          <Link to="/admin/properties/add/2">
             <Button
               id="extra"
               colorScheme="primary"
