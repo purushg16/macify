@@ -40,9 +40,11 @@ const ManagerConfirmationModal = ({
         {manager.name}
       </Button>
       <AlertDialog
+        motionPreset="slideInBottom"
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
         onClose={onClose}
+        isCentered
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
