@@ -92,7 +92,7 @@ const RentalPage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/add/property">
+          <Link to="/admin/properties/add">
             <Button id="extra"> Back </Button>
           </Link>
 
