@@ -15,9 +15,9 @@ import {
 import { BsClockFill } from "react-icons/bs";
 import img from "../../../../assets/app/checking-in.png";
 import AddTitle from "../../elements/AddTitle";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const timeList = [
   "00:00",
@@ -71,8 +71,10 @@ const timeList = [
 ];
 
 const CheckingTimePage = () => {
-  const [checkIn, setCheckIn] = useState<string | undefined>(undefined);
-  const [checkOut, setCheckOut] = useState<string | undefined>(undefined);
+  const checkInTime = useAddPropertyStore((s) => s.checkInTime);
+  const setCheckInTime = useAddPropertyStore((s) => s.setCheckInTime);
+  const checkOutTime = useAddPropertyStore((s) => s.checkOutTime);
+  const setCheckOutTime = useAddPropertyStore((s) => s.setCheckOutTime);
 
   return (
     <>
@@ -94,7 +96,7 @@ const CheckingTimePage = () => {
               bg="gray.50"
               placeholder="CheckIn Time"
               size="md"
-              value={checkIn}
+              value={checkInTime || ""}
             />
             <InputRightElement cursor="pointer">
               <Menu placement="top">
@@ -109,9 +111,8 @@ const CheckingTimePage = () => {
                 </MenuButton>
                 <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
                   {timeList.map((time, i) => (
-                    <MenuItem key={i} onClick={() => setCheckIn(time)}>
-                      {" "}
-                      {time}{" "}
+                    <MenuItem key={i} onClick={() => setCheckInTime(time)}>
+                      {time}
                     </MenuItem>
                   ))}
                 </MenuList>
@@ -124,7 +125,7 @@ const CheckingTimePage = () => {
               bg="gray.50"
               placeholder="CheckOut Time"
               size="md"
-              value={checkOut}
+              value={checkOutTime || ""}
             />
             <InputRightElement cursor="pointer">
               <Menu placement="top">
@@ -139,9 +140,8 @@ const CheckingTimePage = () => {
                 </MenuButton>
                 <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
                   {timeList.map((time, i) => (
-                    <MenuItem key={i} onClick={() => setCheckOut(time)}>
-                      {" "}
-                      {time}{" "}
+                    <MenuItem key={i} onClick={() => setCheckOutTime(time)}>
+                      {time}
                     </MenuItem>
                   ))}
                 </MenuList>
