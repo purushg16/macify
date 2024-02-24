@@ -1,13 +1,44 @@
-import { Button, Flex, HStack, Input, Spacer, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  HStack,
+  Heading,
+  Highlight,
+  Input,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
 import AddManagerModal from "../../elements/AddProperty/AddManagerModal";
 import ManagersList from "../../elements/AddProperty/ManagersList";
 import AddTitle from "../../elements/AddTitle";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const ManagerPage = () => {
+  const manager = useAddPropertyStore((s) => s.manager);
+
   return (
     <>
+      {!!manager && (
+        <AnimateMove delay={0.4}>
+          <Heading
+            fontSize="lg"
+            width="70%"
+            my={0}
+            mx="auto"
+            textAlign="center"
+          >
+            <Highlight
+              query={manager.name}
+              styles={{ color: "primary.500" }}
+              children={`${manager.name} has been successfully assigned a manager for this
+          property`}
+            />
+          </Heading>
+        </AnimateMove>
+      )}
+
       <AnimateMove delay={0.4} noWidth>
         <Flex
           mx="auto"
