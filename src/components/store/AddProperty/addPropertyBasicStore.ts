@@ -23,7 +23,7 @@ interface AddPropertyStoreActions {
   setRentWithin: (rentWithin: boolean) => void;
   setCheckInTime: (checkInTime: string | undefined) => void;
   setCheckOutTime: (checkOutTime: string | undefined) => void;
-  setAmenities: (amenities: string[] | undefined) => void;
+  setAmenities: (amenity: string | undefined) => void;
   setAddress: (address: string | undefined) => void;
   setCity: (city: string | undefined) => void;
   setZipCode: (zipCode: string | undefined) => void;
@@ -49,7 +49,14 @@ const useAddPropertyStore = create<AddPropertyStore & AddPropertyStoreActions>(
     setRentWithin: (rentWithin) => set({ rentWithin }),
     setCheckInTime: (checkInTime) => set({ checkInTime }),
     setCheckOutTime: (checkOutTime) => set({ checkOutTime }),
-    setAmenities: (amenities) => set({ amenities }),
+    setAmenities: (amenity) =>
+      set((store) => ({
+        amenities: store.amenities
+          ? store.amenities.includes(amenity!)
+            ? store.amenities.filter((a) => a !== amenity)
+            : [...store.amenities, amenity!]
+          : [amenity!],
+      })),
     setAddress: (address) => set({ address }),
     setCity: (city) => set({ city }),
     setZipCode: (zipCode) => set({ zipCode }),

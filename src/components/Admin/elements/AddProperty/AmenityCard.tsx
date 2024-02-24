@@ -4,15 +4,20 @@ import { IconType } from "react-icons";
 interface AmenityCardProps {
   icon: IconType;
   title: string;
+  selected?: boolean;
 }
 
-const AmenityCard = ({ title, icon }: AmenityCardProps) => {
+const AmenityCard = ({ title, icon, selected = false }: AmenityCardProps) => {
   return (
     <Box
+      cursor="pointer"
       textAlign="left"
       h={130}
       borderRadius={20}
-      bg="primary.300"
+      bg={selected ? "primary.300" : "none"}
+      border="3px solid"
+      borderColor={selected ? "primary.300" : "none"}
+      transition="all 0.5s"
       p={4}
       display="flex"
       flexDir="column"
