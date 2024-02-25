@@ -15,7 +15,7 @@ import ManagersList from "../../elements/AddProperty/ManagersList";
 import Title from "../../elements/Title";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
-const ManagerPage = () => {
+const AssignManagerPage = () => {
   const manager = useAddPropertyStore((s) => s.manager);
 
   return (
@@ -85,4 +85,4 @@ const ManagerPage = () => {
   );
 };
 
-export default ManagerPage;
+export default AssignManagerPage;

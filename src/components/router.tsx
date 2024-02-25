@@ -5,14 +5,14 @@ import AdminLayout from "./Layouts/AdminLayout";
 import DashBoardPage from "./Admin/pages/DashBoardPage";
 import CalendarPage from "./Admin/pages/CalendarPage";
 import PropertyPage from "./Admin/pages/PropertyPage";
-import CaretakerPage from "./Admin/pages/CaretakerPage";
+import ManagerPage from "./Admin/pages/ManagerPage";
 import HotelBooking from "./Booking/HotelBooking";
 import BookingLayout from "./Booking/BookingLayout";
 import AddFormLayoutPage from "./Layouts/AddFormLayoutPage";
 import NamePage from "./Admin/pages/AddProperty/NamePage";
 import AmenitiesPages from "./Admin/pages/AddProperty/AmenitiesPages";
 import CheckingTimePage from "./Admin/pages/AddProperty/CheckingTimePage";
-import ManagerPage from "./Admin/pages/AddProperty/ManagerPage";
+import AssignManagerPage from "./Admin/pages/AddProperty/AssignManagerPage";
 import PropertyAddressPage from "./Admin/pages/AddProperty/PropertyAddressPage";
 import RentalPage from "./Admin/pages/AddProperty/RentalPage";
 import RoomDetailsPage from "./Admin/pages/AddProperty/RoomDetailsPage";
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <DashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
-      { path: "caretaker", element: <CaretakerPage /> },
+      { path: "caretaker", element: <ManagerPage /> },
 
       {
         path: "properties",
@@ -49,33 +49,12 @@ const router = createBrowserRouter([
               { path: "4", element: <CheckingTimePage /> },
               { path: "5", element: <AmenitiesPages /> },
               { path: "6", element: <PropertyAddressPage /> },
-              { path: "7", element: <ManagerPage /> },
+              { path: "7", element: <AssignManagerPage /> },
               { path: "8", element: <SuccessfulPage /> },
             ],
           },
         ],
       },
-
-      // {
-      //   path: "add",
-      //   element: <AddFormLayoutPage />,
-      //   children: [
-      //     {
-      //       path: "property",
-      //       element: <AddPropertyPage />,
-      //       children: [
-      //         { index: true, element: <NamePage /> },
-      //         { path: "2", element: <RentalPage /> },
-      //         { path: "3", element: <RoomDetailsPage /> },
-      //         { path: "4", element: <CheckingTimePage /> },
-      //         { path: "5", element: <AmenitiesPages /> },
-      //         { path: "6", element: <PropertyAddressPage /> },
-      //         { path: "7", element: <ManagerPage /> },
-      //         { path: "8", element: <SuccessfulPage /> },
-      //       ],
-      //     },
-      //   ],
-      // },
     ],
   },
   {
