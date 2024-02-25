@@ -1,6 +1,32 @@
-import { Box, Button, Icon } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+import { NavLink } from "react-router-dom";
+import { Box, Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { useNavigate } from "react-router-dom";
+
+interface AdminButtonProps {
+  text: string;
+  link: string;
+  isActive: boolean;
+}
+
+const LiteNavigationButton = ({ text, link, isActive }: AdminButtonProps) => {
+  return (
+    <NavLink to={link}>
+      <Button
+        fontSize="xl"
+        variant="text"
+        px={0}
+        opacity={isActive ? 1 : 0.5}
+        transition="all 0.5s"
+      >
+        {text}
+      </Button>
+    </NavLink>
+  );
+};
+
+export { LiteNavigationButton };
 
 interface Props {
   title: string;
@@ -8,17 +34,6 @@ interface Props {
   active?: boolean;
   route?: string;
 }
-
-const NavButton = ({ title, active = false, icon }: Props) => {
-  return (
-    <Button
-      variant={!active ? "outline" : "solid"}
-      leftIcon={<Icon as={icon} />}
-    >
-      {title}
-    </Button>
-  );
-};
 
 const SmallButton = ({ active = false, icon, route }: Props) => {
   const navigate = useNavigate();
@@ -53,4 +68,4 @@ const SmallButton = ({ active = false, icon, route }: Props) => {
   );
 };
 
-export { NavButton, SmallButton };
+export { SmallButton };

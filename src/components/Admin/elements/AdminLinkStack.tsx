@@ -1,5 +1,5 @@
 import { Box, VStack } from "@chakra-ui/react";
-import { AdminButton } from "./AdminButton";
+import { LiteNavigationButton } from "./Button";
 import { useLocation } from "react-router-dom";
 
 const AdminLinkStack = () => {
@@ -8,18 +8,22 @@ const AdminLinkStack = () => {
   return (
     <Box px={{ base: 4, md: 8, lg: 16 }}>
       <VStack align="start" gap={4}>
-        <AdminButton text="Dashboard" link="/admin" isActive={!location} />
-        <AdminButton
+        <LiteNavigationButton
+          text="Dashboard"
+          link="/admin"
+          isActive={!location}
+        />
+        <LiteNavigationButton
           text="Calendar"
           link="/admin/calendar"
           isActive={location === "calendar"}
         />
-        <AdminButton
+        <LiteNavigationButton
           text="Properties"
           link="/admin/properties"
           isActive={location === "properties"}
         />
-        <AdminButton
+        <LiteNavigationButton
           text="Caretaker"
           link="/admin/caretaker"
           isActive={location === "caretaker"}

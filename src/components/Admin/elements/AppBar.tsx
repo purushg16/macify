@@ -1,8 +1,8 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
-import { SmallButton } from "./AppButton";
 import { BsPersonCircle } from "react-icons/bs";
+import { SmallButton } from "./Button";
 
 const AppBar = () => {
   const location = useLocation().pathname.split("/")[2];
