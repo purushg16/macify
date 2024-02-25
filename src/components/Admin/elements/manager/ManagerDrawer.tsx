@@ -33,11 +33,12 @@ const ManagerDrawer = ({ manager }: ManagerDrawerProps) => {
       <IconButton
         onClick={onOpen}
         aria-label="more-manager"
-        icon={<Icon as={CiCircleMore} boxSize="100%" color="white" />}
-        boxSize={10}
-        bg="black"
+        icon={<Icon as={CiCircleMore} boxSize="100%" color="black" />}
+        boxSize={6}
+        p={0}
+        bg="none"
         transition="all 0.5s"
-        _hover={{ bg: "black", opacity: 0.7 }}
+        _hover={{ bg: "none", opacity: 0.7 }}
       />
       <Drawer
         isOpen={isOpen}

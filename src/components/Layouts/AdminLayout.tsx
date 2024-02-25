@@ -42,7 +42,7 @@ const AdminLayout = () => {
           overflowX="auto"
           maxH="100%"
           overflowY="auto"
-          py={8}
+          pb={8}
         >
           <Box px={{ base: 4, md: 8 }}>
             <Outlet />
