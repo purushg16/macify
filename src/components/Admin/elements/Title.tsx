@@ -3,11 +3,12 @@ import { Box, Heading, Text } from "@chakra-ui/react";
 interface AddTitleProps {
   heading: string;
   subtitle: string;
+  align?: CanvasTextAlign;
 }
 
-const Title = ({ heading, subtitle }: AddTitleProps) => {
+const Title = ({ heading, subtitle, align = "center" }: AddTitleProps) => {
   return (
-    <Box textAlign="center">
+    <Box textAlign={align}>
       <Heading fontSize="xl" fontWeight={500}>
         {heading}
       </Heading>
