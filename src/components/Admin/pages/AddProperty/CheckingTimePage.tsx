@@ -2,7 +2,7 @@ import { Button, HStack, Image, VStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import img from "../../../../assets/app/checking-in.png";
 import AnimateMove from "../../../motions/Move";
-import AddTitle from "../../elements/AddTitle";
+import Title from "../../elements/Title";
 
 import CheckInTimePicker from "../../elements/AddProperty/CheckInTimePicker";
 import CheckOutTimePicker from "../../elements/AddProperty/CheckOutTimePicker";
@@ -19,7 +19,7 @@ const CheckingTimePage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <AddTitle
+        <Title
           heading="Checking Time Details"
           subtitle="Enter checking time details for this property"
         />

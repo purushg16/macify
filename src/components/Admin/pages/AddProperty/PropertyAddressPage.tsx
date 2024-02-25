@@ -1,5 +1,5 @@
 import { Button, HStack, Input, Textarea, VStack } from "@chakra-ui/react";
-import AddTitle from "../../elements/AddTitle";
+import Title from "../../elements/Title";
 import AnimateMove from "../../../motions/Move";
 import { Link } from "react-router-dom";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
@@ -56,7 +56,7 @@ const PropertyAddressPage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <AddTitle
+        <Title
           heading="Address Details"
           subtitle="Provide this property’s location details"
         />

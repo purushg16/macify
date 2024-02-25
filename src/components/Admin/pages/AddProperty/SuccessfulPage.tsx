@@ -1,5 +1,5 @@
 import { Box, Button, HStack, Image } from "@chakra-ui/react";
-import AddTitle from "../../elements/AddTitle";
+import Title from "../../elements/Title";
 import success from "../../../../assets/app/success.png";
 import { Link } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
@@ -24,7 +24,7 @@ const SuccessfulPage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <AddTitle
+        <Title
           heading="Successfully Created 🎉"
           subtitle="A new Property has been now added to dashboard"
         />

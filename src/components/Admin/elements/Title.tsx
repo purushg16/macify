@@ -5,7 +5,7 @@ interface AddTitleProps {
   subtitle: string;
 }
 
-const AddTitle = ({ heading, subtitle }: AddTitleProps) => {
+const Title = ({ heading, subtitle }: AddTitleProps) => {
   return (
     <Box textAlign="center">
       <Heading fontSize="xl" fontWeight={500}>
@@ -18,4 +18,4 @@ const AddTitle = ({ heading, subtitle }: AddTitleProps) => {
   );
 };
 
-export default AddTitle;
+export default Title;

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
 import AddManagerModal from "../../elements/AddProperty/AddManagerModal";
 import ManagersList from "../../elements/AddProperty/ManagersList";
-import AddTitle from "../../elements/AddTitle";
+import Title from "../../elements/Title";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const ManagerPage = () => {
@@ -63,7 +63,7 @@ const ManagerPage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <AddTitle
+        <Title
           heading="Assign Manager"
           subtitle="Assign manager for this property or create a new one"
         />

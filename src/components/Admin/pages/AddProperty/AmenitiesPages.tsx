@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import AmenitiesGrid from "../../elements/AddProperty/AmenitiesGrid";
-import AddTitle from "../../elements/AddTitle";
+import Title from "../../elements/Title";
 import { HStack, Button } from "@chakra-ui/react";
 import AnimateMove from "../../../motions/Move";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
@@ -14,7 +14,7 @@ const AmenitiesPages = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <AddTitle
+        <Title
           heading="Choose Amenities"
           subtitle="Select all the amenities available. Select atleast one!"
         />

@@ -4,7 +4,7 @@ import AnimateMove from "../../../motions/Move";
 import CapacityApplyInput from "../../elements/AddProperty/CapacityApplyInput";
 import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
 import SerializeInput from "../../elements/AddProperty/SerializeInput";
-import AddTitle from "../../elements/AddTitle";
+import Title from "../../elements/Title";
 
 const RoomDetailsPage = () => {
   return (
@@ -15,7 +15,7 @@ const RoomDetailsPage = () => {
 
       <AnimateMove delay={0.4}>
         <Box>
-          <AddTitle
+          <Title
             heading="Room Details"
             subtitle="Enter individual room name & numbers "
           />

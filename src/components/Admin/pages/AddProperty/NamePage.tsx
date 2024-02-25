@@ -1,6 +1,6 @@
 import { Button, HStack, Image, Input, VStack } from "@chakra-ui/react";
 import building from "../../../../assets/app/building.png";
-import AddTitle from "../../elements/AddTitle";
+import Title from "../../elements/Title";
 import AnimateMove from "../../../motions/Move";
 import { Link } from "react-router-dom";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
@@ -16,7 +16,7 @@ const NamePage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <AddTitle
+        <Title
           heading="Add New Property"
           subtitle="Enter Property Name & Type"
         />

@@ -13,7 +13,7 @@ import building from "../../../../assets/app/building.png";
 import AnimateMove from "../../../motions/Move";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import PropertyTypeSelector from "../../elements/AddProperty/PropertyTypeSelector";
-import AddTitle from "../../elements/AddTitle";
+import Title from "../../elements/Title";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
 import Room from "../../../entities/room";
 import { useState } from "react";
@@ -54,7 +54,7 @@ const RentalPage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <AddTitle
+        <Title
           heading="Rental Details"
           subtitle="Please select whether this property is rented inside"
         />
