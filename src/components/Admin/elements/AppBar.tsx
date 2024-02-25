@@ -25,8 +25,8 @@ const AppBar = () => {
         <SmallButton
           title="Dashboard"
           icon={TbLayoutBoard}
-          active={location === "dashboard"}
-          route="/admin/dashboard"
+          active={!location}
+          route="/admin"
         />
 
         <SmallButton

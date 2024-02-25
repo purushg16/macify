@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./Brand/pages/HomePage";
 import BrandLayout from "./Layouts/BrandLayout";
 import AdminLayout from "./Layouts/AdminLayout";
-import LandingPage from "./Admin/pages/LandingPage";
 import DashBoardPage from "./Admin/pages/DashBoardPage";
 import CalendarPage from "./Admin/pages/CalendarPage";
 import PropertyPage from "./Admin/pages/PropertyPage";
@@ -31,8 +30,7 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <AdminLayout />,
     children: [
-      { index: true, element: <LandingPage /> },
-      { path: "dashboard", element: <DashBoardPage /> },
+      { index: true, element: <DashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
       { path: "caretaker", element: <CaretakerPage /> },
 
