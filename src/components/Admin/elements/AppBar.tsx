@@ -42,10 +42,10 @@ const AppBar = () => {
           route="/admin/properties"
         />
         <SmallButton
-          title="Caretaker"
+          title="Manager"
           icon={BsPersonCircle}
-          active={location === "caretaker"}
-          route="/admin/caretaker"
+          active={location === "manager"}
+          route="/admin/manager"
         />
       </SimpleGrid>
     </Box>

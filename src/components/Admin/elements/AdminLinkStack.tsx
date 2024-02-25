@@ -24,9 +24,9 @@ const AdminLinkStack = () => {
           isActive={location === "properties"}
         />
         <LiteNavigationButton
-          text="Caretaker"
-          link="/admin/caretaker"
-          isActive={location === "caretaker"}
+          text="Manager"
+          link="/admin/manager"
+          isActive={location === "manager"}
         />
       </VStack>
     </Box>
