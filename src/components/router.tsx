@@ -58,6 +58,14 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/manager",
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <DashBoardPage /> },
+      { path: "calendar", element: <CalendarPage /> },
+    ],
+  },
+  {
     path: "/booking",
     element: <BookingLayout />,
     children: [{ index: true, element: <HotelBooking /> }],
