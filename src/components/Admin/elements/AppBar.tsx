@@ -9,13 +9,15 @@ const AppBar = () => {
   const location = useLocation().pathname.split("/")[2];
 
   const role = useRoleStore((s) => s.role);
+  const s = useRoleStore((s) => s.setRole);
+  s("Manager");
 
   return (
     <Box
       zIndex={10}
       pos="fixed"
       px={2}
-      py={6}
+      py={4}
       w="95%"
       left={3}
       bottom={0}
@@ -24,12 +26,13 @@ const AppBar = () => {
       backdropFilter="blur(2em)"
       boxShadow="rgb(130 140 229 / 43%) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;"
     >
-      <SimpleGrid columns={4} spacingX={2}>
+      <SimpleGrid columns={role === "Admin" ? 4 : 2} spacingX={2}>
         <SmallButton
           title="Dashboard"
           icon={TbLayoutBoard}
           active={!location}
           route="/admin"
+          admin={role === "Admin"}
         />
 
         <SmallButton
@@ -37,6 +40,7 @@ const AppBar = () => {
           icon={TbCalendar}
           active={location === "calendar"}
           route="/admin/calendar"
+          admin={role === "Admin"}
         />
         {role === "Admin" && (
           <>

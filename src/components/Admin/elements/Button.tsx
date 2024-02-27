@@ -33,9 +33,16 @@ interface Props {
   icon: IconType;
   active?: boolean;
   route?: string;
+  admin?: boolean;
 }
 
-const SmallButton = ({ active = false, icon, route }: Props) => {
+const SmallButton = ({
+  title,
+  active = false,
+  icon,
+  route,
+  admin = true,
+}: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -45,25 +52,24 @@ const SmallButton = ({ active = false, icon, route }: Props) => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      py={4}
       px={2}
       transition="all 0.7s"
       fontSize={{ base: "small", md: "md" }}
+      cursor="pointer"
+      onClick={() => navigate(route!)}
     >
       <Icon
-        onClick={() => navigate(route!)}
-        cursor="pointer"
         as={icon}
         p={2}
         borderRadius={999}
         bg={active ? "primary.100" : "none"}
         transform={active ? "scale(1.1)" : "scale(1)"}
-        pos="absolute"
         transition="all 0.7s"
         color={active ? "black" : "gray.400"}
         boxSize={{ base: 12, md: 14 }}
         boxShadow={active ? "rgb(38, 57, 77) 0px 20px 30px -10px;" : "none"}
       />
+      {!admin && <Box>{title}</Box>}
     </Box>
   );
 };
