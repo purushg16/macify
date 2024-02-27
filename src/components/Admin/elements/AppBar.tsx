@@ -31,7 +31,7 @@ const AppBar = () => {
           title="Dashboard"
           icon={TbLayoutBoard}
           active={!location}
-          route="/admin"
+          route={role === "Admin" ? "/admin" : "/manager"}
           admin={role === "Admin"}
         />
 
@@ -39,7 +39,7 @@ const AppBar = () => {
           title="Calender"
           icon={TbCalendar}
           active={location === "calendar"}
-          route="/admin/calendar"
+          route={role === "Admin" ? "/admin/calendar" : "/manager/calendar"}
           admin={role === "Admin"}
         />
         {role === "Admin" && (

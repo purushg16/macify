@@ -12,12 +12,12 @@ const AdminLinkStack = () => {
       <VStack align="start" gap={4}>
         <LiteNavigationButton
           text="Dashboard"
-          link="/admin"
+          link={role === "Admin" ? "/admin" : "/manager"}
           isActive={!location}
         />
         <LiteNavigationButton
           text="Calendar"
-          link="/admin/calendar"
+          link={role === "Admin" ? "/admin/calendar" : "/manager/calendar"}
           isActive={location === "calendar"}
         />
 
