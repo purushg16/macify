@@ -1,11 +1,4 @@
 import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   Button,
   Icon,
@@ -14,7 +7,16 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
+import { useState } from "react";
 import { CiCircleMore } from "react-icons/ci";
 import Manager from "../../../entities/manager";
 
@@ -24,7 +26,6 @@ interface ManagerDrawerProps {
 
 const ManagerDrawer = ({ manager }: ManagerDrawerProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef(null);
 
   const [edit, enableEdit] = useState(false);
 
@@ -40,21 +41,20 @@ const ManagerDrawer = ({ manager }: ManagerDrawerProps) => {
         transition="all 0.5s"
         _hover={{ bg: "none", opacity: 0.7 }}
       />
-      <Drawer
+      <Modal
         isOpen={isOpen}
-        placement="bottom"
-        onClose={() => {
-          onClose();
-          enableEdit(false);
-        }}
-        finalFocusRef={btnRef}
+        onClose={onClose}
+        isCentered
+        motionPreset="slideInBottom"
+        closeOnOverlayClick={false}
+        size="xl"
       >
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader> {manager.name} </DrawerHeader>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{manager.name}</ModalHeader>
+          <ModalCloseButton />
 
-          <DrawerBody mt={4}>
+          <ModalBody>
             <VStack gap={6} align="left">
               <VStack align="left">
                 <Text> Name </Text>
@@ -115,9 +115,9 @@ const ManagerDrawer = ({ manager }: ManagerDrawerProps) => {
                 )}
               </VStack>
             </VStack>
-          </DrawerBody>
+          </ModalBody>
 
-          <DrawerFooter
+          <ModalFooter
             alignItems="center"
             justifyContent="center"
             mt={4}
@@ -150,9 +150,9 @@ const ManagerDrawer = ({ manager }: ManagerDrawerProps) => {
                 </Button>
               </>
             )}
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
