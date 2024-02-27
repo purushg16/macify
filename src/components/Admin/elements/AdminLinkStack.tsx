@@ -6,8 +6,6 @@ import useRoleStore from "../../store/roleStore";
 const AdminLinkStack = () => {
   const location = useLocation().pathname.split("/")[2];
   const role = useRoleStore((s) => s.role);
-  // const setRole = useRoleStore((s) => s.setRole);
-  // setRole("Manager");
 
   return (
     <Box px={{ base: 4, md: 8, lg: 16 }}>

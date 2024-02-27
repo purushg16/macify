@@ -3,9 +3,12 @@ import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
 import { SmallButton } from "./Button";
+import useRoleStore from "../../store/roleStore";
 
 const AppBar = () => {
   const location = useLocation().pathname.split("/")[2];
+
+  const role = useRoleStore((s) => s.role);
 
   return (
     <Box
@@ -35,18 +38,22 @@ const AppBar = () => {
           active={location === "calendar"}
           route="/admin/calendar"
         />
-        <SmallButton
-          title="Property"
-          icon={TbBuilding}
-          active={location === "properties"}
-          route="/admin/properties"
-        />
-        <SmallButton
-          title="Manager"
-          icon={BsPersonCircle}
-          active={location === "manager"}
-          route="/admin/manager"
-        />
+        {role === "Admin" && (
+          <>
+            <SmallButton
+              title="Property"
+              icon={TbBuilding}
+              active={location === "properties"}
+              route="/admin/properties"
+            />
+            <SmallButton
+              title="Manager"
+              icon={BsPersonCircle}
+              active={location === "manager"}
+              route="/admin/manager"
+            />
+          </>
+        )}
       </SimpleGrid>
     </Box>
   );
