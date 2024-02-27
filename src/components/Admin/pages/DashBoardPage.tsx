@@ -1,4 +1,5 @@
 import { Box, Flex, Heading, Highlight, Text } from "@chakra-ui/react";
+import MultiCalendar from "../elements/MultiCalendar/MultiCalendar";
 
 const DashBoardPage = () => {
   return (
@@ -12,6 +13,8 @@ const DashBoardPage = () => {
         </Heading>
         <Text color="gray"> What a day to enter earning! </Text>
       </Box>
+
+      <MultiCalendar />
 
       {/* <SimpleGrid
         spacing={{ base: 4, md: 4 }}
