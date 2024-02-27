@@ -8,7 +8,7 @@ const AdminNavbar = () => {
 
   return (
     <Box bg="white">
-      <Flex alignItems="center" px={{ base: 4, md: 8, lg: 16 }} py={8} w="100%">
+      <Flex alignItems="center" py={8} w="100%">
         <Link to={role === "Admin" ? "/admin" : "/manager"}>
           <Heading fontSize="3xl"> Macify </Heading>
         </Link>

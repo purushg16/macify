@@ -8,7 +8,7 @@ const AdminLinkStack = () => {
   const role = useRoleStore((s) => s.role);
 
   return (
-    <Box px={{ base: 4, md: 8, lg: 16 }}>
+    <Box>
       <VStack align="start" gap={4}>
         <LiteNavigationButton
           text="Dashboard"

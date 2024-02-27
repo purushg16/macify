@@ -17,13 +17,14 @@ const AdminLayout = () => {
         gridTemplateRows={"100px 1fr"}
         gridTemplateColumns={{
           base: "1fr",
-          lg: "300px 1fr",
+          lg: "235px 1fr",
         }}
         gap={1}
         rowGap={{ base: 2, md: 4, lg: 8 }}
         color="blackAlpha.700"
         h="100vh" // Set the height of the grid to the viewport height
         overflowY="hidden"
+        px={{ base: 4, md: 8, lg: 16 }}
       >
         <GridItem area={"header"}>
           <AdminNavbar />
@@ -44,7 +45,7 @@ const AdminLayout = () => {
           overflowY="auto"
           pb={8}
         >
-          <Box px={{ base: 4, md: 8 }}>
+          <Box>
             <Outlet />
           </Box>
 
