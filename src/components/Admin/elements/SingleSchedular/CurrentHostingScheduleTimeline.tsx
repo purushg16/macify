@@ -9,7 +9,9 @@ interface FirstScheduleTimelineProps {
   data: schedule;
 }
 
-const FirstScheduleTimeline = ({ data }: FirstScheduleTimelineProps) => {
+const CurrentHostingScheduleTimeline = ({
+  data,
+}: FirstScheduleTimelineProps) => {
   const blockWidth =
     durationCalculator(data.start.getTime(), data.end.getTime()) *
     fIRST_SCHEDULE_BLOCK_MULTIPLIER;
@@ -45,4 +47,4 @@ const FirstScheduleTimeline = ({ data }: FirstScheduleTimelineProps) => {
   );
 };
 
-export default FirstScheduleTimeline;
+export default CurrentHostingScheduleTimeline;
