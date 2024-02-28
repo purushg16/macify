@@ -9,7 +9,16 @@ interface ScheduleBlockProps {
 
 const ScheduleBlock = ({ date }: ScheduleBlockProps) => {
   const firstData = Object.values(scheduleData)[0];
-  const secondData = Object.values(scheduleData)[1];
+
+  const currentHosting: boolean =
+    date in scheduleData &&
+    isDateBetween(firstData.start, firstData.end) &&
+    Object.keys(scheduleData).indexOf(date) === 0;
+
+  const upcomingHosting: boolean =
+    !currentHosting &&
+    ((date in scheduleData && Object.keys(scheduleData).indexOf(date) === 1) ||
+      Object.keys(scheduleData).indexOf(date) === 0);
 
   return (
     <Box
@@ -24,8 +33,8 @@ const ScheduleBlock = ({ date }: ScheduleBlockProps) => {
         {date in scheduleData && (
           <ScheduleTimeline
             data={scheduleData[date]}
-            current={isDateBetween(firstData.start, firstData.end)}
-            upcoming={scheduleData[date].start === secondData.start}
+            current={currentHosting}
+            upcoming={upcomingHosting}
           />
         )}
       </SimpleGrid>

@@ -5,27 +5,10 @@ const day = 24 * 60 * 60 * 1000;
 const endDate = new Date(today.getTime() + 5 * day);
 endDate.setHours(8);
 
-const date0 = new Date(today.getTime() + 0 * day)
-  .toDateString()
-  .split(" ")
-  .slice(1, 3)
-  .join(" ");
-
-const date1 = new Date(today.getTime() + 2 * day)
-  .toDateString()
-  .split(" ")
-  .slice(1, 3)
-  .join(" ");
-const date2 = new Date(today.getTime() + 7 * day)
-  .toDateString()
-  .split(" ")
-  .slice(1, 3)
-  .join(" ");
-const date3 = new Date(today.getTime() + 10 * day)
-  .toDateString()
-  .split(" ")
-  .slice(1, 3)
-  .join(" ");
+const date0 = new Date(today.getTime() + 0 * day).toDateString();
+const date1 = new Date(today.getTime() + 2 * day).toDateString();
+const date2 = new Date(today.getTime() + 7 * day).toDateString();
+const date3 = new Date(today.getTime() + 10 * day).toDateString();
 
 export default {
   [date0]: {

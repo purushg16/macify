@@ -31,10 +31,7 @@ const Schedular = ({ propertyName, propertyNumber, dates }: SchedularProps) => {
 
       <Flex>
         {dates.map((date, i) => (
-          <ScheduleBlock
-            key={i}
-            date={date.toDateString().split(" ").slice(1, 3).join(" ")}
-          />
+          <ScheduleBlock key={i} date={date.toDateString()} />
         ))}
       </Flex>
 
