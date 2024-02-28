@@ -1,4 +1,4 @@
-import { HStack, Icon, Box, Text } from "@chakra-ui/react";
+import { HStack, Icon, Box, Text, Show } from "@chakra-ui/react";
 import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
 import { durationCalculator } from "../../../generator/durationCalculator";
@@ -28,17 +28,19 @@ const FirstScheduleTimeline = ({ data }: FirstScheduleTimelineProps) => {
         alert(`Title: ${data.title}\n Start: ${data.start}\n End: ${data.end}`)
       }
     >
-      <HStack alignItems="center" visibility="hidden">
-        <Text display="contents">
-          <Icon as={BsPersonFill} color="gray" /> 3
-        </Text>
+      <Show above="md">
+        <HStack alignItems="center">
+          <Text display="contents">
+            <Icon as={BsPersonFill} color="gray" /> 3
+          </Text>
 
-        <Text px={{ base: 0, md: 1 }}>|</Text>
+          <Text px={{ base: 0, md: 1 }}>|</Text>
 
-        <Text display="contents">
-          <Icon as={FaMoon} boxSize={3} color="gray" /> 3
-        </Text>
-      </HStack>
+          <Text display="contents">
+            <Icon as={FaMoon} boxSize={3} color="gray" /> 3
+          </Text>
+        </HStack>
+      </Show>
     </Box>
   );
 };

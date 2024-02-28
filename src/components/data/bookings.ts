@@ -1,4 +1,4 @@
-const today = new Date("2024-02-17");
+const today = new Date("2024-02-27");
 today.setHours(12, 0, 0, 0);
 const day = 24 * 60 * 60 * 1000;
 
