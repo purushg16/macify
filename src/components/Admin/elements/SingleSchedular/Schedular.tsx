@@ -33,7 +33,6 @@ const Schedular = ({ propertyName, propertyNumber, dates }: SchedularProps) => {
         {dates.map((date, i) => (
           <ScheduleBlock
             key={i}
-            index={i}
             date={date.toDateString().split(" ").slice(1, 3).join(" ")}
           />
         ))}
