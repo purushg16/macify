@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useState } from "react";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -34,7 +34,7 @@ const LoginPage = () => {
       <Heading mb={8} fontSize="3xl">
         Macify
       </Heading>
-      <VStack my={4}>
+      <VStack my={4} mb={8}>
         <InputGroup>
           <Input
             placeholder="Username"
@@ -65,17 +65,7 @@ const LoginPage = () => {
         </InputGroup>
       </VStack>
 
-      <Text
-        mb={8}
-        textAlign="end"
-        fontSize="sm"
-        color="primary.500"
-        textDecor="underline"
-      >
-        <Link to="/auth/forgotPassword"> Forgot Password? </Link>
-      </Text>
-
-      <Title heading="Welcome Back!" subtitle="Login using your credentials" />
+      <Title heading="Hey, There!" subtitle="Register yourself here" />
 
       <Button
         colorScheme="primary"
@@ -83,24 +73,24 @@ const LoginPage = () => {
         px={8}
         isDisabled={!username || !password}
       >
-        Login
+        Register
       </Button>
 
       <Text mb={4} mt={8} fontSize="sm" color="gray">
-        If you are new here,{" "}
+        Already an user,{" "}
         <Link
-          to="/auth/register"
+          to="/auth/login"
           style={{
             color: "rgb(82, 83, 235)",
             textDecoration: "underline",
           }}
         >
-          Register
+          Login
         </Link>{" "}
-        yourself!
+        here!
       </Text>
     </Box>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

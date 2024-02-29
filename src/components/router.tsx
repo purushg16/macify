@@ -20,6 +20,7 @@ import SuccessfulPage from "./Admin/pages/AddProperty/SuccessfulPage";
 import PropertiesLayout from "./Layouts/PropertiesLayout";
 import LoginPage from "./Admin/pages/Authentication/LoginPage";
 import AuthLayout from "./Layouts/AuthLayout";
+import RegisterPage from "./Admin/pages/Authentication/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     element: <AuthLayout />,
     children: [
       { path: "login", element: <LoginPage /> },
-      { path: "register", element: <LoginPage /> },
+      { path: "register", element: <RegisterPage /> },
     ],
   },
   {
