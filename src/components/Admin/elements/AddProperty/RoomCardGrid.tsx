@@ -1,9 +1,15 @@
 import { GridItem, SimpleGrid } from "@chakra-ui/react";
 import RoomCard from "./RoomCard";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
+import { BsPeopleFill } from "react-icons/bs";
+import { GiBed } from "react-icons/gi";
 
 const RoomCardGrid = () => {
   const propertyRooms = useAddPropertyRoomStore((s) => s.rooms);
+  const propertyType = useAddPropertyStore((s) => s.propertyType);
+
+  const icon = propertyType !== "Hostel" ? BsPeopleFill : GiBed;
 
   return (
     <SimpleGrid
@@ -20,7 +26,7 @@ const RoomCardGrid = () => {
     >
       {propertyRooms?.map((room) => (
         <GridItem key={room.roomName}>
-          <RoomCard room={room} />
+          <RoomCard room={room} icon={icon} />
         </GridItem>
       ))}
     </SimpleGrid>

@@ -6,13 +6,13 @@ import {
   VStack,
   useDisclosure,
 } from "@chakra-ui/react";
-import { BsPeopleFill } from "react-icons/bs";
 import { useLongPress } from "@uidotdev/usehooks";
 import RoomDetailsEditModal from "./RoomDetailsEditModal";
 // import { TbBed } from "react-icons/tb";
 import Room from "../../../entities/room";
+import { IconType } from "react-icons";
 
-const RoomCard = ({ room }: { room: Room }) => {
+const RoomCard = ({ room, icon }: { room: Room; icon: IconType }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const attrs = useLongPress(() => onOpen());
 
@@ -60,7 +60,7 @@ const RoomCard = ({ room }: { room: Room }) => {
         >
           <HStack alignItems="baseline">
             <Text fontSize="2xl">{room.guestCapacity}</Text>
-            <Icon as={BsPeopleFill} boxSize={4} />
+            <Icon as={icon} boxSize={4} />
           </HStack>
         </Box>
 
