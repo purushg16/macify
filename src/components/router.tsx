@@ -21,6 +21,7 @@ import PropertiesLayout from "./Layouts/PropertiesLayout";
 import LoginPage from "./Admin/pages/Authentication/LoginPage";
 import AuthLayout from "./Layouts/AuthLayout";
 import RegisterPage from "./Admin/pages/Authentication/RegisterPage";
+import ForgotPasswordPage from "./Admin/pages/Authentication/ForgotPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
     children: [
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
+      { path: "forgotPassword", element: <ForgotPasswordPage /> },
     ],
   },
   {
