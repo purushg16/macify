@@ -22,6 +22,8 @@ import LoginPage from "./Admin/pages/Authentication/LoginPage";
 import AuthLayout from "./Layouts/AuthLayout";
 import RegisterPage from "./Admin/pages/Authentication/RegisterPage";
 import ForgotPasswordPage from "./Admin/pages/Authentication/ForgotPasswordPage";
+import AdminNotificationsPage from "./Admin/pages/AdminNotificationsPage";
+import ManagerNofiticationsPage from "./Admin/pages/ManagerNofiticationsPage";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +48,8 @@ const router = createBrowserRouter([
       { index: true, element: <DashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
       { path: "manager", element: <ManagerPage /> },
+
+      { path: "notifications", element: <AdminNotificationsPage /> },
 
       {
         path: "properties",
@@ -76,6 +80,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <DashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
+      { path: "notifications", element: <ManagerNofiticationsPage /> },
     ],
   },
   {
