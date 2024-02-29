@@ -1,7 +1,5 @@
 import {
-  Box,
   Button,
-  Heading,
   Icon,
   Input,
   InputGroup,
@@ -22,18 +20,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <Box
-      textAlign="center"
-      border="1px solid"
-      mx={4}
-      px={12}
-      pt={8}
-      borderRadius={20}
-      borderColor="gray.50"
-    >
-      <Heading mb={8} fontSize="3xl">
-        Macify
-      </Heading>
+    <>
       <VStack my={4}>
         <InputGroup>
           <Input
@@ -99,7 +86,7 @@ const LoginPage = () => {
         </Link>{" "}
         yourself!
       </Text>
-    </Box>
+    </>
   );
 };
 
