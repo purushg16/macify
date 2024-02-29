@@ -41,7 +41,7 @@ const useAddPropertyRoomStore = create<
     set((store) => ({
       rooms: store.rooms?.map((room) => ({
         ...room,
-        capacity: capacity,
+        guestCapacity: capacity,
       })),
     })),
 }));

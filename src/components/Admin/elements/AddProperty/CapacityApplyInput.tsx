@@ -35,7 +35,10 @@ const CapacityApplyInput = () => {
           flex={1}
           type="number"
           value={capacity || ""}
-          onChange={(e) => setCapacity(parseInt(e.target.value))}
+          onChange={(e) => {
+            isAppliedAll(false);
+            setCapacity(parseInt(e.target.value));
+          }}
         />
       )}
       <Switch
