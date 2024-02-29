@@ -1,10 +1,6 @@
 import { create } from "zustand";
 import Room from "../../entities/room";
-
-interface AddPropertyRoomStore {
-  numberOfRooms: number | undefined;
-  propertyRooms: Room[] | undefined;
-}
+import { AddPropertyRoomInterface } from "../../entities/addPropertyRoomInterface.ts";
 
 interface AddPropertyRoomStoreActions {
   setNumberOfRooms: (numberOfRooms: number | undefined) => void;
@@ -16,7 +12,7 @@ interface AddPropertyRoomStoreActions {
 }
 
 const useAddPropertyRoomStore = create<
-  AddPropertyRoomStore & AddPropertyRoomStoreActions
+  AddPropertyRoomInterface & AddPropertyRoomStoreActions
 >((set) => ({
   numberOfRooms: undefined,
   setNumberOfRooms: (numberOfRooms) => set({ numberOfRooms }),

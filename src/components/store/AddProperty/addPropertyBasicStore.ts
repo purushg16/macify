@@ -1,21 +1,8 @@
 import { create } from "zustand";
 import Manager from "../../entities/manager";
+import { AddPropertyBasicInterface } from "../../entities/addPropertyBasicInterface.ts";
 
 export type PropertyType = "Hostel" | "Flat" | "Villa" | undefined;
-
-interface AddPropertyStore {
-  propertyName: string | undefined;
-  propertyType: PropertyType;
-  rentWithin: boolean;
-  checkInTime: string | undefined;
-  checkOutTime: string | undefined;
-  amenities: string[] | undefined;
-  address: string | undefined;
-  city: string | undefined;
-  zipCode: string | undefined;
-  country: string | undefined;
-  manager: Manager | undefined;
-}
 
 interface AddPropertyStoreActions {
   setPropertyName: (propertyName: string | undefined) => void;
@@ -31,38 +18,38 @@ interface AddPropertyStoreActions {
   setManager: (manager: Manager | undefined) => void;
 }
 
-const useAddPropertyStore = create<AddPropertyStore & AddPropertyStoreActions>(
-  (set) => ({
-    propertyName: undefined,
-    propertyType: undefined,
-    rentWithin: false,
-    checkInTime: undefined,
-    checkOutTime: undefined,
-    amenities: undefined,
-    address: undefined,
-    city: undefined,
-    zipCode: undefined,
-    country: undefined,
-    manager: undefined,
-    setPropertyName: (propertyName) => set({ propertyName }),
-    setPropertyType: (propertyType) => set({ propertyType }),
-    setRentWithin: (rentWithin) => set({ rentWithin }),
-    setCheckInTime: (checkInTime) => set({ checkInTime }),
-    setCheckOutTime: (checkOutTime) => set({ checkOutTime }),
-    setAmenities: (amenity) =>
-      set((store) => ({
-        amenities: store.amenities
-          ? store.amenities.includes(amenity!)
-            ? store.amenities.filter((a) => a !== amenity)
-            : [...store.amenities, amenity!]
-          : [amenity!],
-      })),
-    setAddress: (address) => set({ address }),
-    setCity: (city) => set({ city }),
-    setZipCode: (zipCode) => set({ zipCode }),
-    setCountry: (country) => set({ country }),
-    setManager: (manager) => set({ manager }),
-  })
-);
+const useAddPropertyStore = create<
+  AddPropertyBasicInterface & AddPropertyStoreActions
+>((set) => ({
+  propertyName: undefined,
+  propertyType: undefined,
+  rentWithin: false,
+  checkInTime: undefined,
+  checkOutTime: undefined,
+  amenities: undefined,
+  address: undefined,
+  city: undefined,
+  zipCode: undefined,
+  country: undefined,
+  manager: undefined,
+  setPropertyName: (propertyName) => set({ propertyName }),
+  setPropertyType: (propertyType) => set({ propertyType }),
+  setRentWithin: (rentWithin) => set({ rentWithin }),
+  setCheckInTime: (checkInTime) => set({ checkInTime }),
+  setCheckOutTime: (checkOutTime) => set({ checkOutTime }),
+  setAmenities: (amenity) =>
+    set((store) => ({
+      amenities: store.amenities
+        ? store.amenities.includes(amenity!)
+          ? store.amenities.filter((a) => a !== amenity)
+          : [...store.amenities, amenity!]
+        : [amenity!],
+    })),
+  setAddress: (address) => set({ address }),
+  setCity: (city) => set({ city }),
+  setZipCode: (zipCode) => set({ zipCode }),
+  setCountry: (country) => set({ country }),
+  setManager: (manager) => set({ manager }),
+}));
 
 export default useAddPropertyStore;
