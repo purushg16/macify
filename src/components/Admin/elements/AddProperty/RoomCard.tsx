@@ -18,6 +18,7 @@ const RoomCard = ({ room }: { room: Room }) => {
 
   return (
     <Box
+      cursor="pointer"
       {...attrs}
       bg="primary.50"
       borderRadius={20}
