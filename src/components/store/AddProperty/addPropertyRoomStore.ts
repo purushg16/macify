@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import Room from "../../entities/room";
 
-export type PropertyType = "Hostel" | "Flat" | "Villa" | undefined;
-
 interface AddPropertyRoomStore {
   numberOfRooms: number | undefined;
   propertyRooms: Room[] | undefined;
