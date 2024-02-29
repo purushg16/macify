@@ -6,6 +6,15 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({
   config,
+  components: {
+    Modal: {
+      baseStyle: {
+        overlay: {
+          bg: "rgba(0,0,0,0.5)",
+        },
+      },
+    },
+  },
   colors: {
     gray: {
       50: "#e8e8e8",
