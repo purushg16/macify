@@ -12,7 +12,7 @@ import FileTile from "./FileTile";
 import useBookingStore from "../../../store/bookingStore";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import AnimateMove from "../../../motions/Move";
-import fetchFileDetails from "../../../generator/fetchFileDetails";
+import fetchFileDetails from "../../../functions/fetchFileDetails";
 
 const UploadedFiles = () => {
   const guestsCount = useBookingStore((s) => s.numberOfGuests)!;

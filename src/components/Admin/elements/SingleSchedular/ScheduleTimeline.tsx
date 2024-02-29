@@ -2,7 +2,7 @@ import { Box, HStack, Icon, Show, Text } from "@chakra-ui/react";
 import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
 import schedule from "../../../entities/schedule";
-import { durationCalculator } from "../../../generator/durationCalculator";
+import { durationCalculator } from "../../../functions/durationCalculator";
 
 interface ScheduleTimelineProps {
   data: schedule;
