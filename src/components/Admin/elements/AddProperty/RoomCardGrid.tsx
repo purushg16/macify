@@ -3,7 +3,7 @@ import RoomCard from "./RoomCard";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
 
 const RoomCardGrid = () => {
-  const propertyRooms = useAddPropertyRoomStore((s) => s.propertyRooms);
+  const propertyRooms = useAddPropertyRoomStore((s) => s.rooms);
 
   return (
     <SimpleGrid

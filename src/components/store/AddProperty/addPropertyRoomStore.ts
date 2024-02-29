@@ -17,12 +17,12 @@ const useAddPropertyRoomStore = create<
   numberOfRooms: undefined,
   setNumberOfRooms: (numberOfRooms) => set({ numberOfRooms }),
 
-  propertyRooms: undefined,
-  addPropertyRooms: (rooms) => set(() => ({ propertyRooms: rooms })),
+  rooms: undefined,
+  addPropertyRooms: (rooms) => set(() => ({ rooms: rooms })),
 
   editRoom: (room) =>
     set((store) => ({
-      propertyRooms: store.propertyRooms?.map((r) => {
+      rooms: store.rooms?.map((r) => {
         return r.roomId === room.roomId
           ? { ...r, roomName: room.roomName, guestCapacity: room.guestCapacity }
           : r;
@@ -31,7 +31,7 @@ const useAddPropertyRoomStore = create<
 
   serialize: (startingNumber) =>
     set((store) => ({
-      propertyRooms: store.propertyRooms?.map((r, index) => ({
+      rooms: store.rooms?.map((r, index) => ({
         ...r,
         roomName: `room${startingNumber + index}`,
       })),
@@ -39,7 +39,7 @@ const useAddPropertyRoomStore = create<
 
   capacityApplyAll: (capacity) =>
     set((store) => ({
-      propertyRooms: store.propertyRooms?.map((room) => ({
+      rooms: store.rooms?.map((room) => ({
         ...room,
         capacity: capacity,
       })),
