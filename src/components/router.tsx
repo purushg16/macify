@@ -24,6 +24,7 @@ import RegisterPage from "./Admin/pages/Authentication/RegisterPage";
 import ForgotPasswordPage from "./Admin/pages/Authentication/ForgotPasswordPage";
 import AdminNotificationsPage from "./Admin/pages/AdminNotificationsPage";
 import ManagerNofiticationsPage from "./Admin/pages/ManagerNofiticationsPage";
+import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,7 @@ const router = createBrowserRouter([
       { path: "manager", element: <ManagerPage /> },
 
       { path: "notifications", element: <AdminNotificationsPage /> },
+      { path: "approveBooking", element: <ApproveBookingPage /> },
 
       {
         path: "properties",

@@ -9,8 +9,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { BsClockFill, BsPeopleFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const NotificationCard = () => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       justify="space-between"
@@ -21,6 +24,7 @@ const NotificationCard = () => {
       cursor="pointer"
       _hover={{ bg: "primary.100" }}
       transition="all 0.7s"
+      onClick={() => navigate("/admin/approveBooking")}
     >
       <Box>
         <Heading fontSize="xl"> Sunny's Villa </Heading>
