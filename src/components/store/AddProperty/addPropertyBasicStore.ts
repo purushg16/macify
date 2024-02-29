@@ -24,19 +24,19 @@ const useAddPropertyStore = create<
   propertyName: undefined,
   propertyType: undefined,
   rentWithin: false,
-  checkInTime: undefined,
-  checkOutTime: undefined,
+  checkIn: undefined,
+  checkOut: undefined,
   amenities: undefined,
   address: undefined,
   city: undefined,
-  zipCode: undefined,
+  zipcode: undefined,
   country: undefined,
   manager: undefined,
   setPropertyName: (propertyName) => set({ propertyName }),
   setPropertyType: (propertyType) => set({ propertyType }),
   setRentWithin: (rentWithin) => set({ rentWithin }),
-  setCheckInTime: (checkInTime) => set({ checkInTime }),
-  setCheckOutTime: (checkOutTime) => set({ checkOutTime }),
+  setCheckInTime: (checkInTime) => set({ checkIn: checkInTime }),
+  setCheckOutTime: (checkOutTime) => set({ checkOut: checkOutTime }),
   setAmenities: (amenity) =>
     set((store) => ({
       amenities: store.amenities
@@ -47,7 +47,7 @@ const useAddPropertyStore = create<
     })),
   setAddress: (address) => set({ address }),
   setCity: (city) => set({ city }),
-  setZipCode: (zipCode) => set({ zipCode }),
+  setZipCode: (zipCode) => set({ zipcode: zipCode }),
   setCountry: (country) => set({ country }),
   setManager: (manager) => set({ manager }),
 }));

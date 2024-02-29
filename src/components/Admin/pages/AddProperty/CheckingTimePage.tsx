@@ -9,8 +9,8 @@ import CheckOutTimePicker from "../../elements/AddProperty/CheckOutTimePicker";
 import NavigatorWrapper from "../../elements/NavigatorWrapper";
 
 const CheckingTimePage = () => {
-  const checkInTime = useAddPropertyStore((s) => s.checkInTime);
-  const checkOutTime = useAddPropertyStore((s) => s.checkOutTime);
+  const checkInTime = useAddPropertyStore((s) => s.checkIn);
+  const checkOutTime = useAddPropertyStore((s) => s.checkOut);
 
   return (
     <>

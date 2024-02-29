@@ -14,7 +14,7 @@ import { timeList } from "../../../data/timeList";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const CheckInTimePicker = () => {
-  const checkInTime = useAddPropertyStore((s) => s.checkInTime);
+  const checkInTime = useAddPropertyStore((s) => s.checkIn);
   const setCheckInTime = useAddPropertyStore((s) => s.setCheckInTime);
   return (
     <InputGroup>

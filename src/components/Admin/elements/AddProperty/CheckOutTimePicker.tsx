@@ -14,7 +14,7 @@ import { timeList } from "../../../data/timeList";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const CheckOutTimePicker = () => {
-  const checkOutTime = useAddPropertyStore((s) => s.checkOutTime);
+  const checkOutTime = useAddPropertyStore((s) => s.checkOut);
   const setCheckOutTime = useAddPropertyStore((s) => s.setCheckOutTime);
   return (
     <InputGroup>

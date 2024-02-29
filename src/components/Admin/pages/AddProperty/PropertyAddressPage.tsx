@@ -11,7 +11,7 @@ const PropertyAddressPage = () => {
   const city = useAddPropertyStore((s) => s.city);
   const setCity = useAddPropertyStore((s) => s.setCity);
 
-  const zipCode = useAddPropertyStore((s) => s.zipCode);
+  const zipCode = useAddPropertyStore((s) => s.zipcode);
   const setZipCode = useAddPropertyStore((s) => s.setZipCode);
 
   const country = useAddPropertyStore((s) => s.country);

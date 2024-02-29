@@ -5,12 +5,12 @@ export interface AddPropertyBasicInterface {
   propertyName: string | undefined;
   propertyType: PropertyType;
   rentWithin: boolean;
-  checkInTime: string | undefined;
-  checkOutTime: string | undefined;
   amenities: string[] | undefined;
   address: string | undefined;
-  city: string | undefined;
-  zipCode: string | undefined;
   country: string | undefined;
+  city: string | undefined;
+  zipcode: string | undefined;
   manager: Manager | undefined;
+  checkIn: string | undefined;
+  checkOut: string | undefined;
 }
