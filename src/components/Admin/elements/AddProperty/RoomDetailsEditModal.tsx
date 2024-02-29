@@ -28,7 +28,7 @@ const RoomDetailsEditModal = ({
   const [newRoom, editNewRoom] = useState<Room>({
     roomName: room.roomName,
     roomId: room.roomId,
-    capacity: room.capacity,
+    guestCapacity: room.guestCapacity,
   });
 
   const editRoom = useAddPropertyRoomStore((s) => s.editRoom);
@@ -65,11 +65,11 @@ const RoomDetailsEditModal = ({
                 <Input
                   type="number"
                   bg="gray.100"
-                  value={newRoom.capacity}
+                  value={newRoom.guestCapacity}
                   onChange={(e) =>
                     editNewRoom({
                       ...newRoom,
-                      capacity: parseInt(e.target.value),
+                      guestCapacity: parseInt(e.target.value),
                     })
                   }
                 />
@@ -80,11 +80,11 @@ const RoomDetailsEditModal = ({
                 <Input
                   type="number"
                   bg="gray.100"
-                  value={newRoom.capacity}
+                  value={newRoom.guestCapacity}
                   onChange={(e) =>
                     editNewRoom({
                       ...newRoom,
-                      capacity: parseInt(e.target.value),
+                      guestCapacity: parseInt(e.target.value),
                     })
                   }
                 />

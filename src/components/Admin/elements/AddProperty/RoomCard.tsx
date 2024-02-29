@@ -59,7 +59,7 @@ const RoomCard = ({ room }: { room: Room }) => {
           boxShadow="rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;"
         >
           <HStack alignItems="baseline">
-            <Text fontSize="2xl">{room.capacity}</Text>
+            <Text fontSize="2xl">{room.guestCapacity}</Text>
             <Icon as={BsPeopleFill} boxSize={4} />
           </HStack>
         </Box>
