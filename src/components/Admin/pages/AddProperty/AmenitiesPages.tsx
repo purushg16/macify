@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import AmenitiesGrid from "../../elements/AddProperty/AmenitiesGrid";
 import Title from "../../elements/Title";
 import { HStack, Button } from "@chakra-ui/react";
 import AnimateMove from "../../../motions/Move";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
+import NavigatorWrapper from "../../elements/NavigatorWrapper";
 
 const AmenitiesPages = () => {
   const amenities = useAddPropertyStore((s) => s.amenities);
@@ -22,10 +22,10 @@ const AmenitiesPages = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/properties/add/4">
+          <NavigatorWrapper to="/admin/properties/add/4">
             <Button id="extra">Back</Button>
-          </Link>
-          <Link to="/admin/properties/add/6">
+          </NavigatorWrapper>
+          <NavigatorWrapper to="/admin/properties/add/6">
             <Button
               id="extra"
               colorScheme="primary"
@@ -33,7 +33,7 @@ const AmenitiesPages = () => {
             >
               Next
             </Button>
-          </Link>
+          </NavigatorWrapper>
         </HStack>
       </AnimateMove>
     </>

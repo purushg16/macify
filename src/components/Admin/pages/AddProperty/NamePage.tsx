@@ -1,9 +1,9 @@
 import { Button, HStack, Image, Input, VStack } from "@chakra-ui/react";
 import building from "../../../../assets/app/building.png";
-import Title from "../../elements/Title";
 import AnimateMove from "../../../motions/Move";
-import { Link } from "react-router-dom";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
+import NavigatorWrapper from "../../elements/NavigatorWrapper";
+import Title from "../../elements/Title";
 
 const NamePage = () => {
   const name = useAddPropertyStore((s) => s.propertyName);
@@ -35,10 +35,10 @@ const NamePage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/properties">
+          <NavigatorWrapper to="/admin/properties">
             <Button id="extra"> Cancel </Button>
-          </Link>
-          <Link to="/admin/properties/add/2">
+          </NavigatorWrapper>
+          <NavigatorWrapper to="/admin/properties/add/2">
             <Button
               id="extra"
               colorScheme="primary"
@@ -46,7 +46,7 @@ const NamePage = () => {
             >
               Next
             </Button>
-          </Link>
+          </NavigatorWrapper>
         </HStack>
       </AnimateMove>
     </>

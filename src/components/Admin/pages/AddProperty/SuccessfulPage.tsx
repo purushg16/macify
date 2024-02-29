@@ -1,8 +1,8 @@
 import { Box, Button, HStack, Image } from "@chakra-ui/react";
-import Title from "../../elements/Title";
 import success from "../../../../assets/app/success.png";
-import { Link } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
+import NavigatorWrapper from "../../elements/NavigatorWrapper";
+import Title from "../../elements/Title";
 
 const SuccessfulPage = () => {
   return (
@@ -32,14 +32,14 @@ const SuccessfulPage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/properties/add">
+          <NavigatorWrapper to="/admin/properties/add">
             <Button id="extra"> Add Another</Button>
-          </Link>
-          <Link to="/admin">
+          </NavigatorWrapper>
+          <NavigatorWrapper to="/admin">
             <Button id="extra" colorScheme="primary">
               Dashboard
             </Button>
-          </Link>
+          </NavigatorWrapper>
         </HStack>
       </AnimateMove>
     </>

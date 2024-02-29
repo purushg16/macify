@@ -8,12 +8,12 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import AddManagerModal from "../../elements/AddProperty/AddManagerModal";
 import ManagersList from "../../elements/AddProperty/ManagersList";
+import NavigatorWrapper from "../../elements/NavigatorWrapper";
 import Title from "../../elements/Title";
-import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const AssignManagerPage = () => {
   const manager = useAddPropertyStore((s) => s.manager);
@@ -71,14 +71,14 @@ const AssignManagerPage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/properties/add/6">
+          <NavigatorWrapper to="/admin/properties/add/6">
             <Button id="extra">Back</Button>
-          </Link>
-          <Link to="/admin/properties/add/8">
+          </NavigatorWrapper>
+          <NavigatorWrapper to="/admin/properties/add/8">
             <Button id="extra" colorScheme="primary" isDisabled={!manager}>
               Finish
             </Button>
-          </Link>
+          </NavigatorWrapper>
         </HStack>
       </AnimateMove>
     </>

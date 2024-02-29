@@ -8,16 +8,17 @@ import {
   Switch,
   VStack,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import building from "../../../../assets/app/building.png";
+import Room from "../../../entities/room";
 import AnimateMove from "../../../motions/Move";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
-import PropertyTypeSelector from "../../elements/AddProperty/PropertyTypeSelector";
-import Title from "../../elements/Title";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
-import Room from "../../../entities/room";
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import PropertyTypeSelector from "../../elements/AddProperty/PropertyTypeSelector";
+import NavigatorWrapper from "../../elements/NavigatorWrapper";
+import Title from "../../elements/Title";
 
 const RentalPage = () => {
   const numberOfRooms = useAddPropertyRoomStore((s) => s.numberOfRooms);
@@ -92,9 +93,9 @@ const RentalPage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/properties/add">
+          <NavigatorWrapper to="/admin/properties/add">
             <Button id="extra"> Back </Button>
-          </Link>
+          </NavigatorWrapper>
 
           <Button
             id="extra"

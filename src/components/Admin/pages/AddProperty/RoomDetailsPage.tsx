@@ -1,9 +1,9 @@
 import { Box, Button, HStack, Text, VStack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
 import CapacityApplyInput from "../../elements/AddProperty/CapacityApplyInput";
 import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
 import SerializeInput from "../../elements/AddProperty/SerializeInput";
+import NavigatorWrapper from "../../elements/NavigatorWrapper";
 import Title from "../../elements/Title";
 
 const RoomDetailsPage = () => {
@@ -35,14 +35,14 @@ const RoomDetailsPage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/properties/add/2">
+          <NavigatorWrapper to="/admin/properties/add/2">
             <Button id="extra"> Back </Button>
-          </Link>
-          <Link to="/admin/properties/add/4">
+          </NavigatorWrapper>
+          <NavigatorWrapper to="/admin/properties/add/4">
             <Button id="extra" colorScheme="primary">
               Next
             </Button>
-          </Link>
+          </NavigatorWrapper>
         </HStack>
       </AnimateMove>
     </>

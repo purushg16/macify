@@ -1,12 +1,12 @@
 import { Button, HStack, Image, VStack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import img from "../../../../assets/app/checking-in.png";
 import AnimateMove from "../../../motions/Move";
 import Title from "../../elements/Title";
 
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import CheckInTimePicker from "../../elements/AddProperty/CheckInTimePicker";
 import CheckOutTimePicker from "../../elements/AddProperty/CheckOutTimePicker";
-import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
+import NavigatorWrapper from "../../elements/NavigatorWrapper";
 
 const CheckingTimePage = () => {
   const checkInTime = useAddPropertyStore((s) => s.checkInTime);
@@ -34,10 +34,10 @@ const CheckingTimePage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/properties/add/3">
+          <NavigatorWrapper to="/admin/properties/add/3">
             <Button id="extra">Back</Button>
-          </Link>
-          <Link to="/admin/properties/add/5">
+          </NavigatorWrapper>
+          <NavigatorWrapper to="/admin/properties/add/5">
             <Button
               id="extra"
               colorScheme="primary"
@@ -45,7 +45,7 @@ const CheckingTimePage = () => {
             >
               Next
             </Button>
-          </Link>
+          </NavigatorWrapper>
         </HStack>
       </AnimateMove>
     </>

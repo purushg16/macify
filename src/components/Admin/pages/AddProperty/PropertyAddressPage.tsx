@@ -1,8 +1,8 @@
 import { Button, HStack, Input, Textarea, VStack } from "@chakra-ui/react";
-import Title from "../../elements/Title";
 import AnimateMove from "../../../motions/Move";
-import { Link } from "react-router-dom";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
+import NavigatorWrapper from "../../elements/NavigatorWrapper";
+import Title from "../../elements/Title";
 
 const PropertyAddressPage = () => {
   const address = useAddPropertyStore((s) => s.address);
@@ -64,10 +64,10 @@ const PropertyAddressPage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <Link to="/admin/properties/add/5">
+          <NavigatorWrapper to="/admin/properties/add/5">
             <Button id="extra">Back</Button>
-          </Link>
-          <Link to="/admin/properties/add/7">
+          </NavigatorWrapper>
+          <NavigatorWrapper to="/admin/properties/add/7">
             <Button
               id="extra"
               colorScheme="primary"
@@ -75,7 +75,7 @@ const PropertyAddressPage = () => {
             >
               Next
             </Button>
-          </Link>
+          </NavigatorWrapper>
         </HStack>
       </AnimateMove>
     </>
