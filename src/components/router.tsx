@@ -18,6 +18,8 @@ import RentalPage from "./Admin/pages/AddProperty/RentalPage";
 import RoomDetailsPage from "./Admin/pages/AddProperty/RoomDetailsPage";
 import SuccessfulPage from "./Admin/pages/AddProperty/SuccessfulPage";
 import PropertiesLayout from "./Layouts/PropertiesLayout";
+import LoginPage from "./Admin/pages/Authentication/LoginPage";
+import AuthLayout from "./Layouts/AuthLayout";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
     element: <BrandLayout />,
     // errorElement: <ErrorPage />,
     children: [{ index: true, element: <HomePage /> }],
+  },
+  {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      { path: "login", element: <LoginPage /> },
+      { path: "register", element: <LoginPage /> },
+    ],
   },
   {
     path: "/admin",
