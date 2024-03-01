@@ -7,13 +7,17 @@ import router from "./components/router";
 import "./index.css";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const rootElement = document.getElementById("root") as HTMLElement;
+const client = new QueryClient();
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <QueryClientProvider client={client}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      </QueryClientProvider>
       <RouterProvider router={router} />
     </ChakraProvider>
   </React.StrictMode>
