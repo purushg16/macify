@@ -7,10 +7,9 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import CheckInDatePicker from "../elements/ApproveBooking/CheckInDatePicker";
-import CheckOutDatePicker from "../elements/ApproveBooking/CheckOutDatePicker";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import Title from "../elements/Title";
+import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
 
 const ApproveBookingPage = () => {
   return (
@@ -26,8 +25,7 @@ const ApproveBookingPage = () => {
         <Text mb={4}>Checking Time Details</Text>
 
         <VStack align="start" gap={4}>
-          <CheckInDatePicker />
-          <CheckOutDatePicker />
+          <CheckingRangeSelector />
         </VStack>
       </Box>
 
