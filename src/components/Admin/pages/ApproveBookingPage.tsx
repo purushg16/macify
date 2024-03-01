@@ -19,7 +19,7 @@ import {
 import Title from "../elements/Title";
 import { BsClockFill } from "react-icons/bs";
 import { timeList } from "../../data/timeList";
-import GuestCard from "../elements/GuestCard";
+import GuestCard from "../elements/ApproveBooking/GuestCard";
 
 const ApproveBookingPage = () => {
   return (
@@ -35,7 +35,7 @@ const ApproveBookingPage = () => {
         <Text mb={4}>Checking Time Details</Text>
 
         <VStack align="start" gap={4}>
-          <InputGroup maxW="70%">
+          <InputGroup maxW="70%" zIndex={4}>
             <Input bg="gray.50" placeholder="CheckIn Time" size="md" />
             <InputRightElement cursor="pointer">
               <Menu placement="top">
@@ -57,7 +57,7 @@ const ApproveBookingPage = () => {
             </InputRightElement>
           </InputGroup>
 
-          <InputGroup maxW="70%">
+          <InputGroup maxW="70%" zIndex={3}>
             <Input bg="gray.50" placeholder="CheckOut Time" size="md" />
             <InputRightElement cursor="pointer">
               <Menu placement="top">
