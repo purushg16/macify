@@ -7,11 +7,11 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import Title from "../../elements/Title";
-import { Link } from "react-router-dom";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useState } from "react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { Link, useNavigate } from "react-router-dom";
 import { useRegister } from "../../../hooks/useAuth";
+import Title from "../../elements/Title";
 
 const RegisterPage = () => {
   const [show, setShow] = useState(false);
@@ -23,10 +23,19 @@ const RegisterPage = () => {
   const [firstName, setFName] = useState("");
   const [lastName, setLName] = useState("");
 
-  const { mutate } = useRegister((status) => setLoading(!status));
+  const navigate = useNavigate();
+  const callback = () => setLoading(false);
+
+  const { mutate, isSuccess, isError, error, variables } =
+    useRegister(callback);
+
   const register = () => {
-    setLoading(true);
     mutate({ email, password, firstName, lastName });
+    setLoading(true);
+    if (isSuccess) {
+      localStorage.setItem("emailToBeVerified", variables.email);
+      navigate("/auth/verifyEmail");
+    } else if (isError) console.log(error);
   };
 
   return (

@@ -25,6 +25,7 @@ import ForgotPasswordPage from "./Admin/pages/Authentication/ForgotPasswordPage"
 import AdminNotificationsPage from "./Admin/pages/AdminNotificationsPage";
 import ManagerNofiticationsPage from "./Admin/pages/ManagerNofiticationsPage";
 import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
+import EMailVerificationPage from "./Admin/pages/Authentication/EMailVerificationPage";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
     children: [
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
+      { path: "verifyEmail", element: <EMailVerificationPage /> },
       { path: "forgotPassword", element: <ForgotPasswordPage /> },
     ],
   },

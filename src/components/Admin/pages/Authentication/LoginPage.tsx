@@ -8,16 +8,34 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Title from "../../elements/Title";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useState } from "react";
+import { useLogin } from "../../../hooks/useAuth";
 
 const LoginPage = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const callback = () => setLoading(false);
+  const { mutate, isSuccess, isError, error } = useLogin(callback);
+
+  const login = () => {
+    setLoading(true);
+    mutate({ email, password });
+    if (isSuccess) {
+      console.log("first");
+      navigate("/admin");
+    } else if (isError) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -27,8 +45,8 @@ const LoginPage = () => {
             placeholder="Username"
             bg="gray.50"
             mb={4}
-            value={username || ""}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email || ""}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <InputRightElement top={0}>
             <Text>@</Text>
@@ -68,7 +86,9 @@ const LoginPage = () => {
         colorScheme="primary"
         my={4}
         px={8}
-        isDisabled={!username || !password}
+        isDisabled={!email || !password}
+        onClick={login}
+        isLoading={isLoading}
       >
         Login
       </Button>
