@@ -4,22 +4,14 @@ import {
   Divider,
   Flex,
   HStack,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   SimpleGrid,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import Title from "../elements/Title";
-import { BsClockFill } from "react-icons/bs";
-import { timeList } from "../../data/timeList";
+import CheckInDatePicker from "../elements/ApproveBooking/CheckInDatePicker";
+import CheckOutDatePicker from "../elements/ApproveBooking/CheckOutDatePicker";
 import GuestCard from "../elements/ApproveBooking/GuestCard";
+import Title from "../elements/Title";
 
 const ApproveBookingPage = () => {
   return (
@@ -35,49 +27,8 @@ const ApproveBookingPage = () => {
         <Text mb={4}>Checking Time Details</Text>
 
         <VStack align="start" gap={4}>
-          <InputGroup maxW="70%" zIndex={4}>
-            <Input bg="gray.50" placeholder="CheckIn Time" size="md" />
-            <InputRightElement cursor="pointer">
-              <Menu placement="top">
-                <MenuButton
-                  as={Button}
-                  bg="none"
-                  p={0}
-                  _hover={{ bg: "none" }}
-                  _active={{ bg: "none", outline: "none", border: "none" }}
-                >
-                  <Icon as={BsClockFill} />
-                </MenuButton>
-                <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
-                  {timeList.map((time, i) => (
-                    <MenuItem key={i}>{time}</MenuItem>
-                  ))}
-                </MenuList>
-              </Menu>
-            </InputRightElement>
-          </InputGroup>
-
-          <InputGroup maxW="70%" zIndex={3}>
-            <Input bg="gray.50" placeholder="CheckOut Time" size="md" />
-            <InputRightElement cursor="pointer">
-              <Menu placement="top">
-                <MenuButton
-                  as={Button}
-                  bg="none"
-                  p={0}
-                  _hover={{ bg: "none" }}
-                  _active={{ bg: "none", outline: "none", border: "none" }}
-                >
-                  <Icon as={BsClockFill} />
-                </MenuButton>
-                <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
-                  {timeList.map((time, i) => (
-                    <MenuItem key={i}>{time}</MenuItem>
-                  ))}
-                </MenuList>
-              </Menu>
-            </InputRightElement>
-          </InputGroup>
+          <CheckInDatePicker />
+          <CheckOutDatePicker />
         </VStack>
       </Box>
 
