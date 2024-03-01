@@ -4,13 +4,12 @@ import {
   Divider,
   Flex,
   HStack,
-  SimpleGrid,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import CheckInDatePicker from "../elements/ApproveBooking/CheckInDatePicker";
 import CheckOutDatePicker from "../elements/ApproveBooking/CheckOutDatePicker";
-import GuestCard from "../elements/ApproveBooking/GuestCard";
+import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import Title from "../elements/Title";
 
 const ApproveBookingPage = () => {
@@ -36,27 +35,7 @@ const ApproveBookingPage = () => {
 
       <Box>
         <Text mb={4}>Guest Details</Text>
-
-        <HStack mb={2}>
-          <Button size="sm" colorScheme="primary">
-            Select Room
-          </Button>
-          <Button size="sm" colorScheme="primary">
-            Select Bed
-          </Button>
-        </HStack>
-
-        <SimpleGrid
-          columns={{ base: 2, md: 3, lg: 4 }}
-          p={4}
-          spacing={4}
-          borderRadius={10}
-          border="1px dashed"
-          borderColor="gray.100"
-        >
-          <GuestCard />
-          <GuestCard />
-        </SimpleGrid>
+        <RoomAssignBlock />
       </Box>
 
       <Box mt={4}>
