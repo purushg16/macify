@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
@@ -9,24 +9,25 @@ const AppBar = () => {
   const location = useLocation().pathname.split("/")[2];
 
   const role = useRoleStore((s) => s.role);
-  const s = useRoleStore((s) => s.setRole);
-  s("Manager");
+  // const s = useRoleStore((s) => s.setRole);
+  // s("Manager");
 
   return (
     <Box
       zIndex={10}
       pos="fixed"
-      px={2}
-      py={4}
-      w="95%"
-      left={3}
-      bottom={0}
-      borderRadius={"25px 25px 0px 0px"}
-      bg="secondary.50"
+      p={2}
+      left="50%"
+      transform="translateX(-50%)"
+      bottom={3}
+      borderRadius={99}
+      overflow="hidden"
+      border="3px solid"
+      bg="primary.50"
+      borderColor="rgba(255, 255, 255, 0.1)"
       backdropFilter="blur(2em)"
-      boxShadow="rgb(130 140 229 / 43%) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;"
     >
-      <SimpleGrid columns={role === "Admin" ? 4 : 2} spacingX={2}>
+      <Flex gap={4}>
         <SmallButton
           title="Dashboard"
           icon={TbLayoutBoard}
@@ -42,23 +43,23 @@ const AppBar = () => {
           route={role === "Admin" ? "/admin/calendar" : "/manager/calendar"}
           admin={role === "Admin"}
         />
-        {role === "Admin" && (
-          <>
-            <SmallButton
-              title="Property"
-              icon={TbBuilding}
-              active={location === "properties"}
-              route="/admin/properties"
-            />
-            <SmallButton
-              title="Manager"
-              icon={BsPersonCircle}
-              active={location === "manager"}
-              route="/admin/manager"
-            />
-          </>
-        )}
-      </SimpleGrid>
+        {/* {role === "Admin" && ( */}
+        <>
+          <SmallButton
+            title="Property"
+            icon={TbBuilding}
+            active={location === "properties"}
+            route="/admin/properties"
+          />
+          <SmallButton
+            title="Manager"
+            icon={BsPersonCircle}
+            active={location === "manager"}
+            route="/admin/manager"
+          />
+        </>
+        {/* )} */}
+      </Flex>
     </Box>
   );
 };
