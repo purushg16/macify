@@ -1,9 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
 import { emailVerification, login, register } from "../api/auth-client";
 
-const useRegister = () => {
+const useRegister = (done: (state: boolean) => void) => {
   return useMutation({
     mutationFn: register.register,
+    onSuccess: (data) => {
+      console.log(data.data);
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+    onSettled: () => {
+      done(true);
+    },
   });
 };
 

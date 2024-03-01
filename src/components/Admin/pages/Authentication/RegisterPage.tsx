@@ -11,28 +11,54 @@ import Title from "../../elements/Title";
 import { Link } from "react-router-dom";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useState } from "react";
+import { useRegister } from "../../../hooks/useAuth";
 
 const RegisterPage = () => {
   const [show, setShow] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const handleClick = () => setShow(!show);
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFName] = useState("");
+  const [lastName, setLName] = useState("");
+
+  const { mutate } = useRegister((status) => setLoading(!status));
+  const register = () => {
+    setLoading(true);
+    mutate({ email, password, firstName, lastName });
+  };
 
   return (
     <>
       <VStack my={4} mb={8}>
+        <Input
+          placeholder="First Name*"
+          bg="gray.50"
+          mb={4}
+          value={firstName || ""}
+          onChange={(e) => setFName(e.target.value)}
+        />
+
+        <Input
+          placeholder="Last Name*"
+          bg="gray.50"
+          mb={4}
+          value={lastName || ""}
+          onChange={(e) => setLName(e.target.value)}
+        />
+
         <InputGroup>
           <Input
-            placeholder="Username"
+            placeholder="Mail*"
             bg="gray.50"
             mb={4}
-            value={username || ""}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            pr="4.5rem"
+            value={email || ""}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <InputRightElement top={0}>
-            <Text>@</Text>
-          </InputRightElement>
+          <InputRightElement top={0}>@</InputRightElement>
         </InputGroup>
 
         <InputGroup>
@@ -58,7 +84,9 @@ const RegisterPage = () => {
         colorScheme="primary"
         my={4}
         px={8}
-        isDisabled={!username || !password}
+        onClick={register}
+        isDisabled={!firstName || !lastName || !email || !password}
+        isLoading={isLoading}
       >
         Register
       </Button>
