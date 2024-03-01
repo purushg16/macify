@@ -7,11 +7,11 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import Title from "../../elements/Title";
-import { Link, useNavigate } from "react-router-dom";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useState } from "react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { Link } from "react-router-dom";
 import { useLogin } from "../../../hooks/useAuth";
+import Title from "../../elements/Title";
 
 const LoginPage = () => {
   const [show, setShow] = useState(false);
@@ -20,22 +20,9 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [isLoading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const { mutate, status } = useLogin();
 
-  const callback = () => setLoading(false);
-  const { mutate, isSuccess, isError, error } = useLogin(callback);
-
-  const login = () => {
-    setLoading(true);
-    mutate({ email, password });
-    if (isSuccess) {
-      console.log("first");
-      navigate("/admin");
-    } else if (isError) {
-      console.log(error);
-    }
-  };
+  const login = () => mutate({ email, password });
 
   return (
     <>
@@ -88,7 +75,13 @@ const LoginPage = () => {
         px={8}
         isDisabled={!email || !password}
         onClick={login}
-        isLoading={isLoading}
+        isLoading={
+          status === "idle"
+            ? false
+            : status === "success" || status === "error"
+            ? false
+            : true
+        }
       >
         Login
       </Button>

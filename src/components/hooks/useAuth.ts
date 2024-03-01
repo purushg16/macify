@@ -26,10 +26,13 @@ const useVerifyEmail = (callback: () => void) => {
   });
 };
 
-const useLogin = (callback: () => void) => {
+const useLogin = () => {
+  const navigate = useNavigate();
+
   return useMutation({
     mutationFn: login.login,
-    onSettled: () => callback(),
+    onSuccess: () => navigate("/admin"),
+    onError: (err) => console.log(err),
   });
 };
 
