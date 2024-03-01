@@ -5,6 +5,8 @@ import theme from "./components/elements/theme";
 import { RouterProvider } from "react-router-dom";
 import router from "./components/router";
 import "./index.css";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
 
 const rootElement = document.getElementById("root") as HTMLElement;
 
