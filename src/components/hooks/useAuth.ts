@@ -19,10 +19,13 @@ const useRegister = () => {
   });
 };
 
-const useVerifyEmail = (callback: () => void) => {
+const useVerifyEmail = () => {
+  const navigate = useNavigate();
+
   return useMutation({
     mutationFn: emailVerification.verifyEmail,
-    onSettled: () => callback(),
+    onSuccess: () => navigate("/admin"),
+    onError: (err) => console.log(err),
   });
 };
 

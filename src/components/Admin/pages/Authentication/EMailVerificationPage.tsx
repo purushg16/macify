@@ -14,24 +14,17 @@ import { useVerifyEmail } from "../../../hooks/useAuth";
 const EMailVerificationPage = () => {
   const email = localStorage.getItem("emailToBeVerified");
   const [otp, setOTP] = useState("");
-  const [isLoading, setLoading] = useState(false);
 
-  const callback = () => setLoading(false);
-  const { mutate, isSuccess, isError, error } = useVerifyEmail(callback);
+  const { mutate, status } = useVerifyEmail();
 
   const verifyEmail = () => {
-    setLoading(true);
-    if (email) {
-      mutate({ email, otp });
-
-      if (isSuccess) navigate("/admin");
-      else if (isError) console.log(error);
-    }
+    if (email) mutate({ email, otp });
   };
+
   const navigate = useNavigate();
 
   if (!email) {
-    navigate("/auth/verifyEmail");
+    navigate("/auth/register");
     return null;
   }
 
@@ -71,7 +64,13 @@ const EMailVerificationPage = () => {
         px={8}
         onClick={verifyEmail}
         isDisabled={!otp}
-        isLoading={isLoading}
+        isLoading={
+          status === "idle"
+            ? false
+            : status === "success" || status === "error"
+            ? false
+            : true
+        }
       >
         Verify
       </Button>
