@@ -21,6 +21,7 @@
     "@fullcalendar/react": "^6.1.11",
     "@fullcalendar/timegrid": "^6.1.11",
     "@lordicon/react": "^1.4.1",
+    "@tanstack/react-query": "^5.24.1",
     "@types/react-date-range": "^1.4.9",
     "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.6.7",

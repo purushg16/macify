@@ -28,6 +28,20 @@ export default class APIClient<T> {
     this.endpoint = endpoint;
   }
 
+  register = (data: T) => {
+    return axiosAuthInstance.post(this.endpoint, data).then((res) => {
+      return res;
+    });
+  };
+
+  verifyEmail = (data: T) => {
+    return axiosAuthInstance.post(this.endpoint, data).then((res) => {
+      localStorage.setItem("token", `Bearer ${res.data.token}`);
+      injectToken(res.data.token);
+      return res;
+    });
+  };
+
   login = (data: T) => {
     return axiosAuthInstance.post(this.endpoint, data).then((res) => {
       localStorage.setItem("token", `Bearer ${res.data.token}`);
