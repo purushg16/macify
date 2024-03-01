@@ -1,6 +1,6 @@
-import { Box, HStack, Icon, IconButton, Text } from "@chakra-ui/react";
-import { BsPencilFill } from "react-icons/bs";
+import { Box, HStack, Icon, Text } from "@chakra-ui/react";
 import { FaCalendar } from "react-icons/fa";
+import RangePickerMenu from "./RangePickerMenu";
 
 const CheckingRangeSelector = () => {
   return (
@@ -16,13 +16,7 @@ const CheckingRangeSelector = () => {
             Feb 29, 2024
           </Text>
         </HStack>
-        <IconButton
-          colorScheme="primary"
-          //   bg="gray.50"
-          //   _hover={{ bg: "gray.100" }}
-          aria-label="Search database"
-          icon={<BsPencilFill />}
-        />
+        <RangePickerMenu />
       </HStack>
     </Box>
   );
