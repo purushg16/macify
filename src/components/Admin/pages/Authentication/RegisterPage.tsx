@@ -9,13 +9,12 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useRegister } from "../../../hooks/useAuth";
 import Title from "../../elements/Title";
 
 const RegisterPage = () => {
   const [show, setShow] = useState(false);
-  const [isLoading, setLoading] = useState(false);
   const handleClick = () => setShow(!show);
 
   const [email, setEmail] = useState("");
@@ -23,20 +22,8 @@ const RegisterPage = () => {
   const [firstName, setFName] = useState("");
   const [lastName, setLName] = useState("");
 
-  const navigate = useNavigate();
-  const callback = () => setLoading(false);
-
-  const { mutate, isSuccess, isError, error, variables } =
-    useRegister(callback);
-
-  const register = () => {
-    mutate({ email, password, firstName, lastName });
-    setLoading(true);
-    if (isSuccess) {
-      localStorage.setItem("emailToBeVerified", variables.email);
-      navigate("/auth/verifyEmail");
-    } else if (isError) console.log(error);
-  };
+  const { mutate, status } = useRegister();
+  const register = () => mutate({ email, password, firstName, lastName });
 
   return (
     <>
@@ -95,7 +82,13 @@ const RegisterPage = () => {
         px={8}
         onClick={register}
         isDisabled={!firstName || !lastName || !email || !password}
-        isLoading={isLoading}
+        isLoading={
+          status === "idle"
+            ? false
+            : status === "success" || status === "error"
+            ? false
+            : true
+        }
       >
         Register
       </Button>
