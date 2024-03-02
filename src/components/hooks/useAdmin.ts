@@ -2,9 +2,11 @@ import { useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import {
+  AllBookingsInterface,
   approveBooking,
   bookingsToApprove,
   createManager,
+  getAllBookings,
   rejectBooking,
 } from "../api/admin-client";
 import { APIError } from "../entities/Error";
@@ -87,9 +89,20 @@ const useRejectBooking = () => {
   });
 };
 
+const useGetAllBooking = (ids: AllBookingsInterface) => {
+  return useQuery({
+    queryKey: [],
+    queryFn: () =>
+      getAllBookings.getRequest({
+        params: ids,
+      }),
+  });
+};
+
 export {
   useAddManager,
   useGetBookingsToApprove,
   useApproveBooking,
   useRejectBooking,
+  useGetAllBooking,
 };
