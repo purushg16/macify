@@ -9,7 +9,7 @@ const RoomCardGrid = () => {
   const propertyRooms = useAddPropertyRoomStore((s) => s.rooms);
   const propertyType = useAddPropertyStore((s) => s.propertyType);
 
-  const icon = propertyType !== "Hostel" ? BsPeopleFill : GiBed;
+  const icon = propertyType !== "hostel" ? BsPeopleFill : GiBed;
 
   return (
     <SimpleGrid

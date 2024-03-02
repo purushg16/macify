@@ -9,9 +9,7 @@ const SerializeInput = () => {
   const performSerialize = useAddPropertyRoomStore((s) => s.serialize);
 
   const doSerialize = () => {
-    if (!serialize && !!startingNumber) {
-      performSerialize(startingNumber);
-    } else performSerialize(1);
+    if (!serialize && !!startingNumber) performSerialize(startingNumber);
     isSerialized(!serialize);
   };
 
