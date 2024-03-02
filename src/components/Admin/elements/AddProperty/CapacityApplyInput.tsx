@@ -17,7 +17,7 @@ const CapacityApplyInput = () => {
 
   return (
     <Flex gap={2}>
-      {propertyType === "Hostel" ? (
+      {propertyType === "hostel" ? (
         <Input
           placeholder="Number of beds"
           bg="gray.50"
