@@ -11,15 +11,15 @@ import { MdOutlineCellWifi } from "react-icons/md";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const amenities: { [key: string]: IconType } = {
-  "Air Conditioner": TiWeatherSnow,
+  "Air conditioning": TiWeatherSnow,
   Parking: FaParking,
   "Pets Allowed": MdPets,
   Essentials: GiForkKnifeSpoon,
-  "Kitchen Stove": FaDumpsterFire,
-  "Washing Machine": GiWashingMachine,
+  "Kitchen stove": FaDumpsterFire,
+  "Washing machine": GiWashingMachine,
   Internet: MdOutlineCellWifi,
-  "General Heating": GiFireBomb,
-  "Swimming Pool": FaSwimmingPool,
+  "General heating": GiFireBomb,
+  "Swimming pool": FaSwimmingPool,
 };
 
 const AmenitiesGrid = () => {
