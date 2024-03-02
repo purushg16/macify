@@ -14,9 +14,13 @@ import AddManagerModal from "../../elements/AddProperty/AddManagerModal";
 import ManagersList from "../../elements/AddProperty/ManagersList";
 import NavigatorWrapper from "../../elements/NavigatorWrapper";
 import Title from "../../elements/Title";
+import { usePostProperty } from "../../../hooks/usePropertyServices";
 
 const AssignManagerPage = () => {
   const manager = useAddPropertyStore((s) => s.manager);
+
+  const { mutate } = usePostProperty();
+  const handleSubmit = () => mutate();
 
   return (
     <>
@@ -74,11 +78,15 @@ const AssignManagerPage = () => {
           <NavigatorWrapper to="/admin/properties/add/6">
             <Button id="extra">Back</Button>
           </NavigatorWrapper>
-          <NavigatorWrapper to="/admin/properties/add/8">
-            <Button id="extra" colorScheme="primary" isDisabled={!manager}>
-              Finish
-            </Button>
-          </NavigatorWrapper>
+
+          <Button
+            id="extra"
+            colorScheme="primary"
+            isDisabled={!manager}
+            onClick={handleSubmit}
+          >
+            Finish
+          </Button>
         </HStack>
       </AnimateMove>
     </>
