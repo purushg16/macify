@@ -1,7 +1,10 @@
 import { Box, Flex, Heading, Highlight, Text } from "@chakra-ui/react";
 import MultiCalendar from "../elements/MultiCalendar/MultiCalendar";
+// import { useGetAllProperties } from "../../hooks/usePropertyServices";
 
 const DashBoardPage = () => {
+  // const { data } = useGetAllProperties();
+
   return (
     <Flex flexDir="column" w="100%">
       <Box>

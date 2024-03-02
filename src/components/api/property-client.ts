@@ -10,9 +10,11 @@ interface SinglePropertyInterface {
   propertyId: string;
 }
 
+const getAllProperties = new APIClient("/property/getAllProperty");
+
 const getSingleProperty = new APIClient<SinglePropertyInterface>(
   "/property/getProperty"
 );
 const postNewProperty = new APIClient<PropertyService>("/property/addProperty");
 
-export { postNewProperty, getSingleProperty };
+export { postNewProperty, getSingleProperty, getAllProperties };

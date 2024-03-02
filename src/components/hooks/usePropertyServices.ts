@@ -1,8 +1,12 @@
 import { useToast } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
-import { postNewProperty } from "../api/property-client";
+import {
+  getAllProperties,
+  getSingleProperty,
+  postNewProperty,
+} from "../api/property-client";
 import PropertyConverter from "../functions/propertyParameterConverter";
 import { useNavigate } from "react-router-dom";
 
@@ -34,4 +38,24 @@ const usePostProperty = () => {
   });
 };
 
-export { usePostProperty };
+const useGetAllProperties = () => {
+  return useQuery({
+    queryKey: ["property", "getAllProperty"],
+    queryFn: getAllProperties.getRequest,
+  });
+};
+
+const useGetSingleProperty = (propertyId: string) => {
+  return useQuery({
+    queryKey: ["property", "getProperty"],
+    queryFn: () => {
+      getSingleProperty.getRequest({
+        params: {
+          propertyId: propertyId,
+        },
+      });
+    },
+  });
+};
+
+export { usePostProperty, useGetAllProperties, useGetSingleProperty };
