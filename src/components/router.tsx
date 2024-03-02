@@ -71,7 +71,7 @@ const router = createBrowserRouter([
               { path: "5", element: <AmenitiesPages /> },
               { path: "6", element: <PropertyAddressPage /> },
               { path: "7", element: <AssignManagerPage /> },
-              { path: "8", element: <SuccessfulPage /> },
+              { path: "success", element: <SuccessfulPage /> },
             ],
           },
         ],

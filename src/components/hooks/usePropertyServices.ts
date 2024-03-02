@@ -21,7 +21,7 @@ const usePostProperty = () => {
         position: "top",
         duration: 3000,
       });
-      navigate("/admin/properties/add/8");
+      navigate("/admin/properties/add/success");
     },
 
     onError: (err: AxiosError<APIError>) =>
