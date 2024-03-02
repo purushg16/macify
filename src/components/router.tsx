@@ -27,6 +27,7 @@ import ManagerNofiticationsPage from "./Admin/pages/ManagerNofiticationsPage";
 import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
 import EMailVerificationPage from "./Admin/pages/Authentication/EMailVerificationPage";
 import UnAuthorizedPage from "./Admin/pages/UnAuthorizedPage";
+import ManagerLayout from "./Layouts/ManagerLayout";
 
 const router = createBrowserRouter([
   {
@@ -82,7 +83,7 @@ const router = createBrowserRouter([
   { path: "/unauthorized", element: <UnAuthorizedPage /> },
   {
     path: "/manager",
-    element: <AdminLayout />,
+    element: <ManagerLayout />,
     children: [
       { index: true, element: <DashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
