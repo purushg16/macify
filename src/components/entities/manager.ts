@@ -1,5 +1,6 @@
 export default interface Manager {
   name: string;
-  phone: number;
   email: string;
+  userName: string;
+  phone: number;
 }

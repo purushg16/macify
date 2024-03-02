@@ -20,6 +20,7 @@ const AddManagerModal = () => {
     name: "",
     phone: parseInt(""),
     email: "",
+    userName: "",
   });
 
   const addNewManager = () => {};
@@ -67,7 +68,11 @@ const AddManagerModal = () => {
                 type="email"
                 value={newManager.email}
                 onChange={(e) =>
-                  editNewManager({ ...newManager, email: e.target.value })
+                  editNewManager({
+                    ...newManager,
+                    email: e.target.value,
+                    userName: e.target.value,
+                  })
                 }
               />
             </VStack>
@@ -77,7 +82,16 @@ const AddManagerModal = () => {
             <Button colorScheme="gray" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme="primary" onClick={addNewManager}>
+            <Button
+              colorScheme="primary"
+              onClick={addNewManager}
+              isDisabled={
+                !newManager.name ||
+                !newManager.email ||
+                !newManager.userName ||
+                !newManager.phone
+              }
+            >
               Create
             </Button>
           </ModalFooter>
