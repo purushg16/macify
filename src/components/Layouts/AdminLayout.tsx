@@ -6,6 +6,9 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
   if (!localStorage.getItem("token")) return <Navigate to="/auth/login" />;
+  if (localStorage.getItem("manager") === "true")
+    return <Navigate to="/unauthorized" />;
+
   return (
     <>
       <Grid

@@ -26,6 +26,7 @@ import AdminNotificationsPage from "./Admin/pages/AdminNotificationsPage";
 import ManagerNofiticationsPage from "./Admin/pages/ManagerNofiticationsPage";
 import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
 import EMailVerificationPage from "./Admin/pages/Authentication/EMailVerificationPage";
+import UnAuthorizedPage from "./Admin/pages/UnAuthorizedPage";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "/unauthorized", element: <UnAuthorizedPage /> },
   {
     path: "/manager",
     element: <AdminLayout />,
