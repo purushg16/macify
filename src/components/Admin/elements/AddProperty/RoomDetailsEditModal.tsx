@@ -25,15 +25,12 @@ const RoomDetailsEditModal = ({
   onClose,
   room,
 }: RoomDetailsEditModalProps) => {
-  const [newRoom, editNewRoom] = useState<Room>({
-    roomName: room.roomName,
-    roomId: room.roomId,
-    guestCapacity: room.guestCapacity,
-  });
+  const [newRoom, editNewRoom] = useState<Room>(room);
 
   const editRoom = useAddPropertyRoomStore((s) => s.editRoom);
 
   const submit = () => {
+    console.log(room);
     editRoom(newRoom);
     onClose();
   };
@@ -62,21 +59,6 @@ const RoomDetailsEditModal = ({
               </Box>
               <Box>
                 <Text> Number Of Beds: </Text>
-                <Input
-                  type="number"
-                  bg="gray.100"
-                  value={newRoom.guestCapacity}
-                  onChange={(e) =>
-                    editNewRoom({
-                      ...newRoom,
-                      guestCapacity: parseInt(e.target.value),
-                    })
-                  }
-                />
-              </Box>
-
-              <Box>
-                <Text> Capacity: </Text>
                 <Input
                   type="number"
                   bg="gray.100"
