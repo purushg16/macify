@@ -8,11 +8,13 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import Btn from "../../Brand/elements/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useRoleStore from "../../store/roleStore";
 import { BsBell } from "react-icons/bs";
+import { CiLogout } from "react-icons/ci";
 
 const AdminNavbar = () => {
+  const navigate = useNavigate();
   const role = useRoleStore((s) => s.role);
 
   return (
@@ -31,6 +33,15 @@ const AdminNavbar = () => {
             />
           </Link>
           <Btn text="D" primary />
+          <IconButton
+            bg="gray.50"
+            aria-label="notification"
+            icon={<Icon as={CiLogout} />}
+            onClick={() => {
+              localStorage.removeItem("token");
+              navigate("/auth/login");
+            }}
+          />
         </HStack>
       </Flex>
     </Box>

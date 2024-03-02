@@ -2,9 +2,10 @@ import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import AdminNavbar from "../Admin/elements/AdminNavbar";
 import AdminLinkStack from "../Admin/elements/AdminLinkStack";
 import AppBar from "../Admin/elements/AppBar";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
+  if (!localStorage.getItem("token")) return <Navigate to="/auth/login" />;
   return (
     <>
       <Grid
