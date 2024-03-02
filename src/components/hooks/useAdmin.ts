@@ -6,6 +6,7 @@ import {
   approveBooking,
   bookingsToApprove,
   createManager,
+  editBooking,
   getAllBookings,
   rejectBooking,
 } from "../api/admin-client";
@@ -89,6 +90,30 @@ const useRejectBooking = () => {
   });
 };
 
+const useEditBooking = () => {
+  const toast = useToast();
+
+  return useMutation({
+    mutationFn: editBooking.postRequest,
+
+    onSuccess: () =>
+      toast({
+        title: "Booking updated successfully",
+        status: "success",
+        position: "top",
+        duration: 3000,
+      }),
+
+    onError: (err: AxiosError<APIError>) =>
+      toast({
+        title: err.response?.data?.error,
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+  });
+};
+
 const useGetAllBooking = (ids: AllBookingsInterface) => {
   return useQuery({
     queryKey: [],
@@ -104,5 +129,6 @@ export {
   useGetBookingsToApprove,
   useApproveBooking,
   useRejectBooking,
+  useEditBooking,
   useGetAllBooking,
 };
