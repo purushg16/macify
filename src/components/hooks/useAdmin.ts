@@ -1,7 +1,11 @@
 import { useToast } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { createManager } from "../api/admin-client";
+import {
+  approveBooking,
+  bookingsToApprove,
+  createManager,
+} from "../api/admin-client";
 import { APIError } from "../entities/Error";
 
 const useAddManager = () => {
@@ -13,7 +17,7 @@ const useAddManager = () => {
     onSuccess: () =>
       toast({
         title: "Manager created successfully",
-        status: "error",
+        status: "success",
         position: "top",
         duration: 3000,
       }),
@@ -28,4 +32,34 @@ const useAddManager = () => {
   });
 };
 
-export { useAddManager as useAdminFunctions };
+const useGetBookingsToApprove = () =>
+  useQuery({
+    queryKey: ["booking", "bookingToApprove"],
+    queryFn: bookingsToApprove.getRequest,
+  });
+
+const useApproveBooking = () => {
+  const toast = useToast();
+
+  return useMutation({
+    mutationFn: approveBooking.postRequest,
+
+    onSuccess: () =>
+      toast({
+        title: "Property booked successfully",
+        status: "success",
+        position: "top",
+        duration: 3000,
+      }),
+
+    onError: (err: AxiosError<APIError>) =>
+      toast({
+        title: err.response?.data?.error,
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+  });
+};
+
+export { useAddManager, useGetBookingsToApprove, useApproveBooking };
