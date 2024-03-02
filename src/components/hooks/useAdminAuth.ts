@@ -10,7 +10,7 @@ const useAdminRegister = () => {
   const toast = useToast();
 
   return useMutation({
-    mutationFn: register.register,
+    mutationFn: register.postRequest,
 
     onSuccess: (_data, variables) => {
       localStorage.setItem("emailToBeVerified", variables.email);
@@ -32,7 +32,7 @@ const useAdminVerifyEmail = () => {
   const toast = useToast();
 
   return useMutation({
-    mutationFn: emailVerification.verifyEmail,
+    mutationFn: emailVerification.authorizationPost,
     onSuccess: () => navigate("/admin"),
     onError: (err: AxiosError<APIError>) =>
       toast({
@@ -49,7 +49,7 @@ const useAdminLogin = () => {
   const toast = useToast();
 
   return useMutation({
-    mutationFn: adminLogin.login,
+    mutationFn: adminLogin.authorizationPost,
     onSuccess: () => navigate("/admin"),
     onError: (err: AxiosError<APIError>) =>
       toast({

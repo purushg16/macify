@@ -14,9 +14,9 @@ const usePostProperty = () => {
   return useMutation({
     mutationFn: () => postNewProperty.postRequest(property),
 
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast({
-        title: data.msg,
+        title: "New property successfully created",
         status: "error",
         position: "top",
         duration: 3000,

@@ -28,21 +28,7 @@ export default class APIClient<T> {
     this.endpoint = endpoint;
   }
 
-  register = (data: T) => {
-    return axiosAuthInstance.post(this.endpoint, data).then((res) => {
-      return res;
-    });
-  };
-
-  verifyEmail = (data: T) => {
-    return axiosAuthInstance.post(this.endpoint, data).then((res) => {
-      localStorage.setItem("token", res.data.token);
-      injectToken(res.data.token);
-      return res;
-    });
-  };
-
-  login = (data: T) => {
+  authorizationPost = (data: T) => {
     return axiosAuthInstance.post(this.endpoint, data).then((res) => {
       localStorage.setItem("token", res.data.token);
       injectToken(res.data.token);
@@ -60,13 +46,8 @@ export default class APIClient<T> {
       });
   };
 
-  postRequest = (data: T) => {
-    return axiosInstance
-      .post(this.endpoint, data)
-      .then((res) => res.data)
-      .catch((error) => {
-        console.error("Post Request error:", error);
-        throw error;
-      });
-  };
+  postRequest = (data: T) =>
+    axiosAuthInstance.post(this.endpoint, data).then((res) => {
+      return res;
+    });
 }
