@@ -1,0 +1,22 @@
+export type gender = "male" | "female";
+export type idProofType = "passport" | "driving-license" | "aadhar";
+
+interface CustomerBookingGuest {
+  guests: CustomerBookingGuestDetails[];
+}
+
+interface CustomerBookingGuestDetails {
+  guestName: string;
+  age: number;
+  gender: gender;
+  address: string;
+  idProofType: idProofType;
+  idProof: string;
+}
+
+export default interface CreateBooking {
+  propertyId: string;
+  bookings: CustomerBookingGuest[];
+  checkIn: Date;
+  checkOut: Date;
+}
