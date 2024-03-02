@@ -119,7 +119,9 @@ const useGetAllBooking = (ids: AllBookingsInterface) => {
     queryKey: [],
     queryFn: () =>
       getAllBookings.getRequest({
-        params: ids,
+        params: {
+          ids: ids,
+        },
       }),
   });
 };
