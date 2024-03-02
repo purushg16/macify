@@ -7,8 +7,8 @@ interface ApproveBookingProperty {
 export default interface ApproveBooking {
   propertyId: string;
   bookings: ApproveBookingProperty[];
-  checkIn: string;
-  checkOut: string;
+  checkIn: Date;
+  checkOut: Date;
   groupId: string;
   paid: number;
   balance: number;
