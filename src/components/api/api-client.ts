@@ -36,7 +36,7 @@ export default class APIClient<T> {
 
   verifyEmail = (data: T) => {
     return axiosAuthInstance.post(this.endpoint, data).then((res) => {
-      localStorage.setItem("token", `Bearer ${res.data.token}`);
+      localStorage.setItem("token", res.data.token);
       injectToken(res.data.token);
       return res;
     });
@@ -44,7 +44,7 @@ export default class APIClient<T> {
 
   login = (data: T) => {
     return axiosAuthInstance.post(this.endpoint, data).then((res) => {
-      localStorage.setItem("token", `Bearer ${res.data.token}`);
+      localStorage.setItem("token", res.data.token);
       injectToken(res.data.token);
       return res;
     });
