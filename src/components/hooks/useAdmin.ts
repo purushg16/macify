@@ -5,6 +5,7 @@ import {
   approveBooking,
   bookingsToApprove,
   createManager,
+  rejectBooking,
 } from "../api/admin-client";
 import { APIError } from "../entities/Error";
 
@@ -62,4 +63,33 @@ const useApproveBooking = () => {
   });
 };
 
-export { useAddManager, useGetBookingsToApprove, useApproveBooking };
+const useRejectBooking = () => {
+  const toast = useToast();
+
+  return useMutation({
+    mutationFn: rejectBooking.postRequest,
+
+    onSuccess: () =>
+      toast({
+        title: "Booking rejected successfully",
+        status: "success",
+        position: "top",
+        duration: 3000,
+      }),
+
+    onError: (err: AxiosError<APIError>) =>
+      toast({
+        title: err.response?.data?.error,
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+  });
+};
+
+export {
+  useAddManager,
+  useGetBookingsToApprove,
+  useApproveBooking,
+  useRejectBooking,
+};
