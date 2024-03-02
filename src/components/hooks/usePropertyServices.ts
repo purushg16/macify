@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
 import {
+  editProperty,
   getAllProperties,
   getSingleProperty,
   postNewProperty,
@@ -38,6 +39,30 @@ const usePostProperty = () => {
   });
 };
 
+const useEditProperty = () => {
+  const toast = useToast();
+
+  return useMutation({
+    mutationFn: editProperty.postRequest,
+
+    onSuccess: () =>
+      toast({
+        title: "New property successfully created",
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+
+    onError: (err: AxiosError<APIError>) =>
+      toast({
+        title: err.response?.data?.error,
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+  });
+};
+
 const useGetAllProperties = () => {
   return useQuery({
     queryKey: ["property", "getAllProperty"],
@@ -58,4 +83,9 @@ const useGetSingleProperty = (propertyId: string) => {
   });
 };
 
-export { usePostProperty, useGetAllProperties, useGetSingleProperty };
+export {
+  usePostProperty,
+  useGetAllProperties,
+  useGetSingleProperty,
+  useEditProperty,
+};

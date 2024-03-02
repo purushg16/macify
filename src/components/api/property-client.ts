@@ -17,4 +17,6 @@ const getSingleProperty = new APIClient<SinglePropertyInterface>(
 );
 const postNewProperty = new APIClient<PropertyService>("/property/addProperty");
 
-export { postNewProperty, getSingleProperty, getAllProperties };
+const editProperty = new APIClient<PropertyService>("/property/editProperty");
+
+export { postNewProperty, getSingleProperty, getAllProperties, editProperty };
