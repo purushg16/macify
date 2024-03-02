@@ -70,7 +70,6 @@ const RentalPage = () => {
             <InputRightElement width="4.5rem">
               <Switch
                 isChecked={rentWithin}
-                isDisabled={propertyType !== "Villa"}
                 colorScheme="primary"
                 onChange={() => {
                   if (rentWithin) setNumberOfRooms(1);

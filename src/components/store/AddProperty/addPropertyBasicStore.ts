@@ -2,7 +2,14 @@ import { create } from "zustand";
 import Manager from "../../entities/manager";
 import { AddPropertyBasicInterface } from "../../entities/addPropertyBasicInterface.ts";
 
-export type PropertyType = "Hostel" | "Flat" | "Villa" | undefined;
+export type PropertyType =
+  | "hostel"
+  | "resort"
+  | "apartment"
+  | "flat"
+  | "villa"
+  | "hotel"
+  | undefined;
 
 interface AddPropertyStoreActions {
   setPropertyName: (propertyName: string | undefined) => void;

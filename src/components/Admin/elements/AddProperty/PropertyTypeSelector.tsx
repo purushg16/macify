@@ -14,7 +14,7 @@ import useAddPropertyStore, {
   PropertyType,
 } from "../../../store/AddProperty/addPropertyBasicStore";
 
-const PropertyTypes = ["Hostel", "Flat", "Villa"];
+const PropertyTypes = ["villa", "hotel", "apartment", "resort", "hostel"];
 
 const PropertyTypeSelector = () => {
   const type = useAddPropertyStore((s) => s.propertyType);
@@ -46,6 +46,7 @@ const PropertyTypeSelector = () => {
           <MenuList p={1} borderRadius={20}>
             {PropertyTypes.map((pType) => (
               <MenuItem
+                textTransform="capitalize"
                 key={pType}
                 onClick={() => {
                   if (pType === "Flat" || pType === "Hostel")
