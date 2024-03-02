@@ -33,7 +33,7 @@ const useAddPropertyRoomStore = create<
     set((store) => ({
       rooms: store.rooms?.map((r, index) => ({
         ...r,
-        roomName: `room${startingNumber + index}`,
+        roomName: `Room ${startingNumber + index}`,
       })),
     })),
 

@@ -39,7 +39,7 @@ const RentalPage = () => {
     for (let index = 0; index < numberOfRooms!; index++)
       propertyRooms.push({
         roomId: uuidv4(),
-        roomName: `Room${index + 1}`,
+        roomName: `Room ${index + 1}`,
         guestCapacity: 4,
       });
 
