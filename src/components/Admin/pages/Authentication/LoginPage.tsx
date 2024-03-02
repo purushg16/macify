@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { useLogin } from "../../../hooks/useAuth";
+import { useLogin } from "../../../hooks/useAdminAuth";
 import Title from "../../elements/Title";
 
 const LoginPage = () => {

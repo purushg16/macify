@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Title from "../../elements/Title";
-import { useVerifyEmail } from "../../../hooks/useAuth";
+import { useVerifyEmail } from "../../../hooks/useAdminAuth";
 
 const EMailVerificationPage = () => {
   const email = localStorage.getItem("emailToBeVerified");

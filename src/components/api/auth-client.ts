@@ -21,6 +21,6 @@ const register = new APIClient<RegisterAuth>("/user/signup");
 const emailVerification = new APIClient<MailVerificationAuth>(
   "/user/verification"
 );
-const login = new APIClient<LoginAuth>("/user/login");
+const adminLogin = new APIClient<LoginAuth>("/user/login");
 
-export { register, emailVerification, login };
+export { register, emailVerification, adminLogin };

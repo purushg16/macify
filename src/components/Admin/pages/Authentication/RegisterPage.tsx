@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { useRegister } from "../../../hooks/useAuth";
+import { useRegister } from "../../../hooks/useAdminAuth";
 import Title from "../../elements/Title";
 
 const RegisterPage = () => {
