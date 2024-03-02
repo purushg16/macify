@@ -1,9 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { managerLogin } from "../api/auth-client";
 import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
 import { useToast } from "@chakra-ui/react";
+import { getAllManagerBookings, getAllProperty } from "../api/manager-client";
+import { AllBookingsInterface } from "../api/admin-client";
 
 const useManagerLogin = () => {
   const navigate = useNavigate();
@@ -43,4 +45,26 @@ const useManagerChangePassword = () => {
   });
 };
 
-export { useManagerLogin, useManagerChangePassword };
+const useGetManagerProperties = () =>
+  useQuery({
+    queryKey: [],
+    queryFn: getAllProperty.getRequest,
+  });
+
+const useGetManagerBookings = (ids: AllBookingsInterface) =>
+  useQuery({
+    queryKey: [],
+    queryFn: () =>
+      getAllManagerBookings.getRequest({
+        params: {
+          ids: ids,
+        },
+      }),
+  });
+
+export {
+  useManagerLogin,
+  useManagerChangePassword,
+  useGetManagerProperties,
+  useGetManagerBookings,
+};
