@@ -10,10 +10,12 @@ const useManagerLogin = () => {
   const toast = useToast();
 
   return useMutation({
-    mutationFn: managerLogin.postRequest,
+    mutationFn: managerLogin.authorizationPost,
     onSuccess: (data) => {
-      if (data.data.firstLogin) navigate("/manager/changePassword");
-      else navigate("/manager");
+      if (data.data.firstLogin) {
+        localStorage.setItem("manager", "true");
+        navigate("/manager/changePassword");
+      } else navigate("/manager");
     },
     onError: (err: AxiosError<APIError>) =>
       toast({
@@ -30,7 +32,7 @@ const useManagerChangePassword = () => {
   const toast = useToast();
 
   return useMutation({
-    mutationFn: managerLogin.postRequest,
+    mutationFn: managerLogin.authorizationPost,
     onSuccess: () => navigate("/manager"),
     onError: (err: AxiosError<APIError>) =>
       toast({

@@ -33,7 +33,10 @@ const useAdminVerifyEmail = () => {
 
   return useMutation({
     mutationFn: emailVerification.authorizationPost,
-    onSuccess: () => navigate("/admin"),
+    onSuccess: () => {
+      localStorage.removeItem("manager");
+      navigate("/admin");
+    },
     onError: (err: AxiosError<APIError>) =>
       toast({
         title: err.response?.data?.error,
@@ -50,7 +53,10 @@ const useAdminLogin = () => {
 
   return useMutation({
     mutationFn: adminLogin.authorizationPost,
-    onSuccess: () => navigate("/admin"),
+    onSuccess: () => {
+      localStorage.removeItem("manager");
+      navigate("/admin");
+    },
     onError: (err: AxiosError<APIError>) =>
       toast({
         title: err.response?.data?.error,
