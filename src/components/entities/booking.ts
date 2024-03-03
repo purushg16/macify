@@ -1,4 +1,4 @@
-interface BookingGuest {
+export interface BookingGuest {
   guestName: string;
   age: number;
   address: string;

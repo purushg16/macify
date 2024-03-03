@@ -7,14 +7,15 @@ import {
   Heading,
   Icon,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { BsClockFill, BsPeopleFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
 import BookingDetails from "../../entities/booking";
 import DateFormatter from "../../functions/dateFormatter";
+import ApproveBookingPage from "../pages/ApproveBookingPage";
 
 const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
-  const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Flex
@@ -26,7 +27,7 @@ const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
       cursor="pointer"
       _hover={{ bg: "primary.100" }}
       transition="all 0.7s"
-      onClick={() => navigate("/admin/approveBooking")}
+      onClick={onOpen}
     >
       <Box>
         <Heading fontSize="xl" textTransform="capitalize">
@@ -50,6 +51,7 @@ const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
         </HStack>
       </Box>
       <Button> Decline </Button>
+      <ApproveBookingPage onClose={onClose} isOpen={isOpen} booking={booking} />
     </Flex>
   );
 };

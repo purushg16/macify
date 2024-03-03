@@ -1,7 +1,12 @@
 import { Box, Icon, Text } from "@chakra-ui/react";
 import { CiUser } from "react-icons/ci";
+import { BookingGuest } from "../../../entities/booking";
 
-const GuestCard = () => {
+interface Props {
+  guest: BookingGuest;
+}
+
+const GuestCard = ({ guest }: Props) => {
   return (
     <Box
       bg="gray.50"
@@ -10,7 +15,7 @@ const GuestCard = () => {
       borderRadius={10}
       cursor="pointer"
     >
-      <Text mb={4}> John Ipsum </Text>
+      <Text mb={4}> {guest.guestName} </Text>
       <Icon as={CiUser} boxSize={100} />
     </Box>
   );

@@ -4,50 +4,73 @@ import {
   Divider,
   Flex,
   HStack,
+  Heading,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   Text,
-  VStack,
 } from "@chakra-ui/react";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import Title from "../elements/Title";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
+import BookingDetails from "../../entities/booking";
 
-const ApproveBookingPage = () => {
+interface ApproveBooking {
+  isOpen: boolean;
+  onClose: () => void;
+  booking: BookingDetails;
+}
+
+const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
   return (
-    <Flex flexDir="column" gap={8}>
-      <Title
-        heading="Sunny's Villa"
-        subtitle="Approve after assigning rooms"
-        align="left"
-      />
-      <Divider borderColor="gray.100" maxW="7em" m="auto" />
+    <Modal isOpen={isOpen} onClose={onClose} size="full">
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader textTransform="capitalize">
+          <Title
+            align="left"
+            heading={booking.property.propertyName}
+            subtitle="Assign rooms for all guests"
+          />
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody mt={4} pb={4}>
+          <Flex flexDir="column" gap={8}>
+            <Heading fontSize="xl"> Details </Heading>
 
-      <Box>
-        <Text mb={4}>Checking Time Details</Text>
+            {booking.bookings.map((booking) => (
+              <>
+                <Box key={booking._id}>
+                  <Text mb={4}>Guest Details</Text>
+                  <RoomAssignBlock guests={booking.guests} />
+                  <Text my={4}>Checking Time Details</Text>
+                  <CheckingRangeSelector
+                    checkIn={booking.checkIn}
+                    checkOut={booking.checkOut}
+                  />
+                </Box>
+                <Divider borderColor="gray.100" maxW="7em" m="auto" />
+              </>
+            ))}
 
-        <VStack align="start" gap={4}>
-          <CheckingRangeSelector />
-        </VStack>
-      </Box>
+            <Box mb={4}>
+              <Title
+                heading="Approve Booking"
+                subtitle="Click ‘Approve’ to confirm booking"
+              />
 
-      <Divider borderColor="gray.100" maxW="7em" m="auto" />
-
-      <Box>
-        <Text mb={4}>Guest Details</Text>
-        <RoomAssignBlock />
-      </Box>
-
-      <Box mt={4}>
-        <Title
-          heading="Approve Booking"
-          subtitle="Click ‘Approve’ to confirm booking"
-        />
-
-        <HStack justify="center" mt={4}>
-          <Button> Cancel </Button>
-          <Button colorScheme="primary"> Approve </Button>
-        </HStack>
-      </Box>
-    </Flex>
+              <HStack justify="center" mt={4}>
+                <Button> Cancel </Button>
+                <Button colorScheme="primary"> Approve </Button>
+              </HStack>
+            </Box>
+          </Flex>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 

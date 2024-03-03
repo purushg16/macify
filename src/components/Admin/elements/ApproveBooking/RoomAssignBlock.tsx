@@ -1,15 +1,23 @@
-import { Box, Button, HStack, SimpleGrid } from "@chakra-ui/react";
+import { Box, Button, HStack, Icon, SimpleGrid } from "@chakra-ui/react";
 import GuestCard from "./GuestCard";
+import { BookingGuest } from "../../../entities/booking";
+import { BsChevronDown } from "react-icons/bs";
 
-const RoomAssignBlock = () => {
+interface Props {
+  guests: BookingGuest[];
+}
+
+const RoomAssignBlock = ({ guests }: Props) => {
   return (
     <Box>
       <HStack mb={2}>
         <Button size="sm" colorScheme="primary">
           Select Room
+          <Icon as={BsChevronDown} ml={2} />
         </Button>
         <Button size="sm" colorScheme="primary">
           Select Bed
+          <Icon as={BsChevronDown} ml={2} />
         </Button>
       </HStack>
 
@@ -21,8 +29,9 @@ const RoomAssignBlock = () => {
         border="1px dashed"
         borderColor="gray.100"
       >
-        <GuestCard />
-        <GuestCard />
+        {guests.map((guest, i) => (
+          <GuestCard key={i} guest={guest} />
+        ))}
       </SimpleGrid>
     </Box>
   );
