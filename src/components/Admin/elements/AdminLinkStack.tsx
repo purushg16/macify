@@ -1,11 +1,10 @@
 import { Box, VStack } from "@chakra-ui/react";
 import { LiteNavigationButton } from "./Button";
 import { useLocation } from "react-router-dom";
-import useRoleStore from "../../store/roleStore";
 
 const AdminLinkStack = () => {
   const location = useLocation().pathname.split("/")[2];
-  const role = useRoleStore((s) => s.role);
+  const role = localStorage.getItem("manager") === "true" ? "Manager" : "Admin";
 
   return (
     <Box>
