@@ -7,26 +7,18 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Title from "../../elements/Title";
 import { useVerifyEmail } from "../../../hooks/useAdminAuth";
 
 const EMailVerificationPage = () => {
-  const email = localStorage.getItem("emailToBeVerified");
   const [otp, setOTP] = useState("");
-
   const { mutate, status } = useVerifyEmail();
 
-  const verifyEmail = () => {
-    if (email) mutate({ email, otp });
-  };
+  const email = localStorage.getItem("emailToBeVerified");
+  if (!email) return <Navigate to="/auth/register" />;
 
-  const navigate = useNavigate();
-
-  if (!email) {
-    navigate("/auth/register");
-    return null;
-  }
+  const verifyEmail = () => mutate({ email, otp });
 
   return (
     <>
