@@ -9,7 +9,6 @@ const RangePickerMenu = () => {
       startDate: new Date(),
       endDate: new Date(),
       key: "selection",
-      //   color: "black",
     },
   ]);
 
@@ -18,8 +17,6 @@ const RangePickerMenu = () => {
       <MenuButton as={IconButton}>
         <IconButton
           colorScheme="primary"
-          //   bg="gray.50"
-          //   _hover={{ bg: "gray.100" }}
           aria-label="Search database"
           icon={<BsPencilFill />}
         />
