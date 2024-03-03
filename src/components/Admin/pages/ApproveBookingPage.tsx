@@ -43,6 +43,14 @@ const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
           <Flex flexDir="column" gap={8}>
             <Heading fontSize="xl"> Details </Heading>
 
+            <Box>
+              <Text mb={4}>Checking Time Details</Text>
+              <CheckingRangeSelector
+                checkIn={booking.bookings[0].checkIn}
+                checkOut={booking.bookings[0].checkOut}
+              />
+            </Box>
+
             {booking.bookings.map((b) => (
               <>
                 <Box key={b._id}>
@@ -52,13 +60,13 @@ const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
                     <BedAssignBlock propertyId={booking.property._id} />
                   </HStack>
                   <GuestGrid guests={b.guests} />
-                  <Text my={4}>Checking Time Details</Text>
-                  <CheckingRangeSelector
-                    checkIn={b.checkIn}
-                    checkOut={b.checkOut}
-                  />
                 </Box>
-                <Divider borderColor="gray.100" maxW="7em" m="auto" />
+                <Divider
+                  borderColor="gray.100"
+                  maxW="7em"
+                  m="auto"
+                  key={b._id}
+                />
               </>
             ))}
 
