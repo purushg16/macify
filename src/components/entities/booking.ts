@@ -24,5 +24,5 @@ export default interface BookingDetails {
   paid: number;
   balance: number;
   approved: boolean;
-  __v: 0;
+  __v: number;
 }

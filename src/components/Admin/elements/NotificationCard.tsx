@@ -10,8 +10,10 @@ import {
 } from "@chakra-ui/react";
 import { BsClockFill, BsPeopleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import BookingDetails from "../../entities/booking";
+import DateFormatter from "../../functions/dateFormatter";
 
-const NotificationCard = () => {
+const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
   const navigate = useNavigate();
 
   return (
@@ -27,17 +29,22 @@ const NotificationCard = () => {
       onClick={() => navigate("/admin/approveBooking")}
     >
       <Box>
-        <Heading fontSize="xl"> Sunny's Villa </Heading>
+        <Heading fontSize="xl" textTransform="capitalize">
+          {" "}
+          {booking.property.propertyName}{" "}
+        </Heading>
         <HStack mt={2} gap={4}>
           <GridItem>
             <Text display="flex" gap={2} alignItems="center">
-              <Icon as={BsPeopleFill} /> 3
+              <Icon as={BsPeopleFill} />{" "}
+              {booking.bookings.reduce((acc, b) => acc + b.guests.length, 0)}
             </Text>
           </GridItem>
           <GridItem> | </GridItem>
           <GridItem>
             <Text display="flex" gap={2} alignItems="center">
-              <Icon as={BsClockFill} /> Feb 29, 2024
+              <Icon as={BsClockFill} />{" "}
+              {DateFormatter(new Date(booking.bookings[0].checkIn))}
             </Text>
           </GridItem>
         </HStack>
