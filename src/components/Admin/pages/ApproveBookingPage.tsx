@@ -17,6 +17,8 @@ import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import Title from "../elements/Title";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
 import BookingDetails from "../../entities/booking";
+import GuestGrid from "../elements/ApproveBooking/GuestGrid";
+import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
 
 interface ApproveBooking {
   isOpen: boolean;
@@ -41,15 +43,19 @@ const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
           <Flex flexDir="column" gap={8}>
             <Heading fontSize="xl"> Details </Heading>
 
-            {booking.bookings.map((booking) => (
+            {booking.bookings.map((b) => (
               <>
-                <Box key={booking._id}>
+                <Box key={b._id}>
                   <Text mb={4}>Guest Details</Text>
-                  <RoomAssignBlock guests={booking.guests} />
+                  <HStack mb={2}>
+                    <RoomAssignBlock propertyId={booking.property._id} />
+                    <BedAssignBlock propertyId={booking.property._id} />
+                  </HStack>
+                  <GuestGrid guests={b.guests} />
                   <Text my={4}>Checking Time Details</Text>
                   <CheckingRangeSelector
-                    checkIn={booking.checkIn}
-                    checkOut={booking.checkOut}
+                    checkIn={b.checkIn}
+                    checkOut={b.checkOut}
                   />
                 </Box>
                 <Divider borderColor="gray.100" maxW="7em" m="auto" />

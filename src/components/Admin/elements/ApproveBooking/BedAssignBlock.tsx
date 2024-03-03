@@ -5,15 +5,14 @@ interface Props {
   propertyId: string;
 }
 
-const RoomAssignBlock = ({ propertyId }: Props) => {
+const BedAssignBlock = ({ propertyId }: Props) => {
   console.log(propertyId);
-
   return (
     <Button size="sm" colorScheme="primary">
-      Select Room
+      Select Bed
       <Icon as={BsChevronDown} ml={2} />
     </Button>
   );
 };
 
-export default RoomAssignBlock;
+export default BedAssignBlock;
