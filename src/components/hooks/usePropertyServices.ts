@@ -67,6 +67,8 @@ const useGetAllProperties = () => {
   return useQuery({
     queryKey: ["property", "getAllProperty"],
     queryFn: getAllProperties.getRequest,
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 };
 
@@ -80,6 +82,8 @@ const useGetSingleProperty = (propertyId: string) => {
         },
       });
     },
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 };
 

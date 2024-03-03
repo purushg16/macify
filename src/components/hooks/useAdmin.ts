@@ -40,6 +40,8 @@ const useGetBookingsToApprove = () =>
   useQuery({
     queryKey: ["booking", "bookingToApprove"],
     queryFn: bookingsToApprove.getRequest,
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 
 const useApproveBooking = () => {
@@ -123,6 +125,8 @@ const useGetAllBooking = (ids: AllBookingsInterface) => {
           ids: ids,
         },
       }),
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 };
 
