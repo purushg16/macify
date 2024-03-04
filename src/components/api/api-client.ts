@@ -46,6 +46,16 @@ export default class APIClient<T> {
       });
   };
 
+  getProperty = (config: AxiosRequestConfig) => {
+    return axiosInstance
+      .get<T>(this.endpoint, config)
+      .then((res) => res.data)
+      .catch((error) => {
+        console.error("Get Request error:", error);
+        throw error;
+      });
+  };
+
   postRequest = (data: T) =>
     axiosAuthInstance.post(this.endpoint, data).then((res) => {
       return res;

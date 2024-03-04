@@ -1,30 +1,38 @@
 import { BsChevronDown } from "react-icons/bs";
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import singleProperty from "../../../data/singleProperty";
-import { useState } from "react";
-import useApproveBookingStore, {
-  ApproveBookingProperty,
-} from "../../../store/approveBooking";
-import { useGetSingleProperty } from "../../../hooks/usePropertyServices";
-// import { useGetSingleProperty } from "../../../hooks/usePropertyServices";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Spinner,
+} from "@chakra-ui/react";
+import useApproveBookingStore from "../../../store/approveBooking";
+import Property from "../../../entities/property";
 
 interface Props {
+  property: Property;
   propertyId: string;
   bookingId: string;
-  guestId: string;
+  isLoading: boolean;
+  isError: boolean;
 }
 
-export interface RoomAssignmentAction {
-  [guestId: string]: ApproveBookingProperty;
-}
+const RoomAssignBlock = ({
+  property,
+  propertyId,
+  bookingId,
+  isLoading,
+  isError,
+}: Props) => {
+  const assignedRooms = useApproveBookingStore((s) => s.bookings);
+  const assignRoom = useApproveBookingStore((s) => s.setBookings);
 
-const RoomAssignBlock = ({ propertyId, guestId, bookingId }: Props) => {
-  const { isLoading, isError } = useGetSingleProperty(propertyId);
-  const setCurrentRoomId = useApproveBookingStore((s) => s.setCurrentRoomId);
-  const [assignedRoom, setAssignedRoom] = useState<RoomAssignmentAction>({
-    [guestId]: { bookingId: bookingId },
-  });
+  const currentRoom = assignedRooms?.find(
+    (r) => r.bookingId === bookingId
+  )?.roomId;
 
+  if (!property) return <Spinner />;
   return (
     <Menu>
       <MenuButton
@@ -36,20 +44,16 @@ const RoomAssignBlock = ({ propertyId, guestId, bookingId }: Props) => {
         isLoading={isLoading}
         isDisabled={isError}
       >
-        {singleProperty.rooms.find(
-          (r) => r._id === assignedRoom[guestId].roomId!
-        )?.roomName || "Select Room"}
+        {property.rooms.find((r) => r._id === currentRoom)?.roomName ||
+          "Select Room"}
       </MenuButton>
       <MenuList>
-        {singleProperty.rooms.map((room, i) => (
+        {property.rooms.map((room, i) => (
           <MenuItem
             textTransform="capitalize"
             key={i}
             onClick={() => {
-              setCurrentRoomId(room._id);
-              setAssignedRoom({
-                [guestId]: { ...assignedRoom[guestId], roomId: room._id },
-              });
+              assignRoom({ bookingId: bookingId, roomId: room._id });
             }}
           >
             {room.roomName}

@@ -11,7 +11,6 @@ import {
 import PropertyConverter from "../functions/propertyParameterConverter";
 import { useNavigate } from "react-router-dom";
 import ms from "ms";
-
 const usePostProperty = () => {
   const toast = useToast();
   const property = PropertyConverter();
@@ -78,7 +77,7 @@ const useGetSingleProperty = (propertyId: string) => {
     queryKey: ["property", "getProperty"],
     queryFn: () =>
       getSingleProperty
-        .getRequest({
+        .getProperty({
           params: {
             propertyId: propertyId,
           },

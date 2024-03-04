@@ -10,6 +10,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
@@ -18,6 +19,7 @@ import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelec
 import BookingDetails from "../../entities/booking";
 import GuestGrid from "../elements/ApproveBooking/GuestGrid";
 import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
+import { useGetSingleProperty } from "../../hooks/usePropertyServices";
 
 interface ApproveBooking {
   isOpen: boolean;
@@ -26,6 +28,13 @@ interface ApproveBooking {
 }
 
 const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
+  const {
+    data: property,
+    isLoading,
+    isError,
+  } = useGetSingleProperty(booking.property._id);
+
+  if (!property) return <Spinner />;
   return (
     <Modal
       isOpen={isOpen}
@@ -60,15 +69,13 @@ const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
                 <Text mb={4}>Guest Details</Text>
                 <HStack mb={2}>
                   <RoomAssignBlock
+                    property={property}
                     propertyId={booking.property._id}
-                    bookingId={booking._id}
-                    guestId={b._id}
+                    bookingId={b._id}
+                    isLoading={isLoading}
+                    isError={isError}
                   />
-                  <BedAssignBlock
-                    propertyId={booking.property._id}
-                    // bookingId={booking._id}
-                    // guestId={b._id}
-                  />
+                  <BedAssignBlock bookingId={b._id} />
                 </HStack>
                 <GuestGrid guests={b.guests} />
               </Box>

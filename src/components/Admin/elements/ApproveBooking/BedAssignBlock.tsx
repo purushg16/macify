@@ -1,17 +1,47 @@
-import { Button, Icon } from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
+import singleProperty from "../../../data/singleProperty";
+import useApproveBookingStore from "../../../store/approveBooking";
 
 interface Props {
-  propertyId: string;
+  bookingId: string;
 }
 
-const BedAssignBlock = ({ propertyId }: Props) => {
-  console.log(propertyId);
+const BedAssignBlock = ({ bookingId: guestId }: Props) => {
+  const assignedRooms = useApproveBookingStore((s) => s.bookings);
+  const assignRoom = useApproveBookingStore((s) => s.setBookings);
+
+  const respectiveRoomId = assignedRooms?.find(
+    (ar) => ar.bookingId === guestId
+  )?.roomId;
+
+  // =====  if property is other than hostel return null ====== \\
   return (
-    <Button size="sm" colorScheme="primary">
-      Select Bed
-      <Icon as={BsChevronDown} ml={2} />
-    </Button>
+    <Menu>
+      <MenuButton
+        as={Button}
+        size="sm"
+        colorScheme="primary"
+        rightIcon={<BsChevronDown />}
+      >
+        Select Bed
+      </MenuButton>
+      <MenuList>
+        {singleProperty.rooms
+          .find((r) => r._id === respectiveRoomId)
+          ?.beds.map((bed, i) => (
+            <MenuItem
+              textTransform="capitalize"
+              key={i}
+              onClick={() => {
+                assignRoom({ bookingId: guestId, bedId: bed._id });
+              }}
+            >
+              {bed.bedNo}
+            </MenuItem>
+          ))}
+      </MenuList>
+    </Menu>
   );
 };
 

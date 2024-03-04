@@ -9,7 +9,6 @@ export interface ApproveBookingProperty {
 interface ApproveBookingProperties {
   propertyId: string | undefined;
   bookings: ApproveBookingProperty[] | undefined;
-  currentRoomId: string | undefined;
   checkIn: Date | undefined;
   checkOut: Date | undefined;
   groupId: string | undefined;
@@ -19,8 +18,7 @@ interface ApproveBookingProperties {
 
 interface ApproveBookingStoreActions {
   setPropertyId: (propertyId: string | undefined) => void;
-  setBookings: (bookings: ApproveBookingProperty[] | undefined) => void;
-  setCurrentRoomId: (currentRoomId: string | undefined) => void;
+  setBookings: (booking: ApproveBookingProperty) => void;
   setCheckIn: (checkIn: Date | undefined) => void;
   setCheckOut: (checkOut: Date | undefined) => void;
   setGroupId: (groupId: string | undefined) => void;
@@ -30,6 +28,32 @@ interface ApproveBookingStoreActions {
 
 type ApproveBookingStore = ApproveBookingProperties &
   ApproveBookingStoreActions;
+
+const updateOrAddBooking = (
+  existingBookings: ApproveBookingProperty[] | undefined,
+  newBooking: ApproveBookingProperty
+): ApproveBookingProperty[] => {
+  if (!existingBookings) {
+    // If the array is undefined, create a new array with the new booking
+    return [newBooking];
+  }
+
+  const existingIndex = existingBookings.findIndex(
+    (booking) => booking.bookingId === newBooking.bookingId
+  );
+
+  if (existingIndex !== -1) {
+    // If the booking with the same ID exists, update it
+    existingBookings[existingIndex] = {
+      ...existingBookings[existingIndex],
+      ...newBooking,
+    };
+    return [...existingBookings];
+  }
+
+  // If the booking with the same ID doesn't exist, add a new booking
+  return [...existingBookings, newBooking];
+};
 
 const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
   propertyId: undefined,
@@ -42,8 +66,10 @@ const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
   balance: undefined,
 
   setPropertyId: (propertyId) => set({ propertyId }),
-  setBookings: (bookings) => set({ bookings }),
-  setCurrentRoomId: (currentRoomId) => set({ currentRoomId }),
+  setBookings: (booking) =>
+    set((store) => ({
+      bookings: updateOrAddBooking(store.bookings, booking),
+    })),
   setCheckIn: (checkIn) => set({ checkIn }),
   setCheckOut: (checkOut) => set({ checkOut }),
   setGroupId: (groupId) => set({ groupId }),
