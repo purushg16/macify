@@ -17,14 +17,6 @@ const axiosInstance = axios.create({
   baseURL: baseURL,
 });
 
-const injectToken = (token?: string) => {
-  const accessToken = token ? token : localStorage.getItem("token");
-  axiosInstance.interceptors.request.use((req) => {
-    req.headers.Authorization = accessToken;
-    return req;
-  });
-};
-
 export default class APIClient<T> {
   private endpoint: string;
 
@@ -35,17 +27,21 @@ export default class APIClient<T> {
   authorizationPost = (data: T) => {
     return axiosAuthInstance.post(this.endpoint, data).then((res) => {
       localStorage.setItem("token", res.data.token);
-      injectToken(res.data.token);
+      axiosInstance.defaults.headers.common["Authorization"] = res.data.token;
       return res;
     });
   };
 
   getRequest = (config: AxiosRequestConfig) => {
     return axiosInstance
-      .get<FetchResponse<T>>(this.endpoint, config)
+      .get<FetchResponse<T>>(this.endpoint, {
+        ...config,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
       .then((res) => res.data)
       .catch((error) => {
-        console.error("Get Request error:", error);
         throw error;
       });
   };
@@ -61,7 +57,7 @@ export default class APIClient<T> {
   };
 
   postRequest = (data: T) =>
-    axiosAuthInstance.post(this.endpoint, data).then((res) => {
+    axiosInstance.post(this.endpoint, data).then((res) => {
       return res;
     });
 }
