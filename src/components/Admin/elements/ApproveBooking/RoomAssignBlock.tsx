@@ -14,7 +14,7 @@ interface Props {
   guestId: string;
 }
 
-interface RoomAssignmentAction {
+export interface RoomAssignmentAction {
   [guestId: string]: ApproveBookingProperty;
 }
 

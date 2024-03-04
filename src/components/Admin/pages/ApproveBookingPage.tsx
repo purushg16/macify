@@ -62,9 +62,13 @@ const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
                   <RoomAssignBlock
                     propertyId={booking.property._id}
                     bookingId={booking._id}
-                    guestId={booking._id}
+                    guestId={b._id}
                   />
-                  <BedAssignBlock propertyId={booking.property._id} />
+                  <BedAssignBlock
+                    propertyId={booking.property._id}
+                    // bookingId={booking._id}
+                    // guestId={b._id}
+                  />
                 </HStack>
                 <GuestGrid guests={b.guests} />
               </Box>

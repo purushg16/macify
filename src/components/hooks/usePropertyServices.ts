@@ -10,6 +10,7 @@ import {
 } from "../api/property-client";
 import PropertyConverter from "../functions/propertyParameterConverter";
 import { useNavigate } from "react-router-dom";
+import ms from "ms";
 
 const usePostProperty = () => {
   const toast = useToast();
@@ -86,6 +87,7 @@ const useGetSingleProperty = (propertyId: string) => {
 
     retry: 2,
     refetchOnWindowFocus: false,
+    staleTime: ms("1hr"),
   });
 };
 
