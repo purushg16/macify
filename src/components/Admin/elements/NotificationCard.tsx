@@ -11,6 +11,7 @@ import {
 import BookingDetails from "../../entities/booking";
 import BookingCheckInTime from "./BookingCheckInTime";
 import BookingGuestCount from "./BookingGuestCount";
+import { Link } from "react-router-dom";
 
 const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
   return (
@@ -50,9 +51,11 @@ const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
           </Box>
           <Show below="md">
             <HStack mt={4} w="100%">
-              <Button colorScheme="primary" w="100%">
-                View
-              </Button>
+              <Link to={`approveBooking/${booking._id}`}>
+                <Button colorScheme="primary" w="100%">
+                  View
+                </Button>
+              </Link>
               <Button w="100%"> Reject </Button>
             </HStack>
           </Show>
