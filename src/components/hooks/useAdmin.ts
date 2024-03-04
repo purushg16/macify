@@ -11,6 +11,7 @@ import {
   rejectBooking,
 } from "../api/admin-client";
 import { APIError } from "../entities/Error";
+import ms from "ms";
 
 const useAddManager = () => {
   const toast = useToast();
@@ -42,6 +43,7 @@ const useGetBookingsToApprove = () =>
     queryFn: bookingsToApprove.getRequest,
     retry: 2,
     refetchOnWindowFocus: false,
+    staleTime: ms("5m"),
   });
 
 const useApproveBooking = () => {
