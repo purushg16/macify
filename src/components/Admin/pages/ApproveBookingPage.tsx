@@ -14,7 +14,8 @@ import GuestGrid from "../elements/ApproveBooking/GuestGrid";
 import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
 import { useGetSingleProperty } from "../../hooks/usePropertyServices";
 import bookingsToApprove from "../../data/bookingsToApprove";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { MdArrowBack } from "react-icons/md";
 
 const ApproveBookingPage = () => {
   const singleBookingId = useParams().id;
@@ -31,6 +32,11 @@ const ApproveBookingPage = () => {
   if (!property) return <Spinner />;
   return (
     <Flex flexDir="column" gap={8}>
+      <Box>
+        <Link to="/admin/notifications">
+          <Button leftIcon={<MdArrowBack />}> All Bookings </Button>
+        </Link>
+      </Box>
       <Heading fontSize="xl"> Details </Heading>
 
       <Box>
