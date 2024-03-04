@@ -11,9 +11,11 @@ import {
 import BookingDetails from "../../entities/booking";
 import BookingCheckInTime from "./BookingCheckInTime";
 import BookingGuestCount from "./BookingGuestCount";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       bg="#f4f4f4"
@@ -51,8 +53,12 @@ const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
           </Box>
           <Show below="md">
             <HStack mt={4} w="100%">
-              <Button colorScheme="primary" w="100%">
-                <Link to={`/admin/approveBooking/${booking._id}`}>View</Link>
+              <Button
+                colorScheme="primary"
+                w="100%"
+                onClick={() => navigate(`/admin/approveBooking/${booking._id}`)}
+              >
+                View
               </Button>
               <Button w="100%"> Reject </Button>
             </HStack>
