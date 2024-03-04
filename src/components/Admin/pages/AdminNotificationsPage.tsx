@@ -12,7 +12,7 @@ const AdminNotificationsPage = () => {
         align="left"
       />
 
-      <Box bg="#f5f5f5" p={4} py={6} borderRadius={10} mt={4}>
+      <Box mt={4}>
         <SimpleGrid columns={1} spacing={4}>
           {bookingsToApprove.map((booking) => (
             <NotificationCard key={booking._id} booking={booking} />
