@@ -15,7 +15,17 @@ const BedAssignBlock = ({ bookingId: guestId }: Props) => {
     (ar) => ar.bookingId === guestId
   )?.roomId;
 
-  // =====  if property is other than hostel return null ====== \\
+  const beds = singleProperty.rooms.find(
+    (r) => r._id === respectiveRoomId
+  )?.beds;
+
+  const selectedBedId = assignedRooms?.find(
+    (ar) => ar.bookingId === guestId && ar.roomId === respectiveRoomId
+  )?.bedId;
+
+  const selectedBed = beds?.find((b) => b._id === selectedBedId);
+
+  if (!beds) return null;
   return (
     <Menu>
       <MenuButton
@@ -23,23 +33,22 @@ const BedAssignBlock = ({ bookingId: guestId }: Props) => {
         size="sm"
         colorScheme="primary"
         rightIcon={<BsChevronDown />}
+        isDisabled={!beds}
       >
-        Select Bed
+        {selectedBed?.bedNo || "Select Bed"}
       </MenuButton>
       <MenuList>
-        {singleProperty.rooms
-          .find((r) => r._id === respectiveRoomId)
-          ?.beds.map((bed, i) => (
-            <MenuItem
-              textTransform="capitalize"
-              key={i}
-              onClick={() => {
-                assignRoom({ bookingId: guestId, bedId: bed._id });
-              }}
-            >
-              {bed.bedNo}
-            </MenuItem>
-          ))}
+        {beds.map((bed, i) => (
+          <MenuItem
+            textTransform="capitalize"
+            key={i}
+            onClick={() => {
+              assignRoom({ bookingId: guestId, bedId: bed._id });
+            }}
+          >
+            {bed.bedNo}
+          </MenuItem>
+        ))}
       </MenuList>
     </Menu>
   );
