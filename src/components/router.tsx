@@ -27,6 +27,7 @@ import ManagerNofiticationsPage from "./Admin/pages/ManagerNofiticationsPage";
 import EMailVerificationPage from "./Admin/pages/Authentication/EMailVerificationPage";
 import UnAuthorizedPage from "./Admin/pages/UnAuthorizedPage";
 import ManagerLayout from "./Layouts/ManagerLayout";
+import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
       { path: "manager", element: <ManagerPage /> },
 
       { path: "notifications", element: <AdminNotificationsPage /> },
+      { path: "approveBooking/:id", element: <ApproveBookingPage /> },
 
       {
         path: "properties",

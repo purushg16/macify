@@ -7,16 +7,12 @@ import {
   Image,
   Show,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import BookingDetails from "../../entities/booking";
-import ApproveBookingPage from "../pages/ApproveBookingPage";
 import BookingCheckInTime from "./BookingCheckInTime";
 import BookingGuestCount from "./BookingGuestCount";
 
 const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <Flex
       bg="#f4f4f4"
@@ -54,7 +50,7 @@ const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
           </Box>
           <Show below="md">
             <HStack mt={4} w="100%">
-              <Button colorScheme="primary" w="100%" onClick={onOpen}>
+              <Button colorScheme="primary" w="100%">
                 View
               </Button>
               <Button w="100%"> Reject </Button>
@@ -62,7 +58,6 @@ const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
           </Show>
         </Flex>
       </Flex>
-      <ApproveBookingPage onClose={onClose} isOpen={isOpen} booking={booking} />
     </Flex>
   );
 };

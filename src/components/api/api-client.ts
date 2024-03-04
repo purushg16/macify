@@ -5,6 +5,10 @@ export interface FetchResponse<T> {
   data: T[];
 }
 
+export interface SinglePropertyResponse<T> {
+  data: T;
+}
+
 const axiosAuthInstance = axios.create({
   baseURL: baseURL,
 });
@@ -48,8 +52,8 @@ export default class APIClient<T> {
 
   getProperty = (config: AxiosRequestConfig) => {
     return axiosInstance
-      .get<T>(this.endpoint, config)
-      .then((res) => res.data)
+      .get<SinglePropertyResponse<T>>(this.endpoint, config)
+      .then((res) => res.data.data)
       .catch((error) => {
         console.error("Get Request error:", error);
         throw error;
