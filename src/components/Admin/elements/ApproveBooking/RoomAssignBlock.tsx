@@ -5,6 +5,7 @@ import { useState } from "react";
 import useApproveBookingStore, {
   ApproveBookingProperty,
 } from "../../../store/approveBooking";
+import { useGetSingleProperty } from "../../../hooks/usePropertyServices";
 // import { useGetSingleProperty } from "../../../hooks/usePropertyServices";
 
 interface Props {
@@ -18,8 +19,7 @@ interface RoomAssignmentAction {
 }
 
 const RoomAssignBlock = ({ propertyId, guestId, bookingId }: Props) => {
-  // const { data, isLoading } = useGetSingleProperty(propertyId);
-
+  const { isLoading } = useGetSingleProperty(propertyId);
   const setCurrentRoomId = useApproveBookingStore((s) => s.setCurrentRoomId);
   const [assignedRoom, setAssignedRoom] = useState<RoomAssignmentAction>({
     [guestId]: { bookingId: bookingId },
@@ -33,6 +33,7 @@ const RoomAssignBlock = ({ propertyId, guestId, bookingId }: Props) => {
         size="sm"
         colorScheme="primary"
         id={propertyId}
+        isLoading={isLoading}
       >
         {singleProperty.rooms.find(
           (r) => r._id === assignedRoom[guestId].roomId!
