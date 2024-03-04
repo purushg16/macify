@@ -51,11 +51,9 @@ const NotificationCard = ({ booking }: { booking: BookingDetails }) => {
           </Box>
           <Show below="md">
             <HStack mt={4} w="100%">
-              <Link to={`approveBooking/${booking._id}`}>
-                <Button colorScheme="primary" w="100%">
-                  View
-                </Button>
-              </Link>
+              <Button colorScheme="primary" w="100%">
+                <Link to={`/admin/approveBooking/${booking._id}`}>View</Link>
+              </Button>
               <Button w="100%"> Reject </Button>
             </HStack>
           </Show>
