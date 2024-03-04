@@ -75,13 +75,15 @@ const useGetAllProperties = () => {
 const useGetSingleProperty = (propertyId: string) => {
   return useQuery({
     queryKey: ["property", "getProperty"],
-    queryFn: () => {
-      getSingleProperty.getRequest({
-        params: {
-          propertyId: propertyId,
-        },
-      });
-    },
+    queryFn: () =>
+      getSingleProperty
+        .getRequest({
+          params: {
+            propertyId: propertyId,
+          },
+        })
+        .then((res) => res),
+
     retry: 2,
     refetchOnWindowFocus: false,
   });

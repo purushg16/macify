@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Divider,
   Flex,
   HStack,
   Heading,
@@ -28,7 +27,12 @@ interface ApproveBooking {
 
 const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="full">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size="full"
+      closeOnOverlayClick={false}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader textTransform="capitalize">
@@ -52,22 +56,18 @@ const ApproveBookingPage = ({ isOpen, onClose, booking }: ApproveBooking) => {
             </Box>
 
             {booking.bookings.map((b) => (
-              <>
-                <Box key={b._id}>
-                  <Text mb={4}>Guest Details</Text>
-                  <HStack mb={2}>
-                    <RoomAssignBlock propertyId={booking.property._id} />
-                    <BedAssignBlock propertyId={booking.property._id} />
-                  </HStack>
-                  <GuestGrid guests={b.guests} />
-                </Box>
-                <Divider
-                  borderColor="gray.100"
-                  maxW="7em"
-                  m="auto"
-                  key={b._id}
-                />
-              </>
+              <Box key={b._id}>
+                <Text mb={4}>Guest Details</Text>
+                <HStack mb={2}>
+                  <RoomAssignBlock
+                    propertyId={booking.property._id}
+                    bookingId={booking._id}
+                    guestId={booking._id}
+                  />
+                  <BedAssignBlock propertyId={booking.property._id} />
+                </HStack>
+                <GuestGrid guests={b.guests} />
+              </Box>
             ))}
 
             <Box mb={4}>
