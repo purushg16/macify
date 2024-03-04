@@ -6,7 +6,6 @@ import { useGetBookingsToApprove } from "../../hooks/useAdmin";
 const AdminNotificationsPage = () => {
   const { data, isLoading } = useGetBookingsToApprove();
 
-  if (isLoading) return <Spinner />;
   return (
     <Box>
       <Title
@@ -15,13 +14,17 @@ const AdminNotificationsPage = () => {
         align="left"
       />
 
-      <Box mt={4}>
-        <SimpleGrid columns={1} spacing={4}>
-          {data?.data.map((booking) => (
-            <NotificationCard key={booking._id} booking={booking} />
-          ))}
-        </SimpleGrid>
-      </Box>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Box mt={4}>
+          <SimpleGrid columns={1} spacing={4}>
+            {data?.data.map((booking) => (
+              <NotificationCard key={booking._id} booking={booking} />
+            ))}
+          </SimpleGrid>
+        </Box>
+      )}
     </Box>
   );
 };
