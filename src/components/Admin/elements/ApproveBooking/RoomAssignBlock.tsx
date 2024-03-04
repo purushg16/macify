@@ -19,7 +19,7 @@ export interface RoomAssignmentAction {
 }
 
 const RoomAssignBlock = ({ propertyId, guestId, bookingId }: Props) => {
-  const { isLoading } = useGetSingleProperty(propertyId);
+  const { isLoading, isError } = useGetSingleProperty(propertyId);
   const setCurrentRoomId = useApproveBookingStore((s) => s.setCurrentRoomId);
   const [assignedRoom, setAssignedRoom] = useState<RoomAssignmentAction>({
     [guestId]: { bookingId: bookingId },
@@ -34,6 +34,7 @@ const RoomAssignBlock = ({ propertyId, guestId, bookingId }: Props) => {
         colorScheme="primary"
         id={propertyId}
         isLoading={isLoading}
+        isDisabled={isError}
       >
         {singleProperty.rooms.find(
           (r) => r._id === assignedRoom[guestId].roomId!
