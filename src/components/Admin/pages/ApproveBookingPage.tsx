@@ -73,13 +73,13 @@ const ApproveBookingPage = () => {
       <Box mb={4}>
         <Title
           heading="Approve Booking"
-          subtitle="Click ‘Approve’ to confirm booking"
+          subtitle="Click 'Proceed' to enter payment details"
         />
 
         <HStack justify="center" mt={4}>
           <Button> Cancel </Button>
           <Button colorScheme="primary" onClick={onOpen}>
-            Approve
+            Proceed
           </Button>
           <ApproveBookingModal onClose={onClose} isOpen={isOpen} />
         </HStack>
