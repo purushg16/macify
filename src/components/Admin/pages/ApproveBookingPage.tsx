@@ -117,7 +117,11 @@ const ApproveBookingPage = () => {
           >
             Proceed
           </Button>
-          <ApproveBookingModal onClose={onClose} isOpen={isOpen} />
+          <ApproveBookingModal
+            onClose={onClose}
+            isOpen={isOpen}
+            groupId={booking._id}
+          />
         </HStack>
       </Box>
     </Flex>

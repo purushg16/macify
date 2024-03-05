@@ -13,23 +13,31 @@ import {
 } from "@chakra-ui/react";
 import Title from "../Title";
 import { MdPayment } from "react-icons/md";
-import { useState } from "react";
 import useApproveBookingStore from "../../../store/approveBooking";
+import { useApproveBooking } from "../../../hooks/useAdmin";
 
 interface Props {
   onClose: () => void;
   isOpen: boolean;
+  groupId: string;
 }
 
-const ApproveBookingModal = ({ onClose, isOpen }: Props) => {
-  const [isLoading, setLoading] = useState(false);
-
+const ApproveBookingModal = ({ onClose, isOpen, groupId }: Props) => {
   const paid = useApproveBookingStore((s) => s.paid);
   const setPaid = useApproveBookingStore((s) => s.setPaid);
   const balance = useApproveBookingStore((s) => s.balance);
   const setBalance = useApproveBookingStore((s) => s.setBalance);
 
-  const handleSubmit = () => setLoading(true);
+  const setGroupId = useApproveBookingStore((s) => s.setGroupId);
+  const postData = useApproveBookingStore((s) => s.bookingPostValue);
+  const triggerData = useApproveBookingStore((s) => s.setBookingPostValue);
+
+  const { mutate, isPending } = useApproveBooking();
+  const handleSubmit = () => {
+    setGroupId(groupId);
+    triggerData();
+    if (postData) mutate(postData);
+  };
 
   return (
     <>
@@ -83,7 +91,7 @@ const ApproveBookingModal = ({ onClose, isOpen }: Props) => {
             </Button>
             <Button
               colorScheme="primary"
-              isLoading={isLoading}
+              isLoading={isPending}
               isDisabled={!paid || !balance}
               onClick={handleSubmit}
             >
