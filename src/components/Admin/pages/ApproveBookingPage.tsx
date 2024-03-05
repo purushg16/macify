@@ -46,8 +46,8 @@ const ApproveBookingPage = () => {
       <Box>
         <Text mb={4}>Checking Time Details</Text>
         <CheckingRangeSelector
-          checkIn={booking.bookings[0].checkIn}
-          checkOut={booking.bookings[0].checkOut}
+          checkIn={new Date(booking.bookings[0].checkIn)}
+          checkOut={new Date(booking.bookings[0].checkOut)}
         />
       </Box>
 
