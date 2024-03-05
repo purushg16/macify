@@ -18,11 +18,17 @@ import bookingsToApprove from "../../data/bookingsToApprove";
 import { Link, useParams } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import ApproveBookingModal from "../elements/ApproveBooking/ApproveBookingModal";
+import useApproveBookingStore from "../../store/approveBooking";
+import { useEffect, useState } from "react";
 
 const ApproveBookingPage = () => {
   const singleBookingId = useParams().id;
   console.log(singleBookingId);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isDisabled, setDisabled] = useState(false);
+
+  const assignedRooms = useApproveBookingStore((s) => s.bookings);
   const booking = bookingsToApprove[0];
 
   const {
@@ -31,7 +37,33 @@ const ApproveBookingPage = () => {
     isError,
   } = useGetSingleProperty(booking.property._id);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    booking.bookings.map((b) => {
+      const bookingId = b._id;
+      const group = assignedRooms?.find((room) => room.bookingId === bookingId);
+
+      // if the group was not found.
+      if (!group) {
+        setDisabled(true);
+        return;
+      }
+
+      // if it's a hostel & room, bed not assigned
+      if (property?.propertyType === "hostel")
+        if (!group.roomId || !group.bedId) {
+          setDisabled(true);
+          return;
+        }
+
+      // if it's not a hostel and room not assigned
+      if (!group.roomId) {
+        setDisabled(true);
+        return;
+      }
+
+      setDisabled(false);
+    });
+  }, [assignedRooms, booking.bookings, property?.propertyType]);
 
   if (!property) return <Spinner />;
   return (
@@ -78,7 +110,11 @@ const ApproveBookingPage = () => {
 
         <HStack justify="center" mt={4}>
           <Button> Cancel </Button>
-          <Button colorScheme="primary" onClick={onOpen}>
+          <Button
+            colorScheme="primary"
+            onClick={onOpen}
+            isDisabled={isDisabled}
+          >
             Proceed
           </Button>
           <ApproveBookingModal onClose={onClose} isOpen={isOpen} />
