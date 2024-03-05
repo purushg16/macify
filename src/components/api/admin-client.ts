@@ -1,8 +1,8 @@
 import APIClient from "./api-client";
 import Manager from "../entities/manager";
-import BookingDetails from "../entities/booking";
 import ApproveBooking from "../entities/approveBooking";
 import EditBooking from "../entities/editBooking";
+import GroupBooking from "../entities/GroupBooking";
 
 interface RejectBookingInterface {
   groupId: string;
@@ -13,8 +13,8 @@ export interface AllBookingsInterface {
 }
 
 const createManager = new APIClient<Manager>("/manager/addManager");
-const bookingsToApprove = new APIClient<BookingDetails>(
-  "/booking/bookingToApprove"
+const bookingsToApprove = new APIClient<GroupBooking>(
+  "/booking/getAllGroupBooking"
 );
 const approveBooking = new APIClient<ApproveBooking>("/booking/approveBooking");
 const rejectBooking = new APIClient<RejectBookingInterface>(
