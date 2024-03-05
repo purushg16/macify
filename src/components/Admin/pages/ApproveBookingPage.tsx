@@ -6,6 +6,7 @@ import {
   Heading,
   Spinner,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import Title from "../elements/Title";
@@ -16,6 +17,7 @@ import { useGetSingleProperty } from "../../hooks/usePropertyServices";
 import bookingsToApprove from "../../data/bookingsToApprove";
 import { Link, useParams } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
+import ApproveBookingModal from "../elements/ApproveBooking/ApproveBookingModal";
 
 const ApproveBookingPage = () => {
   const singleBookingId = useParams().id;
@@ -28,6 +30,8 @@ const ApproveBookingPage = () => {
     isLoading,
     isError,
   } = useGetSingleProperty(booking.property._id);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   if (!property) return <Spinner />;
   return (
@@ -74,7 +78,10 @@ const ApproveBookingPage = () => {
 
         <HStack justify="center" mt={4}>
           <Button> Cancel </Button>
-          <Button colorScheme="primary"> Approve </Button>
+          <Button colorScheme="primary" onClick={onOpen}>
+            Approve
+          </Button>
+          <ApproveBookingModal onClose={onClose} isOpen={isOpen} />
         </HStack>
       </Box>
     </Flex>
