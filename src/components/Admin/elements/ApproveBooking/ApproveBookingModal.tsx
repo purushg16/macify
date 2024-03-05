@@ -14,6 +14,7 @@ import {
 import Title from "../Title";
 import { MdPayment } from "react-icons/md";
 import { useState } from "react";
+import useApproveBookingStore from "../../../store/approveBooking";
 
 interface Props {
   onClose: () => void;
@@ -22,8 +23,12 @@ interface Props {
 
 const ApproveBookingModal = ({ onClose, isOpen }: Props) => {
   const [isLoading, setLoading] = useState(false);
-  const [amount, setAmount] = useState(0);
-  const [balanceAmount, setBalanceAmount] = useState(0);
+
+  const paid = useApproveBookingStore((s) => s.paid);
+  const setPaid = useApproveBookingStore((s) => s.setPaid);
+  const balance = useApproveBookingStore((s) => s.balance);
+  const setBalance = useApproveBookingStore((s) => s.setBalance);
+
   const handleSubmit = () => setLoading(true);
 
   return (
@@ -49,9 +54,9 @@ const ApproveBookingModal = ({ onClose, isOpen }: Props) => {
               <Input
                 bg="gray.50"
                 placeholder="Amount Paid"
-                value={amount || ""}
+                value={paid || ""}
                 type="number"
-                onChange={(e) => setAmount(parseInt(e.target.value))}
+                onChange={(e) => setPaid(parseInt(e.target.value))}
               />
               <InputRightElement>
                 <Icon as={MdPayment} />
@@ -62,9 +67,9 @@ const ApproveBookingModal = ({ onClose, isOpen }: Props) => {
               <Input
                 bg="gray.50"
                 placeholder="Balance Amount"
-                value={balanceAmount || ""}
+                value={balance || ""}
                 type="number"
-                onChange={(e) => setBalanceAmount(parseInt(e.target.value))}
+                onChange={(e) => setBalance(parseInt(e.target.value))}
               />
               <InputRightElement>
                 <Icon as={MdPayment} />
@@ -79,7 +84,7 @@ const ApproveBookingModal = ({ onClose, isOpen }: Props) => {
             <Button
               colorScheme="primary"
               isLoading={isLoading}
-              isDisabled={!amount || !balanceAmount}
+              isDisabled={!paid || !balance}
               onClick={handleSubmit}
             >
               Approve
