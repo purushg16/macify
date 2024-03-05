@@ -23,7 +23,7 @@ const AppBar = () => {
       borderRadius={99}
       overflow="hidden"
       border="3px solid"
-      bg="primary.50"
+      bg="#F5F7F8"
       borderColor="rgba(255, 255, 255, 0.1)"
       backdropFilter="blur(2em)"
     >

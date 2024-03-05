@@ -57,50 +57,25 @@ const SmallButton = ({ active = false, icon, route }: Props) => {
   const navigate = useNavigate();
 
   return (
-    <Box borderRadius={99} onClick={() => navigate(route!)}>
+    <Box borderRadius="100%" onClick={() => navigate(route!)}>
       <IconButton
-        p={4}
+        p={6}
         aria-label="nav-btn"
         icon={
           <Icon
             as={icon}
-            boxSize={8}
+            boxSize={6}
             color={active ? "black" : "gray.300"}
             transition="all 0.7s"
           />
         }
-        boxSize={12}
+        boxSize={8}
         transition="all 0.7s"
         bg={active ? "white" : "none"}
         _hover={{ bg: "white" }}
         boxShadow={active ? "rgba(0, 0, 0, 0.24) 0px 3px 8px;" : "none"}
       />
     </Box>
-
-    // <Box
-    //   borderRadius={999}
-    //   gap={2}
-    //   display="flex"
-    //   alignItems="center"
-    //   justifyContent="center"
-    //   px={2}
-    //   transition="all 0.7s"
-    //   fontSize={{ base: "small", md: "md" }}
-    //   cursor="pointer"
-    //   onClick={() => navigate(route!)}
-    // >
-    //   <Icon
-    //     as={icon}
-    //     p={2}
-    //     borderRadius={999}
-    //     bg={active ? "primary.100" : "none"}
-    //     transform={active ? "scale(1.1)" : "scale(1)"}
-    //     transition="all 0.7s"
-    //     color={active ? "black" : "gray.400"}
-    //     boxSize={{ base: 12, md: 14 }}
-    //     boxShadow={active ? "rgb(38, 57, 77) 0px 20px 30px -10px;" : "none"}
-    //   />
-    // </Box>
   );
 };
 
