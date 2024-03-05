@@ -48,7 +48,12 @@ export default class APIClient<T> {
 
   getProperty = (config: AxiosRequestConfig) => {
     return axiosInstance
-      .get<SinglePropertyResponse<T>>(this.endpoint, config)
+      .get<SinglePropertyResponse<T>>(this.endpoint, {
+        ...config,
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
       .then((res) => res.data.data)
       .catch((error) => {
         console.error("Get Request error:", error);
