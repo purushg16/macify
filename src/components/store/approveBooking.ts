@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import ApproveBooking from "../entities/approveBooking";
 
 export interface ApproveBookingProperty {
   bookingId: string | undefined;
@@ -14,6 +15,7 @@ interface ApproveBookingProperties {
   groupId: string | undefined;
   paid: number | undefined;
   balance: number | undefined;
+  bookingPostValue: ApproveBooking | undefined;
 }
 
 interface ApproveBookingStoreActions {
@@ -24,6 +26,7 @@ interface ApproveBookingStoreActions {
   setGroupId: (groupId: string | undefined) => void;
   setPaid: (paid: number | undefined) => void;
   setBalance: (balance: number | undefined) => void;
+  setBookingPostValue: () => void;
 }
 
 type ApproveBookingStore = ApproveBookingProperties &
@@ -64,7 +67,6 @@ const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
   groupId: undefined,
   paid: undefined,
   balance: undefined,
-
   setPropertyId: (propertyId) => set({ propertyId }),
   setBookings: (booking) =>
     set((store) => ({
@@ -75,6 +77,20 @@ const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
   setGroupId: (groupId) => set({ groupId }),
   setPaid: (paid) => set({ paid }),
   setBalance: (balance) => set({ balance }),
+
+  bookingPostValue: undefined,
+  setBookingPostValue: () =>
+    set((store) => ({
+      bookingPostValue: {
+        propertyId: store.propertyId!,
+        bookings: store.bookings!,
+        checkIn: store.checkIn!,
+        checkOut: store.checkOut!,
+        groupId: store.groupId!,
+        paid: store.paid!,
+        balance: store.balance!,
+      },
+    })),
 }));
 
 export default useApproveBookingStore;
