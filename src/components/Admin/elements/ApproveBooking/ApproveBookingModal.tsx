@@ -20,21 +20,30 @@ interface Props {
   onClose: () => void;
   isOpen: boolean;
   groupId: string;
+  propertyId: string;
 }
 
-const ApproveBookingModal = ({ onClose, isOpen, groupId }: Props) => {
+const ApproveBookingModal = ({
+  onClose,
+  isOpen,
+  groupId,
+  propertyId,
+}: Props) => {
   const paid = useApproveBookingStore((s) => s.paid);
   const setPaid = useApproveBookingStore((s) => s.setPaid);
   const balance = useApproveBookingStore((s) => s.balance);
   const setBalance = useApproveBookingStore((s) => s.setBalance);
 
   const setGroupId = useApproveBookingStore((s) => s.setGroupId);
+  const setPropertyId = useApproveBookingStore((s) => s.setPropertyId);
+
   const postData = useApproveBookingStore((s) => s.bookingPostValue);
   const triggerData = useApproveBookingStore((s) => s.setBookingPostValue);
 
   const { mutate, isPending } = useApproveBooking();
   const handleSubmit = () => {
     setGroupId(groupId);
+    setPropertyId(propertyId);
     triggerData();
     if (postData) mutate(postData);
   };

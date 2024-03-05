@@ -12,7 +12,6 @@ import Property from "../../../entities/property";
 
 interface Props {
   property: Property;
-  propertyId: string;
   bookingId: string;
   isLoading: boolean;
   isError: boolean;
@@ -20,7 +19,6 @@ interface Props {
 
 const RoomAssignBlock = ({
   property,
-  propertyId,
   bookingId,
   isLoading,
   isError,
@@ -40,7 +38,6 @@ const RoomAssignBlock = ({
         rightIcon={<BsChevronDown />}
         size="sm"
         colorScheme="primary"
-        id={propertyId}
         isLoading={isLoading}
         isDisabled={isError}
       >

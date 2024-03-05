@@ -89,7 +89,6 @@ const ApproveBookingPage = () => {
           <HStack mb={2}>
             <RoomAssignBlock
               property={property}
-              propertyId={booking.property._id}
               bookingId={b._id}
               isLoading={isLoading}
               isError={isError}
@@ -121,6 +120,7 @@ const ApproveBookingPage = () => {
             onClose={onClose}
             isOpen={isOpen}
             groupId={booking._id}
+            propertyId={booking.property._id}
           />
         </HStack>
       </Box>
