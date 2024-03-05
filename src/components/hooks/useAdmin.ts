@@ -54,7 +54,7 @@ const useApproveBooking = () => {
 
     onSuccess: () =>
       toast({
-        title: "Property booked successfully",
+        title: "Booking Approved Successfuly",
         status: "success",
         position: "top",
         duration: 3000,
