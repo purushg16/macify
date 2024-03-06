@@ -21,6 +21,7 @@ import GuestGrid from "../elements/ApproveBooking/GuestGrid";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import Title from "../elements/Title";
 import useApproveBookingStore from "../../store/approveBookingStore";
+import RejectBookingButton from "../elements/ApproveBooking/RejectBookingButton";
 
 const ApproveBookingPage = () => {
   const singleBookingId = useParams().id;
@@ -119,7 +120,7 @@ const ApproveBookingPage = () => {
         />
 
         <HStack justify="center" mt={4}>
-          <Button> Cancel </Button>
+          <RejectBookingButton groupId={booking._id} />
           <Button
             colorScheme="primary"
             onClick={onOpen}
