@@ -20,19 +20,18 @@ interface ApproveBookingStore {
   singlBooking: ApproveBookingProperties[] | undefined;
   setSingleBooking: (
     propertyId: string,
-    field: keyof ApproveBookingProperties,
-    value: string | Date | number | ApproveBookingProperty
+    updatedFields: Partial<ApproveBookingProperties>
   ) => void;
 }
 
 const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
   singlBooking: undefined,
 
-  setSingleBooking: (propertyId, field, value) => {
+  setSingleBooking: (propertyId, updatedFields) => {
     set((store) => ({
       singlBooking: store.singlBooking?.map((booking) =>
         booking.propertyId === propertyId
-          ? { ...booking, [field]: value }
+          ? { ...booking, updatedFields }
           : booking
       ),
     }));
