@@ -88,6 +88,7 @@ const useGetSingleBookingToApprove = (groupId: string) => {
 
 const useApproveBooking = (groupId: string) => {
   const toast = useToast();
+  const navigate = useNavigate();
 
   const store = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === groupId
@@ -116,6 +117,7 @@ const useApproveBooking = (groupId: string) => {
         duration: 3000,
       });
       remove(postValue.groupId);
+      navigate("/admin/notifications");
     },
 
     onError: (err: AxiosError<APIError>) =>
@@ -144,8 +146,8 @@ const useRejectBooking = () => {
         duration: 3000,
       });
 
-      navigate("/admin/notifications");
       remove(variables.groupId);
+      navigate("/admin/notifications");
     },
 
     onError: (err: AxiosError<APIError>) =>
