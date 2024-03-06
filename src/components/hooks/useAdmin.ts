@@ -1,5 +1,5 @@
 import { useToast } from "@chakra-ui/react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import {
   AllBookingsInterface,
@@ -89,6 +89,7 @@ const useGetSingleBookingToApprove = (groupId: string) => {
 const useApproveBooking = (groupId: string) => {
   const toast = useToast();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const store = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === groupId
@@ -117,6 +118,9 @@ const useApproveBooking = (groupId: string) => {
         duration: 3000,
       });
       remove(groupId);
+      queryClient.invalidateQueries({
+        queryKey: ["booking", "bookingToApprove"],
+      });
       navigate("/admin/notifications");
     },
 
@@ -133,8 +137,9 @@ const useApproveBooking = (groupId: string) => {
 const useRejectBooking = () => {
   const toast = useToast();
   const navigate = useNavigate();
-  const remove = useApproveBookingStore((s) => s.removeBooking);
+  const queryClient = useQueryClient();
 
+  const remove = useApproveBookingStore((s) => s.removeBooking);
   return useMutation({
     mutationFn: rejectBooking.postRequest,
 
@@ -147,6 +152,9 @@ const useRejectBooking = () => {
       });
 
       remove(variables.groupId);
+      queryClient.invalidateQueries({
+        queryKey: ["booking", "bookingToApprove"],
+      });
       navigate("/admin/notifications");
     },
 
