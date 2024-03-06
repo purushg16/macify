@@ -19,7 +19,7 @@ interface ApproveBookingProperties {
 interface ApproveBookingStore {
   singlBooking: ApproveBookingProperties[] | undefined;
   setSingleBooking: (
-    propertyId: string,
+    groupId: string,
     updatedFields: Partial<ApproveBookingProperties>
   ) => void;
 }
@@ -27,12 +27,10 @@ interface ApproveBookingStore {
 const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
   singlBooking: undefined,
 
-  setSingleBooking: (propertyId, updatedFields) => {
+  setSingleBooking: (groupId, updatedFields) => {
     set((store) => ({
       singlBooking: store.singlBooking?.map((booking) =>
-        booking.propertyId === propertyId
-          ? { ...booking, updatedFields }
-          : booking
+        booking.groupId === groupId ? { ...booking, updatedFields } : booking
       ),
     }));
   },

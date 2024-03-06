@@ -2,16 +2,17 @@ import { Menu, MenuButton, MenuList, IconButton } from "@chakra-ui/react";
 import { BsPencilFill } from "react-icons/bs";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
-import useApproveBookingRoomStore from "../../../store/approveBooking";
+import useApproveBookingStore from "../../../store/approveBookingStore";
 
 interface Props {
   startDate: Date;
   endDate: Date;
+  groupId: string;
 }
 
-const RangePickerMenu = ({ startDate, endDate }: Props) => {
-  const setCheckIn = useApproveBookingRoomStore((s) => s.setCheckIn);
-  const setCheckOut = useApproveBookingRoomStore((s) => s.setCheckOut);
+const RangePickerMenu = ({ startDate, endDate, groupId }: Props) => {
+  const set = useApproveBookingStore((s) => s.setSingleBooking);
+
   const [state, setState] = useState([
     {
       startDate: startDate,
@@ -40,8 +41,8 @@ const RangePickerMenu = ({ startDate, endDate }: Props) => {
                 key: "selection",
               },
             ]);
-            setCheckIn(item.selection.startDate);
-            setCheckOut(item.selection.endDate);
+            set(groupId, { checkIn: item.selection.startDate });
+            set(groupId, { checkOut: item.selection.endDate });
           }}
           moveRangeOnFirstSelection={false}
           ranges={state}

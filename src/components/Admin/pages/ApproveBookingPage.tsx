@@ -87,6 +87,7 @@ const ApproveBookingPage = () => {
         <CheckingRangeSelector
           checkIn={new Date(booking.bookings[0].checkIn)}
           checkOut={new Date(booking.bookings[0].checkOut)}
+          groupId={booking._id}
         />
       </Box>
 
