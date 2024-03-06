@@ -16,6 +16,7 @@ import ms from "ms";
 import useApproveBookingStore, {
   ApproveBookingProperties,
 } from "../store/approveBookingStore";
+import ApproveBooking from "../entities/approveBooking";
 
 const useAddManager = () => {
   const toast = useToast();
@@ -63,12 +64,14 @@ const useGetSingleBookingToApprove = (groupId: string) => {
           },
         })
         .then((res) => {
+          const booking = res.data[0];
+
           const singleBooking = {
             groupId: groupId,
-            propertyId: undefined,
+            propertyId: booking.property._id,
             bookings: undefined,
-            checkIn: undefined,
-            checkOut: undefined,
+            checkIn: new Date(booking.bookings[0].checkIn),
+            checkOut: new Date(booking.bookings[0].checkOut),
             paid: undefined,
             balance: undefined,
           } as ApproveBookingProperties;
@@ -82,11 +85,25 @@ const useGetSingleBookingToApprove = (groupId: string) => {
   });
 };
 
-const useApproveBooking = () => {
+const useApproveBooking = (groupId: string) => {
   const toast = useToast();
 
+  const store = useApproveBookingStore((s) => s.singlBooking)?.find(
+    (b) => b.groupId === groupId
+  );
+  console.log(store);
+  const postValue = {
+    propertyId: store?.propertyId,
+    groupId: store?.groupId,
+    bookings: store?.bookings,
+    checkIn: store?.checkIn,
+    checkOut: store?.checkOut,
+    paid: store?.paid,
+    balance: store?.balance,
+  } as ApproveBooking;
+
   return useMutation({
-    mutationFn: approveBooking.postRequest,
+    mutationFn: () => approveBooking.postRequest(postValue),
 
     onSuccess: () =>
       toast({

@@ -23,17 +23,16 @@ interface Props {
 }
 
 const ApproveBookingModal = ({ onClose, isOpen, groupId }: Props) => {
-  const postValue = useApproveBookingStore((s) => s.singlBooking)?.find(
+  const singleBooking = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === groupId
   );
-
-  const paid = postValue?.paid;
-  const balance = postValue?.balance;
+  const paid = singleBooking?.paid;
+  const balance = singleBooking?.balance;
   const set = useApproveBookingStore((s) => s.setSingleBooking);
 
-  const { mutate, isPending } = useApproveBooking();
+  const { mutate, isPending } = useApproveBooking(groupId);
   const handleSubmit = () => {
-    if (postValue) mutate(postValue);
+    if (singleBooking) mutate();
   };
 
   return (
