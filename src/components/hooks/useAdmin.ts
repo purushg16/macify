@@ -49,7 +49,7 @@ const useGetBookingsToApprove = () =>
 
 const useGetSingleBookingToApprove = (groupId: string) =>
   useQuery({
-    queryKey: ["booking", "getGroupBooking"],
+    queryKey: ["booking", "getGroupBooking", groupId],
     queryFn: () =>
       getSinglebookingToApprove
         .getRequest({
