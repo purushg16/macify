@@ -41,8 +41,8 @@ const RangePickerMenu = ({ startDate, endDate, groupId }: Props) => {
                 key: "selection",
               },
             ]);
-            set(groupId, { checkIn: item.selection.startDate });
-            set(groupId, { checkOut: item.selection.endDate });
+            set(groupId, "checkIn", item.selection.startDate!);
+            set(groupId, "checkOut", item.selection.endDate!);
           }}
           moveRangeOnFirstSelection={false}
           ranges={state}

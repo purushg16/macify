@@ -13,6 +13,9 @@ import {
 } from "../api/admin-client";
 import { APIError } from "../entities/Error";
 import ms from "ms";
+import useApproveBookingStore, {
+  ApproveBookingProperties,
+} from "../store/approveBookingStore";
 
 const useAddManager = () => {
   const toast = useToast();
@@ -47,8 +50,10 @@ const useGetBookingsToApprove = () =>
     staleTime: ms("5m"),
   });
 
-const useGetSingleBookingToApprove = (groupId: string) =>
-  useQuery({
+const useGetSingleBookingToApprove = (groupId: string) => {
+  const store = useApproveBookingStore((s) => s.singlBooking);
+  const append = useApproveBookingStore((s) => s.appendBookings);
+  return useQuery({
     queryKey: ["booking", "getGroupBooking", groupId],
     queryFn: () =>
       getSinglebookingToApprove
@@ -57,11 +62,25 @@ const useGetSingleBookingToApprove = (groupId: string) =>
             groupId: groupId,
           },
         })
-        .then((res) => res.data[0]),
+        .then((res) => {
+          const singleBooking = {
+            groupId: groupId,
+            propertyId: undefined,
+            bookings: undefined,
+            checkIn: undefined,
+            checkOut: undefined,
+            paid: undefined,
+            balance: undefined,
+          } as ApproveBookingProperties;
+          if (!store || store?.findIndex((s) => s.groupId === groupId) === -1)
+            append(singleBooking);
+          return res.data[0];
+        }),
     retry: 2,
     refetchOnWindowFocus: false,
     staleTime: ms("5m"),
   });
+};
 
 const useApproveBooking = () => {
   const toast = useToast();

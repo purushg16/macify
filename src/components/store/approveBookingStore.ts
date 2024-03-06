@@ -6,7 +6,7 @@ export interface ApproveBookingProperty {
   bedId?: string | undefined;
 }
 
-interface ApproveBookingProperties {
+export interface ApproveBookingProperties {
   propertyId: string | undefined;
   bookings: ApproveBookingProperty[] | undefined;
   checkIn: Date | undefined;
@@ -20,17 +20,27 @@ interface ApproveBookingStore {
   singlBooking: ApproveBookingProperties[] | undefined;
   setSingleBooking: (
     groupId: string,
-    updatedFields: Partial<ApproveBookingProperties>
+    field: keyof ApproveBookingProperties,
+    value: string | Date | number | ApproveBookingProperty[]
   ) => void;
+  appendBookings: (booking: ApproveBookingProperties) => void;
 }
 
 const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
   singlBooking: undefined,
 
-  setSingleBooking: (groupId, updatedFields) => {
+  appendBookings: (booking) => {
+    set((store) => ({
+      singlBooking: !store.singlBooking
+        ? [booking]
+        : [...store.singlBooking, booking],
+    }));
+  },
+
+  setSingleBooking: (groupId, field, value) => {
     set((store) => ({
       singlBooking: store.singlBooking?.map((booking) =>
-        booking.groupId === groupId ? { ...booking, updatedFields } : booking
+        booking.groupId === groupId ? { ...booking, [field]: value } : booking
       ),
     }));
   },

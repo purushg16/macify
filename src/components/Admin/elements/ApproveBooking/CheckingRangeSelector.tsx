@@ -18,8 +18,6 @@ const CheckingRangeSelector = ({ checkIn, checkOut, groupId }: Props) => {
     (b) => b.groupId === groupId!
   )?.checkOut;
 
-  console.log(groupId);
-
   return (
     <Box p={4} bg="#f6f6f6" borderRadius={10}>
       <HStack gap={4} alignItems="center">
@@ -34,8 +32,8 @@ const CheckingRangeSelector = ({ checkIn, checkOut, groupId }: Props) => {
           </Text>
         </HStack>
         <RangePickerMenu
-          startDate={checkIn}
-          endDate={checkOut}
+          startDate={storeCheckIn! || checkIn}
+          endDate={storeCheckOut! || checkOut}
           groupId={groupId}
         />
       </HStack>
