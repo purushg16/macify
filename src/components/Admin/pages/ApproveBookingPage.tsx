@@ -36,35 +36,38 @@ const ApproveBookingPage = () => {
     data: property,
     isLoading,
     isError,
-  } = useGetSingleProperty(propertyId!);
+  } = useGetSingleProperty(propertyId!, !!propertyId);
 
   useEffect(() => {
-    booking?.bookings.map((b) => {
-      const bookingId = b._id;
-      const group = assignedRooms?.find((room) => room.bookingId === bookingId);
+    if (booking)
+      booking?.bookings.map((b) => {
+        const bookingId = b._id;
+        const group = assignedRooms?.find(
+          (room) => room.bookingId === bookingId
+        );
 
-      // if the group was not found.
-      if (!group) {
-        setDisabled(true);
-        return;
-      }
-
-      // if it's a hostel & room, bed not assigned
-      if (property?.propertyType === "hostel")
-        if (!group.roomId || !group.bedId) {
+        // if the group was not found.
+        if (!group) {
           setDisabled(true);
           return;
         }
 
-      // if it's not a hostel and room not assigned
-      if (!group.roomId) {
-        setDisabled(true);
-        return;
-      }
+        // if it's a hostel & room, bed not assigned
+        if (property?.propertyType === "hostel")
+          if (!group.roomId || !group.bedId) {
+            setDisabled(true);
+            return;
+          }
 
-      setDisabled(false);
-    });
-  }, [assignedRooms, booking?.bookings, property?.propertyType]);
+        // if it's not a hostel and room not assigned
+        if (!group.roomId) {
+          setDisabled(true);
+          return;
+        }
+
+        setDisabled(false);
+      });
+  }, [assignedRooms, booking, property?.propertyType]);
 
   if (!property || !booking) return <Spinner />;
   return (

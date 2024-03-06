@@ -52,12 +52,12 @@ const useGetSingleBookingToApprove = (groupId: string) =>
     queryKey: ["booking", "getGroupBooking"],
     queryFn: () =>
       getSinglebookingToApprove
-        .getSingleItem({
+        .getRequest({
           params: {
             groupId: groupId,
           },
         })
-        .then((res) => res),
+        .then((res) => res.data[0]),
     retry: 2,
     refetchOnWindowFocus: false,
     staleTime: ms("5m"),

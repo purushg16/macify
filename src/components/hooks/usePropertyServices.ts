@@ -72,7 +72,7 @@ const useGetAllProperties = () => {
   });
 };
 
-const useGetSingleProperty = (propertyId: string) => {
+const useGetSingleProperty = (propertyId: string, enabled: boolean) => {
   return useQuery({
     queryKey: ["property", "getProperty"],
     queryFn: () =>
@@ -84,6 +84,7 @@ const useGetSingleProperty = (propertyId: string) => {
         })
         .then((res) => res),
 
+    enabled: enabled,
     retry: 2,
     refetchOnWindowFocus: false,
     staleTime: ms("1hr"),
