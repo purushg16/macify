@@ -4,6 +4,7 @@ import {
   Flex,
   HStack,
   Heading,
+  IconButton,
   Spinner,
   Text,
   useDisclosure,
@@ -72,14 +73,16 @@ const ApproveBookingPage = () => {
   if (!property || !booking) return <Spinner />;
   return (
     <Flex flexDir="column" gap={8}>
-      <Box>
+      <Flex gap={2} alignItems="center">
         <Link to="/admin/notifications">
-          <Button leftIcon={<MdArrowBack />}> All Bookings </Button>
+          <IconButton aria-label="back-btn" icon={<MdArrowBack />} size="sm" />
         </Link>
-      </Box>
-      <Heading fontSize="xl"> Details </Heading>
+        <Heading fontSize="xl" textTransform="capitalize">
+          {property.propertyName}
+        </Heading>
+      </Flex>
 
-      <Box>
+      <Box w="max-content">
         <Text mb={4}>Checking Time Details</Text>
         <CheckingRangeSelector
           checkIn={new Date(booking.bookings[0].checkIn)}

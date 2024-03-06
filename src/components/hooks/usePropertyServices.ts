@@ -74,7 +74,7 @@ const useGetAllProperties = () => {
 
 const useGetSingleProperty = (propertyId: string, enabled: boolean) => {
   return useQuery({
-    queryKey: ["property", "getProperty"],
+    queryKey: ["property", "getProperty", propertyId],
     queryFn: () =>
       getSingleProperty
         .getSingleItem({
