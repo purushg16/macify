@@ -1,13 +1,20 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { TimelineBookings } from "../../../api/admin-client";
 import ScheduleBlock from "./ScheduleBlock";
 
 interface SchedularProps {
   dates: Date[];
   propertyName: string;
   propertyNumber?: string;
+  scheduleData: TimelineBookings;
 }
 
-const Schedular = ({ propertyName, propertyNumber, dates }: SchedularProps) => {
+const Schedular = ({
+  propertyName,
+  propertyNumber,
+  dates,
+  scheduleData,
+}: SchedularProps) => {
   return (
     <Box
       borderTop="1px solid"
@@ -31,7 +38,11 @@ const Schedular = ({ propertyName, propertyNumber, dates }: SchedularProps) => {
 
       <Flex>
         {dates.map((date, i) => (
-          <ScheduleBlock key={i} date={date.toDateString()} />
+          <ScheduleBlock
+            key={i}
+            date={date.toISOString().substring(0, 10)}
+            scheduleData={scheduleData}
+          />
         ))}
       </Flex>
 

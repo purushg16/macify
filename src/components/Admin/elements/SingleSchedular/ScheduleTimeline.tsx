@@ -1,11 +1,11 @@
 import { Box, HStack, Icon, Show, Text } from "@chakra-ui/react";
 import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
-import schedule from "../../../entities/schedule";
 import { durationCalculator } from "../../../functions/durationCalculator";
+import { TimelineBookingDetails } from "../../../api/admin-client";
 
 interface ScheduleTimelineProps {
-  data: schedule;
+  data: TimelineBookingDetails;
   current?: boolean;
   upcoming?: boolean;
 }
@@ -15,9 +15,8 @@ const ScheduleTimeline = ({
   current = false,
   upcoming = false,
 }: ScheduleTimelineProps) => {
-  const desc = data.title;
-  const startDate = data.start;
-  const endDate = data.end;
+  const startDate = new Date(data.checkIn);
+  const endDate = new Date(data.checkOut);
 
   const scheduleBlockWidth = durationCalculator(
     startDate.getTime(),
@@ -37,9 +36,7 @@ const ScheduleTimeline = ({
       }} // 20 is perfect centre day
       borderRadius={10}
       zIndex={10}
-      onClick={() =>
-        alert(`Title: ${desc}\n Start: ${startDate}\n End: ${endDate}`)
-      }
+      onClick={() => alert(`Start: ${startDate}\n End: ${endDate}`)}
       w={{
         base: 31 * scheduleBlockWidth,
         md: 56 * scheduleBlockWidth,

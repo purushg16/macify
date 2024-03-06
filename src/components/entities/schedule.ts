@@ -1,6 +1,6 @@
 export default interface schedule {
   id: number;
-  start: Date;
-  end: Date;
+  checkIn: Date;
+  checkOut: Date;
   title: string;
 }

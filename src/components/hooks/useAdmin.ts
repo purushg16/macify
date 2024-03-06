@@ -196,13 +196,16 @@ const useGetAllBooking = (ids: AllBookingsInterface) => {
   return useQuery({
     queryKey: [],
     queryFn: () =>
-      getAllBookings.getRequest({
-        params: {
-          ids: ids,
-        },
-      }),
+      getAllBookings
+        .getSingleItem({
+          params: {
+            ids: ids.ids,
+          },
+        })
+        .then((res) => res),
     retry: 2,
     refetchOnWindowFocus: false,
+    staleTime: ms("24hr"),
   });
 };
 
