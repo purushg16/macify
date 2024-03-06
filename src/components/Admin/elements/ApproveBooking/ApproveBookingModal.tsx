@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import Title from "../Title";
 import { MdPayment } from "react-icons/md";
-import useApproveBookingStore from "../../../store/approveBooking";
+import useApproveBookingRoomStore from "../../../store/approveBooking";
 import { useApproveBooking } from "../../../hooks/useAdmin";
 
 interface Props {
@@ -29,16 +29,16 @@ const ApproveBookingModal = ({
   groupId,
   propertyId,
 }: Props) => {
-  const paid = useApproveBookingStore((s) => s.paid);
-  const setPaid = useApproveBookingStore((s) => s.setPaid);
-  const balance = useApproveBookingStore((s) => s.balance);
-  const setBalance = useApproveBookingStore((s) => s.setBalance);
+  const paid = useApproveBookingRoomStore((s) => s.paid);
+  const setPaid = useApproveBookingRoomStore((s) => s.setPaid);
+  const balance = useApproveBookingRoomStore((s) => s.balance);
+  const setBalance = useApproveBookingRoomStore((s) => s.setBalance);
 
-  const setGroupId = useApproveBookingStore((s) => s.setGroupId);
-  const setPropertyId = useApproveBookingStore((s) => s.setPropertyId);
+  const setGroupId = useApproveBookingRoomStore((s) => s.setGroupId);
+  const setPropertyId = useApproveBookingRoomStore((s) => s.setPropertyId);
 
-  const postData = useApproveBookingStore((s) => s.bookingPostValue);
-  const triggerData = useApproveBookingStore((s) => s.setBookingPostValue);
+  const postData = useApproveBookingRoomStore((s) => s.bookingPostValue);
+  const triggerData = useApproveBookingRoomStore((s) => s.setBookingPostValue);
 
   const { mutate, isPending } = useApproveBooking();
   const handleSubmit = () => {

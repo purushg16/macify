@@ -7,7 +7,7 @@ import {
   MenuList,
   Spinner,
 } from "@chakra-ui/react";
-import useApproveBookingStore from "../../../store/approveBooking";
+import useApproveBookingRoomStore from "../../../store/approveBooking";
 import Property from "../../../entities/property";
 
 interface Props {
@@ -23,8 +23,8 @@ const RoomAssignBlock = ({
   isLoading,
   isError,
 }: Props) => {
-  const assignedRooms = useApproveBookingStore((s) => s.bookings);
-  const assignRoom = useApproveBookingStore((s) => s.setBookings);
+  const assignedRooms = useApproveBookingRoomStore((s) => s.bookings);
+  const assignRoom = useApproveBookingRoomStore((s) => s.setBookings);
 
   const currentRoom = assignedRooms?.find(
     (r) => r.bookingId === bookingId

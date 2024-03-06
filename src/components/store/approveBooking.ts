@@ -58,7 +58,7 @@ const updateOrAddBooking = (
   return [...existingBookings, newBooking];
 };
 
-const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
+const useApproveBookingRoomStore = create<ApproveBookingStore>((set) => ({
   propertyId: undefined,
   bookings: undefined,
   currentRoomId: undefined,
@@ -93,4 +93,4 @@ const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
     })),
 }));
 
-export default useApproveBookingStore;
+export default useApproveBookingRoomStore;

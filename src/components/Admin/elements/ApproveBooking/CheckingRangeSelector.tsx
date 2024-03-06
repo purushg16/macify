@@ -2,7 +2,7 @@ import { Box, HStack, Icon, Text } from "@chakra-ui/react";
 import { FaCalendar } from "react-icons/fa";
 import RangePickerMenu from "./RangePickerMenu";
 import DateFormatter from "../../../functions/dateFormatter";
-import useApproveBookingStore from "../../../store/approveBooking";
+import useApproveBookingRoomStore from "../../../store/approveBooking";
 
 interface Props {
   checkIn: Date;
@@ -10,10 +10,10 @@ interface Props {
 }
 
 const CheckingRangeSelector = ({ checkIn, checkOut }: Props) => {
-  const storeCheckIn = useApproveBookingStore((s) => s.checkIn);
-  const storeCheckOut = useApproveBookingStore((s) => s.checkOut);
-  const setCheckIn = useApproveBookingStore((s) => s.setCheckIn);
-  const setCheckOut = useApproveBookingStore((s) => s.setCheckOut);
+  const storeCheckIn = useApproveBookingRoomStore((s) => s.checkIn);
+  const storeCheckOut = useApproveBookingRoomStore((s) => s.checkOut);
+  const setCheckIn = useApproveBookingRoomStore((s) => s.setCheckIn);
+  const setCheckOut = useApproveBookingRoomStore((s) => s.setCheckOut);
 
   if (storeCheckIn === undefined || storeCheckOut === undefined) {
     setCheckIn(checkIn);
