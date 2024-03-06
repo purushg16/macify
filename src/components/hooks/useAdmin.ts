@@ -17,6 +17,7 @@ import useApproveBookingStore, {
   ApproveBookingProperties,
 } from "../store/approveBookingStore";
 import ApproveBooking from "../entities/approveBooking";
+import { useNavigate } from "react-router-dom";
 
 const useAddManager = () => {
   const toast = useToast();
@@ -129,17 +130,23 @@ const useApproveBooking = (groupId: string) => {
 
 const useRejectBooking = () => {
   const toast = useToast();
+  const navigate = useNavigate();
+  const remove = useApproveBookingStore((s) => s.removeBooking);
 
   return useMutation({
     mutationFn: rejectBooking.postRequest,
 
-    onSuccess: () =>
+    onSuccess: (_data, variables) => {
       toast({
         title: "Booking rejected successfully",
         status: "success",
         position: "top",
         duration: 3000,
-      }),
+      });
+
+      navigate("/admin/notifications");
+      remove(variables.groupId);
+    },
 
     onError: (err: AxiosError<APIError>) =>
       toast({

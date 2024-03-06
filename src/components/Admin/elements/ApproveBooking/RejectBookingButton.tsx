@@ -39,7 +39,7 @@ const RejectBookingButton = ({ groupId }: { groupId: string }) => {
             />
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <Button onClick={onClose}>No</Button>
+            <Button onClick={onClose}> Cancel </Button>
             <Button
               colorScheme="red"
               ml={3}
