@@ -116,7 +116,7 @@ const useApproveBooking = (groupId: string) => {
         position: "top",
         duration: 3000,
       });
-      remove(postValue.groupId);
+      remove(groupId);
       navigate("/admin/notifications");
     },
 

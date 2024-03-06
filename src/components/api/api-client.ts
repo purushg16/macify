@@ -62,7 +62,13 @@ export default class APIClient<T> {
   };
 
   postRequest = (data: T) =>
-    axiosInstance.post(this.endpoint, data).then((res) => {
-      return res;
-    });
+    axiosInstance
+      .post(this.endpoint, data, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        return res;
+      });
 }
