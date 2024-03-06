@@ -18,7 +18,7 @@ const AdminNotificationsPage = () => {
         <Spinner />
       ) : (
         <Box mt={4}>
-          <SimpleGrid columns={1} spacing={8} p={2}>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} p={2}>
             {data?.data.map((booking) => (
               <NotificationCard key={booking._id} booking={booking} />
             ))}
