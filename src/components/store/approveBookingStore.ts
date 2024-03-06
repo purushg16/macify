@@ -7,13 +7,13 @@ export interface ApproveBookingProperty {
 }
 
 export interface ApproveBookingProperties {
-  propertyId: string | undefined;
-  bookings: ApproveBookingProperty[] | undefined;
-  checkIn: Date | undefined;
-  checkOut: Date | undefined;
-  groupId: string | undefined;
-  paid: number | undefined;
-  balance: number | undefined;
+  propertyId: string;
+  bookings: ApproveBookingProperty[];
+  checkIn: Date;
+  checkOut: Date;
+  groupId: string;
+  paid: number;
+  balance: number;
 }
 
 const updateOrAddBooking = (

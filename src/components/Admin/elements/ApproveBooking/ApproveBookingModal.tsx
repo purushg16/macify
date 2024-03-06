@@ -13,39 +13,27 @@ import {
 } from "@chakra-ui/react";
 import Title from "../Title";
 import { MdPayment } from "react-icons/md";
-import useApproveBookingRoomStore from "../../../store/approveBooking";
 import { useApproveBooking } from "../../../hooks/useAdmin";
+import useApproveBookingStore from "../../../store/approveBookingStore";
 
 interface Props {
   onClose: () => void;
   isOpen: boolean;
   groupId: string;
-  propertyId: string;
 }
 
-const ApproveBookingModal = ({
-  onClose,
-  isOpen,
-  groupId,
-  propertyId,
-}: Props) => {
-  const paid = useApproveBookingRoomStore((s) => s.paid);
-  const setPaid = useApproveBookingRoomStore((s) => s.setPaid);
-  const balance = useApproveBookingRoomStore((s) => s.balance);
-  const setBalance = useApproveBookingRoomStore((s) => s.setBalance);
+const ApproveBookingModal = ({ onClose, isOpen, groupId }: Props) => {
+  const postValue = useApproveBookingStore((s) => s.singlBooking)?.find(
+    (b) => b.groupId === groupId
+  );
 
-  const setGroupId = useApproveBookingRoomStore((s) => s.setGroupId);
-  const setPropertyId = useApproveBookingRoomStore((s) => s.setPropertyId);
-
-  const postData = useApproveBookingRoomStore((s) => s.bookingPostValue);
-  const triggerData = useApproveBookingRoomStore((s) => s.setBookingPostValue);
+  const paid = postValue?.paid;
+  const balance = postValue?.balance;
+  const set = useApproveBookingStore((s) => s.setSingleBooking);
 
   const { mutate, isPending } = useApproveBooking();
   const handleSubmit = () => {
-    setGroupId(groupId);
-    setPropertyId(propertyId);
-    triggerData();
-    if (postData) mutate(postData);
+    if (postValue) mutate(postValue);
   };
 
   return (
@@ -73,7 +61,7 @@ const ApproveBookingModal = ({
                 placeholder="Amount Paid"
                 value={paid || ""}
                 type="number"
-                onChange={(e) => setPaid(parseInt(e.target.value))}
+                onChange={(e) => set(groupId, "paid", parseInt(e.target.value))}
               />
               <InputRightElement>
                 <Icon as={MdPayment} />
@@ -86,7 +74,9 @@ const ApproveBookingModal = ({
                 placeholder="Balance Amount"
                 value={balance || ""}
                 type="number"
-                onChange={(e) => setBalance(parseInt(e.target.value))}
+                onChange={(e) =>
+                  set(groupId, "balance", parseInt(e.target.value))
+                }
               />
               <InputRightElement>
                 <Icon as={MdPayment} />

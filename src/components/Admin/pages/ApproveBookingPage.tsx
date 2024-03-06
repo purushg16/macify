@@ -14,13 +14,13 @@ import { MdArrowBack } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { useGetSingleBookingToApprove } from "../../hooks/useAdmin";
 import { useGetSingleProperty } from "../../hooks/usePropertyServices";
-import useApproveBookingRoomStore from "../../store/approveBooking";
 import ApproveBookingModal from "../elements/ApproveBooking/ApproveBookingModal";
 import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
 import GuestGrid from "../elements/ApproveBooking/GuestGrid";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import Title from "../elements/Title";
+import useApproveBookingStore from "../../store/approveBookingStore";
 
 const ApproveBookingPage = () => {
   const singleBookingId = useParams().id;
@@ -28,9 +28,11 @@ const ApproveBookingPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isDisabled, setDisabled] = useState(false);
 
-  const assignedRooms = useApproveBookingRoomStore((s) => s.bookings);
-
   const { data: booking } = useGetSingleBookingToApprove(singleBookingId!);
+
+  const assignedRooms = useApproveBookingStore((s) => s.singlBooking)?.find(
+    (b) => b.groupId === booking?._id
+  )?.bookings;
 
   const propertyId = booking?.property?._id;
   const {
@@ -103,7 +105,7 @@ const ApproveBookingPage = () => {
               isError={isError}
             />
             {property.propertyType === "hostel" && (
-              <BedAssignBlock bookingId={b._id} />
+              <BedAssignBlock bookingId={b._id} groupId={booking._id} />
             )}
           </HStack>
           <GuestGrid guests={b.guests} />
@@ -129,7 +131,6 @@ const ApproveBookingPage = () => {
             onClose={onClose}
             isOpen={isOpen}
             groupId={booking._id}
-            propertyId={booking.property._id}
           />
         </HStack>
       </Box>

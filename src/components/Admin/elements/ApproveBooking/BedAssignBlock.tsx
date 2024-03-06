@@ -1,15 +1,19 @@
 import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import singleProperty from "../../../data/singleProperty";
-import useApproveBookingRoomStore from "../../../store/approveBooking";
+import useApproveBookingStore from "../../../store/approveBookingStore";
 
 interface Props {
   bookingId: string;
+  groupId: string;
 }
 
-const BedAssignBlock = ({ bookingId: guestId }: Props) => {
-  const assignedRooms = useApproveBookingRoomStore((s) => s.bookings);
-  const assignRoom = useApproveBookingRoomStore((s) => s.setBookings);
+const BedAssignBlock = ({ bookingId: guestId, groupId }: Props) => {
+  const assignedRooms = useApproveBookingStore((s) => s.singlBooking)?.find(
+    (b) => b.groupId === groupId
+  )?.bookings;
+
+  const assignRoom = useApproveBookingStore((s) => s.setBookings);
 
   const respectiveRoomId = assignedRooms?.find(
     (ar) => ar.bookingId === guestId
@@ -43,7 +47,7 @@ const BedAssignBlock = ({ bookingId: guestId }: Props) => {
             textTransform="capitalize"
             key={i}
             onClick={() => {
-              assignRoom({ bookingId: guestId, bedId: bed._id });
+              assignRoom(groupId, { bookingId: guestId, bedId: bed._id });
             }}
           >
             {bed.bedNo}
