@@ -6,11 +6,13 @@ import {
   MenuItem,
   MenuList,
   Spinner,
+  Text,
 } from "@chakra-ui/react";
-import useApproveBookingRoomStore from "../../../store/approveBooking";
 import Property from "../../../entities/property";
+import useApproveBookingStore from "../../../store/approveBookingStore";
 
 interface Props {
+  groupId: string;
   property: Property;
   bookingId: string;
   isLoading: boolean;
@@ -18,13 +20,17 @@ interface Props {
 }
 
 const RoomAssignBlock = ({
+  groupId,
   property,
   bookingId,
   isLoading,
   isError,
 }: Props) => {
-  const assignedRooms = useApproveBookingRoomStore((s) => s.bookings);
-  const assignRoom = useApproveBookingRoomStore((s) => s.setBookings);
+  const assignedRooms = useApproveBookingStore((s) => s.singlBooking)?.find(
+    (b) => b.groupId === groupId
+  )?.bookings;
+
+  const assignRoom = useApproveBookingStore((s) => s.setBookings);
 
   const currentRoom = assignedRooms?.find(
     (r) => r.bookingId === bookingId
@@ -44,18 +50,25 @@ const RoomAssignBlock = ({
         {property.rooms.find((r) => r._id === currentRoom)?.roomName ||
           "Select Room"}
       </MenuButton>
-      <MenuList>
-        {property.rooms.map((room, i) => (
-          <MenuItem
-            textTransform="capitalize"
-            key={i}
-            onClick={() => {
-              assignRoom({ bookingId: bookingId, roomId: room._id });
-            }}
-          >
-            {room.roomName}
-          </MenuItem>
-        ))}
+      <MenuList borderRadius={10}>
+        {property.rooms.length > 0 ? (
+          property.rooms.map((room, i) => (
+            <MenuItem
+              textTransform="capitalize"
+              key={i}
+              onClick={() => {
+                assignRoom(groupId, {
+                  bookingId: bookingId,
+                  roomId: room._id,
+                });
+              }}
+            >
+              {room.roomName}
+            </MenuItem>
+          ))
+        ) : (
+          <Text textAlign="center"> No rooms Available </Text>
+        )}
       </MenuList>
     </Menu>
   );

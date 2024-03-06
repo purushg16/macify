@@ -96,6 +96,7 @@ const ApproveBookingPage = () => {
           <Text mb={4}>Guest Details</Text>
           <HStack mb={2}>
             <RoomAssignBlock
+              groupId={booking._id}
               property={property}
               bookingId={b._id}
               isLoading={isLoading}
