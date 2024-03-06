@@ -52,6 +52,7 @@ interface ApproveBookingStore {
     value: string | Date | number | ApproveBookingProperty[]
   ) => void;
   appendBookings: (booking: ApproveBookingProperties) => void;
+  removeBooking: (groupId: string) => void;
 }
 
 const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
@@ -62,6 +63,14 @@ const useApproveBookingStore = create<ApproveBookingStore>((set) => ({
       singlBooking: !store.singlBooking
         ? [booking]
         : [...store.singlBooking, booking],
+    }));
+  },
+
+  removeBooking: (groupId) => {
+    set((store) => ({
+      singlBooking: !store.singlBooking
+        ? undefined
+        : store.singlBooking.filter((b) => b.groupId !== groupId),
     }));
   },
 

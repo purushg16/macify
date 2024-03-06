@@ -91,7 +91,9 @@ const useApproveBooking = (groupId: string) => {
   const store = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === groupId
   );
-  console.log(store);
+
+  const remove = useApproveBookingStore((s) => s.removeBooking);
+
   const postValue = {
     propertyId: store?.propertyId,
     groupId: store?.groupId,
@@ -105,13 +107,15 @@ const useApproveBooking = (groupId: string) => {
   return useMutation({
     mutationFn: () => approveBooking.postRequest(postValue),
 
-    onSuccess: () =>
+    onSuccess: () => {
       toast({
         title: "Booking Approved Successfuly",
         status: "success",
         position: "top",
         duration: 3000,
-      }),
+      });
+      remove(postValue.groupId);
+    },
 
     onError: (err: AxiosError<APIError>) =>
       toast({
