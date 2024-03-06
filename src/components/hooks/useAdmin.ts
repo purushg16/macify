@@ -8,6 +8,7 @@ import {
   createManager,
   editBooking,
   getAllBookings,
+  getSinglebookingToApprove,
   rejectBooking,
 } from "../api/admin-client";
 import { APIError } from "../entities/Error";
@@ -41,6 +42,22 @@ const useGetBookingsToApprove = () =>
   useQuery({
     queryKey: ["booking", "bookingToApprove"],
     queryFn: bookingsToApprove.getRequest,
+    retry: 2,
+    refetchOnWindowFocus: false,
+    staleTime: ms("5m"),
+  });
+
+const useGetSingleBookingToApprove = (groupId: string) =>
+  useQuery({
+    queryKey: ["booking", "getGroupBooking"],
+    queryFn: () =>
+      getSinglebookingToApprove
+        .getSingleItem({
+          params: {
+            groupId: groupId,
+          },
+        })
+        .then((res) => res),
     retry: 2,
     refetchOnWindowFocus: false,
     staleTime: ms("5m"),
@@ -135,6 +152,7 @@ const useGetAllBooking = (ids: AllBookingsInterface) => {
 export {
   useAddManager,
   useGetBookingsToApprove,
+  useGetSingleBookingToApprove,
   useApproveBooking,
   useRejectBooking,
   useEditBooking,

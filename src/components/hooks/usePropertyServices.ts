@@ -77,7 +77,7 @@ const useGetSingleProperty = (propertyId: string) => {
     queryKey: ["property", "getProperty"],
     queryFn: () =>
       getSingleProperty
-        .getProperty({
+        .getSingleItem({
           params: {
             propertyId: propertyId,
           },

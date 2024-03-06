@@ -8,37 +8,38 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
-import Title from "../elements/Title";
+import { useEffect, useState } from "react";
+import { MdArrowBack } from "react-icons/md";
+import { Link, useParams } from "react-router-dom";
+import { useGetSingleBookingToApprove } from "../../hooks/useAdmin";
+import { useGetSingleProperty } from "../../hooks/usePropertyServices";
+import useApproveBookingStore from "../../store/approveBooking";
+import ApproveBookingModal from "../elements/ApproveBooking/ApproveBookingModal";
+import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
 import GuestGrid from "../elements/ApproveBooking/GuestGrid";
-import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
-import { useGetSingleProperty } from "../../hooks/usePropertyServices";
-import bookingsToApprove from "../../data/bookingsToApprove";
-import { Link, useParams } from "react-router-dom";
-import { MdArrowBack } from "react-icons/md";
-import ApproveBookingModal from "../elements/ApproveBooking/ApproveBookingModal";
-import useApproveBookingStore from "../../store/approveBooking";
-import { useEffect, useState } from "react";
+import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
+import Title from "../elements/Title";
 
 const ApproveBookingPage = () => {
   const singleBookingId = useParams().id;
-  console.log(singleBookingId);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isDisabled, setDisabled] = useState(false);
 
   const assignedRooms = useApproveBookingStore((s) => s.bookings);
-  const booking = bookingsToApprove[0];
 
+  const { data: booking } = useGetSingleBookingToApprove(singleBookingId!);
+
+  const propertyId = booking?.property?._id;
   const {
     data: property,
     isLoading,
     isError,
-  } = useGetSingleProperty(booking.property._id);
+  } = useGetSingleProperty(propertyId!);
 
   useEffect(() => {
-    booking.bookings.map((b) => {
+    booking?.bookings.map((b) => {
       const bookingId = b._id;
       const group = assignedRooms?.find((room) => room.bookingId === bookingId);
 
@@ -63,9 +64,9 @@ const ApproveBookingPage = () => {
 
       setDisabled(false);
     });
-  }, [assignedRooms, booking.bookings, property?.propertyType]);
+  }, [assignedRooms, booking?.bookings, property?.propertyType]);
 
-  if (!property) return <Spinner />;
+  if (!property || !booking) return <Spinner />;
   return (
     <Flex flexDir="column" gap={8}>
       <Box>

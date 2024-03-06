@@ -46,7 +46,7 @@ export default class APIClient<T> {
       });
   };
 
-  getProperty = (config: AxiosRequestConfig) => {
+  getSingleItem = (config: AxiosRequestConfig) => {
     return axiosInstance
       .get<SinglePropertyResponse<T>>(this.endpoint, {
         ...config,
