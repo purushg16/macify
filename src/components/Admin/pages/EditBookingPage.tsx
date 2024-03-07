@@ -1,24 +1,11 @@
-import {
-  Flex,
-  Box,
-  IconButton,
-  Heading,
-  Text,
-  HStack,
-  //   Button,
-  Spinner,
-} from "@chakra-ui/react";
-import { MdArrowBack } from "react-icons/md";
-import { Link } from "react-router-dom";
-// import ApproveBookingModal from "../elements/ApproveBooking/ApproveBookingModal";
+import { Flex, Box, Heading, Text, HStack, Spinner } from "@chakra-ui/react";
 import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
 import GuestGrid from "../elements/ApproveBooking/GuestGrid";
-// import RejectBookingButton from "../elements/ApproveBooking/RejectBookingButton";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
-// import Title from "../elements/Title";
 import { useGetSingleProperty } from "../../hooks/usePropertyServices";
 import { TimelineBookingDetails } from "../../api/admin-client";
+// import Title from "../elements/Title";
 
 interface Props {
   booking: TimelineBookingDetails;
@@ -39,13 +26,6 @@ const EditBookingPage = ({ booking }: Props) => {
     return (
       <Flex flexDir="column" gap={8}>
         <Flex gap={2} alignItems="center">
-          <Link to="/admin/notifications">
-            <IconButton
-              aria-label="back-btn"
-              icon={<MdArrowBack />}
-              size="sm"
-            />
-          </Link>
           <Heading fontSize="xl" textTransform="capitalize">
             {property.propertyName}
           </Heading>
