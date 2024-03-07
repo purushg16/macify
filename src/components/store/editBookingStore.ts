@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface EditBookingStore {
+interface EditBookingProperties {
   propertyId: string | undefined;
   bookingId: string | undefined;
   checkIn: Date | undefined;
@@ -9,35 +9,60 @@ interface EditBookingStore {
   bedId?: string | undefined;
 }
 
-interface EditBookingStoreAction {
-  setPropertyId: (propertyId: string) => void;
-  setBookingId: (bookingId: string) => void;
-  setCheckIn: (checkIn: Date) => void;
-  setCkeckOut: (checkOut: Date) => void;
-  setRoomId: (roomId: string) => void;
-  setBedId: (bed: string) => void;
+interface EditBookingStore {
+  editBookingEntries: EditBookingProperties[] | undefined;
+  setEditBookingsEntries: (booking: EditBookingProperties) => void;
+  setSingleBooking: (
+    groupId: string,
+    field: keyof EditBookingProperties,
+    value: string | Date | number | EditBookingProperties[]
+  ) => void;
 }
 
-const useEditBookingStore = create<EditBookingStore & EditBookingStoreAction>(
-  (set) => ({
-    propertyId: undefined,
-    setPropertyId: (bookingId) => set({ bookingId }),
+const updateOrAddBooking = (
+  existingBookings: EditBookingProperties[] | undefined,
+  newBooking: EditBookingProperties
+): EditBookingProperties[] => {
+  if (!existingBookings) {
+    // If the array is undefined, create a new array with the new booking
+    return [newBooking];
+  }
 
-    bookingId: undefined,
-    setBookingId: (bookingId) => set({ bookingId }),
+  const existingIndex = existingBookings.findIndex(
+    (booking) => booking.bookingId === newBooking.bookingId
+  );
 
-    checkIn: undefined,
-    setCheckIn: (checkIn) => set({ checkIn }),
+  if (existingIndex !== -1) {
+    // If the booking with the same ID exists, update it
+    existingBookings[existingIndex] = {
+      ...existingBookings[existingIndex],
+      ...newBooking,
+    };
+    return [...existingBookings];
+  }
 
-    checkOut: undefined,
-    setCkeckOut: (checkOut) => set({ checkOut }),
+  // If the booking with the same ID doesn't exist, add a new booking
+  return [...existingBookings, newBooking];
+};
 
-    roomId: undefined,
-    setRoomId: (roomId) => set({ roomId }),
+const useEditBookingStore = create<EditBookingStore>((set) => ({
+  editBookingEntries: undefined,
 
-    bedId: undefined,
-    setBedId: (bedId) => set({ bedId }),
-  })
-);
+  setEditBookingsEntries: (receivedEntry) =>
+    set((store) => ({
+      editBookingEntries: updateOrAddBooking(
+        store.editBookingEntries,
+        receivedEntry
+      ),
+    })),
+
+  setSingleBooking: (bookingId, field, value) => {
+    set((store) => ({
+      editBookingEntries: store.editBookingEntries?.map((entry) =>
+        entry.bookingId === bookingId ? { ...entry, [field]: value } : entry
+      ),
+    }));
+  },
+}));
 
 export default useEditBookingStore;
