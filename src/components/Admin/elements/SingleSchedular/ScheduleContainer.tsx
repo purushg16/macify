@@ -16,7 +16,6 @@ const ScheduleContainer = () => {
 
   const handleScroll = () => {
     const box = boxRef.current!;
-    console.log(box.scrollLeft);
     if (box.scrollLeft + box.clientWidth === box.scrollWidth)
       setVisibleMonth(visibleMonth + 1);
     else if (box.scrollLeft === 0) setVisibleMonth(1);

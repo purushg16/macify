@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import Property from "../../../entities/property";
 import useApproveBookingStore from "../../../store/approveBookingStore";
+import useEditBookingStore from "../../../store/editBookingStore";
 
 interface Props {
   groupId: string;
@@ -17,6 +18,7 @@ interface Props {
   bookingId: string;
   isLoading: boolean;
   isError: boolean;
+  editBooking?: boolean;
 }
 
 const RoomAssignBlock = ({
@@ -25,16 +27,22 @@ const RoomAssignBlock = ({
   bookingId,
   isLoading,
   isError,
+  editBooking = false,
 }: Props) => {
   const assignedRooms = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === groupId
   )?.bookings;
-
   const assignRoom = useApproveBookingStore((s) => s.setBookings);
 
   const currentRoom = assignedRooms?.find(
     (r) => r.bookingId === bookingId
   )?.roomId;
+
+  const editEntry = useEditBookingStore((s) => s.editBookingEntries)?.find(
+    (entry) => entry.bookingId === groupId
+  )?.roomId;
+
+  const setEditRoom = useEditBookingStore((s) => s.setSingleBooking);
 
   if (!property) return <Spinner />;
   return (
@@ -47,8 +55,11 @@ const RoomAssignBlock = ({
         isLoading={isLoading}
         isDisabled={isError}
       >
-        {property.rooms.find((r) => r._id === currentRoom)?.roomName ||
-          "Select Room"}
+        {editBooking
+          ? property.rooms.find((r) => r._id === editEntry)?.roomName ||
+            "Select Room"
+          : property.rooms.find((r) => r._id === currentRoom)?.roomName ||
+            "Select Room"}
       </MenuButton>
       <MenuList borderRadius={10}>
         {property.rooms.length > 0 ? (
@@ -57,10 +68,12 @@ const RoomAssignBlock = ({
               textTransform="capitalize"
               key={i}
               onClick={() => {
-                assignRoom(groupId, {
-                  bookingId: bookingId,
-                  roomId: room._id,
-                });
+                editBooking
+                  ? setEditRoom(groupId, "roomId", room._id)
+                  : assignRoom(groupId, {
+                      bookingId: bookingId,
+                      roomId: room._id,
+                    });
               }}
             >
               {room.roomName}

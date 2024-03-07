@@ -65,13 +65,16 @@ const EditBookingPage = ({ booking }: Props) => {
           <Box key={b._id}>
             <Text mb={4}>Guest Details</Text>
             <HStack mb={2}>
-              <RoomAssignBlock
-                groupId={booking._id}
-                property={property}
-                bookingId={b._id}
-                isLoading={isLoading}
-                isError={isError}
-              />
+              {property.rentWithin && (
+                <RoomAssignBlock
+                  groupId={booking._id}
+                  property={property}
+                  bookingId={b._id}
+                  isLoading={isLoading}
+                  isError={isError}
+                  editBooking
+                />
+              )}
               {property.propertyType === "hostel" && (
                 <BedAssignBlock bookingId={b._id} groupId={booking._id} />
               )}
