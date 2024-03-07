@@ -172,6 +172,7 @@ const useRejectBooking = () => {
 
 const useEditBooking = (bookingId: string) => {
   const toast = useToast();
+  const queryClient = useQueryClient();
   const entry = useEditBookingStore((s) => s.editBookingEntries)?.find(
     (entry) => entry.bookingId === bookingId
   );
@@ -188,13 +189,15 @@ const useEditBooking = (bookingId: string) => {
   return useMutation({
     mutationFn: () => editBooking.postRequest(postDate),
 
-    onSuccess: () =>
+    onSuccess: () => {
       toast({
         title: "Booking updated successfully",
         status: "success",
         position: "top",
         duration: 3000,
-      }),
+      });
+      queryClient.invalidateQueries({ queryKey: ["booking", "allBookings"] });
+    },
 
     onError: (err: AxiosError<APIError>) =>
       toast({
@@ -208,7 +211,7 @@ const useEditBooking = (bookingId: string) => {
 
 const useGetAllBooking = (ids: AllBookingsInterface) => {
   return useQuery({
-    queryKey: [],
+    queryKey: ["booking", "allBookings"],
     queryFn: () =>
       getAllBookings
         .getSingleItem({
