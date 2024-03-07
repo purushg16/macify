@@ -1,6 +1,7 @@
 import { Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import CalendarCard from "../elements/CalendarCard";
-import { BsCalendar } from "react-icons/bs";
+import { BsBuilding, BsCalendar } from "react-icons/bs";
+import { FaColumns } from "react-icons/fa";
 
 const CalendarPage = () => {
   return (
@@ -14,15 +15,15 @@ const CalendarPage = () => {
           route="single"
         />
         <CalendarCard
-          icon={BsCalendar}
-          title="Single Calendar"
-          subtitle="Inspect booking data in monthly view"
+          icon={FaColumns}
+          title="Multi-Calendar"
+          subtitle="Inspect booking data in a daily basis"
           route="multi"
         />
         <CalendarCard
-          icon={BsCalendar}
-          title="Single Calendar"
-          subtitle="Inspect booking data in monthly view"
+          icon={BsBuilding}
+          title="Hostel"
+          subtitle="Inspect hostel booking data in monthly view"
           route="hostel"
         />
       </SimpleGrid>
