@@ -47,7 +47,7 @@ const rejectBooking = new APIClient<RejectBookingInterface>(
 const getAllBookings = new APIClient<BookingTimelineInterface>(
   "/booking/allBookings"
 );
-const editBooking = new APIClient<EditBooking>("/booking/allBookings");
+const editBooking = new APIClient<EditBooking>("/booking/editBooking");
 
 export {
   createManager,

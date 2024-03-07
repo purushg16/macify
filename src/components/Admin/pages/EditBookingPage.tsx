@@ -14,6 +14,7 @@ import { useGetSingleProperty } from "../../hooks/usePropertyServices";
 import { TimelineBookingDetails } from "../../api/admin-client";
 import EditBedAssign from "../elements/EditBooking.tsx/EditBedAssign";
 import Title from "../elements/Title";
+import { useEditBooking } from "../../hooks/useAdmin";
 
 interface Props {
   booking: TimelineBookingDetails;
@@ -26,6 +27,8 @@ const EditBookingPage = ({ booking }: Props) => {
     isLoading,
     isError,
   } = useGetSingleProperty(propertyId!, true);
+
+  const { mutate, isPending } = useEditBooking(booking._id);
 
   if (isLoading || !booking) return <Spinner />;
   if (isError) return <Text> Error Getting the data </Text>;
@@ -78,7 +81,15 @@ const EditBookingPage = ({ booking }: Props) => {
           />
 
           <HStack justify="center" mt={4}>
-            <Button colorScheme="primary">Proceed</Button>
+            <Button
+              colorScheme="primary"
+              onClick={() => {
+                mutate();
+              }}
+              isLoading={isPending}
+            >
+              Proceed
+            </Button>
           </HStack>
         </Box>
       </Flex>

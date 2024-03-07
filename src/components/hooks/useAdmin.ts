@@ -18,6 +18,8 @@ import useApproveBookingStore, {
 } from "../store/approveBookingStore";
 import ApproveBooking from "../entities/approveBooking";
 import { useNavigate } from "react-router-dom";
+import useEditBookingStore from "../store/editBookingStore";
+import EditBooking from "../entities/editBooking";
 
 const useAddManager = () => {
   const toast = useToast();
@@ -168,11 +170,23 @@ const useRejectBooking = () => {
   });
 };
 
-const useEditBooking = () => {
+const useEditBooking = (bookingId: string) => {
   const toast = useToast();
+  const entry = useEditBookingStore((s) => s.editBookingEntries)?.find(
+    (entry) => entry.bookingId === bookingId
+  );
+
+  const postDate = {
+    bookingId: bookingId,
+    propertyId: entry?.propertyId,
+    checkIn: entry?.checkIn,
+    checkOut: entry?.checkOut,
+    bedId: entry?.bedId,
+    roomId: entry?.roomId,
+  } as EditBooking;
 
   return useMutation({
-    mutationFn: editBooking.postRequest,
+    mutationFn: () => editBooking.postRequest(postDate),
 
     onSuccess: () =>
       toast({
