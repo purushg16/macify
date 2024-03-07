@@ -39,6 +39,7 @@ const Schedular = ({
       <Flex>
         {dates.map((date, i) => (
           <ScheduleBlock
+            firstLap={i == 0}
             key={i}
             date={date.toISOString().substring(0, 10)}
             scheduleData={scheduleData}

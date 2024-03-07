@@ -8,12 +8,14 @@ import useEditBookingStore from "../../../store/editBookingStore";
 
 interface ScheduleTimelineProps {
   data: TimelineBookingDetails;
+  behind?: boolean;
   current?: boolean;
   upcoming?: boolean;
 }
 
 const ScheduleTimeline = ({
   data,
+  behind = false,
   current = false,
   upcoming = false,
 }: ScheduleTimelineProps) => {
@@ -64,17 +66,18 @@ const ScheduleTimeline = ({
     <Box
       pos="absolute"
       left={{
-        base: 8,
-        md: 14,
-        lg: 20,
+        base: behind ? 0 : 8,
+        md: behind ? 0 : 14,
+        lg: behind ? 0 : 20,
       }} // 20 is perfect centre day
       borderRadius={10}
+      borderStartRadius={behind ? 0 : 10}
       zIndex={10}
       onClick={handleToggle}
       w={{
-        base: 31 * scheduleBlockWidth,
-        md: 56 * scheduleBlockWidth,
-        lg: 81 * scheduleBlockWidth,
+        base: (behind ? 15 : 31) * scheduleBlockWidth,
+        md: (behind ? 28 : 56) * scheduleBlockWidth,
+        lg: (behind ? 40 : 81) * scheduleBlockWidth,
       }}
       border="1px solid"
       borderColor={border}
