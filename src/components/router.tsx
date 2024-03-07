@@ -29,6 +29,7 @@ import UnAuthorizedPage from "./Admin/pages/UnAuthorizedPage";
 import ManagerLayout from "./Layouts/ManagerLayout";
 import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
 import ScheduleContainer from "./Admin/elements/SingleSchedular/ScheduleContainer";
+import { SingleCalendarPage } from "./Admin/pages/SingleCalendarPage";
 
 const router = createBrowserRouter([
   {
@@ -53,8 +54,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <DashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
-      { path: "calendar/single", element: <ScheduleContainer /> },
-      { path: "calendar/multi", element: <CalendarPage /> },
+      { path: "calendar/single", element: <SingleCalendarPage /> },
+      { path: "calendar/multi", element: <ScheduleContainer /> },
       { path: "calendar/hostel", element: <CalendarPage /> },
       { path: "manager", element: <ManagerPage /> },
 
