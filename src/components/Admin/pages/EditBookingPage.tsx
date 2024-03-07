@@ -1,11 +1,19 @@
-import { Flex, Box, Heading, Text, HStack, Spinner } from "@chakra-ui/react";
-import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
+import {
+  Flex,
+  Box,
+  Heading,
+  Text,
+  HStack,
+  Spinner,
+  Button,
+} from "@chakra-ui/react";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
 import GuestGrid from "../elements/ApproveBooking/GuestGrid";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import { useGetSingleProperty } from "../../hooks/usePropertyServices";
 import { TimelineBookingDetails } from "../../api/admin-client";
-// import Title from "../elements/Title";
+import EditBedAssign from "../elements/EditBooking.tsx/EditBedAssign";
+import Title from "../elements/Title";
 
 interface Props {
   booking: TimelineBookingDetails;
@@ -56,35 +64,23 @@ const EditBookingPage = ({ booking }: Props) => {
                 />
               )}
               {property.propertyType === "hostel" && (
-                <BedAssignBlock bookingId={b._id} groupId={booking._id} />
+                <EditBedAssign bookingId={b._id} propertyId={propertyId} />
               )}
             </HStack>
             <GuestGrid guests={booking.guests} />
           </Box>
         ))}
 
-        {/* <Box mb={4}>
-        <Title
-          heading="Approve Booking"
-          subtitle="Click 'Proceed' to enter payment details"
-        />
-
-        <HStack justify="center" mt={4}>
-          <RejectBookingButton groupId={booking._id} />
-          <Button
-            colorScheme="primary"
-            onClick={onOpen}
-            isDisabled={isDisabled}
-          >
-            Proceed
-          </Button>
-          <ApproveBookingModal
-            onClose={onClose}
-            isOpen={isOpen}
-            groupId={booking._id}
+        <Box mb={4}>
+          <Title
+            heading="Approve Booking"
+            subtitle="Click 'Proceed' to enter payment details"
           />
-        </HStack>
-      </Box> */}
+
+          <HStack justify="center" mt={4}>
+            <Button colorScheme="primary">Proceed</Button>
+          </HStack>
+        </Box>
       </Flex>
     );
 };
