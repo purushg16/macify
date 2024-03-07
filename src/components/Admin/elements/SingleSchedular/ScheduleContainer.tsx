@@ -1,9 +1,10 @@
-import { Box, Flex, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import DateBlock from "./DateBlock";
 import Schedular from "./Schedular";
 import DateGenerator from "../../../functions/dateGenerator";
 import { useGetAllBooking } from "../../../hooks/useAdmin";
 import { useRef, useState } from "react";
+import BookingDetailsModal from "./BookingDetailsModal";
 
 const ScheduleContainer = () => {
   const { data: scheduleData, isLoading } = useGetAllBooking({
@@ -22,6 +23,7 @@ const ScheduleContainer = () => {
   };
 
   if (isLoading) return <Spinner />;
+  if (!scheduleData) return <Text> No data to display </Text>;
   return (
     <Box
       ref={boxRef}
@@ -49,6 +51,7 @@ const ScheduleContainer = () => {
           />
         ))}
       </Flex>
+      <BookingDetailsModal />
     </Box>
   );
 };

@@ -28,6 +28,7 @@ import EMailVerificationPage from "./Admin/pages/Authentication/EMailVerificatio
 import UnAuthorizedPage from "./Admin/pages/UnAuthorizedPage";
 import ManagerLayout from "./Layouts/ManagerLayout";
 import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
+import ScheduleContainer from "./Admin/elements/SingleSchedular/ScheduleContainer";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <DashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
+      { path: "calendar/single", element: <ScheduleContainer /> },
+      { path: "calendar/multi", element: <CalendarPage /> },
+      { path: "calendar/hostel", element: <CalendarPage /> },
       { path: "manager", element: <ManagerPage /> },
 
       { path: "notifications", element: <AdminNotificationsPage /> },
