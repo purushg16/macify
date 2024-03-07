@@ -10,17 +10,27 @@ import {
 } from "@chakra-ui/react";
 import useBookingModalStore from "../../../store/bookingDetailsModalStore";
 import EditBookingPage from "../../pages/EditBookingPage";
+import useEditBookingStore from "../../../store/editBookingStore";
 
 const BookingDetailsModal = () => {
   const isOpen = useBookingModalStore((s) => s.isOpen);
   const toggleModal = useBookingModalStore((s) => s.toggleModal);
   const currentDetail = useBookingModalStore((s) => s.currentDetail);
 
+  const appendEditBooking = useEditBookingStore(
+    (s) => s.setEditBookingsEntries
+  );
+
+  const handleToggle = () => {
+    appendEditBooking(undefined);
+    toggleModal();
+  };
+
   return (
     <>
       <Modal
         isOpen={isOpen}
-        onClose={toggleModal}
+        onClose={handleToggle}
         closeOnOverlayClick={false}
         isCentered
         size="full"
@@ -34,7 +44,7 @@ const BookingDetailsModal = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={toggleModal}>
+            <Button colorScheme="blue" mr={3} onClick={handleToggle}>
               Close
             </Button>
             <Button variant="ghost">Secondary Action</Button>

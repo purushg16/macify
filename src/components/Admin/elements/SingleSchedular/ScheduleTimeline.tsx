@@ -4,6 +4,7 @@ import { FaMoon } from "react-icons/fa";
 import { durationCalculator } from "../../../functions/durationCalculator";
 import { TimelineBookingDetails } from "../../../api/admin-client";
 import useBookingModalStore from "../../../store/bookingDetailsModalStore";
+import useEditBookingStore from "../../../store/editBookingStore";
 
 interface ScheduleTimelineProps {
   data: TimelineBookingDetails;
@@ -19,6 +20,10 @@ const ScheduleTimeline = ({
   const isOpen = useBookingModalStore((s) => s.isOpen);
   const toggleModal = useBookingModalStore((s) => s.toggleModal);
   const setCurrentDetail = useBookingModalStore((s) => s.setCurrentDetail);
+  const appendEditBooking = useEditBookingStore(
+    (s) => s.setEditBookingsEntries
+  );
+  const editBookingEntries = useEditBookingStore((s) => s.editBookingEntries);
 
   const startDate = new Date(data.checkIn);
   const endDate = new Date(data.checkOut);
@@ -33,7 +38,25 @@ const ScheduleTimeline = ({
 
   const handleToggle = () => {
     if (isOpen) setCurrentDetail(undefined);
-    else setCurrentDetail(data);
+    else {
+      setCurrentDetail(data);
+      if (
+        data &&
+        (editBookingEntries?.findIndex(
+          (entry) => entry.bookingId === data._id
+        ) === -1 ||
+          !editBookingEntries)
+      ) {
+        appendEditBooking({
+          bookingId: data?._id,
+          propertyId: data?.property,
+          checkIn: new Date(data?.checkIn),
+          checkOut: new Date(data?.checkOut),
+          bedId: data?.bed,
+          roomId: data?.room,
+        });
+      }
+    }
     toggleModal();
   };
 

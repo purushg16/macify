@@ -11,7 +11,7 @@ interface EditBookingProperties {
 
 interface EditBookingStore {
   editBookingEntries: EditBookingProperties[] | undefined;
-  setEditBookingsEntries: (booking: EditBookingProperties) => void;
+  setEditBookingsEntries: (booking: EditBookingProperties | undefined) => void;
   setSingleBooking: (
     groupId: string,
     field: keyof EditBookingProperties,
@@ -52,7 +52,7 @@ const useEditBookingStore = create<EditBookingStore>((set) => ({
     set((store) => ({
       editBookingEntries: updateOrAddBooking(
         store.editBookingEntries,
-        receivedEntry
+        receivedEntry!
       ),
     })),
 

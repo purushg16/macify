@@ -19,8 +19,8 @@ export interface TimelineBookingDetails {
   checkOut: string;
   guests: BookingGuest[];
   property: string;
-  room: string;
-  bed: string;
+  room?: string;
+  bed?: string;
   _id: string;
 }
 

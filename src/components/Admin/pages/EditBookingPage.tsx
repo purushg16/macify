@@ -57,6 +57,7 @@ const EditBookingPage = ({ booking }: Props) => {
             checkIn={new Date(booking.checkIn)}
             checkOut={new Date(booking.checkOut)}
             groupId={booking._id}
+            editBooking
           />
         </Box>
 
