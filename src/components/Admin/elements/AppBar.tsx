@@ -3,14 +3,10 @@ import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
 import { BsPersonCircle } from "react-icons/bs";
 import { SmallButton } from "./Button";
-import useRoleStore from "../../store/roleStore";
 
 const AppBar = () => {
   const location = useLocation().pathname.split("/")[2];
-
-  const role = useRoleStore((s) => s.role);
-  // const s = useRoleStore((s) => s.setRole);
-  // s("Manager");
+  const role = localStorage.getItem("manager") === "true" ? "Manager" : "Admin";
 
   return (
     <Box

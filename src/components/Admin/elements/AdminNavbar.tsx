@@ -9,13 +9,12 @@ import {
 } from "@chakra-ui/react";
 import Btn from "../../Brand/elements/Button";
 import { Link, useNavigate } from "react-router-dom";
-import useRoleStore from "../../store/roleStore";
 import { BsBell } from "react-icons/bs";
 import { CiLogout } from "react-icons/ci";
 
 const AdminNavbar = () => {
   const navigate = useNavigate();
-  const role = useRoleStore((s) => s.role);
+  const role = localStorage.getItem("manager") === "true" ? "Manager" : "Admin";
 
   return (
     <Box bg="white">
