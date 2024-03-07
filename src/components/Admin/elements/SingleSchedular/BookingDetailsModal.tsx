@@ -9,6 +9,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import useBookingModalStore from "../../../store/bookingDetailsModalStore";
+import EditBookingPage from "../../pages/EditBookingPage";
 
 const BookingDetailsModal = () => {
   const isOpen = useBookingModalStore((s) => s.isOpen);
@@ -22,12 +23,15 @@ const BookingDetailsModal = () => {
         onClose={toggleModal}
         closeOnOverlayClick={false}
         isCentered
+        size="full"
       >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>{currentDetail?.guests[0].guestName}</ModalBody>
+          <ModalBody>
+            <EditBookingPage booking={currentDetail!} />
+          </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={toggleModal}>

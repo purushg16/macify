@@ -20,6 +20,8 @@ export interface TimelineBookingDetails {
   guests: BookingGuest[];
   property: string;
   room: string;
+  bed: string;
+  _id: string;
 }
 
 export interface TimelineBookings {
