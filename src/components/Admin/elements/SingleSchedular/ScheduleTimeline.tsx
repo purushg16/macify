@@ -18,13 +18,13 @@ const ScheduleTimeline = ({
   const startDate = new Date(data.checkIn);
   const endDate = new Date(data.checkOut);
 
+  const bg = current ? "#D3EBDA" : upcoming ? "#e0d0fb" : "#FAF5E0";
+  const border = current ? "#7edf9a" : upcoming ? "#b793f3" : "#ffe36e";
+
   const scheduleBlockWidth = durationCalculator(
     startDate.getTime(),
     endDate.getTime()
   );
-
-  const bg = current ? "#D3EBDA" : upcoming ? "#e0d0fb" : "#FAF5E0";
-  const border = current ? "#7edf9a" : upcoming ? "#b793f3" : "#ffe36e";
 
   return (
     <Box
@@ -36,7 +36,7 @@ const ScheduleTimeline = ({
       }} // 20 is perfect centre day
       borderRadius={10}
       zIndex={10}
-      onClick={() => alert(`Start: ${startDate}\n End: ${endDate}`)}
+      onClick={() => alert(`CheckIn: ${startDate} CheckOut: ${endDate}`)}
       w={{
         base: 31 * scheduleBlockWidth,
         md: 56 * scheduleBlockWidth,
