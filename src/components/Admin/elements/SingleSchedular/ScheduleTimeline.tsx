@@ -3,6 +3,7 @@ import { BsPersonFill } from "react-icons/bs";
 import { FaMoon } from "react-icons/fa";
 import { durationCalculator } from "../../../functions/durationCalculator";
 import { TimelineBookingDetails } from "../../../api/admin-client";
+import useBookingModalStore from "../../../store/bookingDetailsModalStore";
 
 interface ScheduleTimelineProps {
   data: TimelineBookingDetails;
@@ -15,6 +16,10 @@ const ScheduleTimeline = ({
   current = false,
   upcoming = false,
 }: ScheduleTimelineProps) => {
+  const isOpen = useBookingModalStore((s) => s.isOpen);
+  const toggleModal = useBookingModalStore((s) => s.toggleModal);
+  const setCurrentDetail = useBookingModalStore((s) => s.setCurrentDetail);
+
   const startDate = new Date(data.checkIn);
   const endDate = new Date(data.checkOut);
 
@@ -26,6 +31,12 @@ const ScheduleTimeline = ({
     endDate.getTime()
   );
 
+  const handleToggle = () => {
+    if (isOpen) setCurrentDetail(undefined);
+    else setCurrentDetail(data);
+    toggleModal();
+  };
+
   return (
     <Box
       pos="absolute"
@@ -36,7 +47,7 @@ const ScheduleTimeline = ({
       }} // 20 is perfect centre day
       borderRadius={10}
       zIndex={10}
-      onClick={() => alert(`CheckIn: ${startDate} CheckOut: ${endDate}`)}
+      onClick={handleToggle}
       w={{
         base: 31 * scheduleBlockWidth,
         md: 56 * scheduleBlockWidth,

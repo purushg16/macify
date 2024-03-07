@@ -5,7 +5,7 @@ interface BookingDetailsModalStore {
   isOpen: boolean;
   toggleModal: () => void;
   currentDetail: TimelineBookingDetails | undefined;
-  setCurrentDetail: (detail: TimelineBookingDetails) => void;
+  setCurrentDetail: (detail: TimelineBookingDetails | undefined) => void;
 }
 
 const useBookingModalStore = create<BookingDetailsModalStore>((set) => ({
