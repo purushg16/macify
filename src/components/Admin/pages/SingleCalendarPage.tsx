@@ -1,5 +1,6 @@
-import SingleCalendar from "../elements/SingleCalendar/SingleCalendar";
+// import bookings from "../../data/bookings";
+// import SingleCalendar from "../elements/SingleCalendar/SingleCalendar";
 
 export const SingleCalendarPage = () => {
-  return <SingleCalendar />;
+  return <></>;
 };

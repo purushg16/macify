@@ -3,11 +3,16 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { DateSelectArg, EventContentArg } from "@fullcalendar/core/index.js";
 import { Box } from "@chakra-ui/react";
+import { TimelineBookings } from "../../../api/admin-client";
 
-const SingleCalendar = () => {
+interface Props {
+  bookings: TimelineBookings;
+}
+
+const SingleCalendar = ({ bookings }: Props) => {
   const handleDateSelect = (selectInfo: DateSelectArg) => {
     // Handle date selection logic
-    console.log(selectInfo);
+    alert(`${selectInfo}`);
   };
 
   const handleEventContent = (eventContent: EventContentArg) => {
@@ -34,16 +39,16 @@ const SingleCalendar = () => {
     <FullCalendar
       plugins={[dayGridPlugin, interactionPlugin]}
       initialView="dayGridMonth"
-      events={[
-        {
-          title: "Event 1",
-          start: "2024-03-14T20:00:00",
-          end: "2024-03-15T02:00:00",
-        },
-      ]}
+      events={Object.values(bookings).map((booking) => {
+        return {
+          title: booking.property,
+          start: new Date(booking.checkIn).toISOString(),
+          end: new Date(booking.checkOut).toISOString(),
+        };
+      })}
       select={handleDateSelect}
       eventContent={handleEventContent}
-      eventClick={(arg) => console.log(arg.event._def)}
+      eventClick={(arg) => alert(arg.event._def.title)}
     />
   );
 };
