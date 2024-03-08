@@ -1,5 +1,7 @@
 import { Box, Flex, HStack, Heading, Image, Spacer } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
+import IconWrapper from "./Icons";
+import NotificationIcon from "../../../assets/icons/system-regular-46-notification-bell.json";
 
 const AdminNavbar = () => {
   const navigate = useNavigate();
@@ -14,14 +16,7 @@ const AdminNavbar = () => {
         <Spacer />
         <HStack>
           <Link to="notifications">
-            <Image
-              src="https://img.icons8.com/3d-fluency/100/bell.png"
-              alt="notification"
-              boxSize={10}
-              p={2}
-              bg="gray.50"
-              borderRadius={99}
-            />
+            <IconWrapper icon={NotificationIcon} />
           </Link>
 
           <Image
