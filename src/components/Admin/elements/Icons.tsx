@@ -2,7 +2,12 @@ import { Box } from "@chakra-ui/react";
 import { Player } from "@lordicon/react";
 import { useRef } from "react";
 
-const IconWrapper = ({ icon }: { icon: unknown }) => {
+interface Props {
+  icon: unknown;
+  active?: boolean;
+}
+
+const IconWrapper = ({ icon, active = false }: Props) => {
   const playerRef = useRef<Player>(null);
 
   return (
@@ -12,7 +17,7 @@ const IconWrapper = ({ icon }: { icon: unknown }) => {
         playerRef.current?.playFromBeginning();
       }}
       p={2}
-      bg="gray.50"
+      bg={active ? "primary.50" : "gray.50"}
       borderRadius={99}
     >
       <Player ref={playerRef} size={25} icon={icon} />

@@ -1,7 +1,7 @@
 import { Box, Flex, HStack, Heading, Image, Spacer } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 import IconWrapper from "./Icons";
-import NotificationIcon from "../../../assets/icons/system-regular-46-notification-bell.json";
+import NotificationIcon from "../../../assets/icons/notification.json";
 
 const AdminNavbar = () => {
   const navigate = useNavigate();

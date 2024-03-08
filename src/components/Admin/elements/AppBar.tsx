@@ -1,8 +1,10 @@
 import { Box, Flex } from "@chakra-ui/react";
-import { TbBuilding, TbCalendar, TbLayoutBoard } from "react-icons/tb";
 import { useLocation } from "react-router-dom";
-import { BsPersonCircle } from "react-icons/bs";
 import { SmallButton } from "./Button";
+import DashboardIcon from "../../../assets/icons/dashbaord.json";
+import CalendarIcon from "../../../assets/icons/calendar.json";
+import WorkIcon from "../../../assets/icons/work.json";
+import PropertyIcon from "../../../assets/icons/property.json";
 
 const AppBar = () => {
   const location = useLocation().pathname.split("/")[2];
@@ -26,7 +28,7 @@ const AppBar = () => {
       <Flex gap={4}>
         <SmallButton
           title="Dashboard"
-          icon={TbLayoutBoard}
+          icon={DashboardIcon}
           active={!location}
           route={role === "Admin" ? "/admin" : "/manager"}
           admin={role === "Admin"}
@@ -34,7 +36,7 @@ const AppBar = () => {
 
         <SmallButton
           title="Calender"
-          icon={TbCalendar}
+          icon={CalendarIcon}
           active={location === "calendar"}
           route={role === "Admin" ? "/admin/calendar" : "/manager/calendar"}
           admin={role === "Admin"}
@@ -43,13 +45,13 @@ const AppBar = () => {
         <>
           <SmallButton
             title="Property"
-            icon={TbBuilding}
+            icon={PropertyIcon}
             active={location === "properties"}
             route="/admin/properties"
           />
           <SmallButton
             title="Manager"
-            icon={BsPersonCircle}
+            icon={WorkIcon}
             active={location === "manager"}
             route="/admin/manager"
           />

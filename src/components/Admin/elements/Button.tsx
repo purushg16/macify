@@ -1,8 +1,8 @@
-import { Button, IconButton, Image } from "@chakra-ui/react";
+import { Button, Image } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
-import { Box, Icon } from "@chakra-ui/react";
-import { IconType } from "react-icons";
+import { Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import IconWrapper from "./Icons";
 
 interface AdminButtonProps {
   text: string;
@@ -47,7 +47,7 @@ export { NavButton };
 
 interface Props {
   title: string;
-  icon: IconType;
+  icon: unknown;
   active?: boolean;
   route?: string;
   admin?: boolean;
@@ -58,6 +58,15 @@ const SmallButton = ({ active = false, icon, route }: Props) => {
 
   return (
     <Box borderRadius="100%" onClick={() => navigate(route!)}>
+      <IconWrapper icon={icon} active={active} />
+    </Box>
+  );
+};
+
+export { SmallButton };
+
+{
+  /* <Box borderRadius="100%" onClick={() => navigate(route!)}>
       <IconButton
         p={6}
         aria-label="nav-btn"
@@ -75,8 +84,5 @@ const SmallButton = ({ active = false, icon, route }: Props) => {
         _hover={{ bg: "white" }}
         boxShadow={active ? "rgba(0, 0, 0, 0.24) 0px 3px 8px;" : "none"}
       />
-    </Box>
-  );
-};
-
-export { SmallButton };
+    </Box> */
+}
