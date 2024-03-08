@@ -2,6 +2,7 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import Title from "../elements/Title";
 import ManagerCard from "../elements/manager/ManagerCard";
 import managers from "../../data/managers";
+import AnimateMove from "../../motions/Move";
 
 const ManagerPage = () => {
   return (
@@ -21,8 +22,10 @@ const ManagerPage = () => {
         overflowY="auto"
       >
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
-          {managers.map((manager) => (
-            <ManagerCard key={manager.name} manager={manager} />
+          {managers.map((manager, i) => (
+            <AnimateMove delay={0.2 * (i + 1)}>
+              <ManagerCard key={manager.name} manager={manager} />
+            </AnimateMove>
           ))}
         </SimpleGrid>
       </Box>
