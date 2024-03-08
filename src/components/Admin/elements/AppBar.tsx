@@ -12,7 +12,7 @@ const AppBar = () => {
 
   return (
     <Box
-      zIndex={10}
+      zIndex={100}
       pos="fixed"
       p={2}
       left="50%"
