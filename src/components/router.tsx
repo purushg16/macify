@@ -30,6 +30,7 @@ import ManagerLayout from "./Layouts/ManagerLayout";
 import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
 import ScheduleContainer from "./Admin/elements/SingleSchedular/ScheduleContainer";
 import { SingleCalendarPage } from "./Admin/pages/SingleCalendarPage";
+import ManagerLoginPage from "./Admin/pages/Authentication/ManagerLoginPage";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
       { path: "register", element: <RegisterPage /> },
       { path: "verifyEmail", element: <EMailVerificationPage /> },
       { path: "forgotPassword", element: <ForgotPasswordPage /> },
+      { path: "mLogin", element: <ManagerLoginPage /> },
     ],
   },
   {
