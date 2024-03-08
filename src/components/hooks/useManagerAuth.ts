@@ -15,8 +15,7 @@ const useManagerLogin = () => {
     mutationFn: managerLogin.authorizationPost,
     onSuccess: (data) => {
       localStorage.setItem("manager", "true");
-      if (data.data.firstLogin) navigate("/manager/changePassword");
-      else navigate("/manager");
+      if (data.data.firstLogin === false) navigate("/manager");
     },
     onError: (err: AxiosError<APIError>) =>
       toast({
