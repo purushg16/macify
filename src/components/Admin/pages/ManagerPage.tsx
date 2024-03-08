@@ -13,14 +13,14 @@ const ManagerPage = () => {
       />
 
       <Box
+        my={4}
+        borderRadius={10}
         bg="#f6f6f6"
         p={4}
-        my={4}
-        borderRadius={20}
         maxH={500}
         overflowY="auto"
       >
-        <SimpleGrid columns={{ base: 2, md: 3 }} spacing={4}>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
           {managers.map((manager) => (
             <ManagerCard key={manager.name} manager={manager} />
           ))}
