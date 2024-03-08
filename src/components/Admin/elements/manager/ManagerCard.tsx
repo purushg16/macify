@@ -8,8 +8,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { BsArrowRight, BsBuilding } from "react-icons/bs";
-// import { CiUser } from "react-icons/ci";
-import { RiUser6Fill } from "react-icons/ri";
 import Manager from "../../../entities/manager";
 
 interface ManagerCardProps {
@@ -23,22 +21,7 @@ const Temp = ({ manager }: ManagerCardProps) => {
       borderRadius={10}
       boxShadow="rgba(149, 157, 165, 0.2) 0px 8px 24px;"
     >
-      <Box
-        w={110}
-        bg="primary.50"
-        borderLeftRadius={10}
-        pos="relative"
-        overflow="hidden"
-      >
-        <Icon
-          as={RiUser6Fill}
-          pos="absolute"
-          h="100%"
-          w="150%"
-          right={-10}
-          zIndex={1}
-        />
-      </Box>
+      <Box w={110} bg="primary.50" borderLeftRadius={10} />
 
       <Box
         flex={1}
