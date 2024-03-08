@@ -1,16 +1,5 @@
-import {
-  Box,
-  Flex,
-  HStack,
-  Heading,
-  Icon,
-  IconButton,
-  Spacer,
-} from "@chakra-ui/react";
-import Btn from "../../Brand/elements/Button";
+import { Box, Flex, HStack, Heading, Image, Spacer } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
-import { BsBell } from "react-icons/bs";
-import { CiLogout } from "react-icons/ci";
 
 const AdminNavbar = () => {
   const navigate = useNavigate();
@@ -25,21 +14,28 @@ const AdminNavbar = () => {
         <Spacer />
         <HStack>
           <Link to="notifications">
-            <IconButton
+            <Image
+              src="https://img.icons8.com/3d-fluency/100/bell.png"
+              alt="notification"
+              boxSize={10}
+              p={2}
               bg="gray.50"
-              aria-label="notification"
-              icon={<Icon color="primary.500" as={BsBell} />}
+              borderRadius={99}
             />
           </Link>
-          <Btn text="D" primary />
-          <IconButton
+
+          <Image
+            boxSize={10}
+            p={2}
             bg="gray.50"
-            aria-label="notification"
-            icon={<Icon as={CiLogout} />}
+            borderRadius={99}
+            src="https://img.icons8.com/pulsar-color/32/exit.png"
+            alt="exit"
             onClick={() => {
               localStorage.removeItem("token");
               navigate("/auth/login");
             }}
+            cursor="pointer"
           />
         </HStack>
       </Flex>
