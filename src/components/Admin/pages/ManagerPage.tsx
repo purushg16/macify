@@ -20,6 +20,14 @@ const ManagerPage = () => {
         p={4}
         maxH={500}
         overflowY="auto"
+        sx={{
+          "&::-webkit-scrollbar": {
+            width: "0.1em", // Adjust the width as needed
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#e2e2e2", // Customize the scrollbar thumb color
+          },
+        }}
       >
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
           {managers.map((manager, i) => (
