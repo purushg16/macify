@@ -59,7 +59,7 @@ const EditBookingPage = ({ booking }: Props) => {
               {property.rentWithin && (
                 <RoomAssignBlock
                   groupId={booking._id}
-                  property={property}
+                  rooms={[]}
                   bookingId={b._id}
                   isLoading={isLoading}
                   isError={isError}

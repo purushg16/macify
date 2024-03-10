@@ -34,6 +34,8 @@ const ApproveBookingPage = () => {
 
   const { data: booking } = useGetSingleBookingToApprove(singleBookingId!);
 
+  const store = useApproveBookingStore((s) => s.singlBooking);
+
   const assignedRooms = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === booking?._id
   )?.bookings;
@@ -80,10 +82,6 @@ const ApproveBookingPage = () => {
         const group = assignedRooms?.find(
           (room) => room.bookingId === bookingId
         );
-
-        console.log(assignedRooms);
-        console.log(group);
-
         // if the group was not found.
         if (!group) {
           setDisabled(true);
@@ -91,11 +89,13 @@ const ApproveBookingPage = () => {
         }
 
         // if it's a hostel & room, bed not assigned
-        if (booking.property?.propertyType === "hostel")
+        if (booking.property?.propertyType === "hostel") {
+          console.log(group);
           if (!group.roomId || !group.bedId) {
             setDisabled(true);
             return;
           }
+        }
 
         // if it's not a hostel and room not assigned
         if (!group.roomId) {
@@ -105,7 +105,7 @@ const ApproveBookingPage = () => {
 
         setDisabled(false);
       });
-  }, [assignedRooms, booking, booking?.property?.propertyType]);
+  }, [assignedRooms, booking, booking?.property?.propertyType, store]);
 
   if ((!nonHostelProperty && !hostelProperty) || !booking) return <Spinner />;
   return (
