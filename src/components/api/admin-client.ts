@@ -53,10 +53,10 @@ const editBooking = new APIClient<EditBooking>("/booking/editBooking");
 const getCurrentHostings = new APIClient<CurrentHosting>(
   "/dashboard/currentHostings"
 ).getRequest;
-const getUpcomingCheckins = new APIClient<EditBooking>(
+const getUpcomingCheckins = new APIClient<CurrentHosting>(
   "/dashboard/upcomingCheckins"
 ).getRequest;
-const getUpcomingCheckOuts = new APIClient<EditBooking>(
+const getUpcomingCheckOuts = new APIClient<CurrentHosting>(
   "dashboard/upcomingCheckouts"
 ).getRequest;
 

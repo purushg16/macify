@@ -2,6 +2,8 @@ import { Box, Divider, Flex, Heading, Highlight, Text } from "@chakra-ui/react";
 import OptionsGrid from "../elements/Dashboard/OptionsGrid";
 import CurrentHostingGrid from "../elements/Dashboard/CurrentHostingGrid";
 import { useState } from "react";
+import UpcomingCheckInGrid from "../elements/Dashboard/UpcomingCheckInGrid";
+import UpcomingCheckOutGrid from "../elements/Dashboard/UpcomingCheckOuts";
 
 const DashBoardPage = () => {
   const [tab, setTab] = useState(0);
@@ -24,6 +26,8 @@ const DashBoardPage = () => {
       <Divider />
 
       {tab === 0 && <CurrentHostingGrid />}
+      {tab === 1 && <UpcomingCheckInGrid />}
+      {tab === 2 && <UpcomingCheckOutGrid />}
     </Flex>
   );
 };
