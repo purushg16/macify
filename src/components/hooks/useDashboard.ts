@@ -1,84 +1,37 @@
-import { useToast } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
-import { APIError } from "../entities/Error";
+import { useQuery } from "@tanstack/react-query";
 import {
   getCurrentHostings,
   getUpcomingCheckOuts,
   getUpcomingCheckins,
 } from "../api/admin-client";
+import ms from "ms";
 
-const useAdminCurrentHosting = () => {
-  const toast = useToast();
+const useAdminCurrentHosting = () =>
+  useQuery({
+    queryKey: ["admin", "currentHosting"],
+    queryFn: getCurrentHostings,
 
-  return useMutation({
-    mutationFn: getCurrentHostings,
-
-    onSuccess: () =>
-      toast({
-        title: "Property booked successfully",
-        status: "error",
-        position: "top",
-        duration: 3000,
-      }),
-
-    onError: (err: AxiosError<APIError>) =>
-      toast({
-        title: err.response?.data?.error,
-        status: "error",
-        position: "top",
-        duration: 3000,
-      }),
+    staleTime: ms("5m"),
+    refetchOnWindowFocus: false,
   });
-};
 
-const useAdminUpcomingCheckIns = () => {
-  const toast = useToast();
+const useAdminUpcomingCheckIns = () =>
+  useQuery({
+    queryKey: ["admin", "upcomingCheckIns"],
+    queryFn: getUpcomingCheckins,
 
-  return useMutation({
-    mutationFn: getUpcomingCheckins,
-
-    onSuccess: () =>
-      toast({
-        title: "Property booked successfully",
-        status: "error",
-        position: "top",
-        duration: 3000,
-      }),
-
-    onError: (err: AxiosError<APIError>) =>
-      toast({
-        title: err.response?.data?.error,
-        status: "error",
-        position: "top",
-        duration: 3000,
-      }),
+    staleTime: ms("5m"),
+    refetchOnWindowFocus: false,
   });
-};
 
-const useAdminUpcomingCheckOuts = () => {
-  const toast = useToast();
+const useAdminUpcomingCheckOuts = () =>
+  useQuery({
+    queryKey: ["admin", "upcomingCheckOuts"],
+    queryFn: getUpcomingCheckOuts,
 
-  return useMutation({
-    mutationFn: getUpcomingCheckOuts,
-
-    onSuccess: () =>
-      toast({
-        title: "Property booked successfully",
-        status: "error",
-        position: "top",
-        duration: 3000,
-      }),
-
-    onError: (err: AxiosError<APIError>) =>
-      toast({
-        title: err.response?.data?.error,
-        status: "error",
-        position: "top",
-        duration: 3000,
-      }),
+    staleTime: ms("5m"),
+    refetchOnWindowFocus: false,
   });
-};
 
 export {
   useAdminCurrentHosting,
