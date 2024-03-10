@@ -19,6 +19,7 @@ export default interface BookingDetails {
   property: {
     _id: string;
     propertyName: string;
+    propertyType: string;
   };
   bookings: Booking[];
   paid: number;

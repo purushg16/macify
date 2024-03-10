@@ -13,7 +13,10 @@ import { useEffect, useState } from "react";
 import { MdArrowBack } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { useGetSingleBookingToApprove } from "../../hooks/useAdmin";
-import { useGetSingleProperty } from "../../hooks/usePropertyServices";
+import {
+  useGetAvailableBeds,
+  useGetAvailableRooms,
+} from "../../hooks/usePropertyServices";
 import ApproveBookingModal from "../elements/ApproveBooking/ApproveBookingModal";
 import BedAssignBlock from "../elements/ApproveBooking/BedAssignBlock";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
@@ -34,13 +37,41 @@ const ApproveBookingPage = () => {
   const assignedRooms = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === booking?._id
   )?.bookings;
+  const storeCheckIn = useApproveBookingStore((s) => s.singlBooking)?.find(
+    (b) => b.groupId === booking?._id
+  )?.checkIn;
+  const storeCheckOut = useApproveBookingStore((s) => s.singlBooking)?.find(
+    (b) => b.groupId === booking?._id
+  )?.checkOut;
 
   const propertyId = booking?.property?._id;
+  // const {
+  //   data: property,
+  //   isLoading,
+  //   isError,
+  // } = useGetSingleProperty(propertyId!, !!propertyId);
+
   const {
-    data: property,
-    isLoading,
-    isError,
-  } = useGetSingleProperty(propertyId!, !!propertyId);
+    data: nonHostelProperty,
+    isLoading: isNHPLoading,
+    isError: isNHPError,
+  } = useGetAvailableRooms(
+    propertyId!,
+    storeCheckIn!,
+    storeCheckOut!,
+    !!propertyId && booking?.property.propertyType !== "hostel"
+  );
+
+  const {
+    data: hostelProperty,
+    isLoading: isHPLoading,
+    isError: isHPError,
+  } = useGetAvailableBeds(
+    propertyId!,
+    storeCheckIn!,
+    storeCheckOut!,
+    !!propertyId && booking?.property.propertyType === "hostel"
+  );
 
   useEffect(() => {
     if (booking)
@@ -50,6 +81,9 @@ const ApproveBookingPage = () => {
           (room) => room.bookingId === bookingId
         );
 
+        console.log(assignedRooms);
+        console.log(group);
+
         // if the group was not found.
         if (!group) {
           setDisabled(true);
@@ -57,7 +91,7 @@ const ApproveBookingPage = () => {
         }
 
         // if it's a hostel & room, bed not assigned
-        if (property?.propertyType === "hostel")
+        if (booking.property?.propertyType === "hostel")
           if (!group.roomId || !group.bedId) {
             setDisabled(true);
             return;
@@ -71,9 +105,9 @@ const ApproveBookingPage = () => {
 
         setDisabled(false);
       });
-  }, [assignedRooms, booking, property?.propertyType]);
+  }, [assignedRooms, booking, booking?.property?.propertyType]);
 
-  if (!property || !booking) return <Spinner />;
+  if ((!nonHostelProperty && !hostelProperty) || !booking) return <Spinner />;
   return (
     <Flex flexDir="column" gap={8}>
       <Flex gap={2} alignItems="center">
@@ -81,7 +115,7 @@ const ApproveBookingPage = () => {
           <IconButton aria-label="back-btn" icon={<MdArrowBack />} size="sm" />
         </Link>
         <Heading fontSize="xl" textTransform="capitalize">
-          {property.propertyName}
+          {booking.property.propertyName}
         </Heading>
       </Flex>
 
@@ -100,12 +134,24 @@ const ApproveBookingPage = () => {
           <HStack mb={2}>
             <RoomAssignBlock
               groupId={booking._id}
-              property={property}
+              rooms={
+                booking.property.propertyType === "hostel"
+                  ? hostelProperty!
+                  : nonHostelProperty!
+              }
               bookingId={b._id}
-              isLoading={isLoading}
-              isError={isError}
+              isLoading={
+                booking.property.propertyType === "hostel"
+                  ? isHPLoading
+                  : isNHPLoading
+              }
+              isError={
+                booking.property.propertyType === "hostel"
+                  ? isHPError
+                  : isNHPError
+              }
             />
-            {property.propertyType === "hostel" && (
+            {booking.property.propertyType === "hostel" && (
               <BedAssignBlock bookingId={b._id} groupId={booking._id} />
             )}
           </HStack>

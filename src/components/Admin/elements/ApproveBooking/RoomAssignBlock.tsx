@@ -8,13 +8,13 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import Property from "../../../entities/property";
+import { PropertyRoom } from "../../../entities/property";
 import useApproveBookingStore from "../../../store/approveBookingStore";
 import useEditBookingStore from "../../../store/editBookingStore";
 
 interface Props {
   groupId: string;
-  property: Property;
+  rooms: PropertyRoom[];
   bookingId: string;
   isLoading: boolean;
   isError: boolean;
@@ -23,7 +23,7 @@ interface Props {
 
 const RoomAssignBlock = ({
   groupId,
-  property,
+  rooms,
   bookingId,
   isLoading,
   isError,
@@ -34,17 +34,15 @@ const RoomAssignBlock = ({
   )?.bookings;
   const assignRoom = useApproveBookingStore((s) => s.setBookings);
 
-  const currentRoom = assignedRooms?.find(
-    (r) => r.bookingId === bookingId
-  )?.roomId;
+  const currentRoom = assignedRooms?.find((r) => r.bookingId === bookingId);
 
   const editEntry = useEditBookingStore((s) => s.editBookingEntries)?.find(
     (entry) => entry.bookingId === groupId
-  )?.roomId;
+  );
 
   const setEditRoom = useEditBookingStore((s) => s.setSingleBooking);
 
-  if (!property) return <Spinner />;
+  if (!rooms) return <Spinner />;
   return (
     <Menu>
       <MenuButton
@@ -56,14 +54,14 @@ const RoomAssignBlock = ({
         isDisabled={isError}
       >
         {editBooking
-          ? property.rooms.find((r) => r._id === editEntry)?.roomName ||
+          ? rooms.find((r) => r._id === editEntry?.roomId)?.roomName ||
             "Select Room"
-          : property.rooms.find((r) => r._id === currentRoom)?.roomName ||
+          : rooms.find((r) => r._id === currentRoom?.roomId)?.roomName ||
             "Select Room"}
       </MenuButton>
       <MenuList borderRadius={10}>
-        {property.rooms.length > 0 ? (
-          property.rooms.map((room, i) => (
+        {rooms.length > 0 ? (
+          rooms.map((room, i) => (
             <MenuItem
               textTransform="capitalize"
               key={i}
