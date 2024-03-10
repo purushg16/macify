@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Player } from "@lordicon/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface Props {
   icon: unknown;
@@ -24,5 +24,15 @@ const IconWrapper = ({ icon, active = false }: Props) => {
     </Box>
   );
 };
+
+const NormalWrapper = ({ icon }: Props) => {
+  const playerRef = useRef<Player>(null);
+  useEffect(() => {
+    playerRef.current?.playFromBeginning();
+  }, []);
+  return <Player ref={playerRef} size={25} icon={icon} />;
+};
+
+export { NormalWrapper };
 
 export default IconWrapper;
