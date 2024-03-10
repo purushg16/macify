@@ -4,6 +4,7 @@ import ApproveBooking from "../entities/approveBooking";
 import EditBooking from "../entities/editBooking";
 import GroupBooking from "../entities/GroupBooking";
 import BookingDetails, { BookingGuest } from "../entities/booking";
+import CurrentHosting from "../entities/CurrentHosting";
 
 interface RejectBookingInterface {
   groupId: string;
@@ -49,7 +50,7 @@ const getAllBookings = new APIClient<BookingTimelineInterface>(
 );
 const editBooking = new APIClient<EditBooking>("/booking/editBooking");
 
-const getCurrentHostings = new APIClient<EditBooking>(
+const getCurrentHostings = new APIClient<CurrentHosting>(
   "/dashboard/currentHostings"
 ).getRequest;
 const getUpcomingCheckins = new APIClient<EditBooking>(
