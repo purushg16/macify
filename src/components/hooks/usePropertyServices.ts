@@ -5,6 +5,8 @@ import { APIError } from "../entities/Error";
 import {
   editProperty,
   getAllProperties,
+  getAvailableBeds,
+  getAvailableRooms,
   getSingleProperty,
   postNewProperty,
 } from "../api/property-client";
@@ -72,6 +74,54 @@ const useGetAllProperties = () => {
   });
 };
 
+const useGetAvailableRooms = (
+  propertyId: string,
+  checkIn: Date,
+  checkOut: Date,
+  enabled: boolean
+) => {
+  return useQuery({
+    queryKey: ["property", "getAvaiablerooms"],
+    queryFn: () =>
+      getAvailableRooms
+        .getRequest({
+          params: {
+            propertyId: propertyId,
+            checkIn: checkIn,
+            checkOut: checkOut,
+          },
+        })
+        .then((res) => res.data),
+    enabled: enabled,
+    retry: 2,
+    refetchOnWindowFocus: false,
+  });
+};
+
+const useGetAvailableBeds = (
+  propertyId: string,
+  checkIn: Date,
+  checkOut: Date,
+  enabled: boolean
+) => {
+  return useQuery({
+    queryKey: ["property", "getAvaiablebeds"],
+    queryFn: () =>
+      getAvailableBeds
+        .getRequest({
+          params: {
+            propertyId: propertyId,
+            checkIn: checkIn,
+            checkOut: checkOut,
+          },
+        })
+        .then((res) => res.data),
+    enabled: enabled,
+    retry: 2,
+    refetchOnWindowFocus: false,
+  });
+};
+
 const useGetSingleProperty = (propertyId: string, enabled: boolean) => {
   return useQuery({
     queryKey: ["property", "getProperty", propertyId],
@@ -96,4 +146,6 @@ export {
   useGetAllProperties,
   useGetSingleProperty,
   useEditProperty,
+  useGetAvailableRooms,
+  useGetAvailableBeds,
 };
