@@ -209,7 +209,7 @@ const useEditBooking = (bookingId: string) => {
   });
 };
 
-const useGetAllBooking = (ids: AllBookingsInterface) => {
+const useGetAllBooking = (ids: AllBookingsInterface, enabled?: boolean) => {
   return useQuery({
     queryKey: ["booking", "allBookings"],
     queryFn: () =>
@@ -221,6 +221,7 @@ const useGetAllBooking = (ids: AllBookingsInterface) => {
         })
         .then((res) => res),
     retry: 2,
+    enabled: enabled,
     refetchOnWindowFocus: false,
     staleTime: ms("24hr"),
   });

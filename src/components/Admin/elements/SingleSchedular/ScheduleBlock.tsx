@@ -14,6 +14,8 @@ const ScheduleBlock = ({
   scheduleData,
   firstLap,
 }: ScheduleBlockProps) => {
+  if (!scheduleData) return null;
+
   const firstData = Object.values(scheduleData)[0];
 
   const behindHosting: boolean =

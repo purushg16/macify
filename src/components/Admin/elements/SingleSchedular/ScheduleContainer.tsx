@@ -1,15 +1,21 @@
-import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import DateBlock from "./DateBlock";
 import Schedular from "./Schedular";
 import DateGenerator from "../../../functions/dateGenerator";
 import { useGetAllBooking } from "../../../hooks/useAdmin";
 import { useRef, useState } from "react";
 import BookingDetailsModal from "./BookingDetailsModal";
+import { useGetAllProperties } from "../../../hooks/usePropertyServices";
 
 const ScheduleContainer = () => {
-  const { data: scheduleData, isLoading } = useGetAllBooking({
-    ids: ["65d958df2a773c387290a013", "65d958be2a773c387290a00f"],
-  });
+  const { data: properties } = useGetAllProperties();
+
+  const { data: scheduleData, isLoading } = useGetAllBooking(
+    {
+      ids: ["65d77f3f441ad240998b4b7b", "65d958be2a773c387290a00e"],
+    },
+    !!properties
+  );
 
   const [visibleMonth, setVisibleMonth] = useState(1);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -23,7 +29,12 @@ const ScheduleContainer = () => {
   };
 
   if (isLoading) return <Spinner />;
-  if (!scheduleData) return <Text> No data to display </Text>;
+  if (!scheduleData) return null;
+  if (!properties) return <Spinner />;
+
+  console.log(Object.keys(scheduleData));
+  console.log(properties?.data.map((room) => room.rooms.map((r) => r._id)));
+
   return (
     <Box
       ref={boxRef}
@@ -42,6 +53,36 @@ const ScheduleContainer = () => {
 
       {/* Rendering List of Properties Schedules */}
       <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
+        {properties?.data.map((property) =>
+          !property.rentWithin ? (
+            <Schedular
+              propertyName={property.propertyName}
+              propertyNumber=""
+              dates={dates}
+              scheduleData={
+                scheduleData[
+                  Object.keys(scheduleData).find((s) => s === property.id)
+                ]
+              }
+            />
+          ) : (
+            property.rooms.map((room) => (
+              <Schedular
+                propertyName={property.propertyName}
+                propertyNumber={room.roomName}
+                dates={dates}
+                scheduleData={
+                  scheduleData?.[
+                    Object.keys(scheduleData!)?.find((r) => r === room._id)
+                  ]
+                }
+              />
+            ))
+          )
+        )}
+      </Flex>
+
+      {/* <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
         {Object.values(scheduleData!).map((schedule) => (
           <Schedular
             propertyName="Ganga"
@@ -50,7 +91,7 @@ const ScheduleContainer = () => {
             scheduleData={schedule}
           />
         ))}
-      </Flex>
+      </Flex> */}
       <BookingDetailsModal />
     </Box>
   );

@@ -32,8 +32,9 @@ const Schedular = ({
         pl={2}
         borderLeft="5px solid #7edf9a"
         bg="gray.100"
+        textTransform="capitalize"
       >
-        {propertyName} - {propertyNumber && `  Room ${propertyNumber}`}
+        {propertyName} - {propertyNumber && `${propertyNumber}`}
       </Text>
 
       <Flex>
