@@ -7,6 +7,8 @@ import BedSelector from "../elements/BedSelector";
 import { useGetAllProperties } from "../../hooks/usePropertyServices";
 import PropertyRespone from "../../entities/PropertyResponse";
 import FetchDetailsButton from "../elements/SingleSchedular/FetchDetailsButton";
+import { BookingTimelineInterface } from "../../api/admin-client";
+import SingleCalendar from "../elements/SingleCalendar/SingleCalendar";
 
 export const SingleCalendarPage = () => {
   const { data: properties, isLoading: isPropertiesLoading } =
@@ -43,6 +45,12 @@ export const SingleCalendarPage = () => {
 
     setFinalField(id);
   };
+
+  const [booking, setBooking] = useState<
+    BookingTimelineInterface | undefined
+  >();
+  const afterDataFetched = (b: BookingTimelineInterface | undefined) =>
+    setBooking(b);
 
   return (
     <Grid>
@@ -90,9 +98,16 @@ export const SingleCalendarPage = () => {
           )}
         </Stack>
 
-        <FetchDetailsButton ids={[finalField]} disabled={!finalField} />
+        <FetchDetailsButton
+          ids={[finalField]}
+          disabled={!finalField}
+          callback={afterDataFetched}
+        />
       </GridItem>
-      <GridItem></GridItem>
+
+      <GridItem>
+        {booking && <SingleCalendar bookings={Object.values(booking)[0]} />}
+      </GridItem>
     </Grid>
   );
 };
