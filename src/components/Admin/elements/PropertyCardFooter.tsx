@@ -6,10 +6,10 @@ import { IoBedOutline } from "react-icons/io5";
 import { BiDetail } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-const PropertyCardFooter = () => {
+const PropertyCardFooter = ({ id }: { id: string }) => {
   return (
     <SimpleGrid columns={3} spacing={2}>
-      <Link to="edit">
+      <Link to={`edit/${id}`}>
         <DashboardOptButton label="Edit Details" icon={BiDetail} />
       </Link>
       <DashboardOptButton label="Edit Beds" icon={IoBedOutline} />

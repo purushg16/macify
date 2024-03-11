@@ -53,22 +53,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
         </AccordionButton>
 
         <AccordionPanel pb={4} px={0}>
-          <PropertyCardFooter />
-          {/* <Box
-      >
-        <SimpleGrid columns={2} gap={4} mt={4}>
-          <Button
-            w="100%"
-            colorScheme="primary"
-            onClick={() => navigate(`edit/${property._id}`)}
-          >
-            Edit Details
-          </Button>
-          <Button> Edit Rooms </Button>
-          <Button> Edit Beds </Button>
-          <Button colorScheme="red"> Delete </Button>
-        </SimpleGrid>
-      </Box> */}
+          <PropertyCardFooter id={property._id} />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
