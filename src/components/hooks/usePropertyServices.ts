@@ -71,6 +71,7 @@ const useGetAllProperties = () => {
     queryFn: getAllProperties.getRequest,
     retry: 2,
     refetchOnWindowFocus: false,
+    staleTime: ms("5m"),
   });
 };
 
