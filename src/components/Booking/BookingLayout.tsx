@@ -35,14 +35,13 @@ const BookingLayout = () => {
           p={8}
           borderRadius={20}
           border="1px solid"
-          borderColor="secondary.100"
-          bg="secondary.50"
-          // boxShadow="rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;"
+          borderColor="gray.200"
+          bg="#f6f6f6"
         >
           <Flex
             w="100%"
             flexDir="column"
-            gap={16}
+            gap={12}
             textAlign="center"
             alignItems="center"
             justifyContent="space-between"

@@ -1,20 +1,15 @@
 import CustomerFileUpload from "./CustomerFileUpload";
 import useBookingStore from "../../../store/bookingStore";
-import NumberOfGuestsForm from "./NumberOfGuestsForm";
 import UploadedFiles from "./UploadedFiles";
+import { Navigate } from "react-router-dom";
 
 const CustomerDetails = () => {
-  const numberOfGuestsSelected = useBookingStore(
-    (s) => s.numberOfGuestsSelected
-  );
-
   const uploadefFiles = useBookingStore((s) => s.filesUploaded)!;
+  const numberOfGuests = useBookingStore((s) => s.numberOfGuests)!;
 
-  if (!numberOfGuestsSelected) return <NumberOfGuestsForm />;
-  if (numberOfGuestsSelected) {
-    if (uploadefFiles?.length > 0) return <UploadedFiles />;
-    else return <CustomerFileUpload />;
-  }
+  if (!numberOfGuests) return <Navigate to="/booking" />;
+  if (uploadefFiles?.length > 0) return <UploadedFiles />;
+  else return <CustomerFileUpload />;
 };
 
 export default CustomerDetails;

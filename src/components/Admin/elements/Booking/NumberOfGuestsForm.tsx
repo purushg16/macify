@@ -15,13 +15,12 @@ import { TbMinus } from "react-icons/tb";
 import homies from "../../../../assets/app/homies.png";
 import AnimateMove from "../../../motions/Move";
 import useBookingStore from "../../../store/bookingStore";
+import { useNavigate } from "react-router-dom";
 
 const NumberOfGuestsForm = () => {
+  const navigate = useNavigate();
   const numberOfGuests = useBookingStore((s) => s.numberOfGuests);
   const setNumberOfGuests = useBookingStore((s) => s.setNumberOfGuests);
-  const isNumberOfGuestsSelected = useBookingStore(
-    (s) => s.isNumberOfGuestsSelected
-  );
 
   const {
     valueAsNumber,
@@ -97,7 +96,7 @@ const NumberOfGuestsForm = () => {
             colorScheme="primary"
             onClick={() => {
               setNumberOfGuests(valueAsNumber);
-              isNumberOfGuestsSelected(true);
+              navigate("2");
             }}
           >
             Continue

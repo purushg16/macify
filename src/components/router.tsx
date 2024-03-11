@@ -6,7 +6,6 @@ import DashBoardPage from "./Admin/pages/DashBoardPage";
 import CalendarPage from "./Admin/pages/CalendarPage";
 import PropertyPage from "./Admin/pages/PropertyPage";
 import ManagerPage from "./Admin/pages/ManagerPage";
-import HotelBooking from "./Booking/HotelBooking";
 import BookingLayout from "./Booking/BookingLayout";
 import AddFormLayoutPage from "./Layouts/AddFormLayoutPage";
 import NamePage from "./Admin/pages/AddProperty/NamePage";
@@ -32,6 +31,13 @@ import ScheduleContainer from "./Admin/elements/SingleSchedular/ScheduleContaine
 import { SingleCalendarPage } from "./Admin/pages/SingleCalendarPage";
 import ManagerLoginPage from "./Admin/pages/Authentication/ManagerLoginPage";
 import EditPropertyPage from "./Admin/pages/EditPropertyPage";
+import NumberOfGuestsForm from "./Admin/elements/Booking/NumberOfGuestsForm";
+import UploadedFiles from "./Admin/elements/Booking/UploadedFiles";
+import CustomerDetails from "./Admin/elements/Booking/CustomerDetails";
+import GuestPreviewPage from "./Admin/pages/CustomerBooking/GuestPreviewPage";
+import ReportTimePage from "./Admin/pages/CustomerBooking/ReportTimePage";
+import CustomerRoomDetailsPage from "./Admin/pages/CustomerBooking/CustomerRoomDetailsPage";
+import FinalPage from "./Admin/pages/CustomerBooking/FinalPage";
 
 const router = createBrowserRouter([
   {
@@ -102,7 +108,15 @@ const router = createBrowserRouter([
   {
     path: "/booking",
     element: <BookingLayout />,
-    children: [{ index: true, element: <HotelBooking /> }],
+    children: [
+      { index: true, element: <NumberOfGuestsForm /> },
+      { path: "1", element: <UploadedFiles /> },
+      { path: "2", element: <CustomerDetails /> },
+      { path: "3", element: <GuestPreviewPage /> },
+      { path: "4", element: <CustomerRoomDetailsPage /> },
+      { path: "5", element: <ReportTimePage /> },
+      { path: "6", element: <FinalPage /> },
+    ],
   },
 ]);
 

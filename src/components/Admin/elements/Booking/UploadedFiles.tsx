@@ -13,6 +13,7 @@ import useBookingStore from "../../../store/bookingStore";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import AnimateMove from "../../../motions/Move";
 import fetchFileDetails from "../../../functions/fetchFileDetails";
+import { useNavigate } from "react-router-dom";
 
 const UploadedFiles = () => {
   const guestsCount = useBookingStore((s) => s.numberOfGuests)!;
@@ -28,8 +29,10 @@ const UploadedFiles = () => {
     },
   });
 
+  const navigate = useNavigate();
   const extractDetails = () => {
     fetchFileDetails(uploadedFiles!).then((res) => console.log(res));
+    navigate("/booking/3");
   };
 
   return (
