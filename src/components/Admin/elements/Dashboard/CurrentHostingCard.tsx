@@ -17,7 +17,7 @@ const CurrentHostingCard = ({ data }: { data: CurrentHosting }) => {
       borderRadius={10}
       p={4}
       gap={4}
-      bg="gray.50"
+      bg="green.100"
       justifyContent="space-between"
       h="max-content"
       align="center"
@@ -25,9 +25,7 @@ const CurrentHostingCard = ({ data }: { data: CurrentHosting }) => {
       <Box>
         <HStack gap={2} align="baseline" mb={2}>
           <Heading fontSize="lg"> {data.property.propertyName} </Heading>
-          <Text fontSize="sm" color="gray">
-            Guests:3
-          </Text>
+          <Text fontSize="sm">Guests: {data.guests.length}</Text>
         </HStack>
 
         <HStack gap={2} align="baseline">
@@ -74,8 +72,8 @@ const CurrentHostingCard = ({ data }: { data: CurrentHosting }) => {
         py={{ base: 2, md: 4 }}
         h="100%"
         aspectRatio="1/1"
-        border="1px solid"
-        borderColor="gray"
+        bg="white"
+        _hover={{ bg: "#f6f6f6" }}
       >
         <Icon as={FaLocationArrow} />
       </Button>
