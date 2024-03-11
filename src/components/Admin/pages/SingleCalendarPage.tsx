@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  GridItem,
-  Input,
-  Spinner,
-  Stack,
-} from "@chakra-ui/react";
+import { Flex, Grid, GridItem, Input, Spinner, Stack } from "@chakra-ui/react";
 import PropertySelector from "../elements/PropertySelector";
 import { useState } from "react";
 import { PropertyBed, PropertyRoom } from "../../entities/property";
@@ -15,6 +6,7 @@ import RoomSelector from "../elements/RoomSelector";
 import BedSelector from "../elements/BedSelector";
 import { useGetAllProperties } from "../../hooks/usePropertyServices";
 import PropertyRespone from "../../entities/PropertyResponse";
+import FetchDetailsButton from "../elements/SingleSchedular/FetchDetailsButton";
 
 export const SingleCalendarPage = () => {
   const { data: properties, isLoading: isPropertiesLoading } =
@@ -98,11 +90,7 @@ export const SingleCalendarPage = () => {
           )}
         </Stack>
 
-        <Box textAlign="right" my={4}>
-          <Button colorScheme="primary" isDisabled={!finalField}>
-            View
-          </Button>
-        </Box>
+        <FetchDetailsButton ids={[finalField]} disabled={!finalField} />
       </GridItem>
       <GridItem></GridItem>
     </Grid>
