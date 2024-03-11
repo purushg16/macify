@@ -20,7 +20,10 @@ export default interface Property {
   country: string;
   city: string;
   zipcode: string;
-  manager: string;
+  manager: {
+    _id: string;
+    name: string;
+  };
   checkInTime: string;
   checkOutTime: string;
   rooms: PropertyRoom[];
