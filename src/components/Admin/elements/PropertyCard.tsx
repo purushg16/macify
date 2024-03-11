@@ -1,8 +1,10 @@
 import { Box, Flex, SimpleGrid, Heading, Button, Text } from "@chakra-ui/react";
 import Title from "./Title";
 import PropertyRespone from "../../entities/PropertyResponse";
+import { useNavigate } from "react-router-dom";
 
 const PropertyCard = ({ property }: { property: PropertyRespone }) => {
+  const navigate = useNavigate();
   return (
     <Flex
       gap={4}
@@ -34,7 +36,9 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
       </SimpleGrid>
       <SimpleGrid columns={2} gap={4} mt={4}>
         <Button> Delete </Button>
-        <Button colorScheme="primary">Edit Details</Button>
+        <Button colorScheme="primary" onClick={() => navigate("edit")}>
+          Edit Details
+        </Button>
       </SimpleGrid>
     </Flex>
   );

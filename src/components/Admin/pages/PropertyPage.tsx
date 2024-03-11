@@ -5,7 +5,6 @@ import PropertyCard from "../elements/PropertyCard";
 import Title from "../elements/Title";
 import DashboardOptButton from "../elements/Dashboard/DashboardOptButton";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { RiEditCircleLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 const PropertyPage = () => {
@@ -26,9 +25,6 @@ const PropertyPage = () => {
               label="Add Property"
               icon={IoIosAddCircleOutline}
             />
-          </Link>
-          <Link to="edit">
-            <DashboardOptButton label="Edit Property" icon={RiEditCircleLine} />
           </Link>
         </SimpleGrid>
       </Box>
