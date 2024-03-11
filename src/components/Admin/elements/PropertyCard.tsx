@@ -16,7 +16,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
   return (
     <Accordion allowToggle>
       <AccordionItem border="none">
-        <AccordionButton _hover={{ background: "none" }}>
+        <AccordionButton _hover={{ background: "none" }} px={0}>
           <Flex
             textAlign="left"
             w="100%"
@@ -52,7 +52,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
           </Flex>
         </AccordionButton>
 
-        <AccordionPanel pb={4}>
+        <AccordionPanel pb={4} px={0}>
           <PropertyCardFooter />
           {/* <Box
       >
