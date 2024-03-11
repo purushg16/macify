@@ -7,21 +7,23 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
+import { PropertyBed } from "../../entities/property";
 
 interface Props {
   onSelect: (propertyId: string) => void;
+  beds: PropertyBed[] | undefined;
 }
 
-const BedSelector = ({ onSelect }: Props) => {
+const BedSelector = ({ onSelect, beds }: Props) => {
   return (
     <Menu>
       <MenuButton as={IconButton} colorScheme="primary">
         <Icon as={BsChevronDown} />
       </MenuButton>
       <MenuList>
-        <MenuItem
-          onClick={() => onSelect("65d958be2a773c387290a00e")}
-        ></MenuItem>
+        {beds?.map((bed) => (
+          <MenuItem onClick={() => onSelect(bed._id)}>{bed.bedNo}</MenuItem>
+        ))}
       </MenuList>
     </Menu>
   );

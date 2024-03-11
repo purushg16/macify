@@ -7,21 +7,25 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
+import { PropertyRoom } from "../../entities/property";
 
 interface Props {
   onSelect: (propertyId: string) => void;
+  rooms: PropertyRoom[];
 }
 
-const RoomSelector = ({ onSelect }: Props) => {
+const RoomSelector = ({ onSelect, rooms }: Props) => {
   return (
     <Menu>
       <MenuButton as={IconButton} colorScheme="primary">
         <Icon as={BsChevronDown} />
       </MenuButton>
       <MenuList>
-        <MenuItem
-          onClick={() => onSelect("65d77f3f441ad240998b4b7b")}
-        ></MenuItem>
+        {rooms.map((room) => (
+          <MenuItem onClick={() => onSelect(room._id)}>
+            {room.roomName}
+          </MenuItem>
+        ))}
       </MenuList>
     </Menu>
   );

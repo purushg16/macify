@@ -1,71 +1,110 @@
-// import bookings from "../../data/bookings";
-// import SingleCalendar from "../elements/SingleCalendar/SingleCalendar";
-
-// import { Flex, Grid, GridItem, Input, Stack } from "@chakra-ui/react";
-// import PropertySelector from "../elements/PropertySelector";
-// import { useState } from "react";
-// import properties from "../../data/properties";
-// import Property, { PropertyBed, PropertyRoom } from "../../entities/property";
-// import RoomSelector from "../elements/RoomSelector";
-// import BedSelector from "../elements/BedSelector";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  GridItem,
+  Input,
+  Spinner,
+  Stack,
+} from "@chakra-ui/react";
+import PropertySelector from "../elements/PropertySelector";
+import { useState } from "react";
+import { PropertyBed, PropertyRoom } from "../../entities/property";
+import RoomSelector from "../elements/RoomSelector";
+import BedSelector from "../elements/BedSelector";
+import { useGetAllProperties } from "../../hooks/usePropertyServices";
+import PropertyRespone from "../../entities/PropertyResponse";
 
 export const SingleCalendarPage = () => {
-  // const [property, setProperty] = useState<Property>();
-  // const [room, setRoom] = useState<PropertyRoom>();
-  // const [bed, setBed] = useState<PropertyBed>();
+  const { data: properties, isLoading: isPropertiesLoading } =
+    useGetAllProperties();
 
-  // const onPropertySelect = (id: string) => {
-  //   setProperty(properties.find((property) => property._id === id));
-  // };
+  const [property, setProperty] = useState<PropertyRespone>();
+  const [room, setRoom] = useState<PropertyRoom>();
+  const [bed, setBed] = useState<PropertyBed>();
+  const [finalField, setFinalField] = useState("");
 
-  // const onRoomSelect = (id: string) => {
-  //   const selectedRoom = property?.rooms.find((room) => room._id === id);
-  //   setRoom(selectedRoom);
-  // };
+  const onPropertySelect = (id: string) => {
+    const selectedProperty = properties?.data.find(
+      (property) => property._id === id
+    );
+    setProperty(selectedProperty);
+    setRoom(undefined);
 
-  // const onBedSelect = (id: string) => {
-  //   const selectedBed = room?.beds?.find((bed) => bed._id === id);
-  //   setBed(selectedBed);
-  // };
+    if (!selectedProperty?.rentWithin) setFinalField(id);
+    else setFinalField("");
+  };
+
+  const onRoomSelect = (id: string) => {
+    const selectedRoom = property?.rooms.find((room) => room._id === id);
+    setRoom(selectedRoom);
+    setBed(undefined);
+
+    if (property?.propertyType !== "hostel") setFinalField(id);
+    else setFinalField("");
+  };
+
+  const onBedSelect = (id: string) => {
+    const selectedBed = room?.beds?.find((bed) => bed._id === id);
+    setBed(selectedBed);
+
+    setFinalField(id);
+  };
 
   return (
-    <>Single Calendar Page</>
-    // <Grid>
-    //   <Stack gap={4}>
-    //     <Flex gap={2}>
-    //       <Input
-    //         bg="gray.50"
-    //         value={property?.propertyName || "Select Propery"}
-    //         isDisabled
-    //       />
-    //       <PropertySelector onSelect={onPropertySelect} />
-    //     </Flex>
+    <Grid>
+      <GridItem>
+        <Stack gap={4}>
+          <Flex gap={2}>
+            <Input
+              bg="gray.50"
+              value={property?.propertyName || "Select Propery"}
+              isDisabled
+              textTransform="capitalize"
+            />
+            {isPropertiesLoading ? (
+              <Spinner />
+            ) : (
+              <PropertySelector
+                onSelect={onPropertySelect}
+                properties={properties?.data}
+              />
+            )}
+          </Flex>
 
-    //     {property && !property.rentWithin && (
-    //       <>
-    //         <Flex gap={2}>
-    //           <Input
-    //             bg="gray.50"
-    //             value={room?.roomName || "Select Room"}
-    //             isDisabled
-    //           />
-    //           <RoomSelector onSelect={onRoomSelect} />
-    //         </Flex>
+          {property && property.rentWithin && (
+            <>
+              <Flex gap={2}>
+                <Input
+                  bg="gray.50"
+                  value={room?.roomName || "Select Room"}
+                  isDisabled
+                />
+                <RoomSelector onSelect={onRoomSelect} rooms={property.rooms} />
+              </Flex>
 
-    //         {property.propertyType === "hostel" && (
-    //           <Flex gap={2}>
-    //             <Input
-    //               bg="gray.50"
-    //               value={bed?.bedNo || "Select Bed"}
-    //               isDisabled
-    //             />
-    //             <BedSelector onSelect={onBedSelect} />
-    //           </Flex>
-    //         )}
-    //       </>
-    //     )}
-    //   </Stack>
-    //   <GridItem></GridItem>
-    // </Grid>
+              {room && property.propertyType === "hostel" && (
+                <Flex gap={2}>
+                  <Input
+                    bg="gray.50"
+                    value={bed?.bedNo || "Select Bed"}
+                    isDisabled
+                  />
+                  <BedSelector onSelect={onBedSelect} beds={room.beds} />
+                </Flex>
+              )}
+            </>
+          )}
+        </Stack>
+
+        <Box textAlign="right" my={4}>
+          <Button colorScheme="primary" isDisabled={!finalField}>
+            View
+          </Button>
+        </Box>
+      </GridItem>
+      <GridItem></GridItem>
+    </Grid>
   );
 };
