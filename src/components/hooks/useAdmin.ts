@@ -8,6 +8,7 @@ import {
   createManager,
   editBooking,
   getAllBookings,
+  getAllManagers,
   getSinglebookingToApprove,
   rejectBooking,
 } from "../api/admin-client";
@@ -87,6 +88,14 @@ const useGetSingleBookingToApprove = (groupId: string) => {
     staleTime: ms("5m"),
   });
 };
+
+const useGetAllManagers = () =>
+  useQuery({
+    queryKey: ["manager", "allManager"],
+    queryFn: getAllManagers,
+    staleTime: ms("5m"),
+    refetchOnWindowFocus: false,
+  });
 
 const useApproveBooking = (groupId: string) => {
   const toast = useToast();
@@ -232,6 +241,7 @@ export {
   useGetBookingsToApprove,
   useGetSingleBookingToApprove,
   useApproveBooking,
+  useGetAllManagers,
   useRejectBooking,
   useEditBooking,
   useGetAllBooking,

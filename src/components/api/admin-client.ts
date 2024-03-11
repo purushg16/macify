@@ -50,6 +50,8 @@ const getAllBookings = new APIClient<BookingTimelineInterface>(
 );
 const editBooking = new APIClient<EditBooking>("/booking/editBooking");
 
+const getAllManagers = new APIClient<Manager>("/manager/allManager").getRequest;
+
 const getCurrentHostings = new APIClient<CurrentHosting>(
   "/dashboard/currentHostings"
 ).getRequest;
@@ -68,6 +70,7 @@ export {
   rejectBooking,
   getAllBookings,
   editBooking,
+  getAllManagers,
   getCurrentHostings,
   getUpcomingCheckins,
   getUpcomingCheckOuts,
