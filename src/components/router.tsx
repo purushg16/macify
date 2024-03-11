@@ -31,6 +31,7 @@ import ApproveBookingPage from "./Admin/pages/ApproveBookingPage";
 import ScheduleContainer from "./Admin/elements/SingleSchedular/ScheduleContainer";
 import { SingleCalendarPage } from "./Admin/pages/SingleCalendarPage";
 import ManagerLoginPage from "./Admin/pages/Authentication/ManagerLoginPage";
+import EditPropertyPage from "./Admin/pages/EditPropertyPage";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +84,7 @@ const router = createBrowserRouter([
               { path: "success", element: <SuccessfulPage /> },
             ],
           },
+          { path: "edit", element: <EditPropertyPage /> },
         ],
       },
     ],
