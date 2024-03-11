@@ -14,7 +14,15 @@ const ScheduleBlock = ({
   scheduleData,
   firstLap,
 }: ScheduleBlockProps) => {
-  if (!scheduleData) return null;
+  if (!scheduleData)
+    return (
+      <Box
+        minW={{ base: 61, md: 110, lg: 160 }}
+        minH={{ base: 35, md: 58 }}
+        py={2}
+        borderRight="1px solid #e1e1e1"
+      />
+    );
 
   const firstData = Object.values(scheduleData)[0];
 
