@@ -1,46 +1,77 @@
-import { Box, Flex, SimpleGrid, Heading, Button, Text } from "@chakra-ui/react";
-import Title from "./Title";
+import {
+  Box,
+  Flex,
+  SimpleGrid,
+  Heading,
+  Text,
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
+} from "@chakra-ui/react";
 import PropertyRespone from "../../entities/PropertyResponse";
-import { useNavigate } from "react-router-dom";
+import PropertyCardFooter from "./PropertyCardFooter";
 
 const PropertyCard = ({ property }: { property: PropertyRespone }) => {
-  const navigate = useNavigate();
   return (
-    <Flex
-      gap={4}
-      flexDir="column"
-      bg="#f6f6f6"
-      p={8}
-      px={4}
-      borderRadius={10}
-      boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px;"
-    >
-      <Box>
-        <Title heading={property.propertyName} subtitle="" align="left" />
-      </Box>
-      <SimpleGrid columns={2} gap={4}>
-        <Box p={4} bg="gray.50" borderRadius={10}>
-          <Text color="gray" fontSize="sm">
-            Type
-          </Text>
-          <Heading fontSize="xl" textTransform="capitalize">
-            {property.propertyType}
-          </Heading>
-        </Box>
-        <Box p={4} bg="gray.50" borderRadius={10}>
-          <Text color="gray" fontSize="sm">
-            Rooms
-          </Text>
-          <Heading fontSize="xl"> {property.rooms.length} </Heading>
-        </Box>
-      </SimpleGrid>
-      <SimpleGrid columns={2} gap={4} mt={4}>
-        <Button> Delete </Button>
-        <Button colorScheme="primary" onClick={() => navigate("edit")}>
-          Edit Details
-        </Button>
-      </SimpleGrid>
-    </Flex>
+    <Accordion allowToggle>
+      <AccordionItem border="none">
+        <AccordionButton _hover={{ background: "none" }}>
+          <Flex
+            textAlign="left"
+            w="100%"
+            gap={4}
+            flexDir="column"
+            bg="#f6f6f6"
+            p={8}
+            px={4}
+            borderRadius={10}
+            boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px;"
+          >
+            <Box>
+              <Heading fontSize="xl" textTransform="capitalize">
+                {property.propertyName}
+              </Heading>
+            </Box>
+            <SimpleGrid columns={2} gap={4}>
+              <Box p={4} bg="gray.50" borderRadius={10}>
+                <Text color="gray" fontSize="sm">
+                  Type
+                </Text>
+                <Heading fontSize="xl" textTransform="capitalize">
+                  {property.propertyType}
+                </Heading>
+              </Box>
+              <Box p={4} bg="gray.50" borderRadius={10}>
+                <Text color="gray" fontSize="sm">
+                  Rooms
+                </Text>
+                <Heading fontSize="xl"> {property.rooms.length} </Heading>
+              </Box>
+            </SimpleGrid>
+          </Flex>
+        </AccordionButton>
+
+        <AccordionPanel pb={4}>
+          <PropertyCardFooter />
+          {/* <Box
+      >
+        <SimpleGrid columns={2} gap={4} mt={4}>
+          <Button
+            w="100%"
+            colorScheme="primary"
+            onClick={() => navigate(`edit/${property._id}`)}
+          >
+            Edit Details
+          </Button>
+          <Button> Edit Rooms </Button>
+          <Button> Edit Beds </Button>
+          <Button colorScheme="red"> Delete </Button>
+        </SimpleGrid>
+      </Box> */}
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   );
 };
 

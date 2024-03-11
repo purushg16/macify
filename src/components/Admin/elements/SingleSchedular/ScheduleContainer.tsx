@@ -32,6 +32,8 @@ const ScheduleContainer = () => {
   if (!scheduleData) return null;
   if (!properties) return <Spinner />;
 
+  const bookingDates = Object.keys(scheduleData);
+
   console.log(Object.keys(scheduleData));
   console.log(properties?.data.map((room) => room.rooms.map((r) => r._id)));
 
@@ -60,9 +62,7 @@ const ScheduleContainer = () => {
               propertyNumber=""
               dates={dates}
               scheduleData={
-                scheduleData[
-                  Object.keys(scheduleData).find((s) => s === property.id)
-                ]
+                scheduleData[bookingDates.find((s) => s === property._id)!]
               }
             />
           ) : (
@@ -72,9 +72,7 @@ const ScheduleContainer = () => {
                 propertyNumber={room.roomName}
                 dates={dates}
                 scheduleData={
-                  scheduleData?.[
-                    Object.keys(scheduleData!)?.find((r) => r === room._id)
-                  ]
+                  scheduleData[bookingDates.find((s) => s === room._id)!]
                 }
               />
             ))

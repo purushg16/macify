@@ -84,7 +84,7 @@ const router = createBrowserRouter([
               { path: "success", element: <SuccessfulPage /> },
             ],
           },
-          { path: "edit", element: <EditPropertyPage /> },
+          { path: "edit/:id", element: <EditPropertyPage /> },
         ],
       },
     ],

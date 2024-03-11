@@ -34,7 +34,7 @@ const ScheduleTimeline = ({
   const border = current ? "#7edf9a" : upcoming ? "#b793f3" : "#ffe36e";
 
   const scheduleBlockWidth = durationCalculator(
-    startDate.getTime(),
+    behind ? new Date().getTime() : startDate.getTime(),
     endDate.getTime()
   );
 
@@ -75,9 +75,9 @@ const ScheduleTimeline = ({
       zIndex={10}
       onClick={handleToggle}
       w={{
-        base: (behind ? 15 : 31) * scheduleBlockWidth,
-        md: (behind ? 28 : 56) * scheduleBlockWidth,
-        lg: (behind ? 40 : 81) * scheduleBlockWidth,
+        base: (behind ? 47 : 31) * scheduleBlockWidth,
+        md: (behind ? 56 + 28 : 56) * scheduleBlockWidth,
+        lg: (behind ? 81 + 40 : 81) * scheduleBlockWidth,
       }}
       border="1px solid"
       borderColor={border}
