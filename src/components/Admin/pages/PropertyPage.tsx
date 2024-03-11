@@ -1,9 +1,12 @@
 import { Box, Flex, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { useGetAllProperties } from "../../hooks/usePropertyServices";
 import AnimateMove from "../../motions/Move";
-import AddPropertyButton from "../elements/AddPropertyButton";
 import PropertyCard from "../elements/PropertyCard";
 import Title from "../elements/Title";
+import DashboardOptButton from "../elements/Dashboard/DashboardOptButton";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { RiEditCircleLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const PropertyPage = () => {
   const { data: properties, isLoading } = useGetAllProperties();
@@ -16,8 +19,18 @@ const PropertyPage = () => {
         align="left"
       />
 
-      <Box borderBottom="1px solid" borderColor="gray.50">
-        <AddPropertyButton />
+      <Box borderBottom="1px solid" borderColor="gray.50" pb={4}>
+        <SimpleGrid columns={{ base: 2, sm: 3 }} gap={4}>
+          <Link to="add">
+            <DashboardOptButton
+              label="Add Property"
+              icon={IoIosAddCircleOutline}
+            />
+          </Link>
+          <Link to="edit">
+            <DashboardOptButton label="Edit Property" icon={RiEditCircleLine} />
+          </Link>
+        </SimpleGrid>
       </Box>
 
       {isLoading ? (
