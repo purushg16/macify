@@ -18,11 +18,11 @@ const DashboardOptButton = ({ label, icon, active = false }: Props) => {
       p={2}
       py={4}
       border="1px solid"
-      borderColor={active ? `gray.300` : `gray.50`}
+      borderColor={active ? `gray.200` : `gray.50`}
       alignItems="center"
       justify="center"
-      bg={active ? `gray.50` : `#f6f6f6`}
-      _hover={{ bg: `#f6f6f6` }}
+      bg={`#f6f6f6`}
+      _hover={`#f6f6f6`}
       transition="all 0.7s"
       cursor="pointer"
     >
