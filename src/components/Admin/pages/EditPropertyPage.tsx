@@ -1,20 +1,33 @@
 import { useParams } from "react-router-dom";
 import { useGetSingleProperty } from "../../hooks/usePropertyServices";
-import { Box, Flex, GridItem, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  GridItem,
+  Icon,
+  SimpleGrid,
+  Spacer,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import { BiGlobe } from "react-icons/bi";
 import { IoLocation } from "react-icons/io5";
-import { MdLinearScale } from "react-icons/md";
+import { MdDeleteOutline, MdLinearScale } from "react-icons/md";
 import { TiUserOutline } from "react-icons/ti";
 import PropertyField from "../elements/EditProperty/PropertyField";
 import EditPropertyValue from "../elements/EditProperty/EditPropertyValue";
 import EditPropertyIconValue from "../elements/EditProperty/EditPropertyIconValue";
 import { BsBuilding, BsClock } from "react-icons/bs";
 import EditPropertyAmenityTag from "../elements/EditProperty/EditPropertyAmenityTag";
+import Title from "../elements/Title";
+import EditPropertySubmitButton from "../elements/EditProperty/EditPropertySubmitButton";
 
 const EditPropertyPage = () => {
   const id = useParams().id;
   const { data: property } = useGetSingleProperty(id!, !!id);
 
+  if (!property) return <Spinner />;
   return (
     <Flex
       gap={8}
@@ -25,6 +38,25 @@ const EditPropertyPage = () => {
       borderRadius={10}
       p={2}
     >
+      <GridItem pt={4} px={2}>
+        <Flex>
+          <Title
+            heading={property?.propertyName}
+            subtitle={property?.propertyType}
+            align="left"
+          />
+          <Spacer />
+          <Button
+            size="sm"
+            bg="red.100"
+            _hover={{ bg: "red.200" }}
+            border="1px solid"
+            borderColor="red.300"
+          >
+            <Icon as={MdDeleteOutline} />
+          </Button>
+        </Flex>
+      </GridItem>
       <GridItem>
         <PropertyField fieldTitle="Basics">
           <EditPropertyValue
@@ -89,7 +121,7 @@ const EditPropertyPage = () => {
             </SimpleGrid>
           </Box>
 
-          <Box w="max-content" mt={4}>
+          {/* <Box w="max-content" mt={4}>
             <Text mb={2} fontSize="sm" color="gray">
               Not selected
             </Text>
@@ -98,7 +130,7 @@ const EditPropertyPage = () => {
               <EditPropertyAmenityTag amenity="Pets Allowed" />
               <EditPropertyAmenityTag amenity="Pets Allowed" />
             </SimpleGrid>
-          </Box>
+          </Box> */}
         </PropertyField>
       </GridItem>
 
@@ -110,6 +142,12 @@ const EditPropertyPage = () => {
             icon={TiUserOutline}
           />
         </PropertyField>
+      </GridItem>
+
+      <GridItem textAlign="center">
+        <Title heading="Edit Details" subtitle="Add or remove field & submit" />
+        <EditPropertySubmitButton />
+        {/* // property={property} */}
       </GridItem>
     </Flex>
   );

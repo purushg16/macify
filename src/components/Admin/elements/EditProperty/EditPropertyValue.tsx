@@ -13,7 +13,7 @@ const EditPropertyValue = ({ label, value }: Props) => {
       <Text mb={2} fontSize="sm" color="gray">
         {label}
       </Text>
-      <Box p={2} px={4} borderRadius={10} bg="white" fontSize="xl">
+      <Box p={2} px={4} borderRadius={10} bg="white" fontSize="lg">
         {value}
       </Box>
     </Box>

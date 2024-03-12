@@ -1,7 +1,7 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 
 interface AddTitleProps {
-  heading: string;
+  heading: string | undefined;
   subtitle: string;
   align?: CanvasTextAlign;
 }
@@ -9,10 +9,10 @@ interface AddTitleProps {
 const Title = ({ heading, subtitle, align = "center" }: AddTitleProps) => {
   return (
     <Box textAlign={align}>
-      <Heading fontSize="2xl" fontWeight={500}>
+      <Heading fontSize="2xl" fontWeight={500} textTransform="capitalize">
         {heading}
       </Heading>
-      <Text color="gray" fontSize="sm">
+      <Text color="gray" fontSize="sm" textTransform="capitalize">
         {subtitle}
       </Text>
     </Box>

@@ -18,7 +18,7 @@ const EditPropertyIconValue = ({ time, title, icon }: Props) => {
         px={4}
         borderRadius={10}
         bg="white"
-        fontSize="xl"
+        fontSize="lg"
         textTransform="capitalize"
         display="flex"
         alignItems="center"
