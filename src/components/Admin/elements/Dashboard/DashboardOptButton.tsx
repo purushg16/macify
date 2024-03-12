@@ -3,10 +3,18 @@ import { IconType } from "react-icons";
 
 interface Props {
   label: string;
+  secondary?: string;
   icon: IconType;
+  color?: string;
+  active?: boolean;
 }
 
-const DashboardOptButton = ({ label, icon }: Props) => {
+const DashboardOptButton = ({
+  label,
+  icon,
+  color = "gray",
+  active = false,
+}: Props) => {
   return (
     <Flex
       borderRadius={10}
@@ -15,15 +23,17 @@ const DashboardOptButton = ({ label, icon }: Props) => {
       p={2}
       py={4}
       border="1px solid"
-      borderColor="gray.50"
+      borderColor={`${color}.500`}
       alignItems="center"
       justify="center"
-      bg="#f6f6f6"
-      _hover={{ bg: "gray.50" }}
+      bg={active ? `${color}.100` : `${color}.50`}
+      _hover={{ bg: `${color}.100` }}
       transition="all 0.7s"
       cursor="pointer"
     >
       <IconButton
+        bg="white"
+        _hover={{ bg: "white" }}
         aria-label="opt-btn"
         icon={<Icon as={icon} />}
         w="max-content"

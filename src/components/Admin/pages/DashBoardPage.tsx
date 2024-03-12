@@ -39,7 +39,7 @@ const DashBoardPage = () => {
           borderRadius={10}
           mt={4}
         >
-          <OptionsGrid handleTabChange={handleTabChange} />
+          <OptionsGrid handleTabChange={handleTabChange} currentTab={tab} />
           <Divider my={4} />
 
           {tab === 0 && <CurrentHostingGrid />}
