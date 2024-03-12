@@ -6,6 +6,7 @@ import UpcomingCheckInGrid from "../elements/Dashboard/UpcomingCheckInGrid";
 import UpcomingCheckOutGrid from "../elements/Dashboard/UpcomingCheckOuts";
 import Title from "../elements/Title";
 import AddStack from "../elements/Dashboard/AddStack";
+import { Link } from "react-router-dom";
 
 const DashBoardPage = () => {
   const [tab, setTab] = useState(0);
@@ -40,7 +41,16 @@ const DashBoardPage = () => {
           mt={4}
         >
           <OptionsGrid handleTabChange={handleTabChange} currentTab={tab} />
-          <Divider my={4} />
+          <Text
+            fontSize="xs"
+            textAlign="right"
+            textDecor="underline"
+            mt={4}
+            mb={2}
+          >
+            <Link to="calendar"> See All </Link>
+          </Text>
+          <Divider mb={4} />
 
           {tab === 0 && <CurrentHostingGrid />}
           {tab === 1 && <UpcomingCheckInGrid />}

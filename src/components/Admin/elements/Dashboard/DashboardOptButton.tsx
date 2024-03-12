@@ -9,12 +9,7 @@ interface Props {
   active?: boolean;
 }
 
-const DashboardOptButton = ({
-  label,
-  icon,
-  color = "gray",
-  active = false,
-}: Props) => {
+const DashboardOptButton = ({ label, icon, active = false }: Props) => {
   return (
     <Flex
       borderRadius={10}
@@ -23,15 +18,17 @@ const DashboardOptButton = ({
       p={2}
       py={4}
       border="1px solid"
-      borderColor={`${color}.500`}
+      borderColor={active ? `gray.300` : `gray.50`}
       alignItems="center"
       justify="center"
-      bg={active ? `${color}.100` : `${color}.50`}
-      _hover={{ bg: `${color}.100` }}
+      bg={active ? `gray.50` : `#f6f6f6`}
+      _hover={{ bg: `#f6f6f6` }}
       transition="all 0.7s"
       cursor="pointer"
     >
       <IconButton
+        border={active ? "1px solid" : "none"}
+        borderColor={active ? `gray.300` : `gray.50`}
         bg="white"
         _hover={{ bg: "white" }}
         aria-label="opt-btn"
