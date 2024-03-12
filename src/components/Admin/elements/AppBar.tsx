@@ -14,16 +14,13 @@ const AppBar = () => {
     <Box
       zIndex={100}
       pos="fixed"
-      p={2}
+      p={4}
       left="50%"
       transform="translateX(-50%)"
       bottom={3}
       borderRadius={99}
       overflow="hidden"
-      border="3px solid"
-      bg="#F5F7F8"
-      borderColor="rgba(255, 255, 255, 0.1)"
-      backdropFilter="blur(2em)"
+      bg="#F8F6F4"
     >
       <Flex gap={4}>
         <SmallButton

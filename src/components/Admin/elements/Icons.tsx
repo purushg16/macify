@@ -16,8 +16,8 @@ const IconWrapper = ({ icon, active = false }: Props) => {
       onClick={() => {
         playerRef.current?.playFromBeginning();
       }}
-      p={2}
-      bg={active ? "primary.50" : "gray.50"}
+      p={4}
+      bg={active ? "primary.50" : "none"}
       borderRadius={99}
     >
       <Player ref={playerRef} size={25} icon={icon} />
