@@ -11,13 +11,21 @@ import { FaLocationArrow } from "react-icons/fa";
 import CurrentHosting from "../../../entities/CurrentHosting";
 import DateFormatter from "../../../functions/dateFormatter";
 
-const CurrentHostingCard = ({ data }: { data: CurrentHosting }) => {
+const HostingCard = ({
+  data,
+  color = "green",
+}: {
+  data: CurrentHosting;
+  color: string;
+}) => {
   return (
     <Flex
       borderRadius={10}
       p={4}
       gap={4}
-      bg="green.100"
+      bg={`${color}.100`}
+      border="1px solid"
+      borderColor={`${color}.300`}
       justifyContent="space-between"
       h="max-content"
       align="center"
@@ -81,4 +89,4 @@ const CurrentHostingCard = ({ data }: { data: CurrentHosting }) => {
   );
 };
 
-export default CurrentHostingCard;
+export default HostingCard;

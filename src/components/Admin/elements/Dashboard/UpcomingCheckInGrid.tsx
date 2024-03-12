@@ -1,6 +1,6 @@
 import { Box, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { useAdminUpcomingCheckIns } from "../../../hooks/useDashboard";
-import CurrentHostingCard from "./CurrentHostingCard";
+import HostingCard from "./HostingCard";
 
 const UpcomingCheckInGrid = () => {
   const { data, isLoading } = useAdminUpcomingCheckIns();
@@ -12,7 +12,7 @@ const UpcomingCheckInGrid = () => {
 
       <SimpleGrid columns={1} mt={4} spacing={4}>
         {data?.data.map((hosting) => (
-          <CurrentHostingCard data={hosting} key={hosting._id} />
+          <HostingCard data={hosting} key={hosting._id} color="blue" />
         ))}
       </SimpleGrid>
     </Box>

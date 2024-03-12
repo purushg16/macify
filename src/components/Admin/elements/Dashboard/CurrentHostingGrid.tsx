@@ -1,5 +1,5 @@
 import { Box, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
-import CurrentHostingCard from "./CurrentHostingCard";
+import HostingCard from "./HostingCard";
 import { useAdminCurrentHosting } from "../../../hooks/useDashboard";
 
 const CurrentHostingGrid = () => {
@@ -12,7 +12,7 @@ const CurrentHostingGrid = () => {
 
       <SimpleGrid columns={1} mt={4} spacing={4}>
         {data?.data.map((hosting) => (
-          <CurrentHostingCard data={hosting} key={hosting._id} />
+          <HostingCard data={hosting} key={hosting._id} color="green" />
         ))}
       </SimpleGrid>
     </Box>
