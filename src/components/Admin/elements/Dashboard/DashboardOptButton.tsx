@@ -22,7 +22,7 @@ const DashboardOptButton = ({ label, icon, active = false }: Props) => {
       alignItems="center"
       justify="center"
       bg={`#f6f6f6`}
-      _hover={`#f6f6f6`}
+      _hover={{ bg: `#f6f6f6` }}
       transition="all 0.7s"
       cursor="pointer"
     >
