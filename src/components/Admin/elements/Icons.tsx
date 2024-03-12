@@ -5,9 +5,10 @@ import { useEffect, useRef } from "react";
 interface Props {
   icon: unknown;
   active?: boolean;
+  p?: number;
 }
 
-const IconWrapper = ({ icon, active = false }: Props) => {
+const IconWrapper = ({ icon, active = false, p = 2 }: Props) => {
   const playerRef = useRef<Player>(null);
 
   return (
@@ -16,7 +17,7 @@ const IconWrapper = ({ icon, active = false }: Props) => {
       onClick={() => {
         playerRef.current?.playFromBeginning();
       }}
-      p={4}
+      p={p}
       bg={active ? "primary.50" : "none"}
       borderRadius={99}
     >
