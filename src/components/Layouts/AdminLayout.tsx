@@ -56,6 +56,15 @@ const AdminLayout = () => {
           <Show below="lg">
             <Box py={8} />
             <AppBar />
+            <Box
+              w="100%"
+              pos="fixed"
+              bottom={-5}
+              h={2}
+              bg="none"
+              borderRadius="100%"
+              boxShadow="-11px -12px 20px 20px #b8d4c0d4"
+            />
           </Show>
         </GridItem>
       </Grid>
