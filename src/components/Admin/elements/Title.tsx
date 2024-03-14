@@ -4,15 +4,21 @@ interface AddTitleProps {
   heading: string | undefined;
   subtitle: string;
   align?: CanvasTextAlign;
+  size?: "3xl" | "2xl" | "4xl";
 }
 
-const Title = ({ heading, subtitle, align = "center" }: AddTitleProps) => {
+const Title = ({
+  heading,
+  subtitle,
+  align = "center",
+  size = "2xl",
+}: AddTitleProps) => {
   return (
     <Box textAlign={align}>
-      <Heading fontSize="2xl" fontWeight={500} textTransform="capitalize">
+      <Heading fontSize={size} fontWeight={500} textTransform="capitalize">
         {heading}
       </Heading>
-      <Text color="gray" fontSize="sm" textTransform="capitalize">
+      <Text color="gray" fontSize="sm">
         {subtitle}
       </Text>
     </Box>

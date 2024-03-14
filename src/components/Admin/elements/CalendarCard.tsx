@@ -1,5 +1,14 @@
-import { Box, Flex, Heading, Highlight, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  HStack,
+  Heading,
+  Highlight,
+  Icon,
+  Text,
+} from "@chakra-ui/react";
 import { IconType } from "react-icons";
+import { BsArrowRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -16,15 +25,11 @@ const CalendarCard = ({ title, subtitle, number, route }: Props) => {
     <Flex
       cursor="pointer"
       flexDir="column"
-      pos="relative"
       p={8}
       gap={12}
       borderRadius={15}
       onClick={() => navigate(`${route}`)}
-      // bg="#f1f1f1"
-      border="1px solid"
-      borderColor="gray.100"
-      overflow="hidden"
+      bg="#f2f2f2"
     >
       <Box w="max-content" borderRadius={10}>
         <Heading color="gray">
@@ -33,7 +38,7 @@ const CalendarCard = ({ title, subtitle, number, route }: Props) => {
             styles={{
               color: "gray",
               borderBottom: "3px solid",
-              borderColor: "red.600",
+              borderColor: "primary.500",
             }}
             children={"0" + number}
           />
@@ -41,20 +46,17 @@ const CalendarCard = ({ title, subtitle, number, route }: Props) => {
         {/* <Icon as={icon} boxSize={8} /> */}
       </Box>
 
-      <Box>
-        <Heading> {title} </Heading>
-        <Text color="gray"> {subtitle} </Text>
-      </Box>
-
-      <Box
-        bg="red.600"
-        p={4}
-        borderTopRadius={20}
-        pos="absolute"
-        w="95%"
-        left="2.5%"
-        bottom={-7}
-      />
+      <HStack justify="space-between">
+        <Box>
+          <Heading> {title} </Heading>
+          <Text color="gray" maxW={"90%"}>
+            {subtitle}
+          </Text>
+        </Box>
+        <Box p={2} px={4} bg="primary.100" borderRadius={20}>
+          <Icon as={BsArrowRight} boxSize={8} transform="rotate(320deg)" />
+        </Box>
+      </HStack>
     </Flex>
   );
 };
