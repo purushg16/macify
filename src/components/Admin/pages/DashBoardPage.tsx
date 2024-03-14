@@ -16,6 +16,7 @@ import { MdChecklistRtl, MdEmojiFlags } from "react-icons/md";
 import HostingButton from "../elements/Dashboard/HostingButton";
 import { FaRunning } from "react-icons/fa";
 import AnimateMove from "../../motions/Move";
+import TodayBanner from "../elements/Dashboard/TodayBanner";
 
 const DashBoardPage = () => {
   const [tab, setTab] = useState(0);
@@ -36,6 +37,8 @@ const DashBoardPage = () => {
           </Text>
         </Box>
       </Flex>
+
+      <TodayBanner />
 
       <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={12}>
         <Text fontSize="md"> New Beginning, </Text>
