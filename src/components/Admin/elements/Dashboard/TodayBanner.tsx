@@ -15,6 +15,7 @@ import {
   useAdminUpcomingCheckIns,
   useAdminUpcomingCheckOuts,
 } from "../../../hooks/useDashboard";
+import { Link } from "react-router-dom";
 
 const TodayBanner = () => {
   const { data: ciData, isLoading: CIisLoading } = useAdminUpcomingCheckIns();
@@ -33,12 +34,14 @@ const TodayBanner = () => {
           <Heading fontSize="lg"> Mar 26, 2024 </Heading>
         </Box>
         <Spacer />
-        <IconButton
-          size="sm"
-          aria-label="cal-btn"
-          icon={<Icon as={BsArrowRightCircle} />}
-          colorScheme="primary"
-        />
+        <Link to="calendar">
+          <IconButton
+            size="sm"
+            aria-label="cal-btn"
+            icon={<Icon as={BsArrowRightCircle} />}
+            colorScheme="primary"
+          />
+        </Link>
       </Flex>
 
       <SimpleGrid columns={2} pt={8} spacing={4}>
