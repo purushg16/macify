@@ -20,9 +20,9 @@ const AppBar = () => {
       bottom={3}
       borderRadius={99}
       overflow="hidden"
-      bg="#F8F6F4"
+      bg="primary.500"
     >
-      <Flex gap={4}>
+      <Flex gap={2}>
         <SmallButton
           title="Dashboard"
           icon={DashboardIcon}

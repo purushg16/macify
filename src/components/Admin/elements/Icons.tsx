@@ -7,9 +7,16 @@ interface Props {
   active?: boolean;
   gray?: boolean;
   p?: number;
+  border?: number;
 }
 
-const IconWrapper = ({ icon, active = false, p = 2, gray = false }: Props) => {
+const IconWrapper = ({
+  icon,
+  active = false,
+  gray = false,
+  p = 2,
+  border = 10,
+}: Props) => {
   const playerRef = useRef<Player>(null);
 
   return (
@@ -19,10 +26,15 @@ const IconWrapper = ({ icon, active = false, p = 2, gray = false }: Props) => {
         playerRef.current?.playFromBeginning();
       }}
       p={p}
-      bg={active ? "primary.50" : gray ? "#f6f6f6" : "none"}
-      borderRadius={10}
+      bg={active ? "primary.500" : gray ? "#f6f6f6" : "none"}
+      borderRadius={border}
     >
-      <Player ref={playerRef} size={25} icon={icon} />
+      <Player
+        ref={playerRef}
+        size={25}
+        icon={icon}
+        colorize={active ? "white" : "black"}
+      />
     </Box>
   );
 };
