@@ -8,14 +8,14 @@ import vector from "../../../assets/app/vector.png";
 
 const CalendarPage = () => {
   return (
-    <Flex flexDir="column" gap={8} pos="relative">
+    <Flex flexDir="column" gap={8}>
       <Title
         size="3xl"
         heading="Calendar"
         subtitle="choose the view that fits now!"
         align="left"
       />
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
         <AnimateMove delay={0.2}>
           <CalendarCard
             icon={BsCalendar}
@@ -51,7 +51,7 @@ const CalendarPage = () => {
         pos="absolute"
         opacity={0.5}
         w={500}
-        bottom={-200}
+        bottom={-100}
         right={-100}
         zIndex={-10}
       />

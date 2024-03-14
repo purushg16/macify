@@ -29,6 +29,7 @@ const AdminLayout = () => {
         h="100vh" // Set the height of the grid to the viewport height
         overflowY="hidden"
         px={{ base: 4, md: 8, lg: 16 }}
+        pos="relative"
       >
         <GridItem area={"header"}>
           <AdminNavbar />

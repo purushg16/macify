@@ -25,14 +25,15 @@ const CalendarCard = ({ title, subtitle, number, route }: Props) => {
     <Flex
       cursor="pointer"
       flexDir="column"
-      p={8}
-      gap={12}
+      p={4}
+      px={6}
+      gap={4}
       borderRadius={15}
       onClick={() => navigate(`${route}`)}
       bg="#f2f2f2"
     >
       <Box w="max-content" borderRadius={10}>
-        <Heading color="gray">
+        <Heading color="gray" fontSize="sm">
           <Highlight
             query={"0"}
             styles={{
@@ -48,13 +49,15 @@ const CalendarCard = ({ title, subtitle, number, route }: Props) => {
 
       <HStack justify="space-between">
         <Box>
-          <Heading> {title} </Heading>
-          <Text color="gray" maxW={"90%"}>
+          <Heading fontSize="xl" mb={2}>
+            {title}
+          </Heading>
+          <Text color="gray" maxW={"90%"} fontSize="xs">
             {subtitle}
           </Text>
         </Box>
-        <Box p={2} px={4} bg="primary.100" borderRadius={20}>
-          <Icon as={BsArrowRight} boxSize={8} transform="rotate(320deg)" />
+        <Box p={4} lineHeight="normal" bg="primary.100" borderRadius={10}>
+          <Icon as={BsArrowRight} boxSize={4} transform="rotate(320deg)" />
         </Box>
       </HStack>
     </Flex>
