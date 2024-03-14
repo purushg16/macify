@@ -12,6 +12,7 @@ const HostingButton = ({ title, icon, active = false, onclick }: Props) => {
   return (
     <Flex
       // size="sm"
+      flexDir={{ base: "column", md: "row" }}
       bg={active ? "primary.500" : "white"}
       borderRadius={20}
       gap={2}
@@ -23,7 +24,7 @@ const HostingButton = ({ title, icon, active = false, onclick }: Props) => {
       color={active ? "white" : "black"}
     >
       <Icon as={icon} />
-      <Text lineHeight="normal">
+      <Text lineHeight="normal" fontSize="xs">
         {title.split(" ")[0]} <br /> {title.split(" ")[1]}
       </Text>
     </Flex>

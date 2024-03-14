@@ -1,4 +1,4 @@
-import { Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Button, Flex, Image } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +53,7 @@ interface Props {
   admin?: boolean;
 }
 
-const SmallButton = ({ title, active = false, icon, route }: Props) => {
+const SmallButton = ({ active = false, icon, route }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -61,7 +61,7 @@ const SmallButton = ({ title, active = false, icon, route }: Props) => {
       className={active ? "color-animation" : ""}
       borderRadius={99}
       p={1}
-      pr={4}
+      // pr={4}
       onClick={() => navigate(route!)}
       align="center"
       bg={active ? "white" : "none"}
@@ -73,7 +73,7 @@ const SmallButton = ({ title, active = false, icon, route }: Props) => {
         bg="none"
         color={!active ? "white" : ""}
       />
-      {active && <Text fontSize="sm"> {title} </Text>}
+      {/* {active && <Text fontSize="sm"> {title} </Text>} */}
     </Flex>
   );
 };
