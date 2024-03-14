@@ -1,9 +1,9 @@
-import { Box, Flex, HStack, Image, Spacer } from "@chakra-ui/react";
+import { Box, Flex, HStack, Icon, Image, Spacer } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import IconWrapper from "./Icons";
 import NotificationIcon from "../../../assets/icons/notification.json";
 import logo from "../../../../public/macify.svg";
-
+import { IoMdLogOut } from "react-icons/io";
 const AdminNavbar = () => {
   const navigate = useNavigate();
   const location = useLocation().pathname.split("/")[2];
@@ -16,27 +16,30 @@ const AdminNavbar = () => {
           <Image src={logo} alt="macify" w={50} />
         </Link>
         <Spacer />
-        <HStack>
+        <HStack gap={4}>
           <Link to="notifications">
             <IconWrapper
               icon={NotificationIcon}
               active={location === "notifications"}
+              gray
             />
           </Link>
 
-          <Image
+          <Box
             boxSize={10}
-            p={2}
-            bg="gray.50"
-            borderRadius={99}
-            src="https://img.icons8.com/pulsar-color/32/exit.png"
-            alt="exit"
+            bg="#f6f6f6"
+            borderRadius={10}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            cursor="pointer"
             onClick={() => {
               localStorage.removeItem("token");
               navigate("/auth/login");
             }}
-            cursor="pointer"
-          />
+          >
+            <Icon as={IoMdLogOut} boxSize={6} />
+          </Box>
         </HStack>
       </Flex>
     </Box>

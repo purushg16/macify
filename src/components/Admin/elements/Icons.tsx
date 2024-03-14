@@ -5,10 +5,11 @@ import { useEffect, useRef } from "react";
 interface Props {
   icon: unknown;
   active?: boolean;
+  gray?: boolean;
   p?: number;
 }
 
-const IconWrapper = ({ icon, active = false, p = 2 }: Props) => {
+const IconWrapper = ({ icon, active = false, p = 2, gray = false }: Props) => {
   const playerRef = useRef<Player>(null);
 
   return (
@@ -18,8 +19,8 @@ const IconWrapper = ({ icon, active = false, p = 2 }: Props) => {
         playerRef.current?.playFromBeginning();
       }}
       p={p}
-      bg={active ? "primary.50" : "none"}
-      borderRadius={99}
+      bg={active ? "primary.50" : gray ? "#f6f6f6" : "none"}
+      borderRadius={10}
     >
       <Player ref={playerRef} size={25} icon={icon} />
     </Box>
