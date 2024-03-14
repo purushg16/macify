@@ -5,16 +5,18 @@ import { useEffect, useRef } from "react";
 interface Props {
   icon: unknown;
   active?: boolean;
-  gray?: boolean;
+  bg: string;
   p?: number;
+  color?: string;
   border?: number;
 }
 
 const IconWrapper = ({
   icon,
   active = false,
-  gray = false,
+  bg,
   p = 2,
+  color = "black",
   border = 10,
 }: Props) => {
   const playerRef = useRef<Player>(null);
@@ -26,14 +28,14 @@ const IconWrapper = ({
         playerRef.current?.playFromBeginning();
       }}
       p={p}
-      bg={active ? "primary.500" : gray ? "#f6f6f6" : "none"}
+      bg={active ? "primary.500" : bg}
       borderRadius={border}
     >
       <Player
         ref={playerRef}
         size={25}
         icon={icon}
-        colorize={active ? "white" : "black"}
+        colorize={active ? "white" : color}
       />
     </Box>
   );

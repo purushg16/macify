@@ -60,6 +60,20 @@ input {
   border-radius: 999px !important;
 }
 
+.color-animation {
+  background-color: #fff; /* Initial color */
+  animation: colorChange 1s; /* Adjust duration and timing as needed */
+}
+
+@keyframes colorChange {
+  0% {
+    opacity: 0; /* Initial color */
+  }
+  100% {
+    opacity: 1; /* Final color */
+  }
+}
+
 #date-block:after {
   content: "";
   height: 10%;

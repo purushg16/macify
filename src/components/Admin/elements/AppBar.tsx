@@ -22,7 +22,7 @@ const AppBar = () => {
       overflow="hidden"
       bg="primary.500"
     >
-      <Flex gap={2}>
+      <Flex gap={2} transition="all 0.5s">
         <SmallButton
           title="Dashboard"
           icon={DashboardIcon}

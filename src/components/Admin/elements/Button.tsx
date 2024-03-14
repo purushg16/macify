@@ -58,14 +58,21 @@ const SmallButton = ({ title, active = false, icon, route }: Props) => {
 
   return (
     <Flex
+      className={active ? "color-animation" : ""}
       borderRadius={99}
       p={1}
       pr={4}
       onClick={() => navigate(route!)}
       align="center"
       bg={active ? "white" : "none"}
+      transition="all 0.5s"
     >
-      <IconWrapper icon={icon} border={99} />
+      <IconWrapper
+        icon={icon}
+        border={99}
+        bg="none"
+        color={!active ? "white" : ""}
+      />
       {active && <Text fontSize="sm"> {title} </Text>}
     </Flex>
   );

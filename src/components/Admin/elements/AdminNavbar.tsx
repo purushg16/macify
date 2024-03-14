@@ -21,7 +21,7 @@ const AdminNavbar = () => {
             <IconWrapper
               icon={NotificationIcon}
               active={location === "notifications"}
-              gray
+              bg="#f6f6f6"
             />
           </Link>
 
