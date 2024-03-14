@@ -12,6 +12,7 @@ const useAdminCurrentHosting = () =>
     queryFn: getCurrentHostings,
 
     staleTime: ms("5m"),
+    retry: 2,
     refetchOnWindowFocus: false,
   });
 
@@ -21,6 +22,7 @@ const useAdminUpcomingCheckIns = () =>
     queryFn: getUpcomingCheckins,
 
     staleTime: ms("5m"),
+    retry: 2,
     refetchOnWindowFocus: false,
   });
 
@@ -30,6 +32,7 @@ const useAdminUpcomingCheckOuts = () =>
     queryFn: getUpcomingCheckOuts,
 
     staleTime: ms("5m"),
+    retry: 2,
     refetchOnWindowFocus: false,
   });
 

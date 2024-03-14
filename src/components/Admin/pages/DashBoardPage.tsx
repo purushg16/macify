@@ -1,13 +1,21 @@
-import { Box, Divider, Flex, Heading, Highlight, Text } from "@chakra-ui/react";
-import OptionsGrid from "../elements/Dashboard/OptionsGrid";
-import CurrentHostingGrid from "../elements/Dashboard/CurrentHostingGrid";
+import {
+  Box,
+  Flex,
+  Heading,
+  Highlight,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import { useState } from "react";
+import CurrentHostingGrid from "../elements/Dashboard/CurrentHostingGrid";
 import UpcomingCheckInGrid from "../elements/Dashboard/UpcomingCheckInGrid";
 import UpcomingCheckOutGrid from "../elements/Dashboard/UpcomingCheckOuts";
-import Title from "../elements/Title";
-import AddStack from "../elements/Dashboard/AddStack";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import AddSlider from "../elements/Dashboard/AddSlider";
+import { MdChecklistRtl, MdEmojiFlags } from "react-icons/md";
+import HostingButton from "../elements/Dashboard/HostingButton";
+import { FaRunning } from "react-icons/fa";
+import AnimateMove from "../../motions/Move";
 
 const DashBoardPage = () => {
   const [tab, setTab] = useState(0);
@@ -29,9 +37,49 @@ const DashBoardPage = () => {
         </Box>
       </Flex>
 
-      <Flex flexDir="column" bg="#f6f6f6" borderRadius={20} p={4} gap={12}>
+      <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={12}>
         <Text fontSize="md"> New Beginning, </Text>
         <AddSlider />
+      </Flex>
+
+      <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={12}>
+        <Text fontSize="md"> What's Happening, </Text>
+        <SimpleGrid columns={3} justifyContent="space-between" spacing={2}>
+          <HostingButton
+            active={tab == 0}
+            title="Current Hosting"
+            icon={MdEmojiFlags}
+            onclick={() => handleTabChange(0)}
+          />
+          <HostingButton
+            active={tab == 1}
+            title="Upcoming CheckIn"
+            icon={MdChecklistRtl}
+            onclick={() => handleTabChange(1)}
+          />
+          <HostingButton
+            active={tab == 2}
+            title="Upcoming CheckOut"
+            icon={FaRunning}
+            onclick={() => handleTabChange(2)}
+          />
+        </SimpleGrid>
+
+        {tab === 0 && (
+          <AnimateMove>
+            <CurrentHostingGrid />
+          </AnimateMove>
+        )}
+        {tab === 1 && (
+          <AnimateMove>
+            <UpcomingCheckInGrid />
+          </AnimateMove>
+        )}
+        {tab === 2 && (
+          <AnimateMove>
+            <UpcomingCheckOutGrid />
+          </AnimateMove>
+        )}
       </Flex>
 
       {/* <Box pb={4} borderBottom="1px solid" borderColor="gray.50">
@@ -60,9 +108,7 @@ const DashBoardPage = () => {
           </Text>
           <Divider mb={4} />
 
-          {tab === 0 && <CurrentHostingGrid />}
-          {tab === 1 && <UpcomingCheckInGrid />}
-          {tab === 2 && <UpcomingCheckOutGrid />}
+          
         </Box>
       </Box> */}
     </Flex>
