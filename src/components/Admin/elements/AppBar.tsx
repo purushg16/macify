@@ -14,7 +14,7 @@ const AppBar = () => {
     <Box
       zIndex={100}
       pos="fixed"
-      p={4}
+      p={2}
       left="50%"
       transform="translateX(-50%)"
       bottom={3}
