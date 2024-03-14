@@ -14,10 +14,6 @@ const PropertyCardFooter = ({ id }: { id: string }) => {
       </Link>
       <DashboardOptButton label="Edit Beds" icon={IoBedOutline} />
       <DashboardOptButton label="Edit Rooms" icon={IoGridOutline} />
-      {/* <DashboardOptButton
-        label="Delete Property"
-        icon={MdOutlineDeleteOutline}
-      /> */}
     </SimpleGrid>
   );
 };

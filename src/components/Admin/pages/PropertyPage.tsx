@@ -11,39 +11,38 @@ const PropertyPage = () => {
 
   return (
     <Flex flexDir="column" gap={8}>
-      <Title
-        heading="Your Properties"
-        subtitle="Tap on properties to edit them"
-        align="left"
-        size="2xl"
-      />
+      <AnimateMove delay={0.2}>
+        <Title
+          heading="Your Properties"
+          subtitle="Tap on properties to edit them"
+          align="left"
+          size="2xl"
+        />
 
-      <Box borderBottom="1px solid" borderColor="gray.50" pb={4}>
-        <SimpleGrid columns={{ base: 2, sm: 3 }} gap={4}>
-          <Link to="add">
-            <Button
-              leftIcon={<Icon as={BsFillPlusCircleFill} />}
-              colorScheme="primary"
-            >
-              New Property
-            </Button>
-          </Link>
-        </SimpleGrid>
-      </Box>
+        <Box my={4}>
+          <SimpleGrid columns={{ base: 2, sm: 3 }} gap={4}>
+            <Link to="add">
+              <Button
+                leftIcon={<Icon as={BsFillPlusCircleFill} />}
+                colorScheme="primary"
+              >
+                New Property
+              </Button>
+            </Link>
+          </SimpleGrid>
+        </Box>
+      </AnimateMove>
 
       {isLoading ? (
         <Spinner />
       ) : (
-        <Box>
-          <Title heading="All Properties" subtitle="" align="left" />
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} mt={4}>
-            {properties?.data.map((property, i) => (
-              <AnimateMove delay={0.2 * (i + 1)}>
-                <PropertyCard property={property} />
-              </AnimateMove>
-            ))}
-          </SimpleGrid>
-        </Box>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8} mt={4}>
+          {properties?.data.map((property, i) => (
+            <AnimateMove delay={0.4 * (i + 1)}>
+              <PropertyCard property={property} />
+            </AnimateMove>
+          ))}
+        </SimpleGrid>
       )}
     </Flex>
   );
