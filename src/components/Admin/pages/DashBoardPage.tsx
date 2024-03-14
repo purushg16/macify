@@ -7,6 +7,7 @@ import UpcomingCheckOutGrid from "../elements/Dashboard/UpcomingCheckOuts";
 import Title from "../elements/Title";
 import AddStack from "../elements/Dashboard/AddStack";
 import { Link } from "react-router-dom";
+import AddSlider from "../elements/Dashboard/AddSlider";
 
 const DashBoardPage = () => {
   const [tab, setTab] = useState(0);
@@ -22,11 +23,18 @@ const DashBoardPage = () => {
               Dayalan S 👋
             </Highlight>
           </Heading>
-          <Text color="gray"> What a day to enter earning! </Text>
+          <Text color="gray" fontSize="xs">
+            What a day to enter earning!
+          </Text>
         </Box>
       </Flex>
 
-      <Box pb={4} borderBottom="1px solid" borderColor="gray.50">
+      <Flex flexDir="column" bg="#f6f6f6" borderRadius={20} p={4} gap={12}>
+        <Text fontSize="md"> New Beginning, </Text>
+        <AddSlider />
+      </Flex>
+
+      {/* <Box pb={4} borderBottom="1px solid" borderColor="gray.50">
         <Title heading="Manage on the go!" subtitle="" align="left" />
         <AddStack />
       </Box>
@@ -56,7 +64,7 @@ const DashBoardPage = () => {
           {tab === 1 && <UpcomingCheckInGrid />}
           {tab === 2 && <UpcomingCheckOutGrid />}
         </Box>
-      </Box>
+      </Box> */}
     </Flex>
   );
 };

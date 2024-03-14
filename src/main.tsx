@@ -8,6 +8,9 @@ import "./index.css";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 const client = new QueryClient();
