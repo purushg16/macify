@@ -30,7 +30,7 @@ const TodayBanner = () => {
       >
         <Box>
           <Text fontSize="xs"> today, </Text>
-          <Heading fontSize="xl"> Mar 26, 2024 </Heading>
+          <Heading fontSize="lg"> Mar 26, 2024 </Heading>
         </Box>
         <Spacer />
         <IconButton
@@ -43,8 +43,8 @@ const TodayBanner = () => {
 
       <SimpleGrid columns={2} pt={8} spacing={4}>
         <Flex gap={4} align="center" bg="white" p={4} borderRadius={20}>
-          <Flex p={2} bg="primary.100" borderRadius="100%" lineHeight="normal">
-            <Icon as={FaCaretDown} boxSize={6} color="green" />
+          <Flex p={1} bg="primary.100" borderRadius="100%" lineHeight="normal">
+            <Icon as={FaCaretDown} boxSize={4} color="green" />
           </Flex>
           <Box>
             <Heading fontSize="lg">
@@ -55,8 +55,8 @@ const TodayBanner = () => {
         </Flex>
 
         <Flex gap={4} align="center" bg="white" p={4} borderRadius={20}>
-          <Flex p={2} bg="red.100" borderRadius="100%" lineHeight="normal">
-            <Icon as={FaCaretUp} boxSize={6} color="red" />
+          <Flex p={1} bg="red.100" borderRadius="100%" lineHeight="normal">
+            <Icon as={FaCaretUp} boxSize={4} color="red" />
           </Flex>
           <Box>
             <Heading fontSize="lg">
