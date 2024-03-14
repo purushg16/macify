@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const PropertyCardFooter = ({ id }: { id: string }) => {
   return (
-    <SimpleGrid columns={3} spacing={2}>
+    <SimpleGrid columns={3} mx={4}>
       <Link to={`edit/${id}`}>
         <DashboardOptButton label="Edit Details" icon={BiDetail} />
       </Link>

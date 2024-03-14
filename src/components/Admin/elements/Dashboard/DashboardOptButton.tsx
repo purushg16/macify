@@ -12,6 +12,7 @@ interface Props {
 const DashboardOptButton = ({ label, icon, active = false }: Props) => {
   return (
     <Flex
+      mx={2}
       borderRadius={10}
       flexDir="column"
       gap={4}
@@ -35,7 +36,7 @@ const DashboardOptButton = ({ label, icon, active = false }: Props) => {
         icon={<Icon as={icon} />}
         w="max-content"
       />
-      <Text fontSize="sm" textAlign="center">
+      <Text fontSize="xs" textAlign="center">
         {label}
       </Text>
     </Flex>

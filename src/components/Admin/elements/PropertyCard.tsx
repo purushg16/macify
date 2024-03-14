@@ -8,46 +8,91 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
+  Spacer,
+  IconButton,
+  Icon,
 } from "@chakra-ui/react";
 import PropertyRespone from "../../entities/PropertyResponse";
 import PropertyCardFooter from "./PropertyCardFooter";
+import { MdDelete } from "react-icons/md";
 
 const PropertyCard = ({ property }: { property: PropertyRespone }) => {
   return (
     <Accordion allowToggle>
-      <AccordionItem border="none">
+      <AccordionItem
+        border="1px solid"
+        borderColor="gray.100"
+        borderRadius={20}
+      >
         <AccordionButton _hover={{ background: "none" }} px={0}>
-          <Flex
-            textAlign="left"
-            w="100%"
-            gap={4}
-            flexDir="column"
-            bg="#f6f6f6"
-            p={8}
-            px={4}
-            borderRadius={10}
-            boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px;"
-          >
-            <Box>
-              <Heading fontSize="xl" textTransform="capitalize">
-                {property.propertyName}
-              </Heading>
-            </Box>
-            <SimpleGrid columns={2} gap={4}>
-              <Box p={4} bg="gray.50" borderRadius={10}>
-                <Text color="gray" fontSize="sm">
-                  Type
-                </Text>
+          <Flex textAlign="left" w="100%" gap={4} flexDir="column" p={4}>
+            <Flex pb={4} borderBottom="1px solid" borderColor="gray.50">
+              <Box>
                 <Heading fontSize="xl" textTransform="capitalize">
-                  {property.propertyType}
+                  {property.propertyName}
                 </Heading>
-              </Box>
-              <Box p={4} bg="gray.50" borderRadius={10}>
-                <Text color="gray" fontSize="sm">
-                  Rooms
+                <Text fontSize="sm" textTransform="capitalize">
+                  {property.propertyType}
                 </Text>
-                <Heading fontSize="xl"> {property.rooms.length} </Heading>
               </Box>
+              <Spacer />
+              <IconButton
+                sx={{ borderRadius: "10px !important" }}
+                aria-label="del-btn"
+                icon={<Icon as={MdDelete} />}
+                border="1px solid"
+                borderColor="gray.50"
+                bg="red.200"
+                _hover={{ bg: "red.300" }}
+              />
+            </Flex>
+
+            <SimpleGrid columns={2} gap={4}>
+              <Flex
+                flexDir="column"
+                justify="end"
+                p={4}
+                bg="#f4f4f4"
+                borderRadius={10}
+                gap={2}
+              >
+                <Heading fontSize="3xl"> {property.rooms.length} </Heading>
+                <Text color="gray" fontSize="sm">
+                  Rooms <br />
+                  Available
+                </Text>
+              </Flex>
+
+              {/* <Flex
+                flexDir="column"
+                justify="end"
+                p={4}
+                bg="#f4f4f4"
+                borderRadius={10}
+                gap={2}
+              >
+                <Flex pos="relative">
+                  <AmenititesCircle />
+                  <AmenititesCircle />
+                </Flex>
+                <Text color="gray" fontSize="sm">
+                  Amenities <br />
+                  Provided
+                </Text>
+              </Flex> */}
+              <Flex
+                flexDir="column"
+                justify="end"
+                p={4}
+                bg="#f4f4f4"
+                borderRadius={10}
+                gap={2}
+              >
+                <Heading fontSize="xl"> Manager </Heading>
+                <Text color="gray" fontSize="sm">
+                  Manager Assigned
+                </Text>
+              </Flex>
             </SimpleGrid>
           </Flex>
         </AccordionButton>
