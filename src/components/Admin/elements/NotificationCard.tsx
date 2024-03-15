@@ -60,16 +60,16 @@ const NotificationCard = ({ booking }: { booking: GroupBooking }) => {
 
       <SimpleGrid columns={2} gap={4}>
         <Box p={4} bg="#f4f4f4" borderRadius={10}>
-          <Heading fontSize="xl">
+          <Heading fontSize="lg">
             {DateFormatter(new Date(booking.bookings[0].checkIn))}
           </Heading>
-          <Text color="gray" fontSize="sm">
+          <Text color="gray" fontSize="xs">
             Check-In
           </Text>
         </Box>
         <Box p={4} bg="#f4f4f4" borderRadius={10}>
-          <Heading fontSize="xl"> {booking.guestCount} </Heading>
-          <Text color="gray" fontSize="sm">
+          <Heading fontSize="lg"> {booking.guestCount} </Heading>
+          <Text color="gray" fontSize="xs">
             Guest
           </Text>
         </Box>

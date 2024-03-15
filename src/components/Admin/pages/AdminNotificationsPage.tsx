@@ -42,7 +42,7 @@ const AdminNotificationsPage = () => {
         <Spinner />
       ) : ( */}
       <Box mt={4}>
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4} p={2}>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={4}>
           {notifications.map((booking, index) => (
             <AnimateMove key={booking._id} delay={0.4 * (index + 1)}>
               <NotificationCard booking={booking} />
