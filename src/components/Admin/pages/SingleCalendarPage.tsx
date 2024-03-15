@@ -10,6 +10,7 @@ import FetchDetailsButton from "../elements/SingleSchedular/FetchDetailsButton";
 import { BookingTimelineInterface } from "../../api/admin-client";
 import SingleCalendar from "../elements/SingleCalendar/SingleCalendar";
 import SingleCalendarButtonStack from "../elements/SingleCalendar/SingleCalendarButtonStack";
+import AnimateMove from "../../motions/Move";
 
 export const SingleCalendarPage = () => {
   const { data: properties, isLoading: isPropertiesLoading } =
@@ -54,53 +55,59 @@ export const SingleCalendarPage = () => {
     setBooking(b);
 
   return (
-    <Grid gap={16}>
+    <Grid gap={8}>
       <GridItem>
-        <SingleCalendarButtonStack
-          fetchButton={
-            <FetchDetailsButton
-              ids={[finalField]}
-              disabled={!finalField}
-              callback={afterDataFetched}
-            />
-          }
-          PropertySelector={
-            isPropertiesLoading ? (
-              <Spinner />
-            ) : (
-              <PropertySelector
-                onSelect={onPropertySelect}
-                properties={properties?.data}
-                selectedProperty={property}
+        <AnimateMove>
+          <SingleCalendarButtonStack
+            fetchButton={
+              <FetchDetailsButton
+                ids={[finalField]}
+                disabled={!finalField}
+                callback={afterDataFetched}
               />
-            )
-          }
-          RoomSelector={
-            property &&
-            property.rentWithin && (
-              <RoomSelector
-                onSelect={onRoomSelect}
-                rooms={property.rooms}
-                selectedRoom={room}
-              />
-            )
-          }
-          BedSelector={
-            room &&
-            property &&
-            property.propertyType === "hostel" && (
-              <BedSelector
-                onSelect={onBedSelect}
-                beds={room.beds}
-                selectedBed={bed}
-              />
-            )
-          }
-        />
+            }
+            PropertySelector={
+              isPropertiesLoading ? (
+                <Spinner />
+              ) : (
+                <PropertySelector
+                  onSelect={onPropertySelect}
+                  properties={properties?.data}
+                  selectedProperty={property}
+                />
+              )
+            }
+            RoomSelector={
+              property &&
+              property.rentWithin && (
+                <RoomSelector
+                  onSelect={onRoomSelect}
+                  rooms={property.rooms}
+                  selectedRoom={room}
+                />
+              )
+            }
+            BedSelector={
+              room &&
+              property &&
+              property.propertyType === "hostel" && (
+                <BedSelector
+                  onSelect={onBedSelect}
+                  beds={room.beds}
+                  selectedBed={bed}
+                />
+              )
+            }
+          />
+        </AnimateMove>
       </GridItem>
 
       <GridItem>
-        {booking && <SingleCalendar bookings={Object.values(booking)[0]} />}
+        {booking && (
+          <AnimateMove>
+            <SingleCalendar bookings={Object.values(booking)[0]} />
+          </AnimateMove>
+        )}
       </GridItem>
     </Grid>
   );

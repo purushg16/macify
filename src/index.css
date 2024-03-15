@@ -117,3 +117,93 @@ body {
   display: block;
   object-fit: cover;
 }
+
+/*  Calendaar  */
+
+*::-webkit-scrollbar {
+  width: 0px;
+  border-radius: 20px; /* Width of the scrollbar */
+}
+
+/* Define scrollbar track and thumb styles */
+*::-webkit-scrollbar-track {
+  background: transparent; /* Background color of the scrollbar track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar thumb */
+}
+
+/* Define scrollbar thumb behavior when hovered */
+*::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar thumb when hovered */
+}
+
+.fc.fc-media-screen {
+  padding: 20px !important;
+  background: #f4f4f4;
+  border-radius: 20px;
+}
+
+.fc-header-toolbar.fc-toolbar {
+  padding-bottom: 20px;
+  margin-bottom: 15% !important;
+  border-bottom: 1px solid #e2e2e2 !important;
+}
+
+h2.fc-toolbar-title {
+  font-size: 1.2em !important;
+}
+
+.fc-toolbar-chunk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4;
+}
+
+.fc-button-group {
+  gap: 8px;
+}
+
+.fc * {
+  border: none !important;
+}
+
+.fc table td {
+  border-radius: 20px !important;
+  text-align: left;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background: none !important;
+}
+
+.fc .fc-daygrid-day-top {
+  justify-content: space-around;
+}
+
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-frame .fc-daygrid-day-number {
+  color: #9ccaca;
+  font-weight: bolder !important;
+  text-decoration: underline;
+}
+
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-frame {
+  /* border: 2px solid rgb(105, 171, 105) !important; */
+  border-radius: 20px !important;
+  box-sizing: border-box;
+}
+
+.fc-h-event {
+  background: none;
+  border-radius: 20px;
+}
+/* .fc-prev-button */
+button.fc-button.fc-button-primary:active,
+button.fc-button.fc-button-primary:focus,
+button.fc-button.fc-button-primary:hover {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
