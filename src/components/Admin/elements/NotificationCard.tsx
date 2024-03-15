@@ -41,8 +41,8 @@ const NotificationCard = ({ booking }: { booking: GroupBooking }) => {
         <Spacer />
         <HStack>
           <IconButton
-            bg="red.100"
-            _hover={{ bg: "red.200" }}
+            bg="red.200"
+            _hover={{ bg: "red.300" }}
             aria-label="del"
             icon={<Icon as={CiCircleRemove} />}
             isLoading={isPending}

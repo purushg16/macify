@@ -22,6 +22,7 @@ const AdminNotificationsPage = () => {
       <AnimateMove delay={0.2}>
         <VStack align="start" gap={4}>
           <Title
+            size="3xl"
             heading="Notifications"
             subtitle="See all the bookings here"
             align="left"

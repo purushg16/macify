@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import PropertyRespone from "../../entities/PropertyResponse";
 import PropertyCardFooter from "./PropertyCardFooter";
-import { MdDelete } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 
 const PropertyCard = ({ property }: { property: PropertyRespone }) => {
   return (
@@ -26,7 +26,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
       >
         <AccordionButton _hover={{ background: "none" }} px={0}>
           <Flex textAlign="left" w="100%" gap={4} flexDir="column" p={4}>
-            <Flex pb={4} borderBottom="1px solid" borderColor="gray.50">
+            <Flex>
               <Box>
                 <Heading fontSize="xl" textTransform="capitalize">
                   {property.propertyName}
@@ -39,7 +39,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
               <IconButton
                 sx={{ borderRadius: "10px !important" }}
                 aria-label="del-btn"
-                icon={<Icon as={MdDelete} />}
+                icon={<Icon as={MdDeleteOutline} />}
                 border="1px solid"
                 borderColor="gray.50"
                 bg="red.200"
@@ -47,7 +47,13 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
               />
             </Flex>
 
-            <SimpleGrid columns={2} gap={4}>
+            <SimpleGrid
+              columns={2}
+              gap={4}
+              pt={8}
+              borderTop="1px solid"
+              borderColor="gray.100"
+            >
               <Flex
                 flexDir="column"
                 justify="end"

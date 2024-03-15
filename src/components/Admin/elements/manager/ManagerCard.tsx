@@ -1,8 +1,16 @@
-import { Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  HStack,
+  Heading,
+  Icon,
+  IconButton,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import Manager from "../../../entities/manager";
 import Title from "../Title";
-import MobileNumberFormatter from "../../../functions/mobileNumberFormatter";
-
+import { MdDeleteOutline } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 interface ManagerCardProps {
   manager: Manager;
 }
@@ -12,38 +20,76 @@ const Temp = ({ manager }: ManagerCardProps) => {
     <Flex
       gap={4}
       flexDir="column"
-      bg="#f6f6f6"
-      p={8}
-      px={4}
-      borderRadius={10}
-      boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px;"
+      p={4}
+      borderRadius={20}
+      border="1px solid"
+      borderColor="gray.100"
     >
-      <Box>
-        <Title heading={manager.name} subtitle={manager.email} align="left" />
-      </Box>
-      <SimpleGrid columns={2} gap={4}>
-        <Box p={4} bg="gray.50" borderRadius={10}>
-          <Text color="gray" fontSize="sm">
-            Mobile
-          </Text>
-          <Heading fontSize="xl">
-            {MobileNumberFormatter(manager.phone)[0]} <br />
-            {MobileNumberFormatter(manager.phone)[1]}
+      <Flex>
+        <Title
+          size="2xl"
+          heading={manager.name}
+          subtitle="Male"
+          substitleSize="xs"
+          align="left"
+        />
+        <Spacer />
+        <HStack>
+          <IconButton
+            sx={{ borderRadius: "10px !important" }}
+            aria-label="del-btn"
+            icon={<Icon as={MdDeleteOutline} />}
+            border="1px solid"
+            borderColor="gray.50"
+            bg="red.200"
+            _hover={{ bg: "red.300" }}
+          />
+          <IconButton
+            sx={{ borderRadius: "10px !important" }}
+            aria-label="del-btn"
+            icon={<Icon as={CiEdit} />}
+            border="1px solid"
+            borderColor="gray.50"
+            bg="primary.200"
+            _hover={{ bg: "primary.300" }}
+          />
+        </HStack>
+      </Flex>
+      <Flex gap={4} pt={8} borderTop="1px solid" borderColor="gray.100">
+        <Flex
+          flexDir="column"
+          justify="end"
+          p={4}
+          bg="#f4f4f4"
+          borderRadius={10}
+          flex={1}
+        >
+          <Heading fontSize="lg">
+            {manager.phone} <br />
+            {manager.email}
           </Heading>
-        </Box>
-        <Box p={4} bg="gray.50" borderRadius={10}>
-          <Text color="gray" fontSize="sm">
-            Properties Managing
+          <Text fontSize="xs" color="gray">
+            Contact & <br />
+            EMail
           </Text>
-          <Heading fontSize="xl" textTransform="capitalize">
-            2
+        </Flex>
+        <Flex
+          w="min-content"
+          flexDir="column"
+          justify="end"
+          p={4}
+          bg="#f4f4f4"
+          borderRadius={10}
+        >
+          <Heading fontSize="3xl" textTransform="capitalize">
+            02
           </Heading>
-        </Box>
-      </SimpleGrid>
-      <SimpleGrid columns={2} gap={4} mt={4}>
-        <Button> Delete </Button>
-        <Button colorScheme="primary">Edit Details</Button>
-      </SimpleGrid>
+          <Text fontSize="xs" color="gray">
+            Properties <br />
+            Managing
+          </Text>
+        </Flex>
+      </Flex>
     </Flex>
 
     // <Flex
