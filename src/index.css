@@ -144,7 +144,7 @@ body {
 }
 
 .fc.fc-media-screen {
-  padding: 20px !important;
+  padding: 12px !important;
   background: #f4f4f4;
   border-radius: 20px;
 }
@@ -162,7 +162,7 @@ h2.fc-toolbar-title {
 .fc-toolbar-chunk {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: 4;
 }
 
