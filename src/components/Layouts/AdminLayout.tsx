@@ -27,7 +27,7 @@ const AdminLayout = () => {
         rowGap={{ base: 2, md: 4, lg: 8 }}
         color="blackAlpha.700"
         h="100vh" // Set the height of the grid to the viewport height
-        overflowY="hidden"
+        overflow="hidden"
         px={{ base: 4, md: 8, lg: 16 }}
         pos="relative"
       >
