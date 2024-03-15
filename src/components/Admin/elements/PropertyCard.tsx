@@ -11,11 +11,9 @@ import {
   Spacer,
   IconButton,
   Icon,
-  HStack,
 } from "@chakra-ui/react";
 import PropertyRespone from "../../entities/PropertyResponse";
 import PropertyCardFooter from "./PropertyCardFooter";
-import { MdDeleteOutline } from "react-icons/md";
 import { IoCopyOutline } from "react-icons/io5";
 
 const PropertyCard = ({ property }: { property: PropertyRespone }) => {
@@ -38,7 +36,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
                 </Text>
               </Box>
               <Spacer />
-              <HStack>
+              {/* <HStack>
                 <IconButton
                   sx={{ borderRadius: "10px !important" }}
                   aria-label="del-btn"
@@ -47,17 +45,21 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
                   borderColor="gray.50"
                   bg="red.200"
                   _hover={{ bg: "red.300" }}
-                />
-                <IconButton
-                  sx={{ borderRadius: "10px !important" }}
-                  aria-label="del-btn"
-                  icon={<Icon as={IoCopyOutline} />}
-                  border="1px solid"
-                  borderColor="gray.50"
-                  bg="primary.200"
-                  _hover={{ bg: "primary.300" }}
-                />
-              </HStack>
+                /> */}
+              <IconButton
+                sx={{ borderRadius: "10px !important" }}
+                aria-label="del-btn"
+                icon={<Icon as={IoCopyOutline} />}
+                border="1px solid"
+                borderColor="gray.50"
+                bg="primary.200"
+                _hover={{ bg: "primary.300" }}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  console.log("first");
+                }}
+              />
+              {/* </HStack> */}
             </Flex>
 
             <SimpleGrid

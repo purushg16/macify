@@ -92,6 +92,10 @@ input {
   background-color: gray;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent !important; /* Disable tap highlighting for all elements */
+}
+
 /* 
 body {
   margin: 0;
