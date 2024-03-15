@@ -63,12 +63,13 @@ const Temp = ({ manager }: ManagerCardProps) => {
           bg="#f4f4f4"
           borderRadius={10}
           flex={1}
+          gap={2}
         >
           <Heading fontSize="lg">
             {manager.phone} <br />
             {manager.email}
           </Heading>
-          <Text fontSize="xs" color="gray">
+          <Text fontSize="sm" color="gray">
             Contact & <br />
             EMail
           </Text>
@@ -80,11 +81,12 @@ const Temp = ({ manager }: ManagerCardProps) => {
           p={4}
           bg="#f4f4f4"
           borderRadius={10}
+          gap={2}
         >
           <Heading fontSize="3xl" textTransform="capitalize">
             02
           </Heading>
-          <Text fontSize="xs" color="gray">
+          <Text fontSize="sm" color="gray">
             Properties <br />
             Managing
           </Text>
