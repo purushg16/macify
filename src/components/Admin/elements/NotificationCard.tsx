@@ -1,53 +1,78 @@
-import { Box, Button, Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  HStack,
+  Heading,
+  Icon,
+  IconButton,
+  SimpleGrid,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import GroupBooking from "../../entities/GroupBooking";
 import Title from "./Title";
 import DateFormatter from "../../functions/dateFormatter";
+import { CiCircleRemove } from "react-icons/ci";
+import { TiTickOutline } from "react-icons/ti";
+import { useRejectBooking } from "../../hooks/useAdmin";
 
 const NotificationCard = ({ booking }: { booking: GroupBooking }) => {
   const navigate = useNavigate();
+  const { mutate, isPending } = useRejectBooking();
 
   return (
     <Flex
       gap={4}
       flexDir="column"
-      bg="#f6f6f6"
-      p={8}
-      px={4}
-      borderRadius={10}
-      boxShadow="rgba(0, 0, 0, 0.1) 0px 4px 12px;"
+      p={4}
+      borderRadius={20}
+      border="1px solid"
+      borderColor="gray.100"
     >
-      <Box>
+      <Flex pb={8} borderBottom="1px solid" borderColor="gray.100">
         <Title
           heading={booking.property.propertyName}
           subtitle="25 mins ago"
           align="left"
+          size="lg"
+          substitleSize="xs"
         />
-      </Box>
+        <Spacer />
+        <HStack>
+          <IconButton
+            bg="red.100"
+            _hover={{ bg: "red.200" }}
+            aria-label="del"
+            icon={<Icon as={CiCircleRemove} />}
+            isLoading={isPending}
+            onClick={() => mutate({ groupId: booking._id })}
+          />
+          <IconButton
+            bg="primary.100"
+            _hover={{ bg: "primary.200" }}
+            aria-label="del"
+            icon={<Icon as={TiTickOutline} />}
+            onClick={() => navigate(`/admin/approveBooking/${booking._id}`)}
+          />
+        </HStack>
+      </Flex>
+
       <SimpleGrid columns={2} gap={4}>
-        <Box p={4} bg="gray.50" borderRadius={10}>
-          <Text color="gray" fontSize="sm">
-            Check-In
-          </Text>
+        <Box p={4} bg="#f4f4f4" borderRadius={10}>
           <Heading fontSize="xl">
             {DateFormatter(new Date(booking.bookings[0].checkIn))}
           </Heading>
+          <Text color="gray" fontSize="sm">
+            Check-In
+          </Text>
         </Box>
-        <Box p={4} bg="gray.50" borderRadius={10}>
+        <Box p={4} bg="#f4f4f4" borderRadius={10}>
+          <Heading fontSize="xl"> {booking.guestCount} </Heading>
           <Text color="gray" fontSize="sm">
             Guest
           </Text>
-          <Heading fontSize="xl"> {booking.guestCount} </Heading>
         </Box>
-      </SimpleGrid>
-      <SimpleGrid columns={2} gap={4} mt={4}>
-        <Button> Reject </Button>
-        <Button
-          colorScheme="primary"
-          onClick={() => navigate(`/admin/approveBooking/${booking._id}`)}
-        >
-          Approve
-        </Button>
       </SimpleGrid>
     </Flex>
   );

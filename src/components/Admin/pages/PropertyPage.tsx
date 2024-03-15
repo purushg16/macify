@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Icon, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Button, Flex, Icon, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { useGetAllProperties } from "../../hooks/usePropertyServices";
 import AnimateMove from "../../motions/Move";
 import PropertyCard from "../elements/PropertyCard";
@@ -19,18 +19,15 @@ const PropertyPage = () => {
           size="2xl"
         />
 
-        <Box my={4}>
-          <SimpleGrid columns={{ base: 2, sm: 3 }} gap={4}>
-            <Link to="add">
-              <Button
-                leftIcon={<Icon as={BsFillPlusCircleFill} />}
-                colorScheme="primary"
-              >
-                New Property
-              </Button>
-            </Link>
-          </SimpleGrid>
-        </Box>
+        <Link to="add">
+          <Button
+            my={4}
+            leftIcon={<Icon as={BsFillPlusCircleFill} />}
+            colorScheme="primary"
+          >
+            New Property
+          </Button>
+        </Link>
       </AnimateMove>
 
       {isLoading ? (

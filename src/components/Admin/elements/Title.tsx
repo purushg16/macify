@@ -4,7 +4,8 @@ interface AddTitleProps {
   heading: string | undefined;
   subtitle: string;
   align?: CanvasTextAlign;
-  size?: "3xl" | "2xl" | "4xl";
+  size?: "md" | "lg" | "xl" | "3xl" | "2xl" | "4xl";
+  substitleSize?: "xs" | "sm" | "md";
 }
 
 const Title = ({
@@ -12,13 +13,14 @@ const Title = ({
   subtitle,
   align = "center",
   size = "2xl",
+  substitleSize = "sm",
 }: AddTitleProps) => {
   return (
     <Box textAlign={align}>
       <Heading fontSize={size} fontWeight={500} textTransform="capitalize">
         {heading}
       </Heading>
-      <Text color="gray" fontSize="sm">
+      <Text color="gray" fontSize={substitleSize}>
         {subtitle}
       </Text>
     </Box>
