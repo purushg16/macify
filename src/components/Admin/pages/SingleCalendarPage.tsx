@@ -1,4 +1,4 @@
-import { Flex, Grid, GridItem, Input, Spinner, Stack } from "@chakra-ui/react";
+import { Grid, GridItem, Spinner } from "@chakra-ui/react";
 import PropertySelector from "../elements/PropertySelector";
 import { useState } from "react";
 import { PropertyBed, PropertyRoom } from "../../entities/property";
@@ -9,6 +9,7 @@ import PropertyRespone from "../../entities/PropertyResponse";
 import FetchDetailsButton from "../elements/SingleSchedular/FetchDetailsButton";
 import { BookingTimelineInterface } from "../../api/admin-client";
 import SingleCalendar from "../elements/SingleCalendar/SingleCalendar";
+import SingleCalendarButtonStack from "../elements/SingleCalendar/SingleCalendarButtonStack";
 
 export const SingleCalendarPage = () => {
   const { data: properties, isLoading: isPropertiesLoading } =
@@ -53,55 +54,48 @@ export const SingleCalendarPage = () => {
     setBooking(b);
 
   return (
-    <Grid>
+    <Grid gap={16}>
       <GridItem>
-        <Stack gap={4}>
-          <Flex gap={2}>
-            <Input
-              bg="gray.50"
-              value={property?.propertyName || "Select Propery"}
-              isDisabled
-              textTransform="capitalize"
+        <SingleCalendarButtonStack
+          fetchButton={
+            <FetchDetailsButton
+              ids={[finalField]}
+              disabled={!finalField}
+              callback={afterDataFetched}
             />
-            {isPropertiesLoading ? (
+          }
+          PropertySelector={
+            isPropertiesLoading ? (
               <Spinner />
             ) : (
               <PropertySelector
                 onSelect={onPropertySelect}
                 properties={properties?.data}
+                selectedProperty={property}
               />
-            )}
-          </Flex>
-
-          {property && property.rentWithin && (
-            <>
-              <Flex gap={2}>
-                <Input
-                  bg="gray.50"
-                  value={room?.roomName || "Select Room"}
-                  isDisabled
-                />
-                <RoomSelector onSelect={onRoomSelect} rooms={property.rooms} />
-              </Flex>
-
-              {room && property.propertyType === "hostel" && (
-                <Flex gap={2}>
-                  <Input
-                    bg="gray.50"
-                    value={bed?.bedNo || "Select Bed"}
-                    isDisabled
-                  />
-                  <BedSelector onSelect={onBedSelect} beds={room.beds} />
-                </Flex>
-              )}
-            </>
-          )}
-        </Stack>
-
-        <FetchDetailsButton
-          ids={[finalField]}
-          disabled={!finalField}
-          callback={afterDataFetched}
+            )
+          }
+          RoomSelector={
+            property &&
+            property.rentWithin && (
+              <RoomSelector
+                onSelect={onRoomSelect}
+                rooms={property.rooms}
+                selectedRoom={room}
+              />
+            )
+          }
+          BedSelector={
+            room &&
+            property &&
+            property.propertyType === "hostel" && (
+              <BedSelector
+                onSelect={onBedSelect}
+                beds={room.beds}
+                selectedBed={bed}
+              />
+            )
+          }
         />
       </GridItem>
 

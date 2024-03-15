@@ -1,24 +1,29 @@
 import {
+  Button,
   Icon,
-  IconButton,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { BsChevronDown } from "react-icons/bs";
 import { PropertyRoom } from "../../entities/property";
+import { IoChevronDownCircleOutline } from "react-icons/io5";
 
 interface Props {
   onSelect: (propertyId: string) => void;
   rooms: PropertyRoom[];
+  selectedRoom?: PropertyRoom | undefined;
 }
 
-const RoomSelector = ({ onSelect, rooms }: Props) => {
+const RoomSelector = ({ onSelect, rooms, selectedRoom }: Props) => {
   return (
     <Menu>
-      <MenuButton as={IconButton} colorScheme="primary">
-        <Icon as={BsChevronDown} />
+      <MenuButton
+        w="max-content"
+        as={Button}
+        rightIcon={<Icon as={IoChevronDownCircleOutline} />}
+      >
+        {selectedRoom?.roomName || "Select Room"}
       </MenuButton>
       <MenuList>
         {rooms.map((room) => (
