@@ -55,7 +55,14 @@ const Temp = ({ manager }: ManagerCardProps) => {
           />
         </HStack>
       </Flex>
-      <Flex gap={4} pt={8} borderTop="1px solid" borderColor="gray.100">
+      <Flex
+        gap={4}
+        pt={8}
+        borderTop="1px solid"
+        borderColor="gray.100"
+        maxW="100%"
+        overflow="auto"
+      >
         <Flex
           flexDir="column"
           justify="end"
@@ -65,7 +72,7 @@ const Temp = ({ manager }: ManagerCardProps) => {
           flex={1}
           gap={2}
         >
-          <Heading fontSize="lg">
+          <Heading fontSize="md">
             {manager.phone} <br />
             {manager.email}
           </Heading>
