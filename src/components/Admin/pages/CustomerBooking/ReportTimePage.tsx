@@ -12,8 +12,11 @@ import ImageHolder from "../../elements/Booking/ImageHolder";
 import checkingimg from "../../../../assets/booking/checking.png";
 import Title from "../../elements/Title";
 import CheckingDatePicker from "./CheckingDatePicker";
+import useBookingStore from "../../../store/bookingStore";
+import DateFormatter from "../../../functions/dateFormatter";
 
 const ReportTimePage = () => {
+  const range = useBookingStore((s) => s.checkingRange);
   return (
     <>
       <AnimateMove delay={0.2}>
@@ -22,7 +25,16 @@ const ReportTimePage = () => {
 
       <AnimateMove delay={0.4}>
         <InputGroup mb={8}>
-          <Input bg="gray.50" placeholder="Pick A Range" />
+          <Input
+            bg="gray.50"
+            placeholder={
+              range.startDate && range.endDate
+                ? `${DateFormatter(range.startDate)} - ${DateFormatter(
+                    range.endDate
+                  )}`
+                : "Pick A Range"
+            }
+          />
           <InputRightElement>
             <CheckingDatePicker />
           </InputRightElement>
@@ -36,10 +48,10 @@ const ReportTimePage = () => {
           />
 
           <HStack justify="center" mt={4}>
-            <Link to="/booking/4">
+            <Link to="/booking/2">
               <Button> Back </Button>
             </Link>
-            <Link to="/booking/6">
+            <Link to="/booking/4">
               <Button colorScheme="primary"> Continue </Button>
             </Link>
           </HStack>

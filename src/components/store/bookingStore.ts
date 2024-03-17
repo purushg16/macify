@@ -12,6 +12,14 @@ interface BookingStoreInterface {
   addFiles: (files: FileWithPath[] | FileWithPath) => void;
   removeFiles: (file: FileWithPath) => void;
   clearFiles: () => void;
+
+  //Cheking Time
+  checkingRange: {
+    startDate: Date | undefined;
+    endDate: Date | undefined;
+  };
+
+  setCheckingRange: (startDate: Date, endDate: Date) => void;
 }
 
 const useBookingStore = create<BookingStoreInterface>((set) => ({
@@ -23,6 +31,10 @@ const useBookingStore = create<BookingStoreInterface>((set) => ({
   isNumberOfGuestsSelected: (status) => {
     set(() => ({ numberOfGuestsSelected: status }));
   },
+
+  checkingRange: { startDate: undefined, endDate: undefined },
+  setCheckingRange: (start, end) =>
+    set(() => ({ checkingRange: { startDate: start, endDate: end } })),
 
   filesUploaded: undefined,
   addFiles: (files) => {

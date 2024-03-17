@@ -14,6 +14,7 @@ import { useState } from "react";
 import { DateRange } from "react-date-range";
 import { BsClock } from "react-icons/bs";
 import Title from "../../elements/Title";
+import useBookingStore from "../../../store/bookingStore";
 
 const CheckingDatePicker = () => {
   const [state, setState] = useState([
@@ -24,6 +25,12 @@ const CheckingDatePicker = () => {
     },
   ]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const set = useBookingStore((s) => s.setCheckingRange);
+
+  const sumbit = () => {
+    set(state[0].startDate, state[0].endDate);
+    onClose();
+  };
   return (
     <>
       <IconButton
@@ -67,7 +74,7 @@ const CheckingDatePicker = () => {
             <Button onClick={onClose} mr={4}>
               Close
             </Button>
-            <Button onClick={onClose} colorScheme="primary">
+            <Button onClick={sumbit} colorScheme="primary">
               Alright!
             </Button>
           </ModalFooter>
