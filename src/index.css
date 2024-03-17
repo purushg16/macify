@@ -227,3 +227,11 @@ button.fc-button.fc-button-primary:hover {
   outline: none !important;
   box-shadow: none !important;
 }
+
+/* calendar */
+
+div.rdrCalendarWrapper.rdrDateRangeWrapper,
+div.rdrCalendarWrapper.rdrDateRangeWrapper div.rdrMonth,
+div.rdrCalendarWrapper.rdrDateRangeWrapper div.rdrMonths.rdrMonthsVertical {
+  width: 100%;
+}

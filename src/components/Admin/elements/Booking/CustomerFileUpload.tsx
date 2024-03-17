@@ -4,13 +4,10 @@ import DropZone from "./DropZone";
 import useBookingStore from "../../../store/bookingStore";
 import ImageHolder from "./ImageHolder";
 import file from "../../../../assets/booking/fileUpload.png";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function CustomerFileUpload() {
   const count = useBookingStore((s) => s.numberOfGuests);
-  const isNumberOfGuestsSelected = useBookingStore(
-    (s) => s.isNumberOfGuestsSelected
-  );
 
   if (!count) return <Navigate to="/booking" />;
   return (
@@ -44,9 +41,9 @@ function CustomerFileUpload() {
 
         <AnimateMove delay={0.6}>
           <Box mt={4}>
-            <Button onClick={() => isNumberOfGuestsSelected(false)}>
-              Back
-            </Button>
+            <Link to="/booking">
+              <Button>Back</Button>
+            </Link>
           </Box>
         </AnimateMove>
       </Flex>

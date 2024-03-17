@@ -110,9 +110,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <NumberOfGuestsForm /> },
       { path: "2", element: <CustomerFileUpload /> },
-      { path: "3", element: <GuestPreviewPage /> },
-      { path: "4", element: <CustomerRoomDetailsPage /> },
-      { path: "5", element: <ReportTimePage /> },
+      { path: "3", element: <ReportTimePage /> },
+      { path: "4", element: <GuestPreviewPage /> },
+      { path: "5", element: <CustomerRoomDetailsPage /> },
       { path: "6", element: <FinalPage /> },
     ],
   },
