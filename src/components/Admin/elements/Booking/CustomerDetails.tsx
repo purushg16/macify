@@ -5,9 +5,11 @@ import { Navigate } from "react-router-dom";
 
 const CustomerDetails = () => {
   const uploadefFiles = useBookingStore((s) => s.filesUploaded)!;
-  const numberOfGuests = useBookingStore((s) => s.numberOfGuests)!;
+  const isNumberOfGuestsSelected = useBookingStore(
+    (s) => s.numberOfGuestsSelected
+  )!;
 
-  if (!numberOfGuests) return <Navigate to="/booking" />;
+  if (!isNumberOfGuestsSelected) return <Navigate to="/booking" />;
   if (uploadefFiles?.length > 0) return <UploadedFiles />;
   else return <CustomerFileUpload />;
 };

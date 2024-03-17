@@ -1,19 +1,11 @@
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Heading,
-  List,
-  ListItem,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, List, ListItem } from "@chakra-ui/react";
 import FileTile from "./FileTile";
 import useBookingStore from "../../../store/bookingStore";
 import { FileWithPath, useDropzone } from "react-dropzone";
 import AnimateMove from "../../../motions/Move";
 import fetchFileDetails from "../../../functions/fetchFileDetails";
 import { useNavigate } from "react-router-dom";
+import Title from "../Title";
 
 const UploadedFiles = () => {
   const guestsCount = useBookingStore((s) => s.numberOfGuests)!;
@@ -74,7 +66,15 @@ const UploadedFiles = () => {
 
       <Flex flexDir="column" w="100%" gap={4}>
         <AnimateMove delay={0.4}>
-          <Box>
+          <Title
+            heading="Uploaded Files"
+            subtitle={
+              files.length === guestsCount
+                ? `Preview your proofs`
+                : `Add proofs for remaining homies`
+            }
+          />
+          {/* <Box>
             <Heading fontSize="xl">Uploaded Files</Heading>
             <Text color="gray" my={2}>
               Preview & manage your documents here <br />
@@ -82,7 +82,7 @@ const UploadedFiles = () => {
                 Click a file to remove
               </span>
             </Text>
-          </Box>
+          </Box> */}
         </AnimateMove>
 
         <AnimateMove delay={0.6}>

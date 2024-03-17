@@ -32,12 +32,11 @@ import { SingleCalendarPage } from "./Admin/pages/SingleCalendarPage";
 import ManagerLoginPage from "./Admin/pages/Authentication/ManagerLoginPage";
 import EditPropertyPage from "./Admin/pages/EditPropertyPage";
 import NumberOfGuestsForm from "./Admin/elements/Booking/NumberOfGuestsForm";
-import UploadedFiles from "./Admin/elements/Booking/UploadedFiles";
-import CustomerDetails from "./Admin/elements/Booking/CustomerDetails";
 import GuestPreviewPage from "./Admin/pages/CustomerBooking/GuestPreviewPage";
 import ReportTimePage from "./Admin/pages/CustomerBooking/ReportTimePage";
 import CustomerRoomDetailsPage from "./Admin/pages/CustomerBooking/CustomerRoomDetailsPage";
 import FinalPage from "./Admin/pages/CustomerBooking/FinalPage";
+import CustomerFileUpload from "./Admin/elements/Booking/CustomerFileUpload";
 
 const router = createBrowserRouter([
   {
@@ -110,8 +109,7 @@ const router = createBrowserRouter([
     element: <BookingLayout />,
     children: [
       { index: true, element: <NumberOfGuestsForm /> },
-      { path: "1", element: <UploadedFiles /> },
-      { path: "2", element: <CustomerDetails /> },
+      { path: "2", element: <CustomerFileUpload /> },
       { path: "3", element: <GuestPreviewPage /> },
       { path: "4", element: <CustomerRoomDetailsPage /> },
       { path: "5", element: <ReportTimePage /> },

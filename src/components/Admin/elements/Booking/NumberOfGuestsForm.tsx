@@ -5,22 +5,25 @@ import {
   HStack,
   Heading,
   Icon,
-  Image,
   Input,
   Text,
   useNumberInput,
 } from "@chakra-ui/react";
 import { BsPlus } from "react-icons/bs";
 import { TbMinus } from "react-icons/tb";
-import homies from "../../../../assets/app/homies.png";
+import homies from "../../../../assets/booking/homies.png";
 import AnimateMove from "../../../motions/Move";
 import useBookingStore from "../../../store/bookingStore";
 import { useNavigate } from "react-router-dom";
+import ImageHolder from "./ImageHolder";
 
 const NumberOfGuestsForm = () => {
   const navigate = useNavigate();
   const numberOfGuests = useBookingStore((s) => s.numberOfGuests);
   const setNumberOfGuests = useBookingStore((s) => s.setNumberOfGuests);
+  const isNumberOfGuestsSelected = useBookingStore(
+    (s) => s.isNumberOfGuestsSelected
+  );
 
   const {
     valueAsNumber,
@@ -40,18 +43,16 @@ const NumberOfGuestsForm = () => {
 
   return (
     <>
-      <Box>
-        <AnimateMove delay={0.2}>
-          <Image m="auto" src={homies} w={152} h={245} />
-        </AnimateMove>
-      </Box>
+      <AnimateMove>
+        <ImageHolder image={homies} />
+      </AnimateMove>
 
-      <Flex flexDir="column" w="100%" gap={8}>
+      <Flex flexDir="column" w="100%" gap={4}>
         <AnimateMove delay={0.2}>
           <HStack gap={4} justifyContent="center" alignItems="center">
             <Input
               textAlign="right"
-              bg="gray.100"
+              bg="#f4f4f4"
               {...input}
               maxW={200}
               _active={{ outline: "none" }}
@@ -81,7 +82,7 @@ const NumberOfGuestsForm = () => {
         </AnimateMove>
 
         <AnimateMove delay={0.4}>
-          <Box>
+          <Box mt={4}>
             <Heading fontSize="xl">Number of Homies</Heading>
             <Text fontSize="md" color="gray" maxW={300} m="auto">
               You can always come back and add or remove your homies {": )"}
@@ -96,6 +97,7 @@ const NumberOfGuestsForm = () => {
             colorScheme="primary"
             onClick={() => {
               setNumberOfGuests(valueAsNumber);
+              isNumberOfGuestsSelected(true);
               navigate("2");
             }}
           >

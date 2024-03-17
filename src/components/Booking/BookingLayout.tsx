@@ -35,8 +35,7 @@ const BookingLayout = () => {
           p={8}
           borderRadius={20}
           border="1px solid"
-          borderColor="gray.200"
-          bg="#f6f6f6"
+          borderColor="gray.100"
         >
           <Flex
             w="100%"
