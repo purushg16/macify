@@ -17,8 +17,14 @@ const BookingLayout = () => {
       <GridItem h="max-content">
         <Heading fontSize="2xl" children="Macify" />
       </GridItem>
-      <GridItem mb={16} h={200}>
-        <Flex align="end" justify="center" h="100%">
+      <GridItem mb={48}>
+        <Flex
+          align="end"
+          justify="center"
+          h="100%"
+          maxH="100%"
+          overflowY="scroll"
+        >
           <Outlet />
         </Flex>
       </GridItem>

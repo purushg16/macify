@@ -78,7 +78,7 @@ const ReportTimePage = () => {
               <Button> Back </Button>
             </Link>
             <Link to="/booking/4">
-              <Button colorScheme="primary"> Continue </Button>
+              <Button colorScheme="primary"> Next </Button>
             </Link>
           </>
         }

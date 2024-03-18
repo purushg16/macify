@@ -1,17 +1,9 @@
-import {
-  Box,
-  Button,
-  Divider,
-  HStack,
-  Input,
-  SimpleGrid,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import { Link, Navigate } from "react-router-dom";
-import Title from "../../elements/Title";
-import useBookingStore from "../../../store/bookingStore";
+import { Button, Input } from "@chakra-ui/react";
 import { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import useBookingStore from "../../../store/bookingStore";
+import BookingFooter from "../../elements/Booking/BookingFooter";
+import room from "../../../../assets/booking/room.png";
 
 const ReportTimePage = () => {
   const [numOfRooms, setNumOfRooms] = useState<number | undefined>(1);
@@ -20,7 +12,32 @@ const ReportTimePage = () => {
   if (!numberOfGuests) return <Navigate to="/booking" />;
   return (
     <>
-      <VStack>
+      <BookingFooter
+        title="Rooms Needed"
+        subheading="Enter number of rooms need for you!"
+        children={
+          <Input
+            type="number"
+            bg="gray.50"
+            onChange={(e) =>
+              setNumOfRooms(parseInt(e.target.value) || undefined)
+            }
+            value={numOfRooms}
+          />
+        }
+        image={room}
+        buttons={
+          <>
+            <Link to="/booking/4">
+              <Button> Back </Button>
+            </Link>
+            <Link to="/booking/6">
+              <Button colorScheme="primary"> Next </Button>
+            </Link>
+          </>
+        }
+      />
+      {/* <VStack>
         <Text> Rooms Needed </Text>
         <Input
           type="number"
@@ -59,7 +76,7 @@ const ReportTimePage = () => {
             <Button colorScheme="primary"> Continue </Button>
           </Link>
         </HStack>
-      </VStack>
+      </VStack> */}
     </>
   );
 };

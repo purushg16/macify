@@ -41,7 +41,7 @@ const BookingFooter = ({
       gap={4}
     >
       {!!image && (
-        <Box pos="relative" h={280} maxH={280} zIndex={-10}>
+        <Box pos="relative" h={150} maxH={150} zIndex={-10}>
           <Image
             w={250}
             src={image}
@@ -68,9 +68,14 @@ const BookingFooter = ({
         bg="#E4FEE4"
       >
         <Box maxW="90%">
-          <Title heading={title} subtitle={subheading} align="left" />
+          <Title
+            size="xl"
+            substitleSize="sm"
+            heading={title}
+            subtitle={subheading}
+            align="left"
+          />
         </Box>
-
         {children && <Box alignSelf="center">{children}</Box>}
 
         <HStack alignSelf="end">{buttons}</HStack>
