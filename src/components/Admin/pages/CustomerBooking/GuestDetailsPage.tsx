@@ -5,7 +5,14 @@ import { Link } from "react-router-dom";
 
 const GuestDetailsPage = () => {
   return (
-    <Flex gap={4} flexDir="column" overflowY="auto" borderRadius={20} p={4}>
+    <Flex
+      gap={4}
+      flexDir="column"
+      overflowY="auto"
+      borderRadius={20}
+      p={4}
+      pt={0}
+    >
       <GuestDetailsHug />
       <GuestDetailsHug />
       <GuestDetailsHug />

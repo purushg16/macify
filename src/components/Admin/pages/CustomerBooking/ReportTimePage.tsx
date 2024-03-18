@@ -9,6 +9,9 @@ import BookingFooter from "../../elements/Booking/BookingFooter";
 
 const ReportTimePage = () => {
   const range = useBookingStore((s) => s.checkingRange);
+  // const count = useBookingStore((s) => s.numberOfGuests);
+
+  // if (!count) return <Navigate to="/booking" />;
   return (
     <>
       {/* <AnimateMove delay={0.2}>

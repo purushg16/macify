@@ -1,4 +1,5 @@
 import { Box, Flex, HStack, Input, Text } from "@chakra-ui/react";
+import GuestGenderSelector from "./GuestGenderSelector";
 
 const GuestDetailsHug = () => {
   return (
@@ -15,13 +16,14 @@ const GuestDetailsHug = () => {
         <Input placeholder="Guest Name" bg="#f4f4f4" />
 
         <HStack maxW="100%" gap={4}>
-          <Input placeholder="Age" bg="#f4f4f4" />
-          <Input placeholder="DOB" bg="#f4f4f4" />
+          <Input placeholder="Age" bg="#f4f4f4" w={100} />
+          <GuestGenderSelector />
         </HStack>
 
         <HStack maxW="100%" gap={4}>
+          <Input placeholder="DOB" bg="#f4f4f4" />
           <Input placeholder="Phone" bg="#f4f4f4" />
-          <Input placeholder="Gender" bg="#f4f4f4" />
+          {/* <Input placeholder="Gender" bg="#f4f4f4" /> */}
         </HStack>
       </Flex>
     </Box>
