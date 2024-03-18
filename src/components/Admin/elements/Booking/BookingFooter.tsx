@@ -43,7 +43,7 @@ const BookingFooter = ({
       {!!image && (
         <Box pos="relative" h={280} maxH={280} zIndex={-10}>
           <Image
-            w={300}
+            w={250}
             src={image}
             pos="absolute"
             top={-10}
