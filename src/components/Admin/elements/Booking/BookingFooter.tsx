@@ -18,6 +18,7 @@ interface Props {
   buttons: ReactNode;
   image?: string;
   note?: string;
+  w?: number;
 }
 
 const BookingFooter = ({
@@ -27,6 +28,7 @@ const BookingFooter = ({
   buttons,
   image,
   note,
+  w = 250,
 }: Props) => {
   return (
     <Flex
@@ -43,7 +45,7 @@ const BookingFooter = ({
       {!!image && (
         <Box pos="relative" h={150} maxH={150} zIndex={-10}>
           <Image
-            w={250}
+            w={w}
             src={image}
             pos="absolute"
             top={-10}

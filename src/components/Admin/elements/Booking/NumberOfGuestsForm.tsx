@@ -45,6 +45,7 @@ const NumberOfGuestsForm = () => {
         title="Number of Homies"
         subheading={`You can always come back and add or remove your homies {": )"}`}
         image={homies}
+        w={180}
         children={
           <AnimateMove delay={0.2}>
             <Box mx="auto">

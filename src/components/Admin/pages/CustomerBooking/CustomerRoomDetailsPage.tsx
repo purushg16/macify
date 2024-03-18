@@ -25,6 +25,7 @@ const ReportTimePage = () => {
             value={numOfRooms}
           />
         }
+        w={280}
         image={room}
         buttons={
           <>

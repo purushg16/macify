@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/react";
 import AnimateMove from "../../../motions/Move";
 import DropZone from "./DropZone";
 import useBookingStore from "../../../store/bookingStore";
-import file from "../../../../assets/booking/doc.png";
+import file from "../../../../assets/booking/doc1.png";
 import { Link, Navigate } from "react-router-dom";
 import BookingFooter from "./BookingFooter";
 
@@ -13,6 +13,7 @@ function CustomerFileUpload() {
   return (
     <>
       <BookingFooter
+        w={200}
         title="Upload Proofs"
         subheading={`Upload files for ${count} people`}
         image={file}

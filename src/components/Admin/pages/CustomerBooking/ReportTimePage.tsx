@@ -53,6 +53,7 @@ const ReportTimePage = () => {
         title="Checking Date"
         subheading="Pick checkin & checkout dates of staying"
         image={checkingimg}
+        w={150}
         children={
           <AnimateMove delay={0.4}>
             <InputGroup mb={8}>

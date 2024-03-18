@@ -12,13 +12,12 @@ const FinalPage = () => {
         buttons={
           <>
             <NavigatorWrapper to="/booking">
-              <Button id="extra" colorScheme="primary">
-                Book Another!
-              </Button>
+              <Button colorScheme="primary">New Booking!</Button>
             </NavigatorWrapper>
           </>
         }
         image={success}
+        w={240}
       />
     </>
   );
