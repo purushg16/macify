@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import Title from "../Title";
-import { BiNote } from "react-icons/bi";
+import { IoMdInformationCircle } from "react-icons/io";
 
 interface Props {
   title: string;
@@ -53,11 +53,7 @@ const BookingFooter = ({
           />
         </Box>
       )}
-      {!!note && (
-        <Button leftIcon={<Icon as={BiNote} />}>
-          Tap on rooms to allocate
-        </Button>
-      )}
+
       <VStack
         gap={8}
         align="start"
@@ -68,6 +64,16 @@ const BookingFooter = ({
         bg="#E4FEE4"
       >
         <Box maxW="90%">
+          {!!note && (
+            <Button
+              mb={2}
+              size="xs"
+              leftIcon={<Icon as={IoMdInformationCircle} />}
+              w="max-content"
+            >
+              Tap on rooms to allocate
+            </Button>
+          )}
           <Title
             size="xl"
             substitleSize="sm"

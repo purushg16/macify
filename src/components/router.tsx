@@ -37,6 +37,7 @@ import CustomerRoomDetailsPage from "./Admin/pages/CustomerBooking/CustomerRoomD
 import FinalPage from "./Admin/pages/CustomerBooking/FinalPage";
 import CustomerFileUpload from "./Admin/elements/Booking/CustomerFileUpload";
 import GuestDetailsPage from "./Admin/pages/CustomerBooking/GuestDetailsPage";
+import RoomAssignPage from "./Admin/pages/CustomerBooking/RoomAssignPage";
 
 const router = createBrowserRouter([
   {
@@ -113,7 +114,8 @@ const router = createBrowserRouter([
       { path: "3", element: <ReportTimePage /> },
       { path: "4", element: <GuestDetailsPage /> },
       { path: "5", element: <CustomerRoomDetailsPage /> },
-      { path: "6", element: <FinalPage /> },
+      { path: "6", element: <RoomAssignPage /> },
+      { path: "7", element: <FinalPage /> },
     ],
   },
 ]);
