@@ -1,9 +1,7 @@
 import {
   Box,
   Button,
-  Flex,
   HStack,
-  Heading,
   Icon,
   Input,
   Text,
@@ -11,11 +9,11 @@ import {
 } from "@chakra-ui/react";
 import { BsPlus } from "react-icons/bs";
 import { TbMinus } from "react-icons/tb";
-import homies from "../../../../assets/booking/homies.png";
+import homies from "../../../../assets/booking/friends.png";
 import AnimateMove from "../../../motions/Move";
 import useBookingStore from "../../../store/bookingStore";
 import { useNavigate } from "react-router-dom";
-import ImageHolder from "./ImageHolder";
+import BookingFooter from "./BookingFooter";
 
 const NumberOfGuestsForm = () => {
   const navigate = useNavigate();
@@ -43,6 +41,63 @@ const NumberOfGuestsForm = () => {
 
   return (
     <>
+      <BookingFooter
+        title="Number of Homies"
+        subheading={`You can always come back and add or remove your homies {": )"}`}
+        image={homies}
+        children={
+          <AnimateMove delay={0.2}>
+            <Box mx="auto">
+              <Text> Guest Count </Text>
+              <HStack gap={4} alignItems="center">
+                <Input
+                  textAlign="right"
+                  bg="#f4f4f4"
+                  {...input}
+                  maxW={200}
+                  _active={{ outline: "none" }}
+                  _focus={{ outline: "red" }}
+                />
+
+                <Button
+                  p={0}
+                  {...inc}
+                  boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+                  bg="black"
+                  _hover={{ bg: "black" }}
+                >
+                  <Icon as={BsPlus} boxSize={5} color="white" />
+                </Button>
+
+                <Button
+                  p={0}
+                  {...dec}
+                  boxShadow="rgba(0, 0, 0, 0.24) 0px 3px 8px;"
+                  bg="black"
+                  _hover={{ bg: "black" }}
+                >
+                  <Icon as={TbMinus} color="white" />
+                </Button>
+              </HStack>
+            </Box>
+          </AnimateMove>
+        }
+        buttons={
+          <Button
+            isDisabled={!(valueAsNumber >= 1)}
+            colorScheme="primary"
+            onClick={() => {
+              setNumberOfGuests(valueAsNumber);
+              isNumberOfGuestsSelected(true);
+              navigate("2");
+            }}
+          >
+            Continue
+          </Button>
+        }
+      />
+
+      {/*     
       <AnimateMove>
         <ImageHolder image={homies} />
       </AnimateMove>
@@ -104,7 +159,7 @@ const NumberOfGuestsForm = () => {
             Continue
           </Button>
         </AnimateMove>
-      </Flex>
+      </Flex> */}
     </>
   );
 };

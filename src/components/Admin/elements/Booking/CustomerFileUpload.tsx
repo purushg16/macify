@@ -1,10 +1,10 @@
-import { Box, Button, Flex, Heading, Highlight, Text } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import AnimateMove from "../../../motions/Move";
 import DropZone from "./DropZone";
 import useBookingStore from "../../../store/bookingStore";
-import ImageHolder from "./ImageHolder";
-import file from "../../../../assets/booking/fileUpload.png";
+import file from "../../../../assets/booking/doc.png";
 import { Link, Navigate } from "react-router-dom";
+import BookingFooter from "./BookingFooter";
 
 function CustomerFileUpload() {
   const count = useBookingStore((s) => s.numberOfGuests);
@@ -12,7 +12,23 @@ function CustomerFileUpload() {
   if (!count) return <Navigate to="/booking" />;
   return (
     <>
-      <ImageHolder image={file} />
+      <BookingFooter
+        title="Upload Proofs"
+        subheading={`Upload files for ${count} people`}
+        image={file}
+        children={
+          <AnimateMove delay={0.2}>
+            <DropZone />
+          </AnimateMove>
+        }
+        buttons={
+          <Link to="/booking">
+            <Button>Back</Button>
+          </Link>
+        }
+      />
+
+      {/* <ImageHolder image={file} />
       <Flex flexDir="column" w="100%">
         <AnimateMove delay={0.2}>
           <DropZone />
@@ -46,7 +62,7 @@ function CustomerFileUpload() {
             </Link>
           </Box>
         </AnimateMove>
-      </Flex>
+      </Flex> */}
     </>
   );
 }

@@ -41,7 +41,6 @@ const DropZone = () => {
       alignItems="center"
       justifyContent="space-between"
       mx="auto"
-      w="90%"
       bg="gray.50"
       border="1px solid"
       borderColor="gray.100"
