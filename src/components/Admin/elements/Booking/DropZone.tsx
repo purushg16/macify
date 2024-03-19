@@ -25,7 +25,9 @@ const DropZone = () => {
         }
 
         try {
-          await extractData("aadhar", acceptedFiles);
+          await extractData("aadhar", acceptedFiles).then((res) =>
+            console.log(res)
+          );
         } catch (error) {
           console.error("Error extracting data:", error);
         }

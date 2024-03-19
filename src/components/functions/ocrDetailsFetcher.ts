@@ -1,86 +1,101 @@
 import { FileWithPath } from "react-dropzone";
 import { createWorker } from "tesseract.js";
-// import img from "./dayalan-passport.jpeg";
+import Guest from "../entities/Guest";
+import { v4 as uuidv4 } from "uuid";
 
 const extractData = async (
   type: "aadhar" | "passport",
   files: FileWithPath[]
 ) => {
   const worker = await createWorker("eng");
+  const resultData = [] as Guest[];
 
-  for (const file of files) {
-    const { data } = await worker.recognize(file);
-    let result = data.text;
-    const toOccurenace = result.indexOf("To");
+  try {
+    for (const file of files) {
+      const { data } = await worker.recognize(file);
+      let result = data.text;
+      const toOccurrence = result.indexOf("To");
 
-    result =
-      toOccurenace !== -1 ? result.substring(result.indexOf("To") + 2) : result;
+      result =
+        toOccurrence !== -1
+          ? result.substring(result.indexOf("To") + 2)
+          : result;
 
-    //AADHAR
-    if (type === "aadhar") {
-      const phoneRegex = /\b\d{10}\b/g;
-      const dobRegex = /\b\d{2}\/\d{2}\/\d{4}\b/g;
-      const genderRegex = /\b(MALE|FEMALE)\b/i;
+      if (type === "aadhar") {
+        const phoneRegex = /\b\d{10}\b/g;
+        const dobRegex = /\b\d{2}\/\d{2}\/\d{4}\b/g;
+        const genderRegex = /\b(MALE|FEMALE)\b/i;
 
-      // Extract phone numbers
-      const phoneNumbers = result.match(phoneRegex)![0];
-      const datesOfBirth = result.match(dobRegex)![0];
-      const gender = result.match(genderRegex)![0];
+        // Extract phone numbers
+        const phoneNumbers = result.match(phoneRegex);
+        const datesOfBirth = result.match(dobRegex);
+        const gender = result.match(genderRegex);
 
-      const lines = result.split("\n");
+        const lines = result.split("\n");
 
-      // Loop through each line and find the first line that doesn't contain numbers or special characters
-      let name = null;
-      for (let i = 0; i < lines.length; i++) {
-        // Check if the line contains "@ GovernmentiofIndiam"
-        if (lines[i].includes("Government of")) {
-          // Extract the name from two lines after
-          name = lines[i + 2].trim();
-          break;
+        // Loop through each line and find the first line that doesn't contain numbers or special characters
+        let name = null;
+        for (let i = 0; i < lines.length; i++) {
+          // Check if the line contains "@ GovernmentiofIndiam"
+          if (lines[i].includes("Government of")) {
+            // Extract the name from two lines after
+            name = lines[i + 2].trim();
+            break;
+          }
         }
-      }
-      name = name?.replace(/^\s+|[0-9]/g, "");
-      name = name?.split(" ").find((word) => word.length > 4);
-      const age = calculateAge(datesOfBirth![0]);
+        name = name?.replace(/^\s+|[0-9]/g, "");
+        name = name?.split(" ").find((word) => word.length > 4);
+        const age = calculateAge(datesOfBirth![0]);
 
-      console.log(name, age, phoneNumbers, gender, datesOfBirth);
+        resultData.push({
+          id: uuidv4(),
+          name: name || "",
+          age: age!,
+          phone: phoneNumbers ? parseInt(phoneNumbers[0]) : parseInt(""),
+          dob: datesOfBirth![0] || "",
+          gender: gender ? gender[0] : null,
+        });
+      }
+
+      if (type === "passport") {
+        const genderRegex = /\b(M|F)\b/i;
+        let gender = result.match(genderRegex)! as unknown;
+        if (gender === "M") {
+          gender = "Male";
+        }
+        if (gender === "F") {
+          gender = "Female";
+        }
+
+        // Regular expression pattern to match date of birth (DOB)
+        const dobRegex = /(\d{2}\/\d{2}\/\d{4})/;
+
+        // Extract DOB and name from the data
+        const dobMatch = result.match(dobRegex);
+        const dob = dobMatch![1];
+
+        console.log("Date of Birth:", dob);
+
+        const lines = result.trim().split("\n");
+        // Extract the name from the 5th line
+        const line = lines[3].trim();
+        const words = line.split(" ");
+        // Filter out words with more than 4 characters
+        const name = words.filter((word) => word.length > 4);
+
+        console.log("Name:", name[0]);
+
+        const age = calculateAge(dob);
+        console.log("Age:", age);
+      }
     }
-
-    if (type == "passport") {
-      const genderRegex = /\b(M|F)\b/i;
-      let gender = result.match(genderRegex)! as unknown;
-      if (gender == "M") {
-        gender = "Male";
-      }
-      if (gender == "F") {
-        gender = "Female";
-      }
-
-      // Regular expression pattern to match date of birth (DOB)
-      const dobRegex = /(\d{2}\/\d{2}\/\d{4})/;
-
-      // Extract DOB and name from the data
-      const dobMatch = result.match(dobRegex);
-      const dob = dobMatch![1];
-
-      console.log("Date of Birth:", dob);
-
-      const lines = result.trim().split("\n");
-      // Extract the name from the 5th line
-      const line = lines[3].trim();
-      const words = line.split(" ");
-      // Filter out words with more than 4 characters
-      const name = words.filter((word) => word.length > 4);
-
-      console.log("Name:", name[0]);
-
-      const age = calculateAge(dob);
-      console.log("Age:", age);
-    }
-
+  } finally {
     await worker.terminate();
   }
+
+  return resultData;
 };
+
 // Function to calculate age
 function calculateAge(dateOfBirth: string) {
   // Split the date of birth string by '/' or '-'
