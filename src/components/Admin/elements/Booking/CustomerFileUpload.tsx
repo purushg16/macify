@@ -8,7 +8,6 @@ import BookingFooter from "./BookingFooter";
 
 function CustomerFileUpload() {
   const count = useBookingStore((s) => s.numberOfGuests);
-
   if (!count) return <Navigate to="/booking" />;
   return (
     <>
