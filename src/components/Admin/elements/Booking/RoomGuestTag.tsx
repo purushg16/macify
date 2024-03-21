@@ -1,7 +1,11 @@
 import { Flex, Icon } from "@chakra-ui/react";
 import { IoMdCloseCircle } from "react-icons/io";
+import useBookingRoomStore from "../../../store/bookingRoomStore";
+import Guest from "../../../entities/Guest";
 
-const RoomGuestTag = () => {
+const RoomGuestTag = ({ guest, roomId }: { roomId: string; guest: Guest }) => {
+  const removeGuest = useBookingRoomStore((s) => s.removeGuests);
+
   return (
     <Flex
       fontSize="sm"
@@ -12,8 +16,13 @@ const RoomGuestTag = () => {
       align="center"
       gap={2}
     >
-      Guest Name
-      <Icon as={IoMdCloseCircle} onClick={() => {}} />
+      {guest.guestName}
+      <Icon
+        as={IoMdCloseCircle}
+        onClick={() => {
+          removeGuest(roomId, guest);
+        }}
+      />
     </Flex>
   );
 };

@@ -1,10 +1,11 @@
 import men from "../../../../assets/avatars/men.png";
 import wmen from "../../../../assets/avatars/woman.png";
 import { Box, Flex, Image, Text, VStack } from "@chakra-ui/react";
-import useBookingGuestStore from "../../../store/bookingGuestStore";
+import useBookingRoomStore from "../../../store/bookingRoomStore";
 
-const AvailableGuestCard = () => {
-  const guests = useBookingGuestStore((s) => s.guests);
+const AvailableGuestCard = ({ roomId }: { roomId: string }) => {
+  const guests = useBookingRoomStore((s) => s.unassignedGuests);
+  const appendguests = useBookingRoomStore((s) => s.addGuests);
 
   return (
     <VStack gap={4} w="100%">
@@ -16,6 +17,7 @@ const AvailableGuestCard = () => {
           bg="#f4f4f4"
           borderRadius={10}
           w="100%"
+          onClick={() => appendguests(roomId, guest)}
         >
           <Image
             src={

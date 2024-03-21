@@ -12,7 +12,7 @@ import {
 import { IoMdAddCircleOutline } from "react-icons/io";
 import AvailableGuestCard from "./AvailableGuestCard";
 
-const AvailableGuestModal = () => {
+const AvailableGuestModal = ({ roomId }: { roomId: string }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -30,7 +30,7 @@ const AvailableGuestModal = () => {
         <ModalContent>
           <ModalHeader> Available Guests </ModalHeader>
           <ModalBody>
-            <AvailableGuestCard />
+            <AvailableGuestCard roomId={roomId} />
           </ModalBody>
           <ModalFooter>
             <Button onClick={onClose}>Close</Button>

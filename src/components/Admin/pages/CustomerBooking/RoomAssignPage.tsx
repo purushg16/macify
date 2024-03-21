@@ -2,10 +2,10 @@ import { Button, SimpleGrid } from "@chakra-ui/react";
 import BookingFooter from "../../elements/Booking/BookingFooter";
 import { Link } from "react-router-dom";
 import AssignRoomCard from "../../elements/Booking/AssignRoomCard";
-import useBookingStore from "../../../store/bookingStore";
+import useBookingRoomStore from "../../../store/bookingRoomStore";
 
 const RoomAssignPage = () => {
-  const numOfRooms = useBookingStore((s) => s.numberOfRooms);
+  const rooms = useBookingRoomStore((s) => s.rooms);
 
   return (
     <>
@@ -17,14 +17,18 @@ const RoomAssignPage = () => {
         w="100%"
         mb={8}
       >
-        {Array.from({ length: numOfRooms! }, (_, index) => (
-          <AssignRoomCard key={index} index={index + 1} />
+        {rooms?.map((room, i) => (
+          <AssignRoomCard
+            key={i}
+            index={i + 1}
+            room={room}
+            guests={room.guests}
+          />
         ))}
       </SimpleGrid>
       <BookingFooter
         title="Room Partition"
         subheading="Assign rooms for each group of your homies"
-        note="Tap on rooms to allocate"
         buttons={
           <>
             <Link to="/booking/5">

@@ -1,8 +1,18 @@
 import { Flex, SimpleGrid, Text } from "@chakra-ui/react";
 import RoomGuestTag from "./RoomGuestTag";
 import AvailableGuestModal from "./AvailableGuestModal";
+import Guest from "../../../entities/Guest";
+import { GuestRoom } from "../../../store/bookingRoomStore";
 
-const AssignRoomCard = ({ index }: { index: number }) => {
+const AssignRoomCard = ({
+  guests,
+  index,
+  room,
+}: {
+  guests: Guest[];
+  room: GuestRoom;
+  index: number;
+}) => {
   return (
     <Flex flexDir="column">
       <Text fontSize="sm"> Room {index} </Text>
@@ -14,11 +24,10 @@ const AssignRoomCard = ({ index }: { index: number }) => {
         borderColor="gray"
         p={4}
       >
-        <RoomGuestTag />
-        <RoomGuestTag />
-        <RoomGuestTag />
-        <RoomGuestTag />
-        <AvailableGuestModal />
+        {guests.map((guest) => (
+          <RoomGuestTag key={guest.id} guest={guest} roomId={room.id} />
+        ))}
+        <AvailableGuestModal roomId={room.id} />
       </SimpleGrid>
     </Flex>
   );

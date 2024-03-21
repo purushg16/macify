@@ -3,11 +3,24 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import useBookingStore from "../../../store/bookingStore";
 import BookingFooter from "../../elements/Booking/BookingFooter";
 import room from "../../../../assets/booking/room.png";
+import useBookingRoomStore from "../../../store/bookingRoomStore";
+import useBookingGuestStore from "../../../store/bookingGuestStore";
 
 const ReportTimePage = () => {
   const numberOfGuests = useBookingStore((s) => s.numberOfGuests);
-  const numOfRooms = useBookingStore((s) => s.numberOfRooms);
-  const setNumOfRooms = useBookingStore((s) => s.setNumberOfRooms);
+  const guests = useBookingGuestStore((s) => s.guests);
+  const numOfRooms = useBookingRoomStore((s) => s.numberOfRooms);
+  const setNumOfRooms = useBookingRoomStore((s) => s.setNuumberOfRooms);
+  const addRooms = useBookingRoomStore((s) => s.createRooms);
+  const appendUnassignedGuests = useBookingRoomStore(
+    (s) => s.appendUnassignedGuests
+  );
+
+  const handleSubmit = () => {
+    addRooms(numOfRooms!);
+    appendUnassignedGuests(guests);
+    navigate("/booking/6");
+  };
 
   const navigate = useNavigate();
   if (!numberOfGuests) return <Navigate to="/booking" />;
@@ -45,7 +58,7 @@ const ReportTimePage = () => {
             </Link>
             <Button
               colorScheme="primary"
-              onClick={() => navigate("/booking/6")}
+              onClick={handleSubmit}
               isDisabled={!numOfRooms || numOfRooms > numberOfGuests}
             >
               Next
