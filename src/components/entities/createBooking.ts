@@ -1,4 +1,4 @@
-export type gender = "male" | "female";
+export type gender = "Male" | "Female";
 export type idProofType = "passport" | "aadhar";
 
 interface CustomerBookingGuest {

@@ -11,6 +11,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "react-datepicker/dist/react-datepicker.css";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 const client = new QueryClient();

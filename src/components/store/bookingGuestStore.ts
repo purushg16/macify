@@ -6,7 +6,7 @@ type params = keyof Guest;
 interface BookingGuestStoreInterface {
   guests: Guest[];
   appendGuests: (guests: Guest[]) => void;
-  editGuests: (id: string, param: params, value: string) => void;
+  editGuests: (id: string, param: params, value: string | Date) => void;
 }
 
 const useBookingGuestStore = create<BookingGuestStoreInterface>((set) => ({

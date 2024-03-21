@@ -235,3 +235,8 @@ div.rdrCalendarWrapper.rdrDateRangeWrapper div.rdrMonth,
 div.rdrCalendarWrapper.rdrDateRangeWrapper div.rdrMonths.rdrMonthsVertical {
   width: 100%;
 }
+
+input.dob-picker {
+  background: #f4f4f4;
+  padding: 0.5em !important;
+}

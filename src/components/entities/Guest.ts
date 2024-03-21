@@ -3,7 +3,7 @@ export default interface Guest {
   guestName: string;
   age: number;
   phone: number;
-  dob: string;
+  dob: Date;
   gender: string | "Male" | "Female" | null;
   idProof: string;
   idProofType: "passport" | "aadhar" | null;

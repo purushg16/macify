@@ -2,6 +2,7 @@ import { FileWithPath } from "react-dropzone";
 import { createWorker } from "tesseract.js";
 import Guest from "../entities/Guest";
 import { v4 as uuidv4 } from "uuid";
+import moment from "moment";
 
 const extractData = async (
   type: "aadhar" | "passport",
@@ -47,12 +48,17 @@ const extractData = async (
         name = name?.split(" ").find((word) => word.length > 4);
         const age = calculateAge(datesOfBirth![0]);
 
+        let splittedDate;
+        if (datesOfBirth) {
+          splittedDate = moment(datesOfBirth[0], "DD/MM/YYYY").toDate();
+        }
+
         resultData.push({
           id: uuidv4(),
           guestName: name || "",
           age: age!,
           phone: phoneNumbers ? parseInt(phoneNumbers[0]) : parseInt(""),
-          dob: datesOfBirth![0] || "",
+          dob: splittedDate!,
           gender: gender ? gender[0] : null,
           idProof: "",
           idProofType: "aadhar",
