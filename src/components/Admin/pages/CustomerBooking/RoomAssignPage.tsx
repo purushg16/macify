@@ -1,16 +1,12 @@
 import { Button, SimpleGrid } from "@chakra-ui/react";
 import BookingFooter from "../../elements/Booking/BookingFooter";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AssignRoomCard from "../../elements/Booking/AssignRoomCard";
 import useBookingRoomStore from "../../../store/bookingRoomStore";
-import { useCustomerBooking } from "../../../hooks/useCustomer";
+import SubmitButton from "../../elements/Booking/SubmitButton";
 
 const RoomAssignPage = () => {
   const rooms = useBookingRoomStore((s) => s.rooms);
-  const unassignedGuests = useBookingRoomStore((s) => s.unassignedGuests);
-  const { mutate, isPending, isSuccess } = useCustomerBooking();
-
-  if (isSuccess) <Navigate to="/booking/7" />;
   return (
     <>
       <SimpleGrid
@@ -38,14 +34,7 @@ const RoomAssignPage = () => {
             <Link to="/booking/5">
               <Button> Back </Button>
             </Link>
-            <Button
-              isLoading={isPending}
-              isDisabled={unassignedGuests.length > 0}
-              colorScheme="primary"
-              onClick={() => mutate()}
-            >
-              Submit
-            </Button>
+            <SubmitButton />
           </>
         }
       />
