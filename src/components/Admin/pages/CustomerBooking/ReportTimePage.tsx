@@ -1,5 +1,5 @@
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AnimateMove from "../../../motions/Move";
 import checkingimg from "../../../../assets/booking/checking.png";
 import CheckingDatePicker from "./CheckingDatePicker";
@@ -9,6 +9,7 @@ import BookingFooter from "../../elements/Booking/BookingFooter";
 
 const ReportTimePage = () => {
   const range = useBookingStore((s) => s.checkingRange);
+  const navigate = useNavigate();
   // const count = useBookingStore((s) => s.numberOfGuests);
 
   // if (!count) return <Navigate to="/booking" />;
@@ -81,9 +82,13 @@ const ReportTimePage = () => {
             <Link to="/booking/2">
               <Button> Back </Button>
             </Link>
-            <Link to="/booking/4">
-              <Button colorScheme="primary"> Next </Button>
-            </Link>
+            <Button
+              isDisabled={!range.startDate || !range.endDate}
+              colorScheme="primary"
+              onClick={() => navigate("/booking/4")}
+            >
+              Next
+            </Button>
           </>
         }
       />

@@ -9,32 +9,37 @@ const AvailableGuestCard = ({ roomId }: { roomId: string }) => {
 
   return (
     <VStack gap={4} w="100%">
-      {guests.map((guest) => (
-        <Flex
-          key={guest.id!}
-          gap={4}
-          p={2}
-          bg="#f4f4f4"
-          borderRadius={10}
-          w="100%"
-          onClick={() => appendguests(roomId, guest)}
-        >
-          <Image
-            src={
-              guest.gender?.charAt(0) === "m" || guest.gender?.charAt(0) === "M"
-                ? men
-                : wmen
-            }
-            alt=""
-            w={20}
-            borderRadius={20}
-          />
-          <Box>
-            <Text children={guest.guestName} />
-            <Text children={`Age: ${guest.age}`} />
-          </Box>
-        </Flex>
-      ))}
+      {guests.length > 0 ? (
+        guests.map((guest) => (
+          <Flex
+            key={guest.id!}
+            gap={4}
+            p={2}
+            bg="#f4f4f4"
+            borderRadius={10}
+            w="100%"
+            onClick={() => appendguests(roomId, guest)}
+          >
+            <Image
+              src={
+                guest.gender?.charAt(0) === "m" ||
+                guest.gender?.charAt(0) === "M"
+                  ? men
+                  : wmen
+              }
+              alt=""
+              w={20}
+              borderRadius={20}
+            />
+            <Box>
+              <Text children={guest.guestName} />
+              <Text children={`Age: ${guest.age}`} />
+            </Box>
+          </Flex>
+        ))
+      ) : (
+        <Text> No available guests. </Text>
+      )}
     </VStack>
   );
 };

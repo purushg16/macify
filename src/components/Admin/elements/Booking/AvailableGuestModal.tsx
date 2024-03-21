@@ -18,6 +18,9 @@ const AvailableGuestModal = ({ roomId }: { roomId: string }) => {
   return (
     <>
       <IconButton
+        pos="absolute"
+        right={1}
+        bottom={1}
         aria-label=""
         icon={<IoMdAddCircleOutline />}
         w="max-content"

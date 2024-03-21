@@ -47,32 +47,39 @@ const DropZone = () => {
 
   if (count === filesUploaded?.length) return <Navigate to="/booking/3" />;
   return (
-    <Box
-      p={2}
-      borderRadius={20}
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between"
-      mx="auto"
-      bg="gray.50"
-      border="1px solid"
-      borderColor="gray.100"
-      {...getRootProps({ style: style as React.CSSProperties })}
-    >
-      <input {...getInputProps()} name="pdfFile" />
-
-      <Text color="gray" px={4}>
-        Pick Files
-      </Text>
-
-      <Button
-        size="sm"
-        colorScheme="primary"
-        boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px;"
+    <>
+      <Box
+        p={2}
+        borderRadius={20}
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        mx="auto"
+        bg="gray.50"
+        border="1px solid"
+        borderColor="gray.100"
+        {...getRootProps({ style: style as React.CSSProperties })}
       >
-        <MdUploadFile />
-      </Button>
-    </Box>
+        <input {...getInputProps()} name="pdfFile" />
+
+        <Text color="gray" px={4}>
+          Pick Files
+        </Text>
+
+        <Button
+          size="sm"
+          colorScheme="primary"
+          boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px;"
+        >
+          <MdUploadFile />
+        </Button>
+      </Box>
+      {count !== filesUploaded?.length && (
+        <Text textAlign="center" fontSize="xs">
+          {filesUploaded?.length || 0} files uploaded
+        </Text>
+      )}
+    </>
   );
 };
 

@@ -1,11 +1,34 @@
 import { Button, Flex, Spinner } from "@chakra-ui/react";
 import GuestDetailsHug from "../../elements/Booking/GuestDetailsHug";
 import BookingFooter from "../../elements/Booking/BookingFooter";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
+import Guest from "../../../entities/Guest";
 
 const GuestDetailsPage = () => {
   const guests = useBookingGuestStore((s) => s.guests);
+  const navigate = useNavigate();
+
+  // const isAnyFieldEmpty = () => {
+  //   return guests.some((guest) =>
+  //     Object.values(guest).some(
+  //       (value) => value === undefined || value === null || value === ""
+  //     )
+  //   );
+  // };
+
+  const isAnyFieldEmpty = () => {
+    return guests.some((guest) =>
+      Object.keys(guest)
+        .filter((key) => key !== "idProof") // Exclude idProof from the check
+        .some(
+          (key) =>
+            guest[key as keyof Guest] === undefined ||
+            guest[key as keyof Guest] === null ||
+            guest[key as keyof Guest] === ""
+        )
+    );
+  };
 
   if (guests.length === 0) return <Spinner />;
   return (
@@ -29,9 +52,13 @@ const GuestDetailsPage = () => {
             <Link to="/booking/3">
               <Button> Back </Button>
             </Link>
-            <Link to="/booking/5">
-              <Button colorScheme="primary"> Next </Button>
-            </Link>
+            <Button
+              isDisabled={isAnyFieldEmpty()}
+              colorScheme="primary"
+              onClick={() => navigate("/booking/5")}
+            >
+              Next
+            </Button>
           </>
         }
       />
