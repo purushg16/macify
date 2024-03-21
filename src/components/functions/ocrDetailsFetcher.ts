@@ -49,11 +49,13 @@ const extractData = async (
 
         resultData.push({
           id: uuidv4(),
-          name: name || "",
+          guestName: name || "",
           age: age!,
           phone: phoneNumbers ? parseInt(phoneNumbers[0]) : parseInt(""),
           dob: datesOfBirth![0] || "",
           gender: gender ? gender[0] : null,
+          idProof: "",
+          idProofType: "aadhar",
         });
       }
 

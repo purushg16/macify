@@ -1,9 +1,13 @@
-import { Button, Flex } from "@chakra-ui/react";
+import { Button, Flex, Spinner } from "@chakra-ui/react";
 import GuestDetailsHug from "../../elements/Booking/GuestDetailsHug";
 import BookingFooter from "../../elements/Booking/BookingFooter";
 import { Link } from "react-router-dom";
+import useBookingGuestStore from "../../../store/bookingGuestStore";
 
 const GuestDetailsPage = () => {
+  const guests = useBookingGuestStore((s) => s.guests);
+
+  if (guests.length === 0) return <Spinner />;
   return (
     <Flex
       gap={4}
@@ -13,9 +17,9 @@ const GuestDetailsPage = () => {
       p={4}
       pt={0}
     >
-      <GuestDetailsHug />
-      <GuestDetailsHug />
-      <GuestDetailsHug />
+      {guests.map((guest, i) => (
+        <GuestDetailsHug key={guest.id!} guest={guest} i={i + 1} />
+      ))}
 
       <BookingFooter
         title="Guest Details"

@@ -1,40 +1,23 @@
 import { create } from "zustand";
-import { gender, idProofType } from "../entities/createBooking";
+import Guest from "../entities/Guest";
+
+type params = keyof Guest;
 
 interface BookingGuestStoreInterface {
-  guestName: string;
-  age: number | null;
-  gender: gender | null;
-  address: string;
-  idProof: string;
-  idProofType: "passport" | "aadhar" | null;
+  guests: Guest[];
+  appendGuests: (guests: Guest[]) => void;
+  editGuests: (id: string, param: params, value: string) => void;
 }
 
-interface BookingGuestStoreActionInterface {
-  setGuestName: (name: string) => void;
-  setAge: (age: number | null) => void;
-  setGender: (gender: gender) => void;
-  setAddress: (address: string) => void;
-  setIdProof: (idProof: string) => void;
-  setIdProofType: (type: idProofType) => void;
-}
-
-const useBookingGuestStore = create<
-  BookingGuestStoreInterface & BookingGuestStoreActionInterface
->((set) => ({
-  guestName: "",
-  age: null,
-  gender: null,
-  address: "",
-  idProof: "",
-  idProofType: null,
-
-  setGuestName: (guestName) => set({ guestName }),
-  setAge: (age) => set({ age }),
-  setGender: (gender) => set({ gender }),
-  setAddress: (address) => set({ address }),
-  setIdProof: (idProof) => set({ idProof }),
-  setIdProofType: (idProofType) => set({ idProofType }),
+const useBookingGuestStore = create<BookingGuestStoreInterface>((set) => ({
+  guests: [],
+  appendGuests: (guests) => set({ guests }),
+  editGuests: (id, param, value) =>
+    set((store) => ({
+      guests: store.guests.map((guest) =>
+        guest.id === id ? { ...guest, [param]: value } : guest
+      ),
+    })),
 }));
 
 export default useBookingGuestStore;

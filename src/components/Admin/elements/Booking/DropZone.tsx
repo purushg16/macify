@@ -6,10 +6,12 @@ import useBookingStore from "../../../store/bookingStore";
 import { MdUploadFile } from "react-icons/md";
 import { Navigate } from "react-router-dom";
 import extractData from "../../../functions/ocrDetailsFetcher";
+import useBookingGuestStore from "../../../store/bookingGuestStore";
 const DropZone = () => {
   const count = useBookingStore((s) => s.numberOfGuests);
   const addFiles = useBookingStore((s) => s.addFiles);
   const filesUploaded = useBookingStore((s) => s.filesUploaded);
+  const appendGuests = useBookingGuestStore((s) => s.appendGuests);
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
@@ -26,7 +28,7 @@ const DropZone = () => {
 
         try {
           await extractData("aadhar", acceptedFiles).then((res) =>
-            console.log(res)
+            appendGuests(res)
           );
         } catch (error) {
           console.error("Error extracting data:", error);
