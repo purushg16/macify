@@ -1,16 +1,15 @@
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Text, Button, useToast } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { acceptStyle, focusedStyle, rejectStyle } from "./DropZoneStyles";
 import useBookingStore from "../../../store/bookingStore";
 import { MdUploadFile } from "react-icons/md";
-import { Navigate } from "react-router-dom";
 import extractData from "../../../functions/ocrDetailsFetcher";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
 const DropZone = () => {
+  const toast = useToast();
   const count = useBookingStore((s) => s.numberOfGuests);
   const addFiles = useBookingStore((s) => s.addFiles);
-  const filesUploaded = useBookingStore((s) => s.filesUploaded);
   const appendGuests = useBookingGuestStore((s) => s.appendGuests);
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
@@ -20,6 +19,15 @@ const DropZone = () => {
         "image/png": [".png", ".img", ".jpg", ".jpeg"],
       },
       maxFiles: count,
+
+      onDropRejected: (rej) => {
+        toast({
+          title: rej[0].errors[0].message,
+          status: "error",
+          duration: 3000,
+          position: "top",
+        });
+      },
 
       onDrop: async (acceptedFiles: FileWithPath[]) => {
         if (acceptedFiles.length > 0) {
@@ -45,7 +53,6 @@ const DropZone = () => {
     [isFocused, isDragAccept, isDragReject]
   );
 
-  if (count === filesUploaded?.length) return <Navigate to="/booking/3" />;
   return (
     <>
       <Box
@@ -74,11 +81,6 @@ const DropZone = () => {
           <MdUploadFile />
         </Button>
       </Box>
-      {count !== filesUploaded?.length && (
-        <Text textAlign="center" fontSize="xs">
-          {filesUploaded?.length || 0} files uploaded
-        </Text>
-      )}
     </>
   );
 };
