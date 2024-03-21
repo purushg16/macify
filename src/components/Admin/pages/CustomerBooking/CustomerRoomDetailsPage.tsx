@@ -1,14 +1,15 @@
-import { Button, Input } from "@chakra-ui/react";
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Button, FormControl, FormHelperText, Input } from "@chakra-ui/react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import useBookingStore from "../../../store/bookingStore";
 import BookingFooter from "../../elements/Booking/BookingFooter";
 import room from "../../../../assets/booking/room.png";
 
 const ReportTimePage = () => {
-  const [numOfRooms, setNumOfRooms] = useState<number | undefined>(1);
   const numberOfGuests = useBookingStore((s) => s.numberOfGuests);
+  const numOfRooms = useBookingStore((s) => s.numberOfRooms);
+  const setNumOfRooms = useBookingStore((s) => s.setNumberOfRooms);
 
+  const navigate = useNavigate();
   if (!numberOfGuests) return <Navigate to="/booking" />;
   return (
     <>
@@ -16,14 +17,24 @@ const ReportTimePage = () => {
         title="Rooms Needed"
         subheading="Enter number of rooms need for you!"
         children={
-          <Input
-            type="number"
-            bg="gray.50"
-            onChange={(e) =>
-              setNumOfRooms(parseInt(e.target.value) || undefined)
-            }
-            value={numOfRooms}
-          />
+          <FormControl>
+            <Input
+              placeholder="Number of Rooms Needed"
+              type="number"
+              bg="gray.50"
+              onChange={(e) =>
+                setNumOfRooms(parseInt(e.target.value) || undefined)
+              }
+              value={numOfRooms}
+              max={numberOfGuests}
+            />
+            <FormHelperText
+              opacity={numberOfGuests < numOfRooms! ? 1 : 0}
+              color="red"
+            >
+              Rooms can't be greater than guest count
+            </FormHelperText>
+          </FormControl>
         }
         w={280}
         image={room}
@@ -32,9 +43,13 @@ const ReportTimePage = () => {
             <Link to="/booking/4">
               <Button> Back </Button>
             </Link>
-            <Link to="/booking/6">
-              <Button colorScheme="primary"> Next </Button>
-            </Link>
+            <Button
+              colorScheme="primary"
+              onClick={() => navigate("/booking/6")}
+              isDisabled={!numOfRooms || numOfRooms > numberOfGuests}
+            >
+              Next
+            </Button>
           </>
         }
       />

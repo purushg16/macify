@@ -13,6 +13,9 @@ interface BookingStoreInterface {
   removeFiles: (file: FileWithPath) => void;
   clearFiles: () => void;
 
+  numberOfRooms: number | undefined;
+  setNumberOfRooms: (rooms: number | undefined) => void;
+
   //Cheking Time
   checkingRange: {
     startDate: Date | undefined;
@@ -31,6 +34,8 @@ const useBookingStore = create<BookingStoreInterface>((set) => ({
   isNumberOfGuestsSelected: (status) => {
     set(() => ({ numberOfGuestsSelected: status }));
   },
+  numberOfRooms: undefined,
+  setNumberOfRooms: (rooms) => set({ numberOfRooms: rooms }),
 
   checkingRange: { startDate: undefined, endDate: undefined },
   setCheckingRange: (start, end) =>
