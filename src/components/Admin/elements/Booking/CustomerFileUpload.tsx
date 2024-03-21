@@ -14,6 +14,8 @@ import useBookingStore from "../../../store/bookingStore";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import BookingFooter from "./BookingFooter";
 import { IoClose } from "react-icons/io5";
+import extractData from "../../../functions/ocrDetailsFetcher";
+import useBookingGuestStore from "../../../store/bookingGuestStore";
 
 function CustomerFileUpload() {
   const navigate = useNavigate();
@@ -21,6 +23,15 @@ function CustomerFileUpload() {
   const count = useBookingStore((s) => s.numberOfGuests);
   const files = useBookingStore((s) => s.filesUploaded);
   const removeFiles = useBookingStore((s) => s.removeFiles);
+  const appendGuests = useBookingGuestStore((s) => s.appendGuests);
+
+  const extractDocData = async () => {
+    try {
+      await extractData("aadhar", files!).then((res) => appendGuests(res));
+    } catch (error) {
+      console.error("Error extracting data:", error);
+    }
+  };
 
   if (!count) return <Navigate to="/booking" />;
   return (
@@ -80,7 +91,10 @@ function CustomerFileUpload() {
             <Button
               isDisabled={files?.length !== count}
               colorScheme="primary"
-              onClick={() => navigate("/booking/3")}
+              onClick={() => {
+                extractDocData();
+                navigate("/booking/3");
+              }}
             >
               Next
             </Button>

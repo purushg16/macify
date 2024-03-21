@@ -4,13 +4,11 @@ import { useDropzone, FileWithPath } from "react-dropzone";
 import { acceptStyle, focusedStyle, rejectStyle } from "./DropZoneStyles";
 import useBookingStore from "../../../store/bookingStore";
 import { MdUploadFile } from "react-icons/md";
-import extractData from "../../../functions/ocrDetailsFetcher";
-import useBookingGuestStore from "../../../store/bookingGuestStore";
+
 const DropZone = () => {
   const toast = useToast();
   const count = useBookingStore((s) => s.numberOfGuests);
   const addFiles = useBookingStore((s) => s.addFiles);
-  const appendGuests = useBookingGuestStore((s) => s.appendGuests);
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
@@ -32,14 +30,6 @@ const DropZone = () => {
       onDrop: async (acceptedFiles: FileWithPath[]) => {
         if (acceptedFiles.length > 0) {
           addFiles(acceptedFiles);
-        }
-
-        try {
-          await extractData("aadhar", acceptedFiles).then((res) =>
-            appendGuests(res)
-          );
-        } catch (error) {
-          console.error("Error extracting data:", error);
         }
       },
     });
