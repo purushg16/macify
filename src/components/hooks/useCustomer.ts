@@ -3,12 +3,14 @@ import { createBooking } from "../api/customer-client";
 import { useToast } from "@chakra-ui/react";
 import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
+import useBookingConverter from "./useBookingConverter";
 
 const useCustomerBooking = () => {
   const toast = useToast();
+  const postData = useBookingConverter();
 
   return useMutation({
-    mutationFn: createBooking,
+    mutationFn: () => createBooking(postData),
 
     onSuccess: () =>
       toast({
