@@ -7,6 +7,7 @@ interface BookingGuestStoreInterface {
   guests: Guest[];
   appendGuests: (guests: Guest[]) => void;
   editGuests: (id: string, param: params, value: string | Date) => void;
+  clearGuests: () => void;
 }
 
 const useBookingGuestStore = create<BookingGuestStoreInterface>((set) => ({
@@ -18,6 +19,7 @@ const useBookingGuestStore = create<BookingGuestStoreInterface>((set) => ({
         guest.id === id ? { ...guest, [param]: value } : guest
       ),
     })),
+  clearGuests: () => set(() => ({ guests: [] })),
 }));
 
 export default useBookingGuestStore;

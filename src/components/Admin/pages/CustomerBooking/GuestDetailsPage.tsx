@@ -9,14 +9,6 @@ const GuestDetailsPage = () => {
   const guests = useBookingGuestStore((s) => s.guests);
   const navigate = useNavigate();
 
-  // const isAnyFieldEmpty = () => {
-  //   return guests.some((guest) =>
-  //     Object.values(guest).some(
-  //       (value) => value === undefined || value === null || value === ""
-  //     )
-  //   );
-  // };
-
   const isAnyFieldEmpty = () => {
     return guests.some((guest) =>
       Object.keys(guest)

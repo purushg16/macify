@@ -18,6 +18,7 @@ interface BookingRoomStoreInterface {
 
   unassignedGuests: Guest[];
   appendUnassignedGuests: (guests: Guest[]) => void;
+  resetUnassignedGuests: () => void;
 }
 
 const useBookingRoomStore = create<BookingRoomStoreInterface>((set) => ({
@@ -55,6 +56,8 @@ const useBookingRoomStore = create<BookingRoomStoreInterface>((set) => ({
     set((store) => ({
       unassignedGuests: [...store.unassignedGuests, ...guests],
     })),
+
+  resetUnassignedGuests: () => set(() => ({ unassignedGuests: [] })),
 }));
 
 export default useBookingRoomStore;

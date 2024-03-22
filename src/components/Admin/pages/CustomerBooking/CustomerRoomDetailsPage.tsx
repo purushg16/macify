@@ -12,13 +12,19 @@ const ReportTimePage = () => {
   const numOfRooms = useBookingRoomStore((s) => s.numberOfRooms);
   const setNumOfRooms = useBookingRoomStore((s) => s.setNuumberOfRooms);
   const addRooms = useBookingRoomStore((s) => s.createRooms);
+  const unassignedGuests = useBookingRoomStore((s) => s.unassignedGuests);
   const appendUnassignedGuests = useBookingRoomStore(
     (s) => s.appendUnassignedGuests
   );
 
   const handleSubmit = () => {
     addRooms(numOfRooms!);
-    appendUnassignedGuests(guests);
+
+    const isGuestsAlreadyPresent = unassignedGuests.some((guest) =>
+      guests.some((guest1) => guest.id === guest1.id)
+    );
+
+    if (!isGuestsAlreadyPresent) appendUnassignedGuests(guests);
     navigate("/booking/6");
   };
 

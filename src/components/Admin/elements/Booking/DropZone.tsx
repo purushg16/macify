@@ -28,9 +28,7 @@ const DropZone = () => {
       },
 
       onDrop: async (acceptedFiles: FileWithPath[]) => {
-        if (acceptedFiles.length > 0) {
-          addFiles(acceptedFiles);
-        }
+        if (acceptedFiles.length > 0) addFiles(acceptedFiles);
       },
     });
 

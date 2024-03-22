@@ -16,6 +16,7 @@ import BookingFooter from "./BookingFooter";
 import { IoClose } from "react-icons/io5";
 import extractData from "../../../functions/ocrDetailsFetcher";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
+import useBookingRoomStore from "../../../store/bookingRoomStore";
 
 function CustomerFileUpload() {
   const navigate = useNavigate();
@@ -23,7 +24,11 @@ function CustomerFileUpload() {
   const count = useBookingStore((s) => s.numberOfGuests);
   const files = useBookingStore((s) => s.filesUploaded);
   const removeFiles = useBookingStore((s) => s.removeFiles);
+  const clearGuests = useBookingGuestStore((s) => s.clearGuests);
   const appendGuests = useBookingGuestStore((s) => s.appendGuests);
+  const resetUnassignedGuests = useBookingRoomStore(
+    (s) => s.resetUnassignedGuests
+  );
 
   const extractDocData = async () => {
     try {
@@ -51,7 +56,9 @@ function CustomerFileUpload() {
                 w="100%"
                 align="center"
               >
-                <Text>{file.name}</Text>
+                <Text fontSize="sm" lineHeight="normal">
+                  {file.name}
+                </Text>
                 <Spacer />
                 <IconButton
                   aria-label="cancel"
@@ -92,6 +99,8 @@ function CustomerFileUpload() {
               isDisabled={files?.length !== count}
               colorScheme="primary"
               onClick={() => {
+                resetUnassignedGuests();
+                clearGuests();
                 extractDocData();
                 navigate("/booking/3");
               }}
