@@ -23,9 +23,7 @@ const GuestDetailsPage = () => {
         .filter((key) => key !== "idProof") // Exclude idProof from the check
         .some(
           (key) =>
-            guest[key as keyof Guest] === undefined ||
-            guest[key as keyof Guest] === null ||
-            guest[key as keyof Guest] === ""
+            !guest[key as keyof Guest] || guest[key as keyof Guest] === ""
         )
     );
   };
