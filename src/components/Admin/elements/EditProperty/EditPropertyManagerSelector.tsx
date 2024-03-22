@@ -40,7 +40,7 @@ const EditPropertyManagerSelector = ({ manager, onClick }: Props) => {
           bg="white"
           _hover={{ bg: "white" }}
         >
-          {manager.name}
+          {manager && manager.name}
         </Button>
       </Box>
 
