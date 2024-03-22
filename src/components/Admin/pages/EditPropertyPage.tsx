@@ -6,7 +6,6 @@ import {
   Flex,
   GridItem,
   Icon,
-  SimpleGrid,
   Spacer,
   Spinner,
   Text,
@@ -26,6 +25,7 @@ import EditPropertyTypeSelector from "../elements/EditProperty/EditPropertyTypeS
 import { useState } from "react";
 import { PropertyType } from "../../store/AddProperty/addPropertyBasicStore";
 import CheckingTimePicker from "../elements/EditProperty/EditPropertyCheckingPicker";
+import amenitiesData from "../../data/amenitiesData";
 
 const EditPropertyPage = () => {
   const id = useParams().id;
@@ -45,6 +45,9 @@ const EditPropertyPage = () => {
   const [city, setCity] = useState<string | undefined>(property?.city);
   const [country, setCountry] = useState<string | undefined>(property?.country);
   const [zipcode, setZipcode] = useState<string | undefined>(property?.zipcode);
+  const [amenities, setAmenities] = useState<string[] | undefined>(
+    property?.amenities
+  );
 
   if (!property) return <Spinner />;
   return (
@@ -141,25 +144,47 @@ const EditPropertyPage = () => {
 
       <GridItem>
         <PropertyField fieldTitle="Amenities">
-          <Box w="max-content">
+          <Box>
             <Text mb={2} fontSize="sm" color="gray">
               Amenities
             </Text>
-            <SimpleGrid columns={2}>
-              <EditPropertyAmenityTag amenity="Pets Allowed" selected />
-            </SimpleGrid>
+            {amenities?.length && amenities?.length > 0 ? (
+              <Flex gap={2} flexWrap="wrap" maxWidth="100%" overflowX="auto">
+                {amenities?.map((amenity) => (
+                  <EditPropertyAmenityTag
+                    amenity={amenity}
+                    selected
+                    onClick={(a) =>
+                      setAmenities(amenities.filter((a1) => a1 !== a))
+                    }
+                  />
+                ))}
+              </Flex>
+            ) : (
+              <Text color="gray" fontSize="xs" textAlign="center">
+                No amenities in this property
+              </Text>
+            )}
           </Box>
 
-          {/* <Box w="max-content" mt={4}>
-            <Text mb={2} fontSize="sm" color="gray">
-              Not selected
-            </Text>
-
-            <SimpleGrid columns={2} spacing={4}>
-              <EditPropertyAmenityTag amenity="Pets Allowed" />
-              <EditPropertyAmenityTag amenity="Pets Allowed" />
-            </SimpleGrid>
-          </Box> */}
+          {amenitiesData.filter((am) => !amenities?.includes(am)).length >
+            0 && (
+            <Box mt={4}>
+              <Text mb={2} fontSize="sm" color="gray">
+                You can add
+              </Text>
+              <Flex gap={2} flexWrap="wrap" maxWidth="100%" overflowX="auto">
+                {amenitiesData
+                  .filter((am) => !amenities?.includes(am))
+                  .map((amenity) => (
+                    <EditPropertyAmenityTag
+                      amenity={amenity}
+                      onClick={(a) => setAmenities([...amenities!, a])}
+                    />
+                  ))}
+              </Flex>
+            </Box>
+          )}
         </PropertyField>
       </GridItem>
 
@@ -176,7 +201,6 @@ const EditPropertyPage = () => {
       <GridItem textAlign="center">
         <Title heading="Edit Details" subtitle="Add or remove field & submit" />
         <EditPropertySubmitButton />
-        {/* // property={property} */}
       </GridItem>
     </Flex>
   );
