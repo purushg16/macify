@@ -31,8 +31,10 @@ const GuestGenderSelector = ({
           _hover={{ bg: "#f4f4f4" }}
           textTransform="capitalize"
         >
-          {gender.toLowerCase().charAt(0).toUpperCase() +
-            gender.slice(1).toLowerCase()}
+          {gender &&
+            gender.toLowerCase().charAt(0).toUpperCase() +
+              gender.slice(1).toLowerCase()}
+          {!gender && "Select"}
         </MenuButton>
         <MenuList borderRadius={10} p={2}>
           <MenuItem

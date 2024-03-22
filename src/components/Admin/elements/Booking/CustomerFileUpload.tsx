@@ -27,7 +27,7 @@ function CustomerFileUpload() {
 
   const extractDocData = async () => {
     try {
-      await extractData("aadhar", files!).then((res) => appendGuests(res));
+      await extractData(files!).then((res) => appendGuests(res));
     } catch (error) {
       console.error("Error extracting data:", error);
     }

@@ -4,10 +4,7 @@ import Guest from "../entities/Guest";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 
-const extractData = async (
-  type: "aadhar" | "passport",
-  files: FileWithPath[]
-) => {
+const extractData = async (files: FileWithPath[]) => {
   const worker = await createWorker("eng");
   const resultData = [] as Guest[];
 
@@ -22,7 +19,7 @@ const extractData = async (
           ? result.substring(result.indexOf("To") + 2)
           : result;
 
-      if (type === "aadhar") {
+      if (result.includes("Aadhaar")) {
         const phoneRegex = /\b\d{10}\b/g;
         const dobRegex = /\b\d{2}\/\d{2}\/\d{4}\b/g;
         const genderRegex = /\b(MALE|FEMALE)\b/i;
@@ -63,16 +60,18 @@ const extractData = async (
           idProof: "",
           idProofType: "aadhar",
         });
-      }
-
-      if (type === "passport") {
+      } else {
         const genderRegex = /\b(M|F)\b/i;
-        let gender = result.match(genderRegex)! as unknown;
-        if (gender === "M") {
-          gender = "Male";
-        }
-        if (gender === "F") {
-          gender = "Female";
+        const genderMatch = result.match(genderRegex)!;
+        let gender = null;
+
+        if (genderMatch) {
+          if (genderMatch[0] === "M") {
+            gender = "Male";
+          }
+          if (genderMatch[0] === "F") {
+            gender = "Female";
+          }
         }
 
         // Regular expression pattern to match date of birth (DOB)
@@ -82,7 +81,8 @@ const extractData = async (
         const dobMatch = result.match(dobRegex);
         const dob = dobMatch![1];
 
-        console.log("Date of Birth:", dob);
+        let splittedDate;
+        if (dob) splittedDate = moment(dob, "DD/MM/YYYY").toDate();
 
         const lines = result.trim().split("\n");
         // Extract the name from the 5th line
@@ -95,6 +95,17 @@ const extractData = async (
 
         const age = calculateAge(dob);
         console.log("Age:", age);
+
+        resultData.push({
+          id: uuidv4(),
+          guestName: name[0] || "",
+          age: age!,
+          phone: parseInt(""),
+          dob: splittedDate!,
+          gender: gender,
+          idProof: "",
+          idProofType: "passport",
+        });
       }
     }
   } finally {
