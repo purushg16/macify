@@ -13,10 +13,8 @@ import {
 import { BiGlobe, BiTag } from "react-icons/bi";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdDeleteOutline, MdLinearScale } from "react-icons/md";
-import { TiUserOutline } from "react-icons/ti";
 import PropertyField from "../elements/EditProperty/PropertyField";
 import EditPropertyValue from "../elements/EditProperty/EditPropertyValue";
-import EditPropertyIconValue from "../elements/EditProperty/EditPropertyIconValue";
 import { BsBuilding } from "react-icons/bs";
 import EditPropertyAmenityTag from "../elements/EditProperty/EditPropertyAmenityTag";
 import Title from "../elements/Title";
@@ -26,6 +24,8 @@ import { useState } from "react";
 import { PropertyType } from "../../store/AddProperty/addPropertyBasicStore";
 import CheckingTimePicker from "../elements/EditProperty/EditPropertyCheckingPicker";
 import amenitiesData from "../../data/amenitiesData";
+import EditPropertyManagerSelector from "../elements/EditProperty/EditPropertyManagerSelector";
+import { PropertyManager } from "../../entities/property";
 
 const EditPropertyPage = () => {
   const id = useParams().id;
@@ -47,6 +47,9 @@ const EditPropertyPage = () => {
   const [zipcode, setZipcode] = useState<string | undefined>(property?.zipcode);
   const [amenities, setAmenities] = useState<string[] | undefined>(
     property?.amenities
+  );
+  const [manager, setManager] = useState<PropertyManager | undefined>(
+    property?.manager
   );
 
   if (!property) return <Spinner />;
@@ -190,10 +193,9 @@ const EditPropertyPage = () => {
 
       <GridItem>
         <PropertyField fieldTitle="Manager">
-          <EditPropertyIconValue
-            title="Manager"
-            time={property?.manager.name}
-            icon={TiUserOutline}
+          <EditPropertyManagerSelector
+            manager={manager!}
+            onClick={setManager}
           />
         </PropertyField>
       </GridItem>

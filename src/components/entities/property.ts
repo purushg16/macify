@@ -12,6 +12,11 @@ export interface PropertyRoom {
   _id: string;
 }
 
+export interface PropertyManager {
+  _id: string;
+  name: string;
+}
+
 export default interface Property {
   _id: string;
   propertyName: string;
@@ -22,10 +27,7 @@ export default interface Property {
   country: string;
   city: string;
   zipcode: string;
-  manager: {
-    _id: string;
-    name: string;
-  };
+  manager: PropertyManager;
   checkInTime: string;
   checkOutTime: string;
   rooms: PropertyRoom[];
