@@ -13,13 +13,14 @@ interface BookingStoreInterface {
   removeFiles: (file: FileWithPath) => void;
   clearFiles: () => void;
 
-  //Cheking Time
   checkingRange: {
     startDate: Date | undefined;
     endDate: Date | undefined;
   };
-
   setCheckingRange: (startDate: Date, endDate: Date) => void;
+
+  cloudinaryLink: string | undefined;
+  setCloudinaryLink: (link: string | undefined) => void;
 }
 
 const useBookingStore = create<BookingStoreInterface>((set) => ({
@@ -34,6 +35,9 @@ const useBookingStore = create<BookingStoreInterface>((set) => ({
   checkingRange: { startDate: undefined, endDate: undefined },
   setCheckingRange: (start, end) =>
     set(() => ({ checkingRange: { startDate: start, endDate: end } })),
+
+  cloudinaryLink: undefined,
+  setCloudinaryLink: (link) => set(() => ({ cloudinaryLink: link })),
 
   filesUploaded: undefined,
   addFiles: (files) => {

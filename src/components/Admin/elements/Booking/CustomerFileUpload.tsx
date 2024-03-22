@@ -17,12 +17,14 @@ import { IoClose } from "react-icons/io5";
 import extractData from "../../../functions/ocrDetailsFetcher";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
 import useBookingRoomStore from "../../../store/bookingRoomStore";
+import cloudinaryUpload from "../../../functions/cloudinaryUploader";
 
 function CustomerFileUpload() {
   const navigate = useNavigate();
 
   const count = useBookingStore((s) => s.numberOfGuests);
   const files = useBookingStore((s) => s.filesUploaded);
+  const setCloudinaryLink = useBookingStore((s) => s.setCloudinaryLink);
   const removeFiles = useBookingStore((s) => s.removeFiles);
   const clearGuests = useBookingGuestStore((s) => s.clearGuests);
   const appendGuests = useBookingGuestStore((s) => s.appendGuests);
@@ -98,7 +100,10 @@ function CustomerFileUpload() {
             <Button
               isDisabled={files?.length !== count}
               colorScheme="primary"
-              onClick={() => {
+              onClick={async () => {
+                setCloudinaryLink(
+                  await cloudinaryUpload(files!)!.then((res) => res?.asset_id)
+                );
                 resetUnassignedGuests();
                 clearGuests();
                 extractDocData();
