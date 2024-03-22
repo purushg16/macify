@@ -20,7 +20,6 @@ const GuestDetailsPage = () => {
     );
   };
 
-  if (guests.length === 0) return <Spinner />;
   return (
     <Flex
       gap={4}
@@ -30,9 +29,14 @@ const GuestDetailsPage = () => {
       p={4}
       pt={0}
     >
-      {guests.map((guest, i) => (
-        <GuestDetailsHug key={guest.id!} guest={guest} i={i + 1} />
-      ))}
+      {guests.length === 0 ? (
+        <Spinner />
+      ) : (
+        guests.length > 0 &&
+        guests.map((guest, i) => (
+          <GuestDetailsHug key={guest.id!} guest={guest} i={i + 1} />
+        ))
+      )}
 
       <BookingFooter
         title="Guest Details"
@@ -43,7 +47,7 @@ const GuestDetailsPage = () => {
               <Button> Back </Button>
             </Link>
             <Button
-              isDisabled={isAnyFieldEmpty()}
+              isDisabled={isAnyFieldEmpty() || guests.length === 0}
               colorScheme="primary"
               onClick={() => navigate("/booking/5")}
             >
