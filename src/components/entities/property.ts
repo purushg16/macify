@@ -1,3 +1,5 @@
+import { PropertyType } from "../store/AddProperty/addPropertyBasicStore";
+
 export interface PropertyBed {
   bedNo: number;
   _id: string;
@@ -13,7 +15,7 @@ export interface PropertyRoom {
 export default interface Property {
   _id: string;
   propertyName: string;
-  propertyType: string;
+  propertyType: PropertyType;
   rentWithin: boolean;
   amenities: string[];
   address: string;

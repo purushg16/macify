@@ -2,7 +2,7 @@ import { Box, Heading, Text } from "@chakra-ui/react";
 
 interface AddTitleProps {
   heading: string | undefined;
-  subtitle: string;
+  subtitle: string | undefined;
   align?: CanvasTextAlign;
   size?: "md" | "lg" | "xl" | "3xl" | "2xl" | "4xl";
   substitleSize?: "xs" | "sm" | "md";

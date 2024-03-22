@@ -11,21 +11,40 @@ import {
   Spinner,
   Text,
 } from "@chakra-ui/react";
-import { BiGlobe } from "react-icons/bi";
-import { IoLocation } from "react-icons/io5";
+import { BiGlobe, BiTag } from "react-icons/bi";
+import { IoLocationOutline } from "react-icons/io5";
 import { MdDeleteOutline, MdLinearScale } from "react-icons/md";
 import { TiUserOutline } from "react-icons/ti";
 import PropertyField from "../elements/EditProperty/PropertyField";
 import EditPropertyValue from "../elements/EditProperty/EditPropertyValue";
 import EditPropertyIconValue from "../elements/EditProperty/EditPropertyIconValue";
-import { BsBuilding, BsClock } from "react-icons/bs";
+import { BsBuilding } from "react-icons/bs";
 import EditPropertyAmenityTag from "../elements/EditProperty/EditPropertyAmenityTag";
 import Title from "../elements/Title";
 import EditPropertySubmitButton from "../elements/EditProperty/EditPropertySubmitButton";
+import EditPropertyTypeSelector from "../elements/EditProperty/EditPropertyTypeSelector";
+import { useState } from "react";
+import { PropertyType } from "../../store/AddProperty/addPropertyBasicStore";
+import CheckingTimePicker from "../elements/EditProperty/EditPropertyCheckingPicker";
 
 const EditPropertyPage = () => {
   const id = useParams().id;
   const { data: property } = useGetSingleProperty(id!, !!id);
+
+  const [propertyName, setPropertyName] = useState<string | undefined>(
+    property?.propertyName
+  );
+  const [type, setType] = useState<PropertyType>(property?.propertyType);
+  const [checkInTime, setCheckInTime] = useState<string>(
+    property?.checkInTime || ""
+  );
+  const [checkOutTime, setCheckOutTime] = useState<string>(
+    property?.checkOutTime || ""
+  );
+  const [address, setAddress] = useState<string | undefined>(property?.address);
+  const [city, setCity] = useState<string | undefined>(property?.city);
+  const [country, setCountry] = useState<string | undefined>(property?.country);
+  const [zipcode, setZipcode] = useState<string | undefined>(property?.zipcode);
 
   if (!property) return <Spinner />;
   return (
@@ -57,54 +76,64 @@ const EditPropertyPage = () => {
           </Button>
         </Flex>
       </GridItem>
+
       <GridItem>
         <PropertyField fieldTitle="Basics">
           <EditPropertyValue
             label="Property Name"
-            value={property?.propertyName}
+            value={propertyName}
+            onchange={setPropertyName}
+            icon={BiTag}
           />
-          <EditPropertyValue
+          <EditPropertyTypeSelector
             label="Property Type"
-            value={property?.propertyType}
+            type={type}
+            setType={setType}
           />
         </PropertyField>
       </GridItem>
 
       <GridItem>
         <PropertyField fieldTitle="Checking Time">
-          <EditPropertyIconValue
-            title="Check-In Time"
-            time={property?.checkInTime}
-            icon={BsClock}
+          <CheckingTimePicker
+            title="Check In Time"
+            time={checkInTime!}
+            onSelect={setCheckInTime}
+            zindex={2}
           />
-          <EditPropertyIconValue
-            title="Check-Out Time"
-            time={property?.checkOutTime}
-            icon={BsClock}
+          <CheckingTimePicker
+            title="Check Out Time"
+            time={checkOutTime!}
+            onSelect={setCheckOutTime}
+            zindex={1}
           />
         </PropertyField>
       </GridItem>
 
       <GridItem>
         <PropertyField fieldTitle="Locations">
-          <EditPropertyIconValue
-            title="Address"
-            time={property?.address}
+          <EditPropertyValue
+            value={address}
+            label="Address"
+            onchange={setAddress}
             icon={BsBuilding}
           />
-          <EditPropertyIconValue
-            title="City"
-            time={property?.city}
-            icon={IoLocation}
+          <EditPropertyValue
+            label="City"
+            value={city}
+            onchange={setCity}
+            icon={IoLocationOutline}
           />
-          <EditPropertyIconValue
-            title="Country"
-            time={property?.country}
+          <EditPropertyValue
+            label="Country"
+            value={country}
+            onchange={setCountry}
             icon={BiGlobe}
           />
-          <EditPropertyIconValue
-            title="Zipcode"
-            time={property?.zipcode}
+          <EditPropertyValue
+            label="Zipcode"
+            value={zipcode}
+            onchange={setZipcode}
             icon={MdLinearScale}
           />
         </PropertyField>

@@ -13,8 +13,7 @@ import { TbChevronsDown } from "react-icons/tb";
 import useAddPropertyStore, {
   PropertyType,
 } from "../../../store/AddProperty/addPropertyBasicStore";
-
-const PropertyTypes = ["villa", "hotel", "apartment", "resort", "hostel"];
+import { PropertyTypes } from "./PropertyTypes";
 
 const PropertyTypeSelector = () => {
   const type = useAddPropertyStore((s) => s.propertyType);
