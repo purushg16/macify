@@ -11,19 +11,22 @@ import {
 import useBookingRoomStore from "../../../store/bookingRoomStore";
 import { useCustomerBooking } from "../../../hooks/useCustomer";
 import React from "react";
-import { Navigate } from "react-router-dom";
 
 const SubmitButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const unassignedGuests = useBookingRoomStore((s) => s.unassignedGuests);
-  const { mutate, isPending, isSuccess } = useCustomerBooking();
+  const { mutate, isPending } = useCustomerBooking();
   const cancelRef = React.useRef(null);
 
-  if (isSuccess) <Navigate to="/booking/7" />;
+  const unassignedGuests = useBookingRoomStore((s) => s.unassignedGuests);
+  const rooms = useBookingRoomStore((s) => s.rooms);
+
   return (
     <>
       <Button
-        isDisabled={unassignedGuests.length > 0}
+        isDisabled={
+          unassignedGuests.length > 0 ||
+          rooms?.some((room) => room.guests.length === 0)
+        }
         colorScheme="primary"
         onClick={onOpen}
       >

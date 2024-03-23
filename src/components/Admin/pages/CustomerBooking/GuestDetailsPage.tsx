@@ -1,11 +1,12 @@
 import { Button, Flex, Spinner } from "@chakra-ui/react";
 import GuestDetailsHug from "../../elements/Booking/GuestDetailsHug";
 import BookingFooter from "../../elements/Booking/BookingFooter";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
 import Guest from "../../../entities/Guest";
 
 const GuestDetailsPage = () => {
+  const propertyId = useParams().propertyId;
   const guests = useBookingGuestStore((s) => s.guests);
   const navigate = useNavigate();
 
@@ -43,13 +44,13 @@ const GuestDetailsPage = () => {
         subheading="Enter the requried details for all the homies"
         buttons={
           <>
-            <Link to="/booking/3">
+            <Link to={"/booking/" + propertyId + "/3"}>
               <Button> Back </Button>
             </Link>
             <Button
               isDisabled={isAnyFieldEmpty() || guests.length === 0}
               colorScheme="primary"
-              onClick={() => navigate("/booking/5")}
+              onClick={() => navigate("/booking/" + propertyId + "/5")}
             >
               Next
             </Button>

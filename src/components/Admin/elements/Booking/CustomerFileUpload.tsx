@@ -12,7 +12,7 @@ import {
 import AnimateMove from "../../../motions/Move";
 import DropZone from "./DropZone";
 import useBookingStore from "../../../store/bookingStore";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import BookingFooter from "./BookingFooter";
 import { IoClose } from "react-icons/io5";
 import extractData from "../../../functions/ocrDetailsFetcher";
@@ -25,6 +25,7 @@ function CustomerFileUpload() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
+  const propertyId = useParams().propertyId;
 
   const count = useBookingStore((s) => s.numberOfGuests);
   const files = useBookingStore((s) => s.filesUploaded);
@@ -57,7 +58,7 @@ function CustomerFileUpload() {
       const uploadResponses = await cloudinaryUpload(files!);
 
       uploadResponses.forEach((response) => {
-        if (response !== undefined) extractDocData(response.url);
+        if (response !== undefined) extractDocData(response.secure_url);
       });
     } catch (error) {
       toast({
@@ -69,8 +70,8 @@ function CustomerFileUpload() {
       setIsLoading(false);
       resetUnassignedGuests();
       clearGuests();
-      navigate("/booking/3");
     }
+    navigate("/booking/" + propertyId + "/3");
   };
 
   if (!count) return <Navigate to="/booking" />;
@@ -126,7 +127,7 @@ function CustomerFileUpload() {
         }
         buttons={
           <>
-            <Link to="/booking">
+            <Link to={"/booking/" + propertyId}>
               <Button>Back</Button>
             </Link>
 

@@ -48,7 +48,7 @@ const extractData = async (file: string) => {
         phone: phoneNumbers ? parseInt(phoneNumbers[0]) : parseInt(""),
         dob: splittedDate!,
         gender: gender ? gender[0] : null,
-        idProof: "",
+        idProof: file,
         idProofType: "aadhar",
       } as Guest;
     } else {
@@ -85,7 +85,7 @@ const extractData = async (file: string) => {
         phone: parseInt(""),
         dob: splittedDate!,
         gender: gender,
-        idProof: "",
+        idProof: file,
         idProofType: "passport",
       } as Guest;
     }

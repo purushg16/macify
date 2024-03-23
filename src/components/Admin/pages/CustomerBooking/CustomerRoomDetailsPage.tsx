@@ -1,5 +1,5 @@
 import { Button, FormControl, FormHelperText, Input } from "@chakra-ui/react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import useBookingStore from "../../../store/bookingStore";
 import BookingFooter from "../../elements/Booking/BookingFooter";
 import room from "../../../../assets/booking/room.png";
@@ -7,6 +7,7 @@ import useBookingRoomStore from "../../../store/bookingRoomStore";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
 
 const ReportTimePage = () => {
+  const propertyId = useParams().propertyId;
   const numberOfGuests = useBookingStore((s) => s.numberOfGuests);
   const guests = useBookingGuestStore((s) => s.guests);
   const numOfRooms = useBookingRoomStore((s) => s.numberOfRooms);
@@ -25,7 +26,7 @@ const ReportTimePage = () => {
     );
 
     if (!isGuestsAlreadyPresent) appendUnassignedGuests(guests);
-    navigate("/booking/6");
+    navigate("/booking/" + propertyId + "/6");
   };
 
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const ReportTimePage = () => {
         image={room}
         buttons={
           <>
-            <Link to="/booking/4">
+            <Link to={"/booking/" + propertyId + "/4"}>
               <Button> Back </Button>
             </Link>
             <Button

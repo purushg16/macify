@@ -106,7 +106,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/booking",
+    path: "/booking/:propertyId",
     element: <BookingLayout />,
     children: [
       { index: true, element: <NumberOfGuestsForm /> },

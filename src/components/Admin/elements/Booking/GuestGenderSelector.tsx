@@ -39,14 +39,14 @@ const GuestGenderSelector = ({
         <MenuList borderRadius={10} p={2}>
           <MenuItem
             onClick={() => {
-              editGuest(id, "gender", "Male");
+              editGuest(id, "gender", "male");
             }}
           >
             Male
           </MenuItem>
           <MenuItem
             onClick={() => {
-              editGuest(id, "gender", "Female");
+              editGuest(id, "gender", "female");
             }}
           >
             Female

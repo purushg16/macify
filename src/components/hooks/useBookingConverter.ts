@@ -4,7 +4,7 @@ import CreateBooking, {
 import useBookingRoomStore from "../store/bookingRoomStore";
 import useBookingStore from "../store/bookingStore";
 
-const useBookingConverter = () => {
+const useBookingConverter = (propertyId: string) => {
   const range = useBookingStore((s) => s.checkingRange);
   const rooms = useBookingRoomStore((s) => s.rooms);
 
@@ -15,7 +15,7 @@ const useBookingConverter = () => {
   });
 
   const postData = {
-    propertyId: "",
+    propertyId: propertyId,
     bookings: bookings!,
     checkIn: range.startDate!,
     checkOut: range.endDate!,
