@@ -1,26 +1,38 @@
 import { FileWithPath } from "react-dropzone";
 import CloudinaryResponse from "../entities/CloudinaryResponse";
 
-const cloudinaryUpload = (files: FileWithPath[]) => {
-  const formData = new FormData();
-  files.forEach((file) => {
-    formData.append("file", file); // Append each file with the key "file"
-  });
-  formData.append("upload_preset", "b4xppeg4");
+const cloudinaryUpload = async (files: FileWithPath[]) => {
+  const responses = [];
 
-  try {
-    // Upload the image to Cloudinary
-    const response = fetch(
-      "https://api.cloudinary.com/v1_1/dlzkzqskt/image/upload/?folder=Daya",
-      {
-        method: "POST",
-        body: formData,
+  for (const file of files) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "b4xppeg4");
+
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/dlzkzqskt/image/upload/?folder=Daya",
+
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to upload ${file.name}`);
       }
-    ).then((res) => res.json() as unknown as CloudinaryResponse);
-    return response;
-  } catch (error) {
-    console.error("Error uploading image:", error);
+
+      const responseData =
+        (await response.json()) as unknown as CloudinaryResponse;
+      responses.push(responseData);
+    } catch (error) {
+      console.error(error);
+      responses.push(undefined);
+    }
   }
+
+  return responses;
 };
 
 export default cloudinaryUpload;

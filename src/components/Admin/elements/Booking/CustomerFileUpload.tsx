@@ -7,6 +7,7 @@ import {
   Spacer,
   Text,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import AnimateMove from "../../../motions/Move";
 import DropZone from "./DropZone";
@@ -18,13 +19,15 @@ import extractData from "../../../functions/ocrDetailsFetcher";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
 import useBookingRoomStore from "../../../store/bookingRoomStore";
 import cloudinaryUpload from "../../../functions/cloudinaryUploader";
+import { useState } from "react";
 
 function CustomerFileUpload() {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const count = useBookingStore((s) => s.numberOfGuests);
   const files = useBookingStore((s) => s.filesUploaded);
-  const setCloudinaryLink = useBookingStore((s) => s.setCloudinaryLink);
   const removeFiles = useBookingStore((s) => s.removeFiles);
   const clearGuests = useBookingGuestStore((s) => s.clearGuests);
   const appendGuests = useBookingGuestStore((s) => s.appendGuests);
@@ -32,11 +35,41 @@ function CustomerFileUpload() {
     (s) => s.resetUnassignedGuests
   );
 
-  const extractDocData = async () => {
+  const extractDocData = async (uploadedFiles: string) => {
     try {
-      await extractData(files!).then((res) => appendGuests(res));
+      await extractData(uploadedFiles).then((res) => {
+        appendGuests(res);
+      });
     } catch (error) {
+      toast({
+        title: "Try uploading a different file",
+        status: "warning",
+        duration: 2000,
+      });
       console.error("Error extracting data:", error);
+    }
+  };
+
+  const handleUpload = async () => {
+    setIsLoading(true);
+
+    try {
+      const uploadResponses = await cloudinaryUpload(files!);
+
+      uploadResponses.forEach((response) => {
+        if (response !== undefined) extractDocData(response.url);
+      });
+    } catch (error) {
+      toast({
+        title: "Files are not added to the cloud, try again later",
+        status: "warning",
+        duration: 2000,
+      });
+    } finally {
+      setIsLoading(false);
+      resetUnassignedGuests();
+      clearGuests();
+      navigate("/booking/3");
     }
   };
 
@@ -98,17 +131,10 @@ function CustomerFileUpload() {
             </Link>
 
             <Button
+              isLoading={isLoading}
               isDisabled={files?.length !== count}
               colorScheme="primary"
-              onClick={async () => {
-                setCloudinaryLink(
-                  await cloudinaryUpload(files!)!.then((res) => res?.asset_id)
-                );
-                resetUnassignedGuests();
-                clearGuests();
-                extractDocData();
-                navigate("/booking/3");
-              }}
+              onClick={handleUpload}
             >
               Next
             </Button>

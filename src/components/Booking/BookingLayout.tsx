@@ -1,16 +1,16 @@
 import { Flex, GridItem, Heading } from "@chakra-ui/react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
 const BookingLayout = () => {
-  useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      event.preventDefault();
-      return "";
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, []);
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+  //     event.preventDefault();
+  //     return "";
+  //   };
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+  //   return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  // }, []);
 
   return (
     <Flex gap={8} p={4} flexDir="column">

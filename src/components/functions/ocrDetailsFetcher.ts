@@ -1,118 +1,97 @@
-import { FileWithPath } from "react-dropzone";
 import { createWorker } from "tesseract.js";
 import Guest from "../entities/Guest";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 
-const extractData = async (files: FileWithPath[]) => {
+const extractData = async (file: string) => {
   const worker = await createWorker("eng");
-  const resultData = [] as Guest[];
 
   try {
-    for (const file of files) {
-      const { data } = await worker.recognize(file);
-      let result = data.text;
-      const toOccurrence = result.indexOf("To");
+    const { data } = await worker.recognize(file);
+    let result = data.text;
+    const toOccurrence = result.indexOf("To");
 
-      result =
-        toOccurrence !== -1
-          ? result.substring(result.indexOf("To") + 2)
-          : result;
+    result =
+      toOccurrence !== -1 ? result.substring(result.indexOf("To") + 2) : result;
 
-      if (result.includes("Aadhaar")) {
-        const phoneRegex = /\b\d{10}\b/g;
-        const dobRegex = /\b\d{2}\/\d{2}\/\d{4}\b/g;
-        const genderRegex = /\b(MALE|FEMALE)\b/i;
+    if (result.includes("Aadhaar")) {
+      const phoneRegex = /\b\d{10}\b/g;
+      const dobRegex = /\b\d{2}\/\d{2}\/\d{4}\b/g;
+      const genderRegex = /\b(MALE|FEMALE)\b/i;
 
-        // Extract phone numbers
-        const phoneNumbers = result.match(phoneRegex);
-        const datesOfBirth = result.match(dobRegex);
-        const gender = result.match(genderRegex);
+      const phoneNumbers = result.match(phoneRegex);
+      const datesOfBirth = result.match(dobRegex);
+      const gender = result.match(genderRegex);
 
-        const lines = result.split("\n");
+      const lines = result.split("\n");
 
-        // Loop through each line and find the first line that doesn't contain numbers or special characters
-        let name = null;
-        for (let i = 0; i < lines.length; i++) {
-          // Check if the line contains "@ GovernmentiofIndiam"
-          if (lines[i].includes("Government of")) {
-            // Extract the name from two lines after
-            name = lines[i + 2].trim();
-            break;
-          }
+      let name = null;
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].includes("Government of")) {
+          name = lines[i + 2].trim();
+          break;
         }
-        name = name?.replace(/^\s+|[0-9]/g, "");
-        name = name?.split(" ").find((word) => word.length > 4);
-        const age = calculateAge(datesOfBirth![0]);
-
-        let splittedDate;
-        if (datesOfBirth) {
-          splittedDate = moment(datesOfBirth[0], "DD/MM/YYYY").toDate();
-        }
-
-        resultData.push({
-          id: uuidv4(),
-          guestName: name || "",
-          age: age!,
-          phone: phoneNumbers ? parseInt(phoneNumbers[0]) : parseInt(""),
-          dob: splittedDate!,
-          gender: gender ? gender[0] : null,
-          idProof: "",
-          idProofType: "aadhar",
-        });
-      } else {
-        const genderRegex = /\b(M|F)\b/i;
-        const genderMatch = result.match(genderRegex)!;
-        let gender = null;
-
-        if (genderMatch) {
-          if (genderMatch[0] === "M") {
-            gender = "Male";
-          }
-          if (genderMatch[0] === "F") {
-            gender = "Female";
-          }
-        }
-
-        // Regular expression pattern to match date of birth (DOB)
-        const dobRegex = /(\d{2}\/\d{2}\/\d{4})/;
-
-        // Extract DOB and name from the data
-        const dobMatch = result.match(dobRegex);
-        const dob = dobMatch![1];
-
-        let splittedDate;
-        if (dob) splittedDate = moment(dob, "DD/MM/YYYY").toDate();
-
-        const lines = result.trim().split("\n");
-        // Extract the name from the 5th line
-        const line = lines[3].trim();
-        const words = line.split(" ");
-        // Filter out words with more than 4 characters
-        const name = words.filter((word) => word.length > 4);
-
-        console.log("Name:", name[0]);
-
-        const age = calculateAge(dob);
-        console.log("Age:", age);
-
-        resultData.push({
-          id: uuidv4(),
-          guestName: name[0] || "",
-          age: age!,
-          phone: parseInt(""),
-          dob: splittedDate!,
-          gender: gender,
-          idProof: "",
-          idProofType: "passport",
-        });
       }
+      name = name?.replace(/^\s+|[0-9]/g, "");
+      name = name?.split(" ").find((word) => word.length > 4);
+      const age = calculateAge(datesOfBirth![0]);
+
+      let splittedDate;
+      if (datesOfBirth) {
+        splittedDate = moment(datesOfBirth[0], "DD/MM/YYYY").toDate();
+      }
+
+      return {
+        id: uuidv4(),
+        guestName: name || "",
+        age: age!,
+        phone: phoneNumbers ? parseInt(phoneNumbers[0]) : parseInt(""),
+        dob: splittedDate!,
+        gender: gender ? gender[0] : null,
+        idProof: "",
+        idProofType: "aadhar",
+      } as Guest;
+    } else {
+      const genderRegex = /\b(M|F)\b/i;
+      const genderMatch = result.match(genderRegex)!;
+      let gender = null;
+
+      if (genderMatch) {
+        if (genderMatch[0] === "M") {
+          gender = "Male";
+        }
+        if (genderMatch[0] === "F") {
+          gender = "Female";
+        }
+      }
+
+      const dobRegex = /(\d{2}\/\d{2}\/\d{4})/;
+      const dobMatch = result.match(dobRegex);
+      const dob = dobMatch![1];
+
+      let splittedDate;
+      if (dob) splittedDate = moment(dob, "DD/MM/YYYY").toDate();
+
+      const lines = result.trim().split("\n");
+      const line = lines[3].trim();
+      const words = line.split(" ");
+      const name = words.filter((word) => word.length > 4);
+      const age = calculateAge(dob);
+
+      return {
+        id: uuidv4(),
+        guestName: name[0] || "",
+        age: age!,
+        phone: parseInt(""),
+        dob: splittedDate!,
+        gender: gender,
+        idProof: "",
+        idProofType: "passport",
+      } as Guest;
     }
   } finally {
     await worker.terminate();
   }
-
-  return resultData;
 };
 
 // Function to calculate age
