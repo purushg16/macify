@@ -218,7 +218,10 @@ const useGetSingleBooking = (bookingId: string, enabled: boolean) => {
   });
 };
 
-const useEditBooking = (bookingId: string | undefined) => {
+const useEditBooking = (
+  bookingId: string | undefined,
+  callback: () => void
+) => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const entry = useEditBookingStore((s) => s.editBookingEntries)?.find(
@@ -245,6 +248,7 @@ const useEditBooking = (bookingId: string | undefined) => {
         duration: 3000,
       });
       queryClient.invalidateQueries({ queryKey: ["booking", "allBookings"] });
+      callback();
     },
 
     onError: (err: AxiosError<APIError>) =>
@@ -259,7 +263,7 @@ const useEditBooking = (bookingId: string | undefined) => {
 
 const useGetAllBooking = (ids: AllBookingsInterface, enabled?: boolean) => {
   return useQuery({
-    queryKey: ["booking", "allBookings"],
+    queryKey: ["booking", "allBookings", ids.ids],
     queryFn: () =>
       getAllBookings
         .getSingleItem({

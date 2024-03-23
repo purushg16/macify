@@ -14,7 +14,7 @@ interface RejectBookingInterface {
 }
 
 export interface AllBookingsInterface {
-  ids: string[];
+  ids: string[] | undefined;
 }
 
 export interface TimelineBookingDetails {

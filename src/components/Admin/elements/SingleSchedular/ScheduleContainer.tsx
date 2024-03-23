@@ -12,7 +12,7 @@ const ScheduleContainer = () => {
 
   const { data: scheduleData, isLoading } = useGetAllBooking(
     {
-      ids: ["65d77f3f441ad240998b4b7b", "65d958be2a773c387290a00e"],
+      ids: properties?.data.map((p) => p._id),
     },
     !!properties
   );

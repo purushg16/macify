@@ -59,6 +59,7 @@ const EditBookingPage = ({ bookingId }: Props) => {
     storeCheckIn!,
     storeCheckOut!,
     !!booking?.data[0].property._id &&
+      booking.data[0].property.rentWithin &&
       booking?.data[0].property.propertyType !== "hostel"
   );
 
@@ -71,6 +72,7 @@ const EditBookingPage = ({ bookingId }: Props) => {
     storeCheckIn!,
     storeCheckOut!,
     !!booking?.data[0].property._id &&
+      booking.data[0].property.rentWithin &&
       booking?.data[0].property.propertyType === "hostel"
   );
 
@@ -80,7 +82,11 @@ const EditBookingPage = ({ bookingId }: Props) => {
 
   const toggleModal = useBookingModalStore((s) => s.toggleModal);
 
-  const { mutate, isPending } = useEditBooking(booking?.data[0]._id);
+  const { mutate, isPending } = useEditBooking(
+    booking?.data[0]._id,
+    !id ? () => toggleModal() : () => navigate("/admin")
+  );
+
   if (isLoading || !booking) return <Spinner />;
   if (isError) return <Text> Error Getting the data </Text>;
   if (property)
