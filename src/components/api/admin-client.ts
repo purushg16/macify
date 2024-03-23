@@ -6,6 +6,7 @@ import GroupBooking from "../entities/GroupBooking";
 import BookingDetails, { BookingGuest } from "../entities/booking";
 import CurrentHosting from "../entities/CurrentHosting";
 import Profile from "../entities/profile";
+import SingleBooking from "../entities/singleBooking";
 
 interface RejectBookingInterface {
   groupId: string;
@@ -39,7 +40,9 @@ const createManager = new APIClient<Manager>("/manager/addManager");
 const bookingsToApprove = new APIClient<GroupBooking>(
   "/booking/getAllGroupBooking"
 );
-
+const getSIngleBooking = new APIClient<SingleBooking>(
+  "/booking/getSingleBooking"
+).getRequest;
 const getSinglebookingToApprove = new APIClient<BookingDetails>(
   "/booking/getGroupBooking"
 );
@@ -68,6 +71,7 @@ export {
   getProfile,
   createManager,
   bookingsToApprove,
+  getSIngleBooking,
   getSinglebookingToApprove,
   approveBooking,
   rejectBooking,

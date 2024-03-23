@@ -10,6 +10,7 @@ import {
   getAllBookings,
   getAllManagers,
   getProfile,
+  getSIngleBooking,
   getSinglebookingToApprove,
   rejectBooking,
 } from "../api/admin-client";
@@ -189,6 +190,21 @@ const useRejectBooking = () => {
   });
 };
 
+const useGetSingleBooking = (bookingId: string, enabled: boolean) =>
+  useQuery({
+    queryKey: ["booking", "getSingleBooking"],
+    queryFn: () =>
+      getSIngleBooking({
+        params: {
+          bookingId: bookingId,
+        },
+      }),
+    enabled: enabled,
+    staleTime: ms("5m"),
+    retry: 2,
+    refetchOnWindowFocus: false,
+  });
+
 const useEditBooking = (bookingId: string) => {
   const toast = useToast();
   const queryClient = useQueryClient();
@@ -250,6 +266,7 @@ export {
   useGetProfile,
   useAddManager,
   useGetBookingsToApprove,
+  useGetSingleBooking,
   useGetSingleBookingToApprove,
   useApproveBooking,
   useGetAllManagers,

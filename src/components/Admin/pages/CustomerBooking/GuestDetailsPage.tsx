@@ -28,12 +28,6 @@ const GuestDetailsPage = () => {
     );
   };
 
-  const handleNext = () => {
-    if (!property?.rentWithin && property?.propertyType === "hostel")
-      navigate("/booking/" + propertyId + "/5");
-    else navigate("/booking/" + propertyId + "/7");
-  };
-
   return (
     <Flex
       gap={4}
@@ -70,7 +64,7 @@ const GuestDetailsPage = () => {
                 isLoading={isLoading}
                 isDisabled={isAnyFieldEmpty() || guests.length === 0}
                 colorScheme="primary"
-                onClick={handleNext}
+                onClick={() => navigate("/booking/" + propertyId + "/5")}
               >
                 Next
               </Button>
