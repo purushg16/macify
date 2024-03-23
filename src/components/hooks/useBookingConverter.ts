@@ -1,5 +1,6 @@
 import Guest from "../entities/Guest";
 import CreateBooking, {
+  CustomerBookingGuest,
   CustomerBookingGuestDetails,
 } from "../entities/createBooking";
 import { PropertyType } from "../store/AddProperty/addPropertyBasicStore";
@@ -17,17 +18,19 @@ const useBookingConverter = (
 
   const hostelBookings = guests.map((guest) => {
     return {
-      guests: [guest],
+      guests: [guest] as CustomerBookingGuestDetails[],
     };
-  });
+  }) as CustomerBookingGuest[];
 
-  const rentWithinBookings = [{ guests: guests }];
+  const rentWithinBookings = [
+    { guests: guests as CustomerBookingGuestDetails[] },
+  ] as CustomerBookingGuest[];
 
   const otherBookings = rooms?.map((room) => {
     return {
-      guests: room.guests as unknown as CustomerBookingGuestDetails[],
+      guests: room.guests as CustomerBookingGuestDetails[],
     };
-  });
+  }) as CustomerBookingGuest[];
 
   const postData = {
     propertyId: propertyId,

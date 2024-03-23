@@ -8,10 +8,11 @@ export interface CustomerBookingGuest {
 export interface CustomerBookingGuestDetails {
   guestName: string;
   age: number;
-  gender: gender;
-  address: string;
-  idProofType: idProofType;
+  phone: number;
+  dob: Date;
+  gender: "male" | "female";
   idProof: string;
+  idProofType: "passport" | "aadhar" | null;
 }
 
 export default interface CreateBooking {
