@@ -61,7 +61,12 @@ const CheckingRangeSelector = ({
 
       <HStack gap={2}>
         <HStack p={2} bg="white" borderRadius={10}>
-          <Icon as={BsArrowRightCircle} color="primary.500" />
+          <Icon
+            as={BsArrowRightCircle}
+            color="primary.500"
+            bg="none"
+            _hover={{ bg: "none" }}
+          />
           <Text size="sm">
             {editBooking
               ? DateFormatter(editStoreCheckIn! || checkIn)

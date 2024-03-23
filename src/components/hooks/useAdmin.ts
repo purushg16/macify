@@ -190,20 +190,34 @@ const useRejectBooking = () => {
   });
 };
 
-const useGetSingleBooking = (bookingId: string, enabled: boolean) =>
-  useQuery({
-    queryKey: ["booking", "getSingleBooking"],
+const useGetSingleBooking = (bookingId: string, enabled: boolean) => {
+  const appendEditBooking = useEditBookingStore(
+    (s) => s.setEditBookingsEntries
+  );
+  return useQuery({
+    queryKey: ["booking", "getSingleBooking", bookingId],
     queryFn: () =>
       getSIngleBooking({
         params: {
           bookingId: bookingId,
         },
+      }).then((res) => {
+        const booking = res.data[0];
+        appendEditBooking({
+          bookingId: bookingId,
+          checkIn: new Date(booking.checkIn),
+          checkOut: new Date(booking.checkOut),
+          propertyId: booking.property._id,
+          roomId: booking.room,
+          bedId: booking.bed,
+        });
+        return res;
       }),
     enabled: enabled,
-    staleTime: ms("5m"),
     retry: 2,
     refetchOnWindowFocus: false,
   });
+};
 
 const useEditBooking = (bookingId: string | undefined) => {
   const toast = useToast();

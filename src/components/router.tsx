@@ -38,6 +38,7 @@ import FinalPage from "./Admin/pages/CustomerBooking/FinalPage";
 import CustomerFileUpload from "./Admin/elements/Booking/CustomerFileUpload";
 import GuestDetailsPage from "./Admin/pages/CustomerBooking/GuestDetailsPage";
 import RoomAssignPage from "./Admin/pages/CustomerBooking/RoomAssignPage";
+import EditBookingPage from "./Admin/pages/EditBookingPage";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,7 @@ const router = createBrowserRouter([
 
       { path: "notifications", element: <AdminNotificationsPage /> },
       { path: "approveBooking/:id", element: <ApproveBookingPage /> },
+      { path: "editBooking/:bookingId", element: <EditBookingPage /> },
 
       {
         path: "properties",

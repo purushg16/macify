@@ -11,12 +11,9 @@ import { FaLocationArrow } from "react-icons/fa";
 import CurrentHosting from "../../../entities/CurrentHosting";
 import DateFormatter from "../../../functions/dateFormatter";
 import { useNavigate } from "react-router-dom";
-import { useGetSingleBooking } from "../../../hooks/useAdmin";
 
 const HostingCard = ({ data }: { data: CurrentHosting; color: string }) => {
   const navigate = useNavigate();
-  const { data: bookingData } = useGetSingleBooking(data._id, !!data._id);
-  console.log(bookingData);
 
   return (
     <Flex
@@ -68,7 +65,7 @@ const HostingCard = ({ data }: { data: CurrentHosting; color: string }) => {
         aspectRatio="1/1"
         bg="green.100"
         _hover={{ bg: "green.200" }}
-        onClick={() => navigate("approveBooking/" + data._id)}
+        onClick={() => navigate("editBooking/" + data._id)}
       >
         <Icon as={FaLocationArrow} />
       </Button>

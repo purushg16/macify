@@ -106,7 +106,7 @@ const useGetAvailableBeds = (
   enabled: boolean
 ) => {
   return useQuery({
-    queryKey: ["property", "getAvaiablebeds"],
+    queryKey: ["property", "getAvaiablebeds", checkIn, checkOut],
     queryFn: () =>
       getAvailableBeds
         .getRequest({
