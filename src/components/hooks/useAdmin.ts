@@ -9,6 +9,7 @@ import {
   editBooking,
   getAllBookings,
   getAllManagers,
+  getProfile,
   getSinglebookingToApprove,
   rejectBooking,
 } from "../api/admin-client";
@@ -21,6 +22,15 @@ import ApproveBooking from "../entities/approveBooking";
 import { useNavigate } from "react-router-dom";
 import useEditBookingStore from "../store/editBookingStore";
 import EditBooking from "../entities/editBooking";
+
+const useGetProfile = () =>
+  useQuery({
+    queryKey: ["user", "profile"],
+    queryFn: getProfile,
+    retry: 2,
+    refetchOnWindowFocus: false,
+    staleTime: ms("1hr"),
+  });
 
 const useAddManager = () => {
   const toast = useToast();
@@ -237,6 +247,7 @@ const useGetAllBooking = (ids: AllBookingsInterface, enabled?: boolean) => {
 };
 
 export {
+  useGetProfile,
   useAddManager,
   useGetBookingsToApprove,
   useGetSingleBookingToApprove,

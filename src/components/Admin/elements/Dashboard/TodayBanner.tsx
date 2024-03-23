@@ -16,6 +16,7 @@ import {
   useAdminUpcomingCheckOuts,
 } from "../../../hooks/useDashboard";
 import { Link } from "react-router-dom";
+import DateFormatter from "../../../functions/dateFormatter";
 
 const TodayBanner = () => {
   const { data: ciData, isLoading: CIisLoading } = useAdminUpcomingCheckIns();
@@ -31,7 +32,7 @@ const TodayBanner = () => {
       >
         <Box>
           <Text fontSize="xs"> today, </Text>
-          <Heading fontSize="lg"> Mar 26, 2024 </Heading>
+          <Heading fontSize="lg"> {DateFormatter(new Date())} </Heading>
         </Box>
         <Spacer />
         <Link to="calendar">

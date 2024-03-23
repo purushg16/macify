@@ -5,6 +5,7 @@ import EditBooking from "../entities/editBooking";
 import GroupBooking from "../entities/GroupBooking";
 import BookingDetails, { BookingGuest } from "../entities/booking";
 import CurrentHosting from "../entities/CurrentHosting";
+import Profile from "../entities/profile";
 
 interface RejectBookingInterface {
   groupId: string;
@@ -33,6 +34,7 @@ export interface BookingTimelineInterface {
   [key: string]: TimelineBookings;
 }
 
+const getProfile = new APIClient<Profile>("/user/profile").getSingleItem;
 const createManager = new APIClient<Manager>("/manager/addManager");
 const bookingsToApprove = new APIClient<GroupBooking>(
   "/booking/getAllGroupBooking"
@@ -63,6 +65,7 @@ const getUpcomingCheckOuts = new APIClient<CurrentHosting>(
 ).getRequest;
 
 export {
+  getProfile,
   createManager,
   bookingsToApprove,
   getSinglebookingToApprove,

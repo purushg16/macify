@@ -4,6 +4,7 @@ import {
   Heading,
   Highlight,
   SimpleGrid,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -17,10 +18,12 @@ import HostingButton from "../elements/Dashboard/HostingButton";
 import { FaRunning } from "react-icons/fa";
 import AnimateMove from "../../motions/Move";
 import TodayBanner from "../elements/Dashboard/TodayBanner";
+import { useGetProfile } from "../../hooks/useAdmin";
 
 const DashBoardPage = () => {
   const [tab, setTab] = useState(0);
   const handleTabChange = (t: number) => setTab(t);
+  const { data: user } = useGetProfile();
 
   return (
     <Flex flexDir="column" w="100%" gap={8}>
@@ -29,9 +32,13 @@ const DashBoardPage = () => {
           <Box>
             Hello,
             <Heading>
-              <Highlight query="Dayalan S" styles={{ color: "primary.500" }}>
-                Dayalan S 👋
-              </Highlight>
+              {user && user.firstName && user.lastName ? (
+                <Highlight query="Dayalan S" styles={{ color: "primary.500" }}>
+                  {user.firstName + " " + user.lastName + " 👋"}
+                </Highlight>
+              ) : (
+                <Spinner />
+              )}
             </Heading>
             <Text color="gray" fontSize="xs">
               What a day to enter earning!

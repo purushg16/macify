@@ -10,8 +10,10 @@ import {
 import { FaLocationArrow } from "react-icons/fa";
 import CurrentHosting from "../../../entities/CurrentHosting";
 import DateFormatter from "../../../functions/dateFormatter";
+import { useNavigate } from "react-router-dom";
 
 const HostingCard = ({ data }: { data: CurrentHosting; color: string }) => {
+  const navigate = useNavigate();
   return (
     <Flex
       borderRadius={10}
@@ -62,6 +64,7 @@ const HostingCard = ({ data }: { data: CurrentHosting; color: string }) => {
         aspectRatio="1/1"
         bg="green.100"
         _hover={{ bg: "green.200" }}
+        onClick={() => navigate("approveBooking/" + data._id)}
       >
         <Icon as={FaLocationArrow} />
       </Button>
