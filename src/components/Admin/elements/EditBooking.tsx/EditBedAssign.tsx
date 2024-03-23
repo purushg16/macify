@@ -31,7 +31,7 @@ const EditBedAssign = ({ bookingId }: Props) => {
         rightIcon={<Icon as={BsChevronDown} />}
         colorScheme="primary"
       >
-        {"Select Room"}
+        {"Select Bed"}
       </MenuButton>
       <MenuList>
         {beds?.length === 0 ? (

@@ -1,19 +1,17 @@
+import { Button, Flex, HStack, Heading, Spinner, Text } from "@chakra-ui/react";
+import { useEditBooking, useGetSingleBooking } from "../../hooks/useAdmin";
 import {
-  Flex,
-  Box,
-  Heading,
-  Text,
-  HStack,
-  Spinner,
-  Button,
-} from "@chakra-ui/react";
+  useGetAvailableBeds,
+  useGetAvailableRooms,
+  useGetSingleProperty,
+} from "../../hooks/usePropertyServices";
+import useEditBookingStore from "../../store/editBookingStore";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
 import GuestGrid from "../elements/ApproveBooking/GuestGrid";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
-import { useGetSingleProperty } from "../../hooks/usePropertyServices";
+import BookingFooter from "../elements/Booking/BookingFooter";
 import EditBedAssign from "../elements/EditBooking.tsx/EditBedAssign";
-import Title from "../elements/Title";
-import { useEditBooking, useGetSingleBooking } from "../../hooks/useAdmin";
+import EditBookingGuestWrapper from "../elements/EditBooking.tsx/EditBookingGuestWrapper";
 
 interface Props {
   bookingId: string | undefined;
@@ -21,6 +19,14 @@ interface Props {
 
 const EditBookingPage = ({ bookingId }: Props) => {
   const { data: booking } = useGetSingleBooking(bookingId!, !!bookingId);
+
+  const storeCheckIn = useEditBookingStore((s) => s.editBookingEntries)?.find(
+    (b) => b.bookingId === bookingId
+  )?.checkIn;
+  const storeCheckOut = useEditBookingStore((s) => s.editBookingEntries)?.find(
+    (b) => b.bookingId === bookingId
+  )?.checkOut;
+
   const {
     data: property,
     isLoading,
@@ -30,39 +36,71 @@ const EditBookingPage = ({ bookingId }: Props) => {
     !!booking?.data[0].property._id
   );
 
+  const {
+    data: nonHostelProperty,
+    isLoading: isNHPLoading,
+    isError: isNHPError,
+  } = useGetAvailableRooms(
+    booking?.data[0].property._id,
+    storeCheckIn!,
+    storeCheckOut!,
+    !!booking?.data[0].property._id &&
+      booking?.data[0].property.propertyType !== "hostel"
+  );
+
+  const {
+    data: hostelProperty,
+    isLoading: isHPLoading,
+    isError: isHPError,
+  } = useGetAvailableBeds(
+    booking?.data[0].property._id,
+    storeCheckIn!,
+    storeCheckOut!,
+    !!booking?.data[0].property._id &&
+      booking?.data[0].property.propertyType === "hostel"
+  );
+
   const { mutate, isPending } = useEditBooking(booking?.data[0]._id);
   if (isLoading || !booking) return <Spinner />;
   if (isError) return <Text> Error Getting the data </Text>;
 
   if (property)
     return (
-      <Flex flexDir="column" gap={8}>
+      <Flex flexDir="column" gap={8} mb={8}>
         <Flex gap={2} alignItems="center">
           <Heading fontSize="xl" textTransform="capitalize">
-            {property.propertyName}
+            {booking.data[0].property.propertyName}
           </Heading>
         </Flex>
 
-        <Box w="max-content">
-          <Text mb={4}>Checking Time Details</Text>
-          <CheckingRangeSelector
-            checkIn={new Date(booking.data[0].checkIn)}
-            checkOut={new Date(booking.data[0].checkOut)}
-            groupId={booking.data[0]._id}
-            editBooking
-          />
-        </Box>
+        <CheckingRangeSelector
+          checkIn={new Date(booking.data[0].checkIn)}
+          checkOut={new Date(booking.data[0].checkOut)}
+          groupId={booking.data[0]._id}
+          editBooking
+        />
 
-        <Box>
-          <Text mb={4}>Guest Details</Text>
+        <EditBookingGuestWrapper>
           <HStack mb={2}>
             {property.rentWithin && (
               <RoomAssignBlock
                 groupId={booking.data[0]._id}
-                rooms={[]}
                 bookingId={booking.data[0]._id}
-                isLoading={isLoading}
-                isError={isError}
+                rooms={
+                  booking.data[0].property.propertyType === "hostel"
+                    ? hostelProperty!
+                    : nonHostelProperty!
+                }
+                isLoading={
+                  booking.data[0].property.propertyType === "hostel"
+                    ? isHPLoading
+                    : isNHPLoading
+                }
+                isError={
+                  booking.data[0].property.propertyType === "hostel"
+                    ? isHPError
+                    : isNHPError
+                }
                 editBooking
               />
             )}
@@ -74,15 +112,12 @@ const EditBookingPage = ({ bookingId }: Props) => {
             )}
           </HStack>
           <GuestGrid guests={booking.data[0].guests} />
-        </Box>
+        </EditBookingGuestWrapper>
 
-        <Box mb={4}>
-          <Title
-            heading="Approve Booking"
-            subtitle="Click 'Proceed' to enter payment details"
-          />
-
-          <HStack justify="center" mt={4}>
+        <BookingFooter
+          title="Approve Booking"
+          subheading="Click 'Proceed' to enter payment details"
+          buttons={
             <Button
               colorScheme="primary"
               onClick={() => {
@@ -92,8 +127,8 @@ const EditBookingPage = ({ bookingId }: Props) => {
             >
               Proceed
             </Button>
-          </HStack>
-        </Box>
+          }
+        />
       </Flex>
     );
 };

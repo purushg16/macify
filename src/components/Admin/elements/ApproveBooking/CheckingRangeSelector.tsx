@@ -1,9 +1,9 @@
 import { Box, HStack, Icon, Text } from "@chakra-ui/react";
-import { FaCalendar } from "react-icons/fa";
-import RangePickerMenu from "./RangePickerMenu";
+import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import DateFormatter from "../../../functions/dateFormatter";
 import useApproveBookingStore from "../../../store/approveBookingStore";
 import useEditBookingStore from "../../../store/editBookingStore";
+import RangePickerMenu from "./RangePickerMenu";
 
 interface Props {
   checkIn: Date;
@@ -34,22 +34,15 @@ const CheckingRangeSelector = ({
   )?.find((b) => b.bookingId === groupId!)?.checkOut;
 
   return (
-    <Box p={4} bg="#f6f6f6" borderRadius={10}>
-      <HStack gap={4} alignItems="center">
-        <Icon as={FaCalendar} boxSize={6} />
-        <HStack gap={4}>
-          <Text px={4} py={2} bg="gray.50" borderRadius={10}>
-            {editBooking
-              ? DateFormatter(editStoreCheckIn! || checkIn)
-              : DateFormatter(storeCheckIn! || checkIn)}
-          </Text>
-          <Text>-</Text>
-          <Text px={4} py={2} bg="gray.50" borderRadius={10}>
-            {editBooking
-              ? DateFormatter(editStoreCheckOut! || checkOut)
-              : DateFormatter(storeCheckOut! || checkOut)}
-          </Text>
-        </HStack>
+    <Box p={4} bg="#f6f6f6" borderRadius={10} pb={6}>
+      <HStack
+        gap={4}
+        alignItems="center"
+        justify="space-between"
+        w="100%"
+        pb={8}
+      >
+        <Text>Checking Time Details</Text>
         {editBooking ? (
           <RangePickerMenu
             startDate={editStoreCheckIn! || checkIn}
@@ -64,6 +57,26 @@ const CheckingRangeSelector = ({
             groupId={groupId}
           />
         )}
+      </HStack>
+
+      <HStack gap={2}>
+        <HStack p={2} bg="white" borderRadius={10}>
+          <Icon as={BsArrowRightCircle} color="primary.500" />
+          <Text size="sm">
+            {editBooking
+              ? DateFormatter(editStoreCheckIn! || checkIn)
+              : DateFormatter(storeCheckIn! || checkIn)}
+          </Text>
+        </HStack>
+
+        <HStack p={2} bg="white" borderRadius={10}>
+          <Icon as={BsArrowLeftCircle} color="red.500" />
+          <Text size="sm">
+            {editBooking
+              ? DateFormatter(editStoreCheckOut! || checkOut)
+              : DateFormatter(storeCheckOut! || checkOut)}
+          </Text>
+        </HStack>
       </HStack>
     </Box>
   );

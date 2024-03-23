@@ -1,5 +1,4 @@
-import { Box, Icon, Text } from "@chakra-ui/react";
-import { CiUser } from "react-icons/ci";
+import { Text, VStack } from "@chakra-ui/react";
 import Guest from "../../../entities/Guest";
 
 interface Props {
@@ -8,16 +7,27 @@ interface Props {
 
 const GuestCard = ({ guest }: Props) => {
   return (
-    <Box
+    <VStack
+      gap={2}
       bg="gray.50"
-      pt={2}
+      p={2}
       textAlign="center"
       borderRadius={10}
       cursor="pointer"
     >
-      <Text mb={4}> {guest.guestName} </Text>
-      <Icon as={CiUser} boxSize={100} />
-    </Box>
+      {guest.gender === "male" ? (
+        <img
+          src="https://img.icons8.com/ios-filled/40/user-male--v1.png"
+          alt="user-male--v1"
+        />
+      ) : (
+        <img
+          src="https://img.icons8.com/ios-filled/40/user-female--v1.png"
+          alt="user-male--v1"
+        />
+      )}
+      <Text> {guest.guestName} </Text>
+    </VStack>
   );
 };
 

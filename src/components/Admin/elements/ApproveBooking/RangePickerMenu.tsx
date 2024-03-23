@@ -31,11 +31,12 @@ const RangePickerMenu = ({
 
   return (
     <Menu>
-      <MenuButton as={IconButton}>
+      <MenuButton as={IconButton} bg="none" _hover={{ bg: "none" }}>
         <IconButton
           colorScheme="primary"
           aria-label="Search database"
           icon={<BsPencilFill />}
+          size="sm"
         />
       </MenuButton>
       <MenuList borderRadius={10}>
