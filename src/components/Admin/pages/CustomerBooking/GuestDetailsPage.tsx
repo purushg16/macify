@@ -42,7 +42,7 @@ const GuestDetailsPage = () => {
       ) : (
         guests.length > 0 &&
         guests.map((guest, i) => (
-          <GuestDetailsHug key={guest.id!} guest={guest} i={i + 1} />
+          <GuestDetailsHug key={guest._id!} guest={guest} i={i + 1} />
         ))
       )}
 

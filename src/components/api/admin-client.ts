@@ -3,10 +3,11 @@ import Manager from "../entities/manager";
 import ApproveBooking from "../entities/approveBooking";
 import EditBooking from "../entities/editBooking";
 import GroupBooking from "../entities/GroupBooking";
-import BookingDetails, { BookingGuest } from "../entities/booking";
+import BookingDetails from "../entities/booking";
 import CurrentHosting from "../entities/CurrentHosting";
 import Profile from "../entities/profile";
 import SingleBooking from "../entities/singleBooking";
+import Guest from "../entities/Guest";
 
 interface RejectBookingInterface {
   groupId: string;
@@ -20,7 +21,7 @@ export interface TimelineBookingDetails {
   approve: boolean;
   checkIn: string;
   checkOut: string;
-  guests: BookingGuest[];
+  guests: Guest[];
   property: string;
   room?: string;
   bed?: string;

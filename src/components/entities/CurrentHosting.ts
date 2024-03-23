@@ -1,10 +1,10 @@
-import { BookingGuest } from "./booking";
+import Guest from "./Guest";
 
 export default interface CurrentHosting {
   approved: boolean;
   checkIn: string;
   checkOut: string;
-  guests: BookingGuest[];
+  guests: Guest[];
   property: {
     propertyName: string;
     checkInTime: string;

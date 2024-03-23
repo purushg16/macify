@@ -42,7 +42,7 @@ const extractData = async (file: string) => {
       }
 
       return {
-        id: uuidv4(),
+        _id: uuidv4(),
         guestName: name || "",
         age: age!,
         phone: phoneNumbers ? parseInt(phoneNumbers[0]) : parseInt(""),
@@ -79,7 +79,7 @@ const extractData = async (file: string) => {
       const age = calculateAge(dob);
 
       return {
-        id: uuidv4(),
+        _id: uuidv4(),
         guestName: name[0] || "",
         age: age!,
         phone: parseInt(""),

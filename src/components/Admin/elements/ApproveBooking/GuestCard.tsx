@@ -1,9 +1,9 @@
 import { Box, Icon, Text } from "@chakra-ui/react";
 import { CiUser } from "react-icons/ci";
-import { BookingGuest } from "../../../entities/booking";
+import Guest from "../../../entities/Guest";
 
 interface Props {
-  guest: BookingGuest;
+  guest: Guest;
 }
 
 const GuestCard = ({ guest }: Props) => {

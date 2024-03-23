@@ -1,9 +1,9 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import GuestCard from "./GuestCard";
-import { BookingGuest } from "../../../entities/booking";
+import Guest from "../../../entities/Guest";
 
 interface Props {
-  guests: BookingGuest[];
+  guests: Guest[];
 }
 
 const GuestGrid = ({ guests }: Props) => {

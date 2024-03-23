@@ -1,5 +1,5 @@
 export default interface Guest {
-  id?: string;
+  _id: string;
   guestName: string;
   age: number;
   phone: number;

@@ -205,7 +205,7 @@ const useGetSingleBooking = (bookingId: string, enabled: boolean) =>
     refetchOnWindowFocus: false,
   });
 
-const useEditBooking = (bookingId: string) => {
+const useEditBooking = (bookingId: string | undefined) => {
   const toast = useToast();
   const queryClient = useQueryClient();
   const entry = useEditBookingStore((s) => s.editBookingEntries)?.find(

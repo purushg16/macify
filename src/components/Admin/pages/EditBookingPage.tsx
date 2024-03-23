@@ -11,25 +11,26 @@ import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelec
 import GuestGrid from "../elements/ApproveBooking/GuestGrid";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import { useGetSingleProperty } from "../../hooks/usePropertyServices";
-import { TimelineBookingDetails } from "../../api/admin-client";
 import EditBedAssign from "../elements/EditBooking.tsx/EditBedAssign";
 import Title from "../elements/Title";
-import { useEditBooking } from "../../hooks/useAdmin";
+import { useEditBooking, useGetSingleBooking } from "../../hooks/useAdmin";
 
 interface Props {
-  booking: TimelineBookingDetails;
+  bookingId: string | undefined;
 }
 
-const EditBookingPage = ({ booking }: Props) => {
-  const propertyId = booking.property;
+const EditBookingPage = ({ bookingId }: Props) => {
+  const { data: booking } = useGetSingleBooking(bookingId!, !!bookingId);
   const {
     data: property,
     isLoading,
     isError,
-  } = useGetSingleProperty(propertyId!, true);
+  } = useGetSingleProperty(
+    booking?.data[0].property._id,
+    !!booking?.data[0].property._id
+  );
 
-  const { mutate, isPending } = useEditBooking(booking._id);
-
+  const { mutate, isPending } = useEditBooking(booking?.data[0]._id);
   if (isLoading || !booking) return <Spinner />;
   if (isError) return <Text> Error Getting the data </Text>;
 
@@ -45,34 +46,35 @@ const EditBookingPage = ({ booking }: Props) => {
         <Box w="max-content">
           <Text mb={4}>Checking Time Details</Text>
           <CheckingRangeSelector
-            checkIn={new Date(booking.checkIn)}
-            checkOut={new Date(booking.checkOut)}
-            groupId={booking._id}
+            checkIn={new Date(booking.data[0].checkIn)}
+            checkOut={new Date(booking.data[0].checkOut)}
+            groupId={booking.data[0]._id}
             editBooking
           />
         </Box>
 
-        {booking.guests.map((b) => (
-          <Box key={b._id}>
-            <Text mb={4}>Guest Details</Text>
-            <HStack mb={2}>
-              {property.rentWithin && (
-                <RoomAssignBlock
-                  groupId={booking._id}
-                  rooms={[]}
-                  bookingId={b._id}
-                  isLoading={isLoading}
-                  isError={isError}
-                  editBooking
-                />
-              )}
-              {property.propertyType === "hostel" && (
-                <EditBedAssign bookingId={b._id} propertyId={propertyId} />
-              )}
-            </HStack>
-            <GuestGrid guests={booking.guests} />
-          </Box>
-        ))}
+        <Box>
+          <Text mb={4}>Guest Details</Text>
+          <HStack mb={2}>
+            {property.rentWithin && (
+              <RoomAssignBlock
+                groupId={booking.data[0]._id}
+                rooms={[]}
+                bookingId={booking.data[0]._id}
+                isLoading={isLoading}
+                isError={isError}
+                editBooking
+              />
+            )}
+            {property.propertyType === "hostel" && (
+              <EditBedAssign
+                bookingId={booking.data[0]._id}
+                propertyId={booking.data[0].property._id}
+              />
+            )}
+          </HStack>
+          <GuestGrid guests={booking.data[0].guests} />
+        </Box>
 
         <Box mb={4}>
           <Title

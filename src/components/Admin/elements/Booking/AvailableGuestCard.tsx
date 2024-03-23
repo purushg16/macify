@@ -12,7 +12,7 @@ const AvailableGuestCard = ({ roomId }: { roomId: string }) => {
       {guests.length > 0 ? (
         guests.map((guest) => (
           <Flex
-            key={guest.id!}
+            key={guest._id!}
             gap={4}
             p={2}
             bg="#f4f4f4"

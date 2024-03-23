@@ -22,7 +22,7 @@ const ReportTimePage = () => {
     addRooms(numOfRooms!);
 
     const isGuestsAlreadyPresent = unassignedGuests.some((guest) =>
-      guests.some((guest1) => guest.id === guest1.id)
+      guests.some((guest1) => guest._id === guest1._id)
     );
 
     if (!isGuestsAlreadyPresent) appendUnassignedGuests(guests);

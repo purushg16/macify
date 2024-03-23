@@ -1,15 +1,8 @@
-export interface BookingGuest {
-  guestName: string;
-  age: number;
-  address: string;
-  idProofType: string;
-  idProof: string;
-  _id: string;
-}
+import Guest from "./Guest";
 
 interface Booking {
   _id: string;
-  guests: BookingGuest[];
+  guests: Guest[];
   checkIn: string;
   checkOut: string;
 }

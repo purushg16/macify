@@ -26,7 +26,7 @@ const BookingDetailsModal = () => {
         <ModalContent pt={2}>
           <ModalCloseButton />
           <ModalBody>
-            <EditBookingPage booking={currentDetail!} />
+            <EditBookingPage bookingId={currentDetail?._id} />
           </ModalBody>
         </ModalContent>
       </Modal>

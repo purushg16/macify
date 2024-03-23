@@ -123,7 +123,10 @@ const useGetAvailableBeds = (
   });
 };
 
-const useGetSingleProperty = (propertyId: string, enabled: boolean) => {
+const useGetSingleProperty = (
+  propertyId: string | undefined,
+  enabled: boolean
+) => {
   return useQuery({
     queryKey: ["property", "getProperty", propertyId],
     queryFn: () =>
