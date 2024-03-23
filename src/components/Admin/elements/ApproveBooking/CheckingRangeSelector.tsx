@@ -34,7 +34,7 @@ const CheckingRangeSelector = ({
   )?.find((b) => b.bookingId === groupId!)?.checkOut;
 
   return (
-    <Box p={4} bg="#f6f6f6" borderRadius={10} pb={6}>
+    <Box p={4} bg="#f6f6f6" borderRadius={20} pb={6}>
       <HStack
         gap={4}
         alignItems="center"

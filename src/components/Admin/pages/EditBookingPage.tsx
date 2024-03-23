@@ -8,7 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { MdArrowBack } from "react-icons/md";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEditBooking, useGetSingleBooking } from "../../hooks/useAdmin";
 import {
   useGetAvailableBeds,
@@ -22,6 +22,7 @@ import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import BookingFooter from "../elements/Booking/BookingFooter";
 import EditBedAssign from "../elements/EditBooking.tsx/EditBedAssign";
 import EditBookingGuestWrapper from "../elements/EditBooking.tsx/EditBookingGuestWrapper";
+import useBookingModalStore from "../../store/bookingDetailsModalStore";
 
 interface Props {
   bookingId?: string | undefined;
@@ -29,6 +30,7 @@ interface Props {
 
 const EditBookingPage = ({ bookingId }: Props) => {
   const id = useParams().bookingId;
+  const navigate = useNavigate();
   if (!bookingId) bookingId = id;
 
   const { data: booking } = useGetSingleBooking(bookingId!, !!bookingId);
@@ -76,21 +78,23 @@ const EditBookingPage = ({ bookingId }: Props) => {
     (entry) => entry.bookingId === bookingId
   );
 
+  const toggleModal = useBookingModalStore((s) => s.toggleModal);
+
   const { mutate, isPending } = useEditBooking(booking?.data[0]._id);
   if (isLoading || !booking) return <Spinner />;
   if (isError) return <Text> Error Getting the data </Text>;
-
   if (property)
     return (
       <Flex flexDir="column" gap={8} mb={8}>
         <Flex gap={2} alignItems="center">
-          <Link to="/admin">
-            <IconButton
-              aria-label="back-btn"
-              icon={<MdArrowBack />}
-              size="sm"
-            />
-          </Link>
+          <IconButton
+            aria-label="back-btn"
+            icon={<MdArrowBack />}
+            size="sm"
+            onClick={() => {
+              !id ? toggleModal() : navigate("/admin");
+            }}
+          />
           <Heading fontSize="xl" textTransform="capitalize">
             {booking.data[0].property.propertyName}
           </Heading>
@@ -151,7 +155,9 @@ const EditBookingPage = ({ bookingId }: Props) => {
           buttons={
             <Button
               isDisabled={
-                property?.propertyType === "hostel"
+                !property.rentWithin
+                  ? false
+                  : property?.propertyType === "hostel"
                   ? !entry?.bedId || !entry.roomId
                     ? true
                     : false

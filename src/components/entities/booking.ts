@@ -13,6 +13,7 @@ export default interface BookingDetails {
     _id: string;
     propertyName: string;
     propertyType: string;
+    rentWithin: boolean;
   };
   bookings: Booking[];
   paid: number;

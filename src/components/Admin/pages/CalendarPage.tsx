@@ -5,8 +5,13 @@ import { FaColumns } from "react-icons/fa";
 import AnimateMove from "../../motions/Move";
 import Title from "../elements/Title";
 import vector from "../../../assets/app/vector.png";
+import useBookingModalStore from "../../store/bookingDetailsModalStore";
 
 const CalendarPage = () => {
+  const isOpen = useBookingModalStore((s) => s.isOpen);
+  const toggleModal = useBookingModalStore((s) => s.toggleModal);
+  if (isOpen) toggleModal();
+
   return (
     <Flex flexDir="column" gap={8}>
       <Title

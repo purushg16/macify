@@ -39,6 +39,9 @@ const ApproveBookingPage = () => {
   const assignedRooms = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === booking?._id
   )?.bookings;
+
+  const assignGroup = useApproveBookingStore((s) => s.setSingleBooking);
+
   const storeCheckIn = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === booking?._id
   )?.checkIn;
@@ -47,12 +50,6 @@ const ApproveBookingPage = () => {
   )?.checkOut;
 
   const propertyId = booking?.property?._id;
-  // const {
-  //   data: property,
-  //   isLoading,
-  //   isError,
-  // } = useGetSingleProperty(propertyId!, !!propertyId);
-
   const {
     data: nonHostelProperty,
     isLoading: isNHPLoading,
@@ -82,6 +79,12 @@ const ApproveBookingPage = () => {
         const group = assignedRooms?.find(
           (room) => room.bookingId === bookingId
         );
+
+        if (!booking.property.rentWithin) {
+          setDisabled(false);
+          return;
+        }
+
         // if the group was not found.
         if (!group) {
           setDisabled(true);
@@ -90,7 +93,6 @@ const ApproveBookingPage = () => {
 
         // if it's a hostel & room, bed not assigned
         if (booking.property?.propertyType === "hostel") {
-          console.log(group);
           if (!group.roomId || !group.bedId) {
             setDisabled(true);
             return;
@@ -107,7 +109,7 @@ const ApproveBookingPage = () => {
       });
   }, [assignedRooms, booking, booking?.property?.propertyType, store]);
 
-  if ((!nonHostelProperty && !hostelProperty) || !booking) return <Spinner />;
+  if (!booking) return <Spinner />;
   return (
     <Flex flexDir="column" gap={8}>
       <Flex gap={2} alignItems="center">
@@ -119,38 +121,37 @@ const ApproveBookingPage = () => {
         </Heading>
       </Flex>
 
-      <Box w="max-content">
-        <Text mb={4}>Checking Time Details</Text>
-        <CheckingRangeSelector
-          checkIn={new Date(booking.bookings[0].checkIn)}
-          checkOut={new Date(booking.bookings[0].checkOut)}
-          groupId={booking._id}
-        />
-      </Box>
+      <CheckingRangeSelector
+        checkIn={new Date(booking.bookings[0].checkIn)}
+        checkOut={new Date(booking.bookings[0].checkOut)}
+        groupId={booking._id}
+      />
 
       {booking.bookings.map((b) => (
         <Box key={b._id}>
           <Text mb={4}>Guest Details</Text>
           <HStack mb={2}>
-            <RoomAssignBlock
-              groupId={booking._id}
-              rooms={
-                booking.property.propertyType === "hostel"
-                  ? hostelProperty!
-                  : nonHostelProperty!
-              }
-              bookingId={b._id}
-              isLoading={
-                booking.property.propertyType === "hostel"
-                  ? isHPLoading
-                  : isNHPLoading
-              }
-              isError={
-                booking.property.propertyType === "hostel"
-                  ? isHPError
-                  : isNHPError
-              }
-            />
+            {booking.property.rentWithin && (
+              <RoomAssignBlock
+                groupId={booking._id}
+                rooms={
+                  booking.property.propertyType === "hostel"
+                    ? hostelProperty!
+                    : nonHostelProperty!
+                }
+                bookingId={b._id}
+                isLoading={
+                  booking.property.propertyType === "hostel"
+                    ? isHPLoading
+                    : isNHPLoading
+                }
+                isError={
+                  booking.property.propertyType === "hostel"
+                    ? isHPError
+                    : isNHPError
+                }
+              />
+            )}
             {booking.property.propertyType === "hostel" && (
               <BedAssignBlock bookingId={b._id} groupId={booking._id} />
             )}
@@ -169,7 +170,12 @@ const ApproveBookingPage = () => {
           <RejectBookingButton groupId={booking._id} />
           <Button
             colorScheme="primary"
-            onClick={onOpen}
+            onClick={() => {
+              assignGroup(booking._id, "bookings", [
+                { bookingId: booking.bookings[0]._id },
+              ]);
+              onOpen();
+            }}
             isDisabled={isDisabled}
           >
             Proceed

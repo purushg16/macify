@@ -128,7 +128,6 @@ const useApproveBooking = (groupId: string) => {
     paid: store?.paid,
     balance: store?.balance,
   } as ApproveBooking;
-
   return useMutation({
     mutationFn: () => approveBooking.postRequest(postValue),
 
@@ -231,8 +230,8 @@ const useEditBooking = (bookingId: string | undefined) => {
     propertyId: entry?.propertyId,
     checkIn: entry?.checkIn,
     checkOut: entry?.checkOut,
-    bedId: entry?.bedId,
-    roomId: entry?.roomId,
+    bedId: entry?.bedId || null,
+    roomId: entry?.roomId || null,
   } as EditBooking;
 
   return useMutation({
