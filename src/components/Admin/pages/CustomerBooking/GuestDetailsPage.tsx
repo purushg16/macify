@@ -4,9 +4,16 @@ import BookingFooter from "../../elements/Booking/BookingFooter";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
 import Guest from "../../../entities/Guest";
+import { useGetSingleProperty } from "../../../hooks/usePropertyServices";
+import HostelSubmitButton from "../../elements/Booking/HostelSubmitButton";
 
 const GuestDetailsPage = () => {
   const propertyId = useParams().propertyId;
+  const { data: property, isLoading } = useGetSingleProperty(
+    propertyId!,
+    !!propertyId
+  );
+
   const guests = useBookingGuestStore((s) => s.guests);
   const navigate = useNavigate();
 
@@ -19,6 +26,12 @@ const GuestDetailsPage = () => {
             !guest[key as keyof Guest] || guest[key as keyof Guest] === ""
         )
     );
+  };
+
+  const handleNext = () => {
+    if (!property?.rentWithin && property?.propertyType === "hostel")
+      navigate("/booking/" + propertyId + "/5");
+    else navigate("/booking/" + propertyId + "/7");
   };
 
   return (
@@ -47,13 +60,21 @@ const GuestDetailsPage = () => {
             <Link to={"/booking/" + propertyId + "/3"}>
               <Button> Back </Button>
             </Link>
-            <Button
-              isDisabled={isAnyFieldEmpty() || guests.length === 0}
-              colorScheme="primary"
-              onClick={() => navigate("/booking/" + propertyId + "/5")}
-            >
-              Next
-            </Button>
+            {!property?.rentWithin || property?.propertyType === "hostel" ? (
+              <HostelSubmitButton
+                propertyType={property?.propertyType}
+                isDisabled={isAnyFieldEmpty() || guests.length === 0}
+              />
+            ) : (
+              <Button
+                isLoading={isLoading}
+                isDisabled={isAnyFieldEmpty() || guests.length === 0}
+                colorScheme="primary"
+                onClick={handleNext}
+              >
+                Next
+              </Button>
+            )}
           </>
         }
       />

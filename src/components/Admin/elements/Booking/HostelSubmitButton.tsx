@@ -1,39 +1,35 @@
 import {
+  useDisclosure,
+  Button,
   AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
   AlertDialogBody,
   AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
-  Button,
-  useDisclosure,
 } from "@chakra-ui/react";
-import useBookingRoomStore from "../../../store/bookingRoomStore";
-import { useCustomerBooking } from "../../../hooks/useCustomer";
 import React from "react";
+import { useCustomerBooking } from "../../../hooks/useCustomer";
+import { PropertyType } from "../../../store/AddProperty/addPropertyBasicStore";
 
-const SubmitButton = () => {
+const HostelSubmitButton = ({
+  isDisabled,
+  propertyType,
+}: {
+  propertyType: PropertyType;
+  isDisabled: boolean;
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { mutate, isPending } = useCustomerBooking("apartment", true);
   const cancelRef = React.useRef(null);
-
-  const unassignedGuests = useBookingRoomStore((s) => s.unassignedGuests);
-  const rooms = useBookingRoomStore((s) => s.rooms);
+  const { mutate, isPending } = useCustomerBooking(propertyType, false);
 
   return (
     <>
-      <Button
-        isDisabled={
-          unassignedGuests.length > 0 ||
-          rooms?.some((room) => room.guests.length === 0)
-        }
-        colorScheme="primary"
-        onClick={onOpen}
-      >
+      <Button colorScheme="primary" onClick={onOpen} isDisabled={isDisabled}>
         Submit
       </Button>
+
       <AlertDialog
-        isCentered
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
         onClose={onClose}
@@ -47,15 +43,14 @@ const SubmitButton = () => {
             <AlertDialogBody>
               Are you sure you want to confirm the booking?
             </AlertDialogBody>
-
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
               <Button
                 colorScheme="primary"
-                onClick={() => mutate()}
                 ml={3}
+                onClick={() => mutate()}
                 isLoading={isPending}
               >
                 Submit Booking
@@ -68,4 +63,4 @@ const SubmitButton = () => {
   );
 };
 
-export default SubmitButton;
+export default HostelSubmitButton;

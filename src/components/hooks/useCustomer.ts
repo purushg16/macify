@@ -5,12 +5,23 @@ import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
 import useBookingConverter from "./useBookingConverter";
 import { useNavigate, useParams } from "react-router-dom";
+import { PropertyType } from "../store/AddProperty/addPropertyBasicStore";
+import useBookingGuestStore from "../store/bookingGuestStore";
 
-const useCustomerBooking = () => {
+const useCustomerBooking = (
+  propertyType: PropertyType,
+  rentWithin: boolean
+) => {
   const propertyId = useParams().propertyId;
   const toast = useToast();
   const navigate = useNavigate();
-  const postData = useBookingConverter(propertyId!);
+  const guests = useBookingGuestStore((s) => s.guests);
+  const postData = useBookingConverter(
+    propertyId!,
+    propertyType,
+    rentWithin,
+    guests
+  );
 
   return useMutation({
     mutationFn: () => createBooking(postData),
