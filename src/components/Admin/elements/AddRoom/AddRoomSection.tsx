@@ -1,7 +1,8 @@
-import { Heading, SimpleGrid, Box, Icon, Flex, Text } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
+import AnimateMove from "../../../motions/Move";
 import useAddRoomsStore from "../../../store/addRoomStore";
-import { IoCloseCircleOutline } from "react-icons/io5";
 import AddRoomDetailsModal from "./AddRoomDetailsModal";
+import RoomTile from "./RoomTile";
 
 const AddRoomSection = ({ propertyId }: { propertyId: string }) => {
   const rooms = useAddRoomsStore((s) => s.rooms).find(
@@ -16,27 +17,14 @@ const AddRoomSection = ({ propertyId }: { propertyId: string }) => {
       </Heading>
       <SimpleGrid columns={2} spacing={4}>
         {rooms && rooms.roomsData.length > 0 ? (
-          rooms.roomsData.map((room) => (
-            <Flex
-              p={4}
-              gap={2}
-              bg="green.200"
-              key={room.id}
-              borderRadius={20}
-              align="center"
-              justify="space-between"
-            >
-              <Box textAlign="left">
-                <Heading size="xs">{room.roomName}</Heading>
-                <Text fontSize="xs">Capacity: {room.guestCapacity}</Text>
-              </Box>
-              <Icon
-                as={IoCloseCircleOutline}
-                color="red.500"
-                cursor="pointer"
-                onClick={() => removeRoom(propertyId, room.id)}
+          rooms.roomsData.map((room, i) => (
+            <AnimateMove delay={0.2} key={i}>
+              <RoomTile
+                color="green.200"
+                room={room}
+                callback={() => removeRoom(propertyId, room.id)}
               />
-            </Flex>
+            </AnimateMove>
           ))
         ) : (
           <></>

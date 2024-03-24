@@ -4,19 +4,18 @@ import {
   Divider,
   Flex,
   Heading,
-  Icon,
   SimpleGrid,
   Spinner,
-  Text,
   VStack,
 } from "@chakra-ui/react";
 import Title from "../elements/Title";
 import { Link, useParams } from "react-router-dom";
 import { useGetSingleProperty } from "../../hooks/usePropertyServices";
 import { BiLeftArrowCircle } from "react-icons/bi";
-import { IoCloseCircleOutline } from "react-icons/io5";
 import AddRoomSection from "../elements/AddRoom/AddRoomSection";
 import AddRoomSubmitButton from "../elements/AddRoom/AddRoomSubmitButton";
+import AnimateMove from "../../motions/Move";
+import RoomTile from "../elements/AddRoom/RoomTile";
 
 const AddRoomsPage = () => {
   const propertyId = useParams().id;
@@ -54,26 +53,10 @@ const AddRoomsPage = () => {
             Present Rooms
           </Heading>
           <SimpleGrid columns={2} spacing={4}>
-            {property?.rooms.map((room) => (
-              <Flex
-                p={4}
-                gap={2}
-                bg="white"
-                key={room._id}
-                borderRadius={20}
-                align="center"
-                justify="space-between"
-              >
-                <Box textAlign="left">
-                  <Heading size="xs">{room.roomName}</Heading>
-                  <Text fontSize="xs">Capacity: {room.guestCapacity}</Text>
-                </Box>
-                <Icon
-                  as={IoCloseCircleOutline}
-                  color="red.500"
-                  cursor="pointer"
-                />
-              </Flex>
+            {property?.rooms.map((room, i) => (
+              <AnimateMove key={i} delay={0.2}>
+                <RoomTile room={room} callback={() => {}} color="white" />
+              </AnimateMove>
             ))}
           </SimpleGrid>
         </Box>
