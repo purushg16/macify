@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       { path: "calendar", element: <CalendarPage /> },
       { path: "calendar/single", element: <SingleCalendarPage /> },
       { path: "calendar/multi", element: <ScheduleContainer /> },
-      { path: "calendar/hostel", element: <CalendarPage /> },
+      { path: "calendar/hostel", element: <></> },
       { path: "manager", element: <ManagerPage /> },
 
       { path: "notifications", element: <AdminNotificationsPage /> },

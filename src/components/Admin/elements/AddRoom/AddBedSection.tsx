@@ -16,7 +16,6 @@ const AddBedSection = ({
     (bed) => bed.propertyId === propertyId && bed.roomId === roomId
   );
   const addBed = useAddBedsStore((s) => s.addBeds);
-  const removeBed = useAddBedsStore((s) => s.removeBed);
 
   return (
     <Box mt={6}>
@@ -29,7 +28,10 @@ const AddBedSection = ({
             bedNo={bed.bedNo}
             key={bed.id}
             color="green.200"
-            callback={() => removeBed(propertyId, roomId!)}
+            bedId={bed.id}
+            roomId={roomId!}
+            propertyId={propertyId}
+            action="store"
           />
         ))}
         <Button

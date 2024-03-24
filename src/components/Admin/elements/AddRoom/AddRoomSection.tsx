@@ -8,7 +8,6 @@ const AddRoomSection = ({ propertyId }: { propertyId: string }) => {
   const rooms = useAddRoomsStore((s) => s.rooms).find(
     (room) => room.propertyId === propertyId
   );
-  const removeRoom = useAddRoomsStore((s) => s.removeRoom);
 
   return (
     <Box mt={6}>
@@ -22,7 +21,9 @@ const AddRoomSection = ({ propertyId }: { propertyId: string }) => {
               <RoomTile
                 color="green.200"
                 room={room}
-                callback={() => removeRoom(propertyId, room.id)}
+                propertyId={propertyId}
+                roomId={room.id}
+                action="store"
               />
             </AnimateMove>
           ))
