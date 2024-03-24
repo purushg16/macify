@@ -35,7 +35,7 @@ const PropertyCardFooter = ({
         justifyContent="start"
         w="100%"
         isDisabled={!rentWithin}
-        onClick={() => navigate(`edit/${id}/addRooms`)}
+        onClick={() => navigate(`addRooms/${id}`)}
       >
         Add Room
       </Button>

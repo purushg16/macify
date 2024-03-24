@@ -14,6 +14,7 @@ import {
 import PropertyConverter from "../functions/propertyParameterConverter";
 import { useNavigate } from "react-router-dom";
 import ms from "ms";
+import useAddRoomsStore from "../store/addRoomStore";
 const usePostProperty = () => {
   const toast = useToast();
   const property = PropertyConverter();
@@ -45,11 +46,14 @@ const usePostProperty = () => {
 const useAddRooms = () => {
   const toast = useToast();
   const queryClient = useQueryClient();
+  const clearSinglePropertyRooms = useAddRoomsStore(
+    (s) => s.clearSinglePropertyRooms
+  );
 
   return useMutation({
     mutationFn: addRooms.postRequest,
 
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       toast({
         title: "Rooms Added Successfully",
         status: "success",
@@ -57,6 +61,8 @@ const useAddRooms = () => {
         duration: 3000,
       });
       queryClient.invalidateQueries({ queryKey: ["property", "getProperty"] });
+
+      clearSinglePropertyRooms(variables.propertyId);
     },
     onError: () =>
       toast({

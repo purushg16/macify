@@ -94,7 +94,7 @@ const router = createBrowserRouter([
             ],
           },
           { path: "edit/:id", element: <EditPropertyPage /> },
-          { path: "edit/:id/addRooms", element: <AddRoomsPage /> },
+          { path: "addRooms/:id", element: <AddRoomsPage /> },
         ],
       },
     ],
