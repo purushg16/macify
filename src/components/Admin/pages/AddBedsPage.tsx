@@ -1,25 +1,25 @@
 import {
-  Flex,
   Box,
   Button,
-  Spinner,
+  Divider,
+  Flex,
   Heading,
   Menu,
   MenuButton,
-  MenuList,
   MenuItem,
+  MenuList,
   SimpleGrid,
-  Icon,
-  Divider,
+  Spinner,
 } from "@chakra-ui/react";
-import { BiChevronDownCircle, BiLeftArrowCircle } from "react-icons/bi";
-import Title from "../elements/Title";
-import { Link, useParams } from "react-router-dom";
-import { useGetSingleProperty } from "../../hooks/usePropertyServices";
 import { useRef, useState } from "react";
+import { BiChevronDownCircle, BiLeftArrowCircle } from "react-icons/bi";
+import { Link, useParams } from "react-router-dom";
 import { PropertyRoom } from "../../entities/property";
-import { IoBedOutline, IoCloseCircleOutline } from "react-icons/io5";
+import { useGetSingleProperty } from "../../hooks/usePropertyServices";
+import AnimateMove from "../../motions/Move";
 import AddBedSection from "../elements/AddRoom/AddBedSection";
+import BedTile from "../elements/AddRoom/BedTile";
+import Title from "../elements/Title";
 
 const AddBedsPage = () => {
   const propertyId = useParams().id;
@@ -65,7 +65,7 @@ const AddBedsPage = () => {
             rightIcon={<BiChevronDownCircle />}
             _hover={{ bg: "gray.200" }}
           >
-            Select
+            {room?.roomName || "Select"}
           </MenuButton>
           <MenuList maxH={200} overflowY="auto" borderRadius={20} p={2}>
             {property?.rooms.map((room) => (
@@ -77,46 +77,45 @@ const AddBedsPage = () => {
         </Menu>
       </Flex>
 
-      <Box p={4} bg="#f4f4f4" borderRadius={20}>
-        <Box pb={4} mb={8} borderBottom="1px solid" borderColor="gray.100">
-          <Heading fontSize="md" m={0}>
-            {room?.roomName}
-          </Heading>
-        </Box>
+      {room && (
+        <AnimateMove>
+          <Box p={4} bg="#f4f4f4" borderRadius={20}>
+            <Box pb={4} mb={8} borderBottom="1px solid" borderColor="gray.100">
+              <Heading fontSize="md" m={0}>
+                {room?.roomName}
+              </Heading>
+            </Box>
 
-        <Box mb={6}>
-          <Heading fontSize="sm" color="gray.200" mb={2}>
-            Present Beds
-          </Heading>
-          <SimpleGrid columns={2} spacing={4} mb={8}>
-            {room &&
-              room.beds.map((bed) => (
-                <Flex
-                  bg="white"
-                  key={bed._id}
-                  p={2}
-                  gap={2}
-                  borderRadius={20}
-                  flexDir="column"
-                  align="center"
-                >
-                  <Icon
-                    alignSelf="end"
-                    as={IoCloseCircleOutline}
-                    color="red.500"
-                    onClick={() => {}}
-                  />
-                  <Icon as={IoBedOutline} boxSize={8} />
-                  Bed {bed.bedNo}
-                </Flex>
-              ))}
-          </SimpleGrid>
-        </Box>
+            <Box mb={6}>
+              <Heading fontSize="sm" color="gray.200" mb={2}>
+                Present Beds
+              </Heading>
+              <SimpleGrid columns={2} spacing={4} mb={8}>
+                {room &&
+                  room.beds.map((bed, i) => (
+                    <AnimateMove delay={0.2} key={i}>
+                      <BedTile
+                        bedNo={bed.bedNo}
+                        color="white"
+                        callback={() => {}}
+                      />
+                    </AnimateMove>
+                  ))}
+              </SimpleGrid>
+            </Box>
 
-        <Divider variant="dashed" maxW={200} m="auto" />
+            <Divider variant="dashed" maxW={200} m="auto" />
 
-        <AddBedSection propertyId={propertyId!} roomId={room?._id} />
-      </Box>
+            {room && (
+              <AddBedSection
+                propertyId={propertyId!}
+                roomId={room?._id}
+                count={room?.beds.length}
+              />
+            )}
+          </Box>
+        </AnimateMove>
+      )}
     </Flex>
   );
 };
