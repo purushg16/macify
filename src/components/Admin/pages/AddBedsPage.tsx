@@ -115,7 +115,11 @@ const AddBedsPage = () => {
               <AddBedSection
                 propertyId={propertyId!}
                 roomId={room?._id}
-                count={room?.beds.length}
+                count={
+                  room?.beds.length === room.beds[room?.beds.length - 1].bedNo // checking the last bed's no is === bed's length
+                    ? room?.beds.length // if true serialize from it.
+                    : room.beds[room?.beds.length - 1].bedNo // if not serialize from last bed's no.
+                }
               />
             )}
           </Box>
