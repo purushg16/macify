@@ -44,6 +44,7 @@ const PropertyCardFooter = ({
         leftIcon={<Icon as={IoBedOutline} />}
         justifyContent="start"
         isDisabled={propertyType !== "hostel"}
+        onClick={() => navigate(`addBeds/${id}`)}
       >
         Add Beds
       </Button>

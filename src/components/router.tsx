@@ -40,6 +40,7 @@ import GuestDetailsPage from "./Admin/pages/CustomerBooking/GuestDetailsPage";
 import RoomAssignPage from "./Admin/pages/CustomerBooking/RoomAssignPage";
 import EditBookingPage from "./Admin/pages/EditBookingPage";
 import AddRoomsPage from "./Admin/pages/AddRoomsPage";
+import AddBedsPage from "./Admin/pages/AddBedsPage";
 
 const router = createBrowserRouter([
   {
@@ -95,6 +96,7 @@ const router = createBrowserRouter([
           },
           { path: "edit/:id", element: <EditPropertyPage /> },
           { path: "addRooms/:id", element: <AddRoomsPage /> },
+          { path: "addBeds/:id", element: <AddBedsPage /> },
         ],
       },
     ],
