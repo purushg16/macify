@@ -59,8 +59,11 @@ const DashBoardPage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.8}>
-        <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={12}>
-          <Text fontSize="md"> What's Happening, </Text>
+        <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={4}>
+          <Text fontSize="md" mb={8}>
+            {" "}
+            What's Happening,{" "}
+          </Text>
           <SimpleGrid columns={3} justifyContent="space-between" spacing={2}>
             <HostingButton
               active={tab == 0}

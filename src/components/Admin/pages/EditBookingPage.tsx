@@ -1,13 +1,12 @@
 import {
+  Box,
   Button,
   Flex,
   HStack,
-  Heading,
-  IconButton,
   Spinner,
   Text,
+  VStack,
 } from "@chakra-ui/react";
-import { MdArrowBack } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEditBooking, useGetSingleBooking } from "../../hooks/useAdmin";
 import {
@@ -19,10 +18,11 @@ import useEditBookingStore from "../../store/editBookingStore";
 import CheckingRangeSelector from "../elements/ApproveBooking/CheckingRangeSelector";
 import GuestGrid from "../elements/ApproveBooking/GuestGrid";
 import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
-import BookingFooter from "../elements/Booking/BookingFooter";
 import EditBedAssign from "../elements/EditBooking.tsx/EditBedAssign";
 import EditBookingGuestWrapper from "../elements/EditBooking.tsx/EditBookingGuestWrapper";
 import useBookingModalStore from "../../store/bookingDetailsModalStore";
+import Title from "../elements/Title";
+import { BsArrowLeftCircle } from "react-icons/bs";
 
 interface Props {
   bookingId?: string | undefined;
@@ -91,20 +91,25 @@ const EditBookingPage = ({ bookingId }: Props) => {
   if (isError) return <Text> Error Getting the data </Text>;
   if (property)
     return (
-      <Flex flexDir="column" gap={8} mb={8}>
-        <Flex gap={2} alignItems="center">
-          <IconButton
-            aria-label="back-btn"
-            icon={<MdArrowBack />}
-            size="sm"
+      <Flex flexDir="column" gap={4} mb={8}>
+        <Box>
+          <Button
+            leftIcon={<BsArrowLeftCircle />}
+            size="xs"
             onClick={() => {
               !id ? toggleModal() : navigate("/admin");
             }}
+            mb={2}
+          >
+            Back
+          </Button>
+          <Title
+            heading={booking.data[0].property.propertyName}
+            subtitle={booking.data[0].property.propertyType}
+            size="xl"
+            align="left"
           />
-          <Heading fontSize="xl" textTransform="capitalize">
-            {booking.data[0].property.propertyName}
-          </Heading>
-        </Flex>
+        </Box>
 
         <CheckingRangeSelector
           checkIn={new Date(booking.data[0].checkIn)}
@@ -155,32 +160,33 @@ const EditBookingPage = ({ bookingId }: Props) => {
           <GuestGrid guests={booking.data[0].guests} />
         </EditBookingGuestWrapper>
 
-        <BookingFooter
-          title="Approve Booking"
-          subheading="Click 'Proceed' to enter payment details"
-          buttons={
-            <Button
-              isDisabled={
-                !property.rentWithin
-                  ? false
-                  : property?.propertyType === "hostel"
-                  ? !entry?.bedId || !entry.roomId
-                    ? true
-                    : false
-                  : !entry?.roomId
+        <VStack gap={4} mt={4}>
+          <Title
+            size="xl"
+            heading="Approve Booking"
+            subtitle="Click 'Proceed' to enter payment details"
+          />
+          <Button
+            isDisabled={
+              !property.rentWithin
+                ? false
+                : property?.propertyType === "hostel"
+                ? !entry?.bedId || !entry.roomId
                   ? true
                   : false
-              }
-              colorScheme="primary"
-              onClick={() => {
-                mutate();
-              }}
-              isLoading={isPending}
-            >
-              Proceed
-            </Button>
-          }
-        />
+                : !entry?.roomId
+                ? true
+                : false
+            }
+            colorScheme="primary"
+            onClick={() => {
+              mutate();
+            }}
+            isLoading={isPending}
+          >
+            Proceed
+          </Button>
+        </VStack>
       </Flex>
     );
 };
