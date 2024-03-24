@@ -1,4 +1,7 @@
 const railwayTimeConverter = (time: string) => {
+  if (time.includes("AM")) time = time.replace("AM", "").trim();
+  if (time.includes("PM")) time = time.replace("PM", "").trim();
+
   const hour = time.split(":")[0];
   const minutes = time.split(":")[1];
 

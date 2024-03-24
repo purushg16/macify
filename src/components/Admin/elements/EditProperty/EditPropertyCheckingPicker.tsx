@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { BsClockFill } from "react-icons/bs";
 import { timeList } from "../../../data/timeList";
+import railwayTimeConverter from "../../../functions/railwayTimeConverter";
 
 interface Props {
   zindex: number;
@@ -28,7 +29,11 @@ const CheckingTimePicker = ({ title, time, onSelect, zindex }: Props) => {
         {title}
       </Text>
       <InputGroup w="max-content" zIndex={zindex}>
-        <Input bg="white" placeholder="CheckIn Time" value={time} />
+        <Input
+          bg="white"
+          placeholder="CheckIn Time"
+          value={railwayTimeConverter(time)}
+        />
         <InputRightElement cursor="pointer" bg="gray.50" borderRadius={10}>
           <Menu placement="bottom">
             <MenuButton

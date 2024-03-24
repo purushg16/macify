@@ -1,5 +1,5 @@
 import { useToast } from "@chakra-ui/react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
 import {
@@ -43,18 +43,23 @@ const usePostProperty = () => {
 
 const useEditProperty = () => {
   const toast = useToast();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: editProperty.postRequest,
 
-    onSuccess: () =>
+    onSuccess: () => {
       toast({
-        title: "New property successfully created",
-        status: "error",
+        title: "Property Editted created",
+        status: "success",
         position: "top",
         duration: 3000,
-      }),
-
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["property", "getAllProperty"],
+      });
+      queryClient.invalidateQueries({ queryKey: ["property", "getProperty"] });
+    },
     onError: (err: AxiosError<APIError>) =>
       toast({
         title: err.response?.data?.error,

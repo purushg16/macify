@@ -9,6 +9,20 @@ export interface PropertyService
   extends AddPropertyRoomInterface,
     AddPropertyBasicInterface {}
 
+export interface EditPropertyInterface {
+  propertyId: string | undefined;
+  propertyName: string | undefined;
+  rentWithin: boolean;
+  amenities: string[] | undefined;
+  address: string | undefined;
+  country: string | undefined;
+  city: string | undefined;
+  zipcode: string | undefined;
+  manager: string | undefined;
+  checkIn: string | undefined;
+  checkOut: string | undefined;
+}
+
 const getAllProperties = new APIClient<PropertyRespone>(
   "/property/getAllProperty"
 );
@@ -24,7 +38,9 @@ const getAvailableBeds = new APIClient<AvailableResponse>(
 const getSingleProperty = new APIClient<Property>("/property/getProperty");
 const postNewProperty = new APIClient<PropertyService>("/property/addProperty");
 
-const editProperty = new APIClient<PropertyService>("/property/editProperty");
+const editProperty = new APIClient<EditPropertyInterface>(
+  "/property/editProperty"
+);
 
 export {
   postNewProperty,

@@ -34,9 +34,6 @@ const ScheduleContainer = () => {
 
   const bookingDates = Object.keys(scheduleData);
 
-  console.log(Object.keys(scheduleData));
-  console.log(properties?.data.map((room) => room.rooms.map((r) => r._id)));
-
   return (
     <Box
       ref={boxRef}
@@ -47,17 +44,20 @@ const ScheduleContainer = () => {
       sx={{ "&::-webkit-scrollbar": { height: 0 } }}
     >
       {/* Redering Date Blocks */}
-      <Flex pt={3}>
-        {dates.map((date, i) => (
-          <DateBlock key={i} currentDate={date} />
-        ))}
-      </Flex>
+      <Box>
+        <Flex pt={3}>
+          {dates.map((date, i) => (
+            <DateBlock key={i} currentDate={date} />
+          ))}
+        </Flex>
+      </Box>
 
       {/* Rendering List of Properties Schedules */}
       <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
         {properties?.data.map((property) =>
           !property.rentWithin ? (
             <Schedular
+              key={property._id}
               propertyName={property.propertyName}
               propertyNumber=""
               dates={dates}
@@ -68,6 +68,7 @@ const ScheduleContainer = () => {
           ) : (
             property.rooms.map((room) => (
               <Schedular
+                key={room._id}
                 propertyName={property.propertyName}
                 propertyNumber={room.roomName}
                 dates={dates}
@@ -79,17 +80,6 @@ const ScheduleContainer = () => {
           )
         )}
       </Flex>
-
-      {/* <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
-        {Object.values(scheduleData!).map((schedule) => (
-          <Schedular
-            propertyName="Ganga"
-            propertyNumber="8"
-            dates={dates}
-            scheduleData={schedule}
-          />
-        ))}
-      </Flex> */}
       <BookingDetailsModal />
     </Box>
   );

@@ -1,20 +1,12 @@
+import { Box, Button, Flex, GridItem, Spacer, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import { BiGlobe, BiTag } from "react-icons/bi";
+import { BsArrowLeftCircle, BsBuilding } from "react-icons/bs";
+import { IoLocationOutline } from "react-icons/io5";
+import { MdLinearScale } from "react-icons/md";
+import amenitiesData from "../../../data/amenitiesData";
 import Property, { PropertyManager } from "../../../entities/property";
 import { PropertyType } from "../../../store/AddProperty/addPropertyBasicStore";
-import {
-  Flex,
-  GridItem,
-  Spacer,
-  Button,
-  Icon,
-  Text,
-  Box,
-} from "@chakra-ui/react";
-import { BiTag, BiGlobe } from "react-icons/bi";
-import { BsBuilding } from "react-icons/bs";
-import { IoLocationOutline } from "react-icons/io5";
-import { MdDeleteOutline, MdLinearScale } from "react-icons/md";
-import amenitiesData from "../../../data/amenitiesData";
 import Title from "../Title";
 import EditPropertyAmenityTag from "./EditPropertyAmenityTag";
 import CheckingTimePicker from "./EditPropertyCheckingPicker";
@@ -23,6 +15,7 @@ import EditPropertySubmitButton from "./EditPropertySubmitButton";
 import EditPropertyTypeSelector from "./EditPropertyTypeSelector";
 import EditPropertyValue from "./EditPropertyValue";
 import PropertyField from "./PropertyField";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   property: Property;
@@ -50,6 +43,7 @@ const EditPropertyWrapper = ({ property }: Props) => {
     property?.manager
   );
 
+  const navigate = useNavigate();
   return (
     <Flex
       gap={8}
@@ -61,6 +55,14 @@ const EditPropertyWrapper = ({ property }: Props) => {
       p={2}
     >
       <GridItem pt={4} px={2}>
+        <Button
+          size="xs"
+          leftIcon={<BsArrowLeftCircle />}
+          mb={4}
+          onClick={() => navigate("/admin/properties")}
+        >
+          All Properties
+        </Button>
         <Flex>
           <Title
             heading={property?.propertyName}
@@ -68,7 +70,7 @@ const EditPropertyWrapper = ({ property }: Props) => {
             align="left"
           />
           <Spacer />
-          <Button
+          {/* <Button
             size="sm"
             bg="red.100"
             _hover={{ bg: "red.200" }}
@@ -76,7 +78,7 @@ const EditPropertyWrapper = ({ property }: Props) => {
             borderColor="red.300"
           >
             <Icon as={MdDeleteOutline} />
-          </Button>
+          </Button> */}
         </Flex>
       </GridItem>
 
@@ -199,7 +201,33 @@ const EditPropertyWrapper = ({ property }: Props) => {
 
       <GridItem textAlign="center">
         <Title heading="Edit Details" subtitle="Add or remove field & submit" />
-        <EditPropertySubmitButton />
+        <EditPropertySubmitButton
+          property={{
+            propertyId: property._id,
+            propertyName,
+            checkIn: checkInTime,
+            checkOut: checkOutTime,
+            address,
+            city,
+            zipcode,
+            country,
+            amenities,
+            rentWithin: property.rentWithin,
+            manager: manager?._id,
+          }}
+          isDisabled={
+            !propertyName ||
+            !type ||
+            !checkInTime ||
+            !checkOutTime ||
+            !address ||
+            !city ||
+            !zipcode ||
+            !country ||
+            !manager ||
+            amenities?.length === 0
+          }
+        />
       </GridItem>
     </Flex>
   );
