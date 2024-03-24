@@ -39,6 +39,7 @@ import CustomerFileUpload from "./Admin/elements/Booking/CustomerFileUpload";
 import GuestDetailsPage from "./Admin/pages/CustomerBooking/GuestDetailsPage";
 import RoomAssignPage from "./Admin/pages/CustomerBooking/RoomAssignPage";
 import EditBookingPage from "./Admin/pages/EditBookingPage";
+import AddRoomsPage from "./Admin/pages/AddRoomsPage";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,7 @@ const router = createBrowserRouter([
             ],
           },
           { path: "edit/:id", element: <EditPropertyPage /> },
+          { path: "edit/:id/addRooms", element: <AddRoomsPage /> },
         ],
       },
     ],

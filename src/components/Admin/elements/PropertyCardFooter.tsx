@@ -3,12 +3,24 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { IoGridOutline } from "react-icons/io5";
 import { IoBedOutline } from "react-icons/io5";
 import { BiDetail } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import NavigatorWrapper from "./NavigatorWrapper";
+import { PropertyType } from "../../store/AddProperty/addPropertyBasicStore";
+import { useNavigate } from "react-router-dom";
 
-const PropertyCardFooter = ({ id }: { id: string }) => {
+const PropertyCardFooter = ({
+  id,
+  propertyType,
+  rentWithin,
+}: {
+  id: string;
+  propertyType: PropertyType;
+  rentWithin: boolean;
+}) => {
+  const navigate = useNavigate();
+
   return (
     <SimpleGrid columns={2} mx={4} spacing={4}>
-      <Link to={`edit/${id}`} style={{ width: "100%" }}>
+      <NavigatorWrapper to={`edit/${id}`}>
         <Button
           leftIcon={<Icon as={BiDetail} />}
           justifyContent="start"
@@ -16,13 +28,26 @@ const PropertyCardFooter = ({ id }: { id: string }) => {
         >
           Edit Details
         </Button>
-      </Link>
-      <Button leftIcon={<Icon as={IoGridOutline} />} justifyContent="start">
+      </NavigatorWrapper>
+
+      <Button
+        leftIcon={<Icon as={IoGridOutline} />}
+        justifyContent="start"
+        w="100%"
+        isDisabled={!rentWithin}
+        onClick={() => navigate(`edit/${id}/addRooms`)}
+      >
         Add Room
       </Button>
-      <Button leftIcon={<Icon as={IoBedOutline} />} justifyContent="start">
+
+      <Button
+        leftIcon={<Icon as={IoBedOutline} />}
+        justifyContent="start"
+        isDisabled={propertyType !== "hostel"}
+      >
         Add Beds
       </Button>
+
       <Button
         justifyContent="start"
         leftIcon={<Icon as={MdOutlineDeleteOutline} />}
@@ -31,11 +56,6 @@ const PropertyCardFooter = ({ id }: { id: string }) => {
       >
         Delete
       </Button>
-      {/* <Link to={`edit/${id}`}>
-        <DashboardOptButton label="Edit Details" icon={BiDetail} />
-      </Link>
-      <DashboardOptButton label="Edit Beds" icon={IoBedOutline} />
-      <DashboardOptButton label="Edit Rooms" icon={IoGridOutline} /> */}
     </SimpleGrid>
   );
 };

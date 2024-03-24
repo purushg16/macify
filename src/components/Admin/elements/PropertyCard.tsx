@@ -11,12 +11,15 @@ import {
   Spacer,
   IconButton,
   Icon,
+  useToast,
 } from "@chakra-ui/react";
 import PropertyRespone from "../../entities/PropertyResponse";
 import PropertyCardFooter from "./PropertyCardFooter";
 import { IoCopyOutline } from "react-icons/io5";
 
 const PropertyCard = ({ property }: { property: PropertyRespone }) => {
+  const toast = useToast();
+
   return (
     <Accordion allowToggle>
       <AccordionItem
@@ -56,7 +59,18 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
                 _hover={{ bg: "primary.300" }}
                 onClick={(event) => {
                   event.stopPropagation();
-                  console.log("first");
+                  navigator.clipboard
+                    .writeText(
+                      window.location.origin + "/booking/" + property._id
+                    )
+                    .then(() =>
+                      toast({
+                        title: "Link Copied",
+                        status: "success",
+                        duration: 2000,
+                        position: "top",
+                      })
+                    );
                 }}
               />
               {/* </HStack> */}
@@ -119,7 +133,11 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
         </AccordionButton>
 
         <AccordionPanel pb={4} px={0}>
-          <PropertyCardFooter id={property._id} />
+          <PropertyCardFooter
+            id={property._id}
+            propertyType={property.propertyType}
+            rentWithin={property.rentWithin}
+          />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
