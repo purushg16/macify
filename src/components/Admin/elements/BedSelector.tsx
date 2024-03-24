@@ -19,13 +19,14 @@ const BedSelector = ({ onSelect, beds, selectedBed }: Props) => {
   return (
     <Menu>
       <MenuButton
+        size="sm"
         w="max-content"
         as={Button}
         rightIcon={<Icon as={IoChevronDownCircleOutline} />}
       >
         {selectedBed?.bedNo || "Select Bed"}
       </MenuButton>
-      <MenuList>
+      <MenuList p={2} borderRadius={20}>
         {beds?.map((bed) => (
           <MenuItem onClick={() => onSelect(bed._id)}>{bed.bedNo}</MenuItem>
         ))}

@@ -23,13 +23,14 @@ const PropertySelector = ({
   return (
     <Menu>
       <MenuButton
+        size="sm"
         w="max-content"
         as={Button}
         rightIcon={<Icon as={IoChevronDownCircleOutline} />}
       >
         {selectedProperty?.propertyName || "Select Property"}
       </MenuButton>
-      <MenuList>
+      <MenuList p={2} borderRadius={20}>
         {properties?.map((property) => (
           <MenuItem
             onClick={() => onSelect(property._id)}

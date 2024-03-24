@@ -4,15 +4,18 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { DateSelectArg, EventContentArg } from "@fullcalendar/core/index.js";
 import { Box } from "@chakra-ui/react";
 import { TimelineBookings } from "../../../api/admin-client";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   bookings: TimelineBookings;
 }
 
 const SingleCalendar = ({ bookings }: Props) => {
+  const navigate = useNavigate();
+
   const handleDateSelect = (selectInfo: DateSelectArg) => {
     // Handle date selection logic
-    alert(`${selectInfo}`);
+    navigate(`/admin/editBooking/${selectInfo}`);
   };
 
   const handleEventContent = (eventContent: EventContentArg) => {
@@ -40,6 +43,7 @@ const SingleCalendar = ({ bookings }: Props) => {
 
   return (
     <FullCalendar
+      height={550}
       headerToolbar={{
         start: "title today", // will normally be on the left. if RTL, will be on the right
         center: "",
@@ -60,7 +64,9 @@ const SingleCalendar = ({ bookings }: Props) => {
       }
       select={handleDateSelect}
       eventContent={handleEventContent}
-      eventClick={(arg) => alert(arg.event._def.title)}
+      eventClick={(arg) =>
+        navigate(`/admin/editBooking/${arg.event._def.title}`)
+      }
       buttonText={{
         today: "Today",
       }}

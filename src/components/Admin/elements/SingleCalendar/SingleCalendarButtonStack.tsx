@@ -1,25 +1,21 @@
-import { Flex, HStack, Spacer, Text } from "@chakra-ui/react";
+import { Flex, HStack, Heading } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 interface Props {
-  fetchButton: ReactNode;
   PropertySelector: ReactNode;
   RoomSelector?: ReactNode;
   BedSelector?: ReactNode;
 }
 
 const SingleCalendarButtonStack = ({
-  fetchButton,
   PropertySelector,
   RoomSelector,
   BedSelector,
 }: Props) => {
   return (
-    <Flex gap={12} flexDir="column" p={4} borderRadius={20} bg="#f4f4f4">
+    <Flex gap={8} flexDir="column" p={4} borderRadius={20} bg="#f4f4f4">
       <Flex align="start">
-        <Text> Choose Property </Text>
-        <Spacer />
-        {fetchButton}
+        <Heading fontSize="md"> Choose Property </Heading>
       </Flex>
 
       <Flex gap={4} flexDir="column">

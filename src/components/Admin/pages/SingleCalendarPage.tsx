@@ -6,11 +6,10 @@ import RoomSelector from "../elements/RoomSelector";
 import BedSelector from "../elements/BedSelector";
 import { useGetAllProperties } from "../../hooks/usePropertyServices";
 import PropertyRespone from "../../entities/PropertyResponse";
-import FetchDetailsButton from "../elements/SingleSchedular/FetchDetailsButton";
-import { BookingTimelineInterface } from "../../api/admin-client";
 import SingleCalendar from "../elements/SingleCalendar/SingleCalendar";
 import SingleCalendarButtonStack from "../elements/SingleCalendar/SingleCalendarButtonStack";
 import AnimateMove from "../../motions/Move";
+import { useGetAllBooking } from "../../hooks/useAdmin";
 
 export const SingleCalendarPage = () => {
   const { data: properties, isLoading: isPropertiesLoading } =
@@ -20,6 +19,10 @@ export const SingleCalendarPage = () => {
   const [room, setRoom] = useState<PropertyRoom>();
   const [bed, setBed] = useState<PropertyBed>();
   const [finalField, setFinalField] = useState("");
+  const { data, isLoading, isRefetching } = useGetAllBooking(
+    { ids: [finalField] },
+    !!finalField
+  );
 
   const onPropertySelect = (id: string) => {
     const selectedProperty = properties?.data.find(
@@ -28,8 +31,9 @@ export const SingleCalendarPage = () => {
     setProperty(selectedProperty);
     setRoom(undefined);
 
-    if (!selectedProperty?.rentWithin) setFinalField(id);
-    else setFinalField("");
+    if (!selectedProperty?.rentWithin) {
+      setFinalField(id);
+    } else setFinalField("");
   };
 
   const onRoomSelect = (id: string) => {
@@ -37,35 +41,22 @@ export const SingleCalendarPage = () => {
     setRoom(selectedRoom);
     setBed(undefined);
 
-    if (property?.propertyType !== "hostel") setFinalField(id);
-    else setFinalField("");
+    if (property?.propertyType !== "hostel") {
+      setFinalField(id);
+    } else setFinalField("");
   };
 
   const onBedSelect = (id: string) => {
     const selectedBed = room?.beds?.find((bed) => bed._id === id);
     setBed(selectedBed);
-
     setFinalField(id);
   };
-
-  const [booking, setBooking] = useState<
-    BookingTimelineInterface | undefined
-  >();
-  const afterDataFetched = (b: BookingTimelineInterface | undefined) =>
-    setBooking(b);
 
   return (
     <Grid gap={8}>
       <GridItem>
         <AnimateMove>
           <SingleCalendarButtonStack
-            fetchButton={
-              <FetchDetailsButton
-                ids={[finalField]}
-                disabled={!finalField}
-                callback={afterDataFetched}
-              />
-            }
             PropertySelector={
               isPropertiesLoading ? (
                 <Spinner />
@@ -101,14 +92,17 @@ export const SingleCalendarPage = () => {
           />
         </AnimateMove>
       </GridItem>
-
-      <GridItem>
-        {booking && (
-          <AnimateMove>
-            <SingleCalendar bookings={Object.values(booking)[0]} />
-          </AnimateMove>
-        )}
-      </GridItem>
+      {isRefetching || isLoading ? (
+        <Spinner />
+      ) : (
+        <GridItem>
+          {data && (
+            <AnimateMove>
+              <SingleCalendar bookings={Object.values(data)[0]} />
+            </AnimateMove>
+          )}
+        </GridItem>
+      )}
     </Grid>
   );
 };
