@@ -47,6 +47,20 @@ const editProperty = new APIClient<EditPropertyInterface>(
 const addRooms = new APIClient<AddRoomInterface>("/property/addRooms");
 const addBeds = new APIClient<AddBedInteface>("/property/addBeds");
 
+interface DeleteRoom {
+  propertyId: string;
+  roomId: string;
+}
+
+interface DeleteBed {
+  propertyId: string;
+  roomId: string;
+  bedId: string;
+}
+
+const deleteRoom = new APIClient<DeleteRoom>("/property/deleteRoom");
+const deleteBed = new APIClient<DeleteBed>("/property/deleteBed");
+
 export {
   postNewProperty,
   getSingleProperty,
@@ -56,4 +70,6 @@ export {
   getAvailableBeds,
   addRooms,
   addBeds,
+  deleteRoom,
+  deleteBed,
 };

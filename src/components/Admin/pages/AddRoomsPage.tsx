@@ -10,7 +10,10 @@ import {
 } from "@chakra-ui/react";
 import Title from "../elements/Title";
 import { Link, useParams } from "react-router-dom";
-import { useGetSingleProperty } from "../../hooks/usePropertyServices";
+import {
+  useDeleteRoom,
+  useGetSingleProperty,
+} from "../../hooks/usePropertyServices";
 import { BiLeftArrowCircle } from "react-icons/bi";
 import AddRoomSection from "../elements/AddRoom/AddRoomSection";
 import AddRoomSubmitButton from "../elements/AddRoom/AddRoomSubmitButton";
@@ -23,6 +26,7 @@ const AddRoomsPage = () => {
     propertyId!,
     !!propertyId
   );
+  const { mutate } = useDeleteRoom();
 
   if (isLoading) return <Spinner />;
   return (
@@ -55,7 +59,13 @@ const AddRoomsPage = () => {
           <SimpleGrid columns={2} spacing={4}>
             {property?.rooms.map((room, i) => (
               <AnimateMove key={i} delay={0.2}>
-                <RoomTile room={room} callback={() => {}} color="white" />
+                <RoomTile
+                  room={room}
+                  callback={() => {
+                    propertyId && mutate({ propertyId, roomId: room._id });
+                  }}
+                  color="white"
+                />
               </AnimateMove>
             ))}
           </SimpleGrid>

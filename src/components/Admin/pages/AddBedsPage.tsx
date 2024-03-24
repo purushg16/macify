@@ -16,7 +16,10 @@ import { useRef, useState } from "react";
 import { BiChevronDownCircle, BiLeftArrowCircle } from "react-icons/bi";
 import { Link, useParams } from "react-router-dom";
 import { PropertyRoom } from "../../entities/property";
-import { useGetSingleProperty } from "../../hooks/usePropertyServices";
+import {
+  useDeleteBed,
+  useGetSingleProperty,
+} from "../../hooks/usePropertyServices";
 import AnimateMove from "../../motions/Move";
 import AddBedSection from "../elements/AddRoom/AddBedSection";
 import BedTile from "../elements/AddRoom/BedTile";
@@ -30,7 +33,7 @@ const AddBedsPage = () => {
     !!propertyId
   );
   const ref = useRef(null);
-
+  const { mutate } = useDeleteBed();
   const [room, setRoom] = useState<PropertyRoom | undefined>();
   if (isLoading) return <Spinner />;
   return (
@@ -100,7 +103,16 @@ const AddBedsPage = () => {
                         <BedTile
                           bedNo={bed.bedNo}
                           color="white"
-                          callback={() => {}}
+                          callback={() => {
+                            propertyId &&
+                              room._id &&
+                              bed._id &&
+                              mutate({
+                                bedId: bed._id,
+                                propertyId,
+                                roomId: room._id,
+                              });
+                          }}
                         />
                       </AnimateMove>
                     ))}

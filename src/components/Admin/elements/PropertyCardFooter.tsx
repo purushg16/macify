@@ -37,7 +37,7 @@ const PropertyCardFooter = ({
         isDisabled={!rentWithin}
         onClick={() => navigate(`addRooms/${id}`)}
       >
-        Add Room
+        Edit Rooms
       </Button>
 
       <Button
@@ -46,7 +46,7 @@ const PropertyCardFooter = ({
         isDisabled={propertyType !== "hostel"}
         onClick={() => navigate(`addBeds/${id}`)}
       >
-        Add Beds
+        Edit Beds
       </Button>
 
       <Button

@@ -5,6 +5,8 @@ import { APIError } from "../entities/Error";
 import {
   addBeds,
   addRooms,
+  deleteBed,
+  deleteRoom,
   editProperty,
   getAllProperties,
   getAvailableBeds,
@@ -213,6 +215,62 @@ const useGetSingleProperty = (
   });
 };
 
+const useDeleteRoom = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteRoom.postRequest,
+    onSuccess: () => {
+      toast({
+        title: "Room Deleted Successfully",
+        status: "success",
+        position: "top",
+        duration: 3000,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["property", "getAllProperty"],
+      });
+      queryClient.invalidateQueries({ queryKey: ["property", "getProperty"] });
+    },
+    onError: (err: AxiosError<APIError>) =>
+      toast({
+        title: err.response?.data.error,
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+  });
+};
+
+const useDeleteBed = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deleteBed.postRequest,
+    onSuccess: () => {
+      toast({
+        title: "Bed Deleted Successfully",
+        status: "success",
+        position: "top",
+        duration: 3000,
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["property", "getAllProperty"],
+      });
+      queryClient.invalidateQueries({ queryKey: ["property", "getProperty"] });
+    },
+    onError: () =>
+      toast({
+        title: "Error Deleting Bed",
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+  });
+};
+
 export {
   usePostProperty,
   useGetAllProperties,
@@ -222,4 +280,6 @@ export {
   useGetAvailableBeds,
   useAddRooms,
   useAddBeds,
+  useDeleteRoom,
+  useDeleteBed,
 };
