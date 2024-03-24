@@ -17,7 +17,7 @@ const useBookingGuestStore = create<BookingGuestStoreInterface>((set) => ({
   editGuests: (id, param, value) =>
     set((store) => ({
       guests: store.guests.map((guest) =>
-        guest._id === id ? { ...guest, [param]: value } : guest
+        guest.id === id ? { ...guest, [param]: value } : guest
       ),
     })),
   clearGuests: () => set(() => ({ guests: [] })),

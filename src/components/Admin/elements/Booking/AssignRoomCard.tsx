@@ -29,7 +29,7 @@ const AssignRoomCard = ({
         overflowX="auto"
       >
         {guests.map((guest) => (
-          <RoomGuestTag key={guest._id} guest={guest} roomId={room.id} />
+          <RoomGuestTag key={guest.id} guest={guest} roomId={room.id} />
         ))}
         <AvailableGuestModal roomId={room.id} />
       </Flex>

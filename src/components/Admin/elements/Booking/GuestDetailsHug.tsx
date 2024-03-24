@@ -35,7 +35,7 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
             placeholder="Guest Name"
             bg="#f4f4f4"
             value={guest.guestName}
-            onChange={(e) => editGuest(guest._id!, "guestName", e.target.value)}
+            onChange={(e) => editGuest(guest.id!, "guestName", e.target.value)}
           />
         </FormControl>
 
@@ -48,11 +48,11 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
               placeholder="Age"
               bg="#f4f4f4"
               value={guest.age}
-              onChange={(e) => editGuest(guest._id!, "age", e.target.value)}
+              onChange={(e) => editGuest(guest.id!, "age", e.target.value)}
             />
           </FormControl>
 
-          <GuestGenderSelector gender={guest.gender!} id={guest._id!} />
+          <GuestGenderSelector gender={guest.gender!} id={guest.id!} />
         </SimpleGrid>
 
         <FormControl>
@@ -62,7 +62,7 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
 
           <DatePicker
             selected={guest.dob}
-            onChange={(date) => editGuest(guest._id!, "dob", date!)}
+            onChange={(date) => editGuest(guest.id!, "dob", date!)}
             className="dob-picker"
           />
         </FormControl>
@@ -75,7 +75,7 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
             placeholder="Phone"
             bg="#f4f4f4"
             value={guest.phone || ""}
-            onChange={(e) => editGuest(guest._id!, "phone", e.target.value)}
+            onChange={(e) => editGuest(guest.id!, "phone", e.target.value)}
           />
         </FormControl>
       </Flex>

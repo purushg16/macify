@@ -37,7 +37,7 @@ const useBookingRoomStore = create<BookingRoomStoreInterface>((set) => ({
         room.id === id ? { ...room, guests: [...room.guests, guest] } : room
       ),
       unassignedGuests: store.unassignedGuests.filter(
-        (storeGuest) => storeGuest._id !== guest._id
+        (storeGuest) => storeGuest.id !== guest.id
       ),
     })),
 
@@ -45,7 +45,7 @@ const useBookingRoomStore = create<BookingRoomStoreInterface>((set) => ({
     set((store) => ({
       rooms: store.rooms?.map((room) =>
         room.id === id
-          ? { ...room, guests: room.guests.filter((g) => g._id !== guest._id) }
+          ? { ...room, guests: room.guests.filter((g) => g.id !== guest.id) }
           : room
       ),
       unassignedGuests: [...store.unassignedGuests, guest],
