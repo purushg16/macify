@@ -1,6 +1,7 @@
 import AddRoomInterface from "../entities/AddRoomInterface.ts";
 import { AvailableResponse } from "../entities/AvailableResponse.ts";
 import PropertyRespone from "../entities/PropertyResponse.ts";
+import AddBedInteface from "../entities/addBed.ts";
 import { AddPropertyBasicInterface } from "../entities/addPropertyBasicInterface.ts";
 import { AddPropertyRoomInterface } from "../entities/addPropertyRoomInterface.ts";
 import Property from "../entities/property.ts";
@@ -44,6 +45,7 @@ const editProperty = new APIClient<EditPropertyInterface>(
 );
 
 const addRooms = new APIClient<AddRoomInterface>("/property/addRooms");
+const addBeds = new APIClient<AddBedInteface>("/property/addBeds");
 
 export {
   postNewProperty,
@@ -53,4 +55,5 @@ export {
   getAvailableRooms,
   getAvailableBeds,
   addRooms,
+  addBeds,
 };

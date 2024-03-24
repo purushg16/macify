@@ -10,6 +10,7 @@ import {
   MenuList,
   SimpleGrid,
   Spinner,
+  VStack,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { BiChevronDownCircle, BiLeftArrowCircle } from "react-icons/bi";
@@ -20,6 +21,7 @@ import AnimateMove from "../../motions/Move";
 import AddBedSection from "../elements/AddRoom/AddBedSection";
 import BedTile from "../elements/AddRoom/BedTile";
 import Title from "../elements/Title";
+import AddBedSubmitButton from "../elements/AddRoom/AddBedSubmitButton";
 
 const AddBedsPage = () => {
   const propertyId = useParams().id;
@@ -116,6 +118,16 @@ const AddBedsPage = () => {
           </Box>
         </AnimateMove>
       )}
+
+      <VStack gap={4} mt={8}>
+        <Title
+          heading="Submit Edits"
+          subtitle="Add or remove bed & submit"
+          size="xl"
+          substitleSize="xs"
+        />
+        <AddBedSubmitButton propertyId={propertyId!} roomId={room?._id} />
+      </VStack>
     </Flex>
   );
 };

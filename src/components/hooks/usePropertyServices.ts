@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
 import {
+  addBeds,
   addRooms,
   editProperty,
   getAllProperties,
@@ -15,6 +16,7 @@ import PropertyConverter from "../functions/propertyParameterConverter";
 import { useNavigate } from "react-router-dom";
 import ms from "ms";
 import useAddRoomsStore from "../store/addRoomStore";
+import useAddBedsStore from "../store/addBedStore";
 const usePostProperty = () => {
   const toast = useToast();
   const property = PropertyConverter();
@@ -36,6 +38,34 @@ const usePostProperty = () => {
     onError: (err: AxiosError<APIError>) =>
       toast({
         title: err.response?.data?.error,
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+  });
+};
+
+const useAddBeds = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const clearBed = useAddBedsStore((s) => s.clearBed);
+
+  return useMutation({
+    mutationFn: addBeds.postRequest,
+
+    onSuccess: (_data, variables) => {
+      toast({
+        title: "Beds Added Successfully",
+        status: "success",
+        position: "top",
+        duration: 3000,
+      });
+      queryClient.invalidateQueries({ queryKey: ["property", "getProperty"] });
+      clearBed(variables.propertyId, variables.roomId);
+    },
+    onError: () =>
+      toast({
+        title: "Error Adding the Rooms",
         status: "error",
         position: "top",
         duration: 3000,
@@ -191,4 +221,5 @@ export {
   useGetAvailableRooms,
   useGetAvailableBeds,
   useAddRooms,
+  useAddBeds,
 };

@@ -6,6 +6,7 @@ interface AddBedStore {
   storeBeds: AddBedInteface[];
   addBeds: (propertyId: string, roomId: string, bedNo: number) => void;
   removeBed: (propertyId: string, roomId: string) => void;
+  clearBed: (propertyId: string, roomId: string) => void;
 }
 
 const useAddBedsStore = create<AddBedStore>((set) => ({
@@ -51,6 +52,15 @@ const useAddBedsStore = create<AddBedStore>((set) => ({
                 : bed
             )
           : [],
+    })),
+
+  clearBed: (propertyId, roomId) =>
+    set((store) => ({
+      storeBeds: store.storeBeds.map((b) =>
+        b.propertyId === propertyId && roomId === b.roomId
+          ? { ...b, bedsData: [] }
+          : b
+      ),
     })),
 }));
 
