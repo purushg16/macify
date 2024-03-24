@@ -1,3 +1,4 @@
+import AddRoomInterface from "../entities/AddRoomInterface.ts";
 import { AvailableResponse } from "../entities/AvailableResponse.ts";
 import PropertyRespone from "../entities/PropertyResponse.ts";
 import { AddPropertyBasicInterface } from "../entities/addPropertyBasicInterface.ts";
@@ -42,6 +43,8 @@ const editProperty = new APIClient<EditPropertyInterface>(
   "/property/editProperty"
 );
 
+const addRooms = new APIClient<AddRoomInterface>("/property/addRooms");
+
 export {
   postNewProperty,
   getSingleProperty,
@@ -49,4 +52,5 @@ export {
   editProperty,
   getAvailableRooms,
   getAvailableBeds,
+  addRooms,
 };

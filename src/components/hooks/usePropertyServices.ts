@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
 import {
+  addRooms,
   editProperty,
   getAllProperties,
   getAvailableBeds,
@@ -34,6 +35,32 @@ const usePostProperty = () => {
     onError: (err: AxiosError<APIError>) =>
       toast({
         title: err.response?.data?.error,
+        status: "error",
+        position: "top",
+        duration: 3000,
+      }),
+  });
+};
+
+const useAddRooms = () => {
+  const toast = useToast();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: addRooms.postRequest,
+
+    onSuccess: () => {
+      toast({
+        title: "Rooms Added Successfully",
+        status: "success",
+        position: "top",
+        duration: 3000,
+      });
+      queryClient.invalidateQueries({ queryKey: ["property", "getProperty"] });
+    },
+    onError: () =>
+      toast({
+        title: "Error Adding the Rooms",
         status: "error",
         position: "top",
         duration: 3000,
@@ -157,4 +184,5 @@ export {
   useEditProperty,
   useGetAvailableRooms,
   useGetAvailableBeds,
+  useAddRooms,
 };
