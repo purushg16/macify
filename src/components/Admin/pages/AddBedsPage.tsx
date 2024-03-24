@@ -31,8 +31,7 @@ const AddBedsPage = () => {
   );
   const ref = useRef(null);
 
-  const [room, setRoom] = useState<PropertyRoom>();
-
+  const [room, setRoom] = useState<PropertyRoom | undefined>();
   if (isLoading) return <Spinner />;
   return (
     <Flex gap={4} flexDir="column">
@@ -94,15 +93,17 @@ const AddBedsPage = () => {
               </Heading>
               <SimpleGrid columns={2} spacing={4} mb={8}>
                 {room &&
-                  room.beds.map((bed, i) => (
-                    <AnimateMove delay={0.2} key={i}>
-                      <BedTile
-                        bedNo={bed.bedNo}
-                        color="white"
-                        callback={() => {}}
-                      />
-                    </AnimateMove>
-                  ))}
+                  property?.rooms
+                    ?.find((r) => room._id === r._id)
+                    ?.beds.map((bed, i) => (
+                      <AnimateMove delay={0.2} key={i}>
+                        <BedTile
+                          bedNo={bed.bedNo}
+                          color="white"
+                          callback={() => {}}
+                        />
+                      </AnimateMove>
+                    ))}
               </SimpleGrid>
             </Box>
 

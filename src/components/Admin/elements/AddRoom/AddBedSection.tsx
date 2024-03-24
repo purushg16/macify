@@ -33,9 +33,13 @@ const AddBedSection = ({
           />
         ))}
         <Button
-          onClick={() =>
-            addBed(propertyId, roomId!, count + (beds?.bedsData.length || 0))
-          }
+          onClick={() => {
+            addBed(
+              propertyId,
+              roomId!,
+              count + (beds?.bedsData.length || 0) + 1
+            );
+          }}
           colorScheme="primary"
           leftIcon={<BiPlusCircle />}
           w="max-content"
