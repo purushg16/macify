@@ -6,6 +6,7 @@ import {
   IconButton,
   Spacer,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import Manager from "../../../entities/manager";
 import Title from "../Title";
@@ -15,7 +16,20 @@ interface ManagerCardProps {
   manager: Manager;
 }
 
-const Temp = ({ manager }: ManagerCardProps) => {
+const ManagerCard = ({ manager }: ManagerCardProps) => {
+  const toast = useToast();
+
+  const handleCopy = (type: "Mail" | "Number", data: string) => {
+    const title = `${type} copied to clipboard`;
+    toast({
+      title: title,
+      status: "success",
+      position: "top",
+      duration: 1000,
+    });
+    window.navigator.clipboard.writeText(data.toString());
+  };
+
   return (
     <Flex
       gap={4}
@@ -67,21 +81,34 @@ const Temp = ({ manager }: ManagerCardProps) => {
           flexDir="column"
           justify="end"
           p={4}
+          px={2}
           bg="#f4f4f4"
           borderRadius={10}
           flex={1}
-          gap={2}
+          onClick={() => handleCopy("Number", manager.phone.toString())}
         >
-          <Heading fontSize="md">
-            {manager.phone} <br />
-            {manager.email}
-          </Heading>
-          <Text fontSize="sm" color="gray">
-            Contact & <br />
-            EMail
+          <Heading fontSize="sm">{manager.phone}</Heading>
+          <Text fontSize="xs" color="gray">
+            Contact
           </Text>
         </Flex>
         <Flex
+          flexDir="column"
+          justify="end"
+          py={4}
+          px={2}
+          bg="#f4f4f4"
+          borderRadius={10}
+          flex={1}
+          onClick={() => handleCopy("Mail", manager.email)}
+        >
+          <Heading fontSize="sm">{manager.email}</Heading>
+          <Text fontSize="xs" color="gray">
+            EMail
+          </Text>
+        </Flex>
+
+        {/* <Flex
           w="min-content"
           flexDir="column"
           justify="end"
@@ -97,7 +124,7 @@ const Temp = ({ manager }: ManagerCardProps) => {
             Properties <br />
             Managing
           </Text>
-        </Flex>
+        </Flex> */}
       </Flex>
     </Flex>
 
@@ -143,4 +170,4 @@ const Temp = ({ manager }: ManagerCardProps) => {
   );
 };
 
-export default Temp;
+export default ManagerCard;
