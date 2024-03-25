@@ -60,7 +60,7 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
         </HStack>
       </Flex>
       <Flex
-        gap={4}
+        gap={2}
         pt={8}
         borderTop="1px solid"
         borderColor="gray.100"
@@ -77,7 +77,7 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
           flex={1}
           onClick={() => handleCopy("Number", manager.phone.toString())}
         >
-          <Heading fontSize="sm">{manager.phone}</Heading>
+          <Heading fontSize="xs">{manager.phone}</Heading>
           <Text fontSize="xs" color="gray">
             Contact
           </Text>
@@ -92,9 +92,9 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
           flex={1}
           onClick={() => handleCopy("Mail", manager.email)}
         >
-          <Heading fontSize="sm">{manager.email}</Heading>
+          <Heading fontSize="xs">{manager.email}</Heading>
           <Text fontSize="xs" color="gray" width="min-content">
-            EMail
+            Mail
           </Text>
         </Flex>
 
