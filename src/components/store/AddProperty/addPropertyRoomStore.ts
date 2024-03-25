@@ -9,6 +9,8 @@ interface AddPropertyRoomStoreActions {
 
   serialize: (startingNumber: number) => void;
   capacityApplyAll: (capacity: number) => void;
+
+  clearStore: () => void;
 }
 
 const useAddPropertyRoomStore = create<
@@ -39,6 +41,12 @@ const useAddPropertyRoomStore = create<
         ...room,
         guestCapacity: capacity,
       })),
+    })),
+
+  clearStore: () =>
+    set(() => ({
+      numberOfRooms: undefined,
+      rooms: undefined,
     })),
 }));
 

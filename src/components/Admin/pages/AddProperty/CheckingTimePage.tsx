@@ -11,6 +11,7 @@ import NavigatorWrapper from "../../elements/NavigatorWrapper";
 const CheckingTimePage = () => {
   const checkInTime = useAddPropertyStore((s) => s.checkIn);
   const checkOutTime = useAddPropertyStore((s) => s.checkOut);
+  const rentWithin = useAddPropertyStore((s) => s.rentWithin);
 
   return (
     <>
@@ -34,7 +35,9 @@ const CheckingTimePage = () => {
 
       <AnimateMove delay={0.4}>
         <HStack>
-          <NavigatorWrapper to="/admin/properties/add/3">
+          <NavigatorWrapper
+            to={"/admin/properties/add/" + (rentWithin ? "3" : "2")}
+          >
             <Button id="extra">Back</Button>
           </NavigatorWrapper>
           <NavigatorWrapper to="/admin/properties/add/5">

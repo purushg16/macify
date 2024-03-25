@@ -19,10 +19,15 @@ import { useNavigate } from "react-router-dom";
 import ms from "ms";
 import useAddRoomsStore from "../store/addRoomStore";
 import useAddBedsStore from "../store/addBedStore";
+import useAddPropertyRoomStore from "../store/AddProperty/addPropertyRoomStore";
+import useAddPropertyStore from "../store/AddProperty/addPropertyBasicStore";
 const usePostProperty = () => {
   const toast = useToast();
   const property = PropertyConverter();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const clearRoomStore = useAddPropertyRoomStore((s) => s.clearStore);
+  const clearStore = useAddPropertyStore((s) => s.clearStore);
 
   return useMutation({
     mutationFn: () => postNewProperty.postRequest(property),
@@ -30,10 +35,15 @@ const usePostProperty = () => {
     onSuccess: () => {
       toast({
         title: "New property successfully created",
-        status: "error",
+        status: "success",
         position: "top",
         duration: 3000,
       });
+      queryClient.invalidateQueries({
+        queryKey: ["property", "getAllProperty"],
+      });
+      clearRoomStore();
+      clearStore();
       navigate("/admin/properties/add/success");
     },
 

@@ -45,7 +45,8 @@ const RentalPage = () => {
 
     addPropertyRooms(propertyRooms);
     setLoading(false);
-    navigate("/admin/properties/add/3");
+    if (rentWithin) navigate("/admin/properties/add/3");
+    else navigate("/admin/properties/add/4");
   };
 
   return (
@@ -72,7 +73,7 @@ const RentalPage = () => {
                 isChecked={rentWithin}
                 colorScheme="primary"
                 onChange={() => {
-                  if (rentWithin) setNumberOfRooms(1);
+                  if (rentWithin) setNumberOfRooms(0);
                   setRentWithin(!rentWithin);
                 }}
               />
@@ -84,7 +85,7 @@ const RentalPage = () => {
             bg="gray.50"
             placeholder="Number of rooms available"
             isDisabled={!rentWithin}
-            value={numberOfRooms || ""}
+            value={rentWithin ? numberOfRooms || "" : ""}
             onChange={(event) => setNumberOfRooms(parseInt(event.target.value))}
           />
         </VStack>

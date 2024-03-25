@@ -32,7 +32,8 @@ const ManagerConfirmationModal = ({
   return (
     <>
       <Button
-        colorScheme="gray"
+        bg="#f4f4f4"
+        _hover={{ bg: "none" }}
         justifyContent="left"
         w="100%"
         onClick={onOpen}

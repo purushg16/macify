@@ -17,7 +17,7 @@ import LabelInput from "../LabelInput";
 import { RxAvatar } from "react-icons/rx";
 import { useAddManager } from "../../../hooks/useAdmin";
 
-const AddManagerModal = () => {
+const AddManagerModal = ({ small }: { small?: boolean }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [newManager, editNewManager] = useState<Manager>({
@@ -42,13 +42,14 @@ const AddManagerModal = () => {
   return (
     <>
       <Button
+        size={small ? "sm" : "md"}
         w="max-content"
-        my={4}
+        my={small ? 0 : 4}
         leftIcon={<Icon as={BsFillPlusCircleFill} />}
         colorScheme="primary"
         onClick={onOpen}
       >
-        New Manager
+        {small ? "Add" : "New Manager"}
       </Button>
 
       <Modal

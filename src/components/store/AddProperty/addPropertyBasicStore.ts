@@ -23,6 +23,8 @@ interface AddPropertyStoreActions {
   setZipCode: (zipCode: string | undefined) => void;
   setCountry: (country: string | undefined) => void;
   setManager: (manager: Manager | undefined) => void;
+
+  clearStore: () => void;
 }
 
 const useAddPropertyStore = create<
@@ -57,6 +59,21 @@ const useAddPropertyStore = create<
   setZipCode: (zipCode) => set({ zipcode: zipCode }),
   setCountry: (country) => set({ country }),
   setManager: (manager) => set({ manager }),
+
+  clearStore: () =>
+    set(() => ({
+      propertyName: undefined,
+      propertyType: undefined,
+      rentWithin: false,
+      checkIn: undefined,
+      checkOut: undefined,
+      amenities: undefined,
+      address: undefined,
+      city: undefined,
+      zipcode: undefined,
+      country: undefined,
+      manager: undefined,
+    })),
 }));
 
 export default useAddPropertyStore;

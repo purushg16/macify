@@ -13,13 +13,13 @@ import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStor
 const amenities: { [key: string]: IconType } = {
   "Air conditioning": TiWeatherSnow,
   Parking: FaParking,
-  "Pets Allowed": MdPets,
+  "Pets allowed": MdPets,
   Essentials: GiForkKnifeSpoon,
   "Kitchen stove": FaDumpsterFire,
   "Washing machine": GiWashingMachine,
   Internet: MdOutlineCellWifi,
-  "General heating": GiFireBomb,
-  "Swimming pool": FaSwimmingPool,
+  "General Heating": GiFireBomb,
+  "Swimming Pool": FaSwimmingPool,
 };
 
 const AmenitiesGrid = () => {

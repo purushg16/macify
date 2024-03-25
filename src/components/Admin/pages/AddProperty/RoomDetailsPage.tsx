@@ -5,8 +5,13 @@ import RoomCardGrid from "../../elements/AddProperty/RoomCardGrid";
 import SerializeInput from "../../elements/AddProperty/SerializeInput";
 import NavigatorWrapper from "../../elements/NavigatorWrapper";
 import Title from "../../elements/Title";
+import { Navigate } from "react-router-dom";
+import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 
 const RoomDetailsPage = () => {
+  const rentWithin = useAddPropertyStore((s) => s.rentWithin);
+
+  if (!rentWithin) return <Navigate to="/admin/properties/add/4" />;
   return (
     <>
       <AnimateMove noWidth delay={0.2}>

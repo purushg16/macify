@@ -4,7 +4,6 @@ import {
   HStack,
   Heading,
   Highlight,
-  Input,
   Spacer,
   Text,
 } from "@chakra-ui/react";
@@ -19,7 +18,7 @@ import { usePostProperty } from "../../../hooks/usePropertyServices";
 const AssignManagerPage = () => {
   const manager = useAddPropertyStore((s) => s.manager);
 
-  const { mutate } = usePostProperty();
+  const { mutate, isPending } = usePostProperty();
   const handleSubmit = () => mutate();
 
   return (
@@ -48,20 +47,17 @@ const AssignManagerPage = () => {
           mx="auto"
           w="100%"
           bg="#f5f5f5"
-          py={4}
-          px={8}
+          p={4}
           flexDir="column"
           gap={4}
           borderRadius={20}
           maxW={600}
         >
-          <Flex w="100%">
+          <Flex w="100%" align="center">
             <Text> Select Manager </Text>
             <Spacer />
-            <AddManagerModal />
+            <AddManagerModal small />
           </Flex>
-
-          <Input placeholder="Search" bg="gray.50" />
           <ManagersList />
         </Flex>
       </AnimateMove>
@@ -82,6 +78,7 @@ const AssignManagerPage = () => {
           <Button
             id="extra"
             colorScheme="primary"
+            isLoading={isPending}
             isDisabled={!manager}
             onClick={handleSubmit}
           >
