@@ -7,15 +7,15 @@ import {
   Spacer,
   Text,
   VStack,
-  useDisclosure,
 } from "@chakra-ui/react";
-import RoomDetailsEditModal from "./RoomDetailsEditModal";
 import Room from "../../../entities/room";
 import { IconType } from "react-icons";
 import { CiEdit } from "react-icons/ci";
+import useAddPropertyModalStore from "../../../store/AddProperty/addPropertyModalStore";
 
 const RoomCard = ({ room, icon }: { room: Room; icon: IconType }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toggle = useAddPropertyModalStore((s) => s.toggleOpen);
+  const setModalRoom = useAddPropertyModalStore((s) => s.setModalRoom);
 
   return (
     <Box
@@ -46,7 +46,10 @@ const RoomCard = ({ room, icon }: { room: Room; icon: IconType }) => {
         </Text>
         <Spacer />
         <IconButton
-          onClick={onOpen}
+          onClick={() => {
+            toggle();
+            setModalRoom(room);
+          }}
           aria-label="edit-btn"
           icon={<Icon as={CiEdit} />}
           size="sm"
@@ -76,7 +79,6 @@ const RoomCard = ({ room, icon }: { room: Room; icon: IconType }) => {
           </HStack>
         </Box>
       </VStack>
-      <RoomDetailsEditModal isOpen={isOpen} onClose={onClose} room={room} />
     </Box>
   );
 };

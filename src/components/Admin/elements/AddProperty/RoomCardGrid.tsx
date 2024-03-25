@@ -4,12 +4,18 @@ import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomS
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import { BsPeopleFill } from "react-icons/bs";
 import { GiBed } from "react-icons/gi";
+import RoomDetailsEditModal from "./RoomDetailsEditModal";
+import useAddPropertyModalStore from "../../../store/AddProperty/addPropertyModalStore";
 
 const RoomCardGrid = () => {
   const propertyRooms = useAddPropertyRoomStore((s) => s.rooms);
   const propertyType = useAddPropertyStore((s) => s.propertyType);
 
   const icon = propertyType !== "hostel" ? BsPeopleFill : GiBed;
+
+  const isOpen = useAddPropertyModalStore((s) => s.isOpen);
+  const onClose = useAddPropertyModalStore((s) => s.toggleOpen);
+  const room = useAddPropertyModalStore((s) => s.modalRoom);
 
   return (
     <SimpleGrid
@@ -29,6 +35,10 @@ const RoomCardGrid = () => {
           <RoomCard room={room} icon={icon} />
         </GridItem>
       ))}
+
+      {room && (
+        <RoomDetailsEditModal isOpen={isOpen} onClose={onClose} room={room} />
+      )}
     </SimpleGrid>
   );
 };
