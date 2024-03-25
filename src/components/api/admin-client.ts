@@ -36,6 +36,11 @@ export interface BookingTimelineInterface {
   [key: string]: TimelineBookings;
 }
 
+export interface BedBookingInterface {
+  roomId: string | undefined;
+  checkIn: Date | undefined;
+}
+
 const getProfile = new APIClient<Profile>("/user/profile").getSingleItem;
 const createManager = new APIClient<Manager>("/manager/addManager");
 const bookingsToApprove = new APIClient<GroupBooking>(
@@ -53,6 +58,10 @@ const rejectBooking = new APIClient<RejectBookingInterface>(
 );
 const getAllBookings = new APIClient<BookingTimelineInterface>(
   "/booking/allBookings"
+);
+
+const getBedBookings = new APIClient<BedBookingInterface>(
+  "/booking/bedBookings"
 );
 const editBooking = new APIClient<EditBooking>("/booking/editBooking");
 
@@ -73,6 +82,7 @@ export {
   createManager,
   bookingsToApprove,
   getSIngleBooking,
+  getBedBookings,
   getSinglebookingToApprove,
   approveBooking,
   rejectBooking,

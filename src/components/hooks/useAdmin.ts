@@ -3,12 +3,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import {
   AllBookingsInterface,
+  BedBookingInterface,
   approveBooking,
   bookingsToApprove,
   createManager,
   editBooking,
   getAllBookings,
   getAllManagers,
+  getBedBookings,
   getProfile,
   getSIngleBooking,
   getSinglebookingToApprove,
@@ -279,11 +281,33 @@ const useGetAllBooking = (ids: AllBookingsInterface, enabled?: boolean) => {
   });
 };
 
+const useGetBedBooking = (
+  { roomId }: BedBookingInterface,
+  enabled: boolean
+) => {
+  return useQuery({
+    queryKey: ["booking", "allBookings", roomId],
+    queryFn: () =>
+      getBedBookings
+        .getSingleItem({
+          params: {
+            roomId: roomId,
+          },
+        })
+        .then((res) => res),
+    retry: 2,
+    enabled: enabled,
+    refetchOnWindowFocus: false,
+    staleTime: ms("24hr"),
+  });
+};
+
 export {
   useGetProfile,
   useAddManager,
   useGetBookingsToApprove,
   useGetSingleBooking,
+  useGetBedBooking,
   useGetSingleBookingToApprove,
   useApproveBooking,
   useGetAllManagers,

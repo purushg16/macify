@@ -15,6 +15,7 @@ export const SingleCalendarPage = () => {
   const { data: properties, isLoading: isPropertiesLoading } =
     useGetAllProperties();
 
+  const [title, setTitle] = useState<string>("Property");
   const [property, setProperty] = useState<PropertyRespone>();
   const [room, setRoom] = useState<PropertyRoom>();
   const [bed, setBed] = useState<PropertyBed>();
@@ -33,7 +34,10 @@ export const SingleCalendarPage = () => {
 
     if (!selectedProperty?.rentWithin) {
       setFinalField(id);
-    } else setFinalField("");
+    } else {
+      setFinalField("");
+      setTitle("Room");
+    }
   };
 
   const onRoomSelect = (id: string) => {
@@ -43,7 +47,10 @@ export const SingleCalendarPage = () => {
 
     if (property?.propertyType !== "hostel") {
       setFinalField(id);
-    } else setFinalField("");
+    } else {
+      setFinalField("");
+      setTitle("Bed");
+    }
   };
 
   const onBedSelect = (id: string) => {
@@ -57,6 +64,7 @@ export const SingleCalendarPage = () => {
       <GridItem>
         <AnimateMove>
           <SingleCalendarButtonStack
+            title={title}
             PropertySelector={
               isPropertiesLoading ? (
                 <Spinner />
