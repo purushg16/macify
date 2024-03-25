@@ -3,14 +3,12 @@ import {
   Flex,
   HStack,
   Icon,
-  IconButton,
   Spacer,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import Room from "../../../entities/room";
 import { IconType } from "react-icons";
-import { CiEdit } from "react-icons/ci";
 import useAddPropertyModalStore from "../../../store/AddProperty/addPropertyModalStore";
 
 const RoomCard = ({ room, icon }: { room: Room; icon: IconType }) => {
@@ -33,6 +31,10 @@ const RoomCard = ({ room, icon }: { room: Room; icon: IconType }) => {
       // boxShadow="inset 1px 4px 9px -1px #00000057"
       boxShadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"
       pos="relative"
+      onClick={() => {
+        toggle();
+        setModalRoom(room);
+      }}
     >
       <Flex w="100%">
         <Text
@@ -45,7 +47,7 @@ const RoomCard = ({ room, icon }: { room: Room; icon: IconType }) => {
           {room.roomName}
         </Text>
         <Spacer />
-        <IconButton
+        {/* <IconButton
           onClick={() => {
             toggle();
             setModalRoom(room);
@@ -56,7 +58,7 @@ const RoomCard = ({ room, icon }: { room: Room; icon: IconType }) => {
           bg="gray.50"
           _hover={{ bg: "gray.100" }}
           transition="all 0.7s"
-        />
+        /> */}
       </Flex>
       <VStack>
         <Box

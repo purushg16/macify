@@ -18,19 +18,20 @@ interface RoomDetailsEditModalProps {
   isOpen: boolean;
   onClose: () => void;
   room: Room;
+  hostel?: boolean;
 }
 
 const RoomDetailsEditModal = ({
   isOpen,
   onClose,
   room,
+  hostel = false,
 }: RoomDetailsEditModalProps) => {
   const [newRoom, editNewRoom] = useState<Room>(room);
 
   const editRoom = useAddPropertyRoomStore((s) => s.editRoom);
 
   const submit = () => {
-    console.log(room);
     editRoom(newRoom);
     onClose();
   };
@@ -58,7 +59,7 @@ const RoomDetailsEditModal = ({
                 />
               </Box>
               <Box>
-                <Text> Number Of Beds: </Text>
+                <Text> {hostel ? "Number Of Beds:" : "Guest Capacity"} </Text>
                 <Input
                   type="number"
                   bg="gray.100"

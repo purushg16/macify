@@ -66,19 +66,23 @@ const RentalPage = () => {
         <VStack gap={4}>
           <PropertyTypeSelector />
 
-          <InputGroup size="md" bg="gray.50" borderRadius={99}>
-            <Input defaultValue="Rental Within" pointerEvents="none" />
-            <InputRightElement width="4.5rem">
-              <Switch
-                isChecked={rentWithin}
-                colorScheme="primary"
-                onChange={() => {
-                  if (rentWithin) setNumberOfRooms(0);
-                  setRentWithin(!rentWithin);
-                }}
-              />
-            </InputRightElement>
-          </InputGroup>
+          {propertyType &&
+            propertyType !== "hostel" &&
+            propertyType !== "hotel" && (
+              <InputGroup size="md" bg="gray.50" borderRadius={99}>
+                <Input defaultValue="Rental Within" pointerEvents="none" />
+                <InputRightElement width="4.5rem">
+                  <Switch
+                    isChecked={rentWithin}
+                    colorScheme="primary"
+                    onChange={() => {
+                      if (rentWithin) setNumberOfRooms(0);
+                      setRentWithin(!rentWithin);
+                    }}
+                  />
+                </InputRightElement>
+              </InputGroup>
+            )}
 
           <Input
             type="number"

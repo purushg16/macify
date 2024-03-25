@@ -37,7 +37,12 @@ const RoomCardGrid = () => {
       ))}
 
       {room && (
-        <RoomDetailsEditModal isOpen={isOpen} onClose={onClose} room={room} />
+        <RoomDetailsEditModal
+          isOpen={isOpen}
+          onClose={onClose}
+          room={room}
+          hostel={propertyType === "hostel"}
+        />
       )}
     </SimpleGrid>
   );

@@ -28,7 +28,7 @@ const PropertyTypeSelector = () => {
         pointerEvents="none"
       />
       <InputRightElement width="4.5rem">
-        <Menu>
+        <Menu placement="top">
           <MenuButton
             _hover={{ bg: "gray.700" }}
             as={Button}
@@ -48,7 +48,7 @@ const PropertyTypeSelector = () => {
                 textTransform="capitalize"
                 key={pType}
                 onClick={() => {
-                  if (pType === "Flat" || pType === "Hostel")
+                  if (pType === "hotel" || pType === "hostel")
                     setRentWithin(true);
                   setType(pType as PropertyType);
                 }}

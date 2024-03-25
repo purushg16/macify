@@ -55,7 +55,7 @@ const SingleCalendar = ({ bookings }: Props) => {
         bookings
           ? Object.values(bookings).map((booking) => {
               return {
-                title: booking.property,
+                title: booking._id,
                 start: new Date(booking.checkIn).toISOString(),
                 end: new Date(booking.checkOut).toISOString(),
               };

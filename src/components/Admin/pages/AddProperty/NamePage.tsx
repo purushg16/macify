@@ -16,10 +16,7 @@ const NamePage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <Title
-          heading="Add New Property"
-          subtitle="Enter Property Name & Type"
-        />
+        <Title heading="Add New Property" subtitle="Enter Property Name" />
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
