@@ -1,14 +1,22 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Button,
+  Heading,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
-import singleProperty from "../../../data/singleProperty";
 import useApproveBookingStore from "../../../store/approveBookingStore";
+import { AvailableResponse } from "../../../entities/AvailableResponse";
 
 interface Props {
   bookingId: string;
   groupId: string;
+  data: AvailableResponse[];
 }
 
-const BedAssignBlock = ({ bookingId: guestId, groupId }: Props) => {
+const BedAssignBlock = ({ bookingId: guestId, groupId, data }: Props) => {
   const assignedRooms = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === groupId
   )?.bookings;
@@ -19,16 +27,12 @@ const BedAssignBlock = ({ bookingId: guestId, groupId }: Props) => {
     (ar) => ar.bookingId === guestId
   )?.roomId;
 
-  const beds = singleProperty.rooms.find(
-    (r) => r._id === respectiveRoomId
-  )?.beds;
-
+  const beds = data.find((r) => r.roomId === respectiveRoomId)?.beds;
   const selectedBedId = assignedRooms?.find(
     (ar) => ar.bookingId === guestId && ar.roomId === respectiveRoomId
   )?.bedId;
 
   const selectedBed = beds?.find((b) => b._id === selectedBedId);
-
   if (!beds) return null;
   return (
     <Menu>
@@ -41,16 +45,29 @@ const BedAssignBlock = ({ bookingId: guestId, groupId }: Props) => {
       >
         {selectedBed?.bedNo || "Select Bed"}
       </MenuButton>
-      <MenuList>
+      <MenuList maxH={250} overflowY="auto" borderRadius={20}>
         {beds.map((bed, i) => (
           <MenuItem
+            _hover={{ bg: "none" }}
+            _active={{ bg: "none" }}
+            _focus={{ bg: "none" }}
             textTransform="capitalize"
             key={i}
             onClick={() => {
               assignRoom(groupId, { bookingId: guestId, bedId: bed._id });
             }}
           >
-            {bed.bedNo}
+            <Heading
+              fontSize="md"
+              _hover={{ bg: "gray.50" }}
+              bg="#f4f4f4"
+              w="100%"
+              borderRadius={20}
+              p={2}
+              px={4}
+            >
+              Bed {bed.bedNo}
+            </Heading>
           </MenuItem>
         ))}
       </MenuList>

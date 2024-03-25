@@ -75,6 +75,7 @@ const RoomAssignBlock = ({
                   : assignRoom(groupId, {
                       bookingId: bookingId,
                       roomId: room.roomId,
+                      bedId: "",
                     });
                 setEditRoom(groupId, "bedId", "");
               }}

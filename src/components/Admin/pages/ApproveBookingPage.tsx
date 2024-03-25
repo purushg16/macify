@@ -73,41 +73,38 @@ const ApproveBookingPage = () => {
   );
 
   useEffect(() => {
-    if (booking)
-      booking?.bookings.map((b) => {
-        const bookingId = b._id;
-        const group = assignedRooms?.find(
-          (room) => room.bookingId === bookingId
-        );
+    if (!booking || !booking.bookings || !assignedRooms || !store) {
+      // If any required data is missing, disable and exit early
+      setDisabled(true);
+      return;
+    }
 
-        if (!booking.property.rentWithin) {
-          setDisabled(false);
-          return;
-        }
+    const hasValidAssignment = booking.bookings.every((b) => {
+      const bookingId = b._id;
 
-        // if the group was not found.
-        if (!group) {
-          setDisabled(true);
-          return;
-        }
+      const group = assignedRooms.find((room) => room.bookingId === bookingId);
 
-        // if it's a hostel & room, bed not assigned
-        if (booking.property?.propertyType === "hostel") {
-          if (!group.roomId || !group.bedId) {
-            setDisabled(true);
-            return;
-          }
-        }
+      // If the group was not found, disable and exit early
+      if (!group) return false;
 
-        // if it's not a hostel and room not assigned
-        if (!group.roomId) {
-          setDisabled(true);
-          return;
-        }
+      // If it's a hostel & room, bed not assigned
+      if (
+        booking.property?.propertyType === "hostel" &&
+        (!group.roomId ||
+          group.roomId === "" ||
+          !group.bedId ||
+          group.bedId === "")
+      ) {
+        return false;
+      }
 
-        setDisabled(false);
-      });
-  }, [assignedRooms, booking, booking?.property?.propertyType, store]);
+      if (booking.property.rentWithin && !group.roomId) return false;
+
+      return true;
+    });
+
+    setDisabled(!hasValidAssignment);
+  }, [assignedRooms, booking, store]);
 
   if (!booking) return <Spinner />;
   return (
@@ -152,8 +149,12 @@ const ApproveBookingPage = () => {
                 }
               />
             )}
-            {booking.property.propertyType === "hostel" && (
-              <BedAssignBlock bookingId={b._id} groupId={booking._id} />
+            {hostelProperty && booking.property.propertyType === "hostel" && (
+              <BedAssignBlock
+                bookingId={b._id}
+                groupId={booking._id}
+                data={hostelProperty}
+              />
             )}
           </HStack>
           <GuestGrid guests={b.guests} />

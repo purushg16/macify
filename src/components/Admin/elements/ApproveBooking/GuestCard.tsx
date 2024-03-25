@@ -1,13 +1,17 @@
-import { Text, VStack } from "@chakra-ui/react";
+import { Text, VStack, useDisclosure } from "@chakra-ui/react";
 import Guest from "../../../entities/Guest";
+import GuestDetailsModal from "./GuestDetailsModal";
 
 interface Props {
   guest: Guest;
 }
 
 const GuestCard = ({ guest }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <VStack
+      onClick={onOpen}
       gap={2}
       bg="gray.50"
       p={2}
@@ -27,6 +31,7 @@ const GuestCard = ({ guest }: Props) => {
         />
       )}
       <Text> {guest.guestName} </Text>
+      <GuestDetailsModal isOpen={isOpen} onClose={onClose} guest={guest} />
     </VStack>
   );
 };

@@ -14,6 +14,7 @@ interface Props {
   onChange: (value: string) => void;
   icon: IconType;
   number?: boolean;
+  isDisabled?: boolean;
 }
 
 const LabelInput = ({
@@ -22,6 +23,7 @@ const LabelInput = ({
   onChange,
   icon,
   number = false,
+  isDisabled = false,
 }: Props) => {
   return (
     <FormControl>
@@ -30,11 +32,16 @@ const LabelInput = ({
       </FormLabel>
       <InputGroup>
         <Input
+          textTransform="capitalize"
+          _placeholder={{ textTransform: "capitalize" }}
           type={number ? "number" : "text"}
           bg="gray.100"
           placeholder={label}
+          isDisabled={isDisabled}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => {
+            !isDisabled && onChange(e.target.value);
+          }}
         />
         <InputRightElement>
           <Icon as={icon} />

@@ -58,10 +58,10 @@ const extractData = async (file: string) => {
 
       if (genderMatch) {
         if (genderMatch[0] === "M") {
-          gender = "Male";
+          gender = "male";
         }
         if (genderMatch[0] === "F") {
-          gender = "Female";
+          gender = "female";
         }
       }
 

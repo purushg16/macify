@@ -93,7 +93,9 @@ const useGetSingleBookingToApprove = (groupId: string) => {
           const singleBooking = {
             groupId: groupId,
             propertyId: booking.property._id,
-            bookings: undefined,
+            bookings: !booking.property.rentWithin
+              ? [{ bookingId: booking.bookings[0]._id }]
+              : undefined,
             checkIn: new Date(booking.bookings[0].checkIn),
             checkOut: new Date(booking.bookings[0].checkOut),
             paid: undefined,
