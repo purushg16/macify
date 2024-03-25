@@ -35,27 +35,34 @@ const useGetProfile = () =>
     staleTime: ms("1hr"),
   });
 
-const useAddManager = () => {
+const useAddManager = (then: (status: "success" | "error") => void) => {
   const toast = useToast();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: createManager.postRequest,
 
-    onSuccess: () =>
+    onSuccess: () => {
+      then("success");
+
       toast({
         title: "Manager created successfully",
         status: "success",
         position: "top",
         duration: 3000,
-      }),
+      });
+      queryClient.invalidateQueries({ queryKey: ["manager", "allManager"] });
+    },
 
-    onError: (err: AxiosError<APIError>) =>
+    onError: (err: AxiosError<APIError>) => {
+      then("error");
       toast({
         title: err.response?.data?.error,
         status: "error",
         position: "top",
         duration: 3000,
-      }),
+      });
+    },
   });
 };
 

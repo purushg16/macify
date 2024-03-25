@@ -43,7 +43,7 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
         <Title
           size="2xl"
           heading={manager.name}
-          subtitle="Male"
+          subtitle=""
           substitleSize="xs"
           align="left"
         />
@@ -103,7 +103,7 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
           onClick={() => handleCopy("Mail", manager.email)}
         >
           <Heading fontSize="sm">{manager.email}</Heading>
-          <Text fontSize="xs" color="gray">
+          <Text fontSize="xs" color="gray" width="min-content">
             EMail
           </Text>
         </Flex>

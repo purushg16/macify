@@ -1,5 +1,4 @@
 import {
-  Text,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -8,10 +7,15 @@ import {
   useDisclosure,
   Button,
   VStack,
-  Input,
+  Icon,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Manager from "../../../entities/manager";
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import Title from "../Title";
+import LabelInput from "../LabelInput";
+import { RxAvatar } from "react-icons/rx";
+import { useAddManager } from "../../../hooks/useAdmin";
 
 const AddManagerModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -23,12 +27,28 @@ const AddManagerModal = () => {
     userName: "",
   });
 
-  const addNewManager = () => {};
+  const { mutate, isPending } = useAddManager((status: "success" | "error") => {
+    if (status === "success") {
+      editNewManager({
+        name: "",
+        phone: parseInt(""),
+        email: "",
+        userName: "",
+      });
+      onClose();
+    }
+  });
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="primary" size="sm">
-        Add Manager
+      <Button
+        w="max-content"
+        my={4}
+        leftIcon={<Icon as={BsFillPlusCircleFill} />}
+        colorScheme="primary"
+        onClick={onOpen}
+      >
+        New Manager
       </Button>
 
       <Modal
@@ -39,41 +59,37 @@ const AddManagerModal = () => {
       >
         <ModalOverlay />
         <ModalContent borderRadius={20} bg="gray.50" py={8}>
-          <ModalBody px={16}>
-            <Text mb={4}>Add Manager</Text>
-            <VStack gap={6}>
-              <Input
-                bg="gray.100"
-                placeholder="Name"
+          <ModalBody>
+            <Title
+              heading="Add New Manager"
+              size="md"
+              align="left"
+              subtitle="Enter details & click 'Create'"
+              substitleSize="xs"
+            />
+            <VStack gap={4} mt={4}>
+              <LabelInput
+                label="Name"
                 value={newManager.name}
-                onChange={(e) =>
-                  editNewManager({ ...newManager, name: e.target.value })
-                }
+                onChange={(e) => editNewManager({ ...newManager, name: e })}
+                icon={RxAvatar}
               />
-              <Input
-                bg="gray.100"
-                placeholder="Phone"
-                type="number"
+              <LabelInput
+                number
+                label="Phone"
                 value={newManager.phone}
                 onChange={(e) =>
-                  editNewManager({
-                    ...newManager,
-                    phone: parseInt(e.target.value || ""),
-                  })
+                  editNewManager({ ...newManager, phone: parseInt(e || "") })
                 }
+                icon={RxAvatar}
               />
-              <Input
-                bg="gray.100"
-                placeholder="Email"
-                type="email"
-                value={newManager.email}
+              <LabelInput
+                label="Email"
+                value={newManager.email.toString()}
                 onChange={(e) =>
-                  editNewManager({
-                    ...newManager,
-                    email: e.target.value,
-                    userName: e.target.value,
-                  })
+                  editNewManager({ ...newManager, email: e, userName: e })
                 }
+                icon={RxAvatar}
               />
             </VStack>
           </ModalBody>
@@ -84,7 +100,8 @@ const AddManagerModal = () => {
             </Button>
             <Button
               colorScheme="primary"
-              onClick={addNewManager}
+              isLoading={isPending}
+              onClick={() => mutate(newManager)}
               isDisabled={
                 !newManager.name ||
                 !newManager.email ||
