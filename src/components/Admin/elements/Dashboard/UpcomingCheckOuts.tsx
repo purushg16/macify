@@ -12,7 +12,7 @@ const UpcomingCheckOutGrid = () => {
       <Heading fontSize="xl"> Upcoming Check-Outs </Heading>
 
       {data?.data.length === 0 ? (
-        <Text> No hostings today, boss! </Text>
+        <Text fontSize="sm"> No upcoming check-outs, boss! </Text>
       ) : (
         <SimpleGrid columns={1} mt={4} spacing={4}>
           {data?.data.map((hosting, i) => (

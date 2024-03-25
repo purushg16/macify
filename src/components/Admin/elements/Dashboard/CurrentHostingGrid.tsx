@@ -12,7 +12,7 @@ const CurrentHostingGrid = () => {
       <Heading fontSize="xl"> Current Hosting </Heading>
 
       {data?.data.length === 0 ? (
-        <Text> No hostings today, boss! </Text>
+        <Text fontSize="sm"> No hostings today, boss! </Text>
       ) : (
         <SimpleGrid columns={1} mt={4} spacing={4}>
           {data?.data.map((hosting, i) => (

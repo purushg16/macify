@@ -41,6 +41,7 @@ import RoomAssignPage from "./Admin/pages/CustomerBooking/RoomAssignPage";
 import EditBookingPage from "./Admin/pages/EditBookingPage";
 import AddRoomsPage from "./Admin/pages/AddRoomsPage";
 import AddBedsPage from "./Admin/pages/AddBedsPage";
+import HostelCalendarPage from "./Admin/pages/HostelCalendarPage";
 
 const router = createBrowserRouter([
   {
@@ -68,7 +69,7 @@ const router = createBrowserRouter([
       { path: "calendar", element: <CalendarPage /> },
       { path: "calendar/single", element: <SingleCalendarPage /> },
       { path: "calendar/multi", element: <ScheduleContainer /> },
-      { path: "calendar/hostel", element: <></> },
+      { path: "calendar/hostel", element: <HostelCalendarPage /> },
       { path: "manager", element: <ManagerPage /> },
 
       { path: "notifications", element: <AdminNotificationsPage /> },
