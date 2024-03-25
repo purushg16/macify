@@ -41,6 +41,7 @@ const RangePickerMenu = ({
       </MenuButton>
       <MenuList borderRadius={10}>
         <DateRange
+          minDate={new Date()}
           editableDateInputs={true}
           onChange={(item) => {
             setState([

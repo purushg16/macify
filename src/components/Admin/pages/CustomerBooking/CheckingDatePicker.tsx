@@ -56,6 +56,7 @@ const CheckingDatePicker = () => {
           </ModalHeader>
           <ModalBody>
             <DateRange
+              minDate={new Date()}
               editableDateInputs={true}
               onChange={(item) =>
                 setState([
