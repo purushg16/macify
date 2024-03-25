@@ -11,7 +11,6 @@ import {
 import Manager from "../../../entities/manager";
 import Title from "../Title";
 import { MdDeleteOutline } from "react-icons/md";
-import { CiEdit } from "react-icons/ci";
 interface ManagerCardProps {
   manager: Manager;
 }
@@ -57,15 +56,6 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
             borderColor="gray.50"
             bg="red.200"
             _hover={{ bg: "red.300" }}
-          />
-          <IconButton
-            sx={{ borderRadius: "10px !important" }}
-            aria-label="del-btn"
-            icon={<Icon as={CiEdit} />}
-            border="1px solid"
-            borderColor="gray.50"
-            bg="primary.200"
-            _hover={{ bg: "primary.300" }}
           />
         </HStack>
       </Flex>
