@@ -7,10 +7,10 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
-import GuestGenderSelector from "./GuestGenderSelector";
 import Guest from "../../../entities/Guest";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
-import DatePicker from "react-datepicker";
+import SingleDatePicker from "../HostelCalendar/HostelDatePicker";
+import GuestGenderSelector from "./GuestGenderSelector";
 
 const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
   const editGuest = useBookingGuestStore((s) => s.editGuests);
@@ -39,6 +39,18 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
           />
         </FormControl>
 
+        <FormControl>
+          <FormLabel fontSize="sm" color="gray">
+            Date Of Birth
+          </FormLabel>
+          <SingleDatePicker
+            date={guest.dob}
+            setDate={(date) => editGuest(guest.id!, "dob", date!)}
+            isDisabled={false}
+            lite
+          />
+        </FormControl>
+
         <SimpleGrid columns={2} maxW="100%" gap={4}>
           <FormControl>
             <FormLabel fontSize="sm" color="gray">
@@ -54,18 +66,6 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
 
           <GuestGenderSelector gender={guest.gender!} id={guest.id!} />
         </SimpleGrid>
-
-        <FormControl>
-          <FormLabel fontSize="sm" color="gray">
-            Date Of Birth
-          </FormLabel>
-
-          <DatePicker
-            selected={guest.dob}
-            onChange={(date) => editGuest(guest.id!, "dob", date!)}
-            className="dob-picker"
-          />
-        </FormControl>
 
         <FormControl>
           <FormLabel fontSize="sm" color="gray">

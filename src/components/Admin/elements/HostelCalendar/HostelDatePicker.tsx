@@ -7,10 +7,12 @@ const SingleDatePicker = ({
   date,
   setDate,
   isDisabled,
+  lite = false,
 }: {
   date: Date | undefined;
   setDate: (date: Date) => void;
   isDisabled: boolean;
+  lite?: boolean;
 }) => {
   return (
     <Menu>
@@ -18,7 +20,9 @@ const SingleDatePicker = ({
         isDisabled={isDisabled}
         w="max-content"
         as={Button}
-        colorScheme="primary"
+        colorScheme={!lite ? "primary" : "gray"}
+        bg={lite ? "#f4f4f4" : "primary.500"}
+        _hover={{ bg: lite ? "#f5f5f5" : "primary.600" }}
         rightIcon={<BiChevronDownCircle />}
         size="sm"
       >

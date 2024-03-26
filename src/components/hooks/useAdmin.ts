@@ -130,8 +130,6 @@ const useApproveBooking = (groupId: string) => {
 
   const remove = useApproveBookingStore((s) => s.removeBooking);
 
-  console.log(store);
-
   const postValue = {
     propertyId: store?.propertyId,
     groupId: store?.groupId,
