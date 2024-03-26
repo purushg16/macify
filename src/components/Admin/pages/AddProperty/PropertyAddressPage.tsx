@@ -1,8 +1,19 @@
-import { Button, HStack, Input, Textarea, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  HStack,
+  Textarea,
+  VStack,
+} from "@chakra-ui/react";
 import AnimateMove from "../../../motions/Move";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import NavigatorWrapper from "../../elements/NavigatorWrapper";
 import Title from "../../elements/Title";
+import LabelInput from "../../elements/LabelInput";
+import { FaCity } from "react-icons/fa";
+import { BiDotsHorizontal } from "react-icons/bi";
+import { IoGlobeOutline } from "react-icons/io5";
 
 const PropertyAddressPage = () => {
   const address = useAddPropertyStore((s) => s.address);
@@ -19,38 +30,35 @@ const PropertyAddressPage = () => {
 
   return (
     <>
-      <AnimateMove delay={0.2}>
-        <VStack
-          gap={8}
-          bg="#f5f5f5"
-          p={6}
-          borderRadius={20}
-          w={{ base: 400, md: 400, lg: 500 }}
-        >
-          <Textarea
-            bg="gray.50"
-            placeholder="Address"
-            value={address || ""}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-          <Input
-            bg="gray.50"
-            placeholder="City"
+      <AnimateMove delay={0.2} noWidth>
+        <VStack gap={4} bg="#f5f5f5" p={6} borderRadius={20} w="100%">
+          <FormControl>
+            <FormLabel fontSize="xs"> Address </FormLabel>
+            <Textarea
+              bg="gray.50"
+              placeholder="Address"
+              value={address || ""}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </FormControl>
+
+          <LabelInput
+            icon={FaCity}
+            label="City"
             value={city || ""}
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(value) => setCity(value)}
           />
-          <Input
-            type="number"
-            bg="gray.50"
-            placeholder="Zip Cope"
+          <LabelInput
+            icon={BiDotsHorizontal}
+            label="Zip Cope"
             value={zipCode || ""}
-            onChange={(e) => setZipCode(e.target.value)}
+            onChange={(value) => setZipCode(value)}
           />
-          <Input
-            bg="gray.50"
-            placeholder="Country"
+          <LabelInput
+            icon={IoGlobeOutline}
+            label="Country"
             value={country || ""}
-            onChange={(e) => setCountry(e.target.value)}
+            onChange={(value) => setCountry(value)}
           />
         </VStack>
       </AnimateMove>
@@ -59,11 +67,10 @@ const PropertyAddressPage = () => {
         <Title
           heading="Address Details"
           subtitle="Provide this property’s location details"
+          size="lg"
+          substitleSize="xs"
         />
-      </AnimateMove>
-
-      <AnimateMove delay={0.4}>
-        <HStack>
+        <HStack mt={2}>
           <NavigatorWrapper to="/admin/properties/add/5">
             <Button id="extra">Back</Button>
           </NavigatorWrapper>

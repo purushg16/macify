@@ -27,7 +27,7 @@ const AmenitiesGrid = () => {
   const addAmenity = useAddPropertyStore((s) => s.setAmenities);
 
   return (
-    <SimpleGrid columns={3} spacing={4}>
+    <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4}>
       {Object.keys(amenities).map((amenity, i) => (
         <Box key={i} onClick={() => addAmenity(amenity)}>
           <AmenityCard

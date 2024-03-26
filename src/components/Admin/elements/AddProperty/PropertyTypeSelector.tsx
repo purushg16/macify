@@ -1,15 +1,14 @@
 import {
-  InputGroup,
-  Input,
-  InputRightElement,
+  Box,
+  Button,
+  FormLabel,
+  Icon,
   Menu,
   MenuButton,
-  Button,
-  Icon,
-  MenuList,
   MenuItem,
+  MenuList,
 } from "@chakra-ui/react";
-import { TbChevronsDown } from "react-icons/tb";
+import { IoChevronDownCircleOutline } from "react-icons/io5";
 import useAddPropertyStore, {
   PropertyType,
 } from "../../../store/AddProperty/addPropertyBasicStore";
@@ -21,45 +20,39 @@ const PropertyTypeSelector = () => {
   const setRentWithin = useAddPropertyStore((s) => s.setRentWithin);
 
   return (
-    <InputGroup size="md" bg="gray.50" borderRadius={99} zIndex={2}>
-      <Input
-        placeholder="Property Type"
-        value={type || ""}
-        pointerEvents="none"
-      />
-      <InputRightElement width="4.5rem">
-        <Menu placement="top">
-          <MenuButton
-            _hover={{ bg: "gray.700" }}
-            as={Button}
-            pos="absolute"
-            right={2}
-            top={1}
-            p={0}
-            bg="black"
-            color="white"
-            size="sm"
-          >
-            <Icon as={TbChevronsDown} p={0} />
-          </MenuButton>
-          <MenuList p={1} borderRadius={20}>
-            {PropertyTypes.map((pType) => (
-              <MenuItem
-                textTransform="capitalize"
-                key={pType}
-                onClick={() => {
-                  if (pType === "hotel" || pType === "hostel")
-                    setRentWithin(true);
-                  setType(pType as PropertyType);
-                }}
-              >
-                {pType}
-              </MenuItem>
-            ))}
-          </MenuList>
-        </Menu>
-      </InputRightElement>
-    </InputGroup>
+    <Box w="100%">
+      <FormLabel fontSize="xs" m={0} ml={2}>
+        Property Type
+      </FormLabel>
+      <Menu placement="top">
+        <MenuButton
+          bg="gray.50"
+          _hover={{ bg: "gray.50" }}
+          textAlign="left"
+          textTransform="capitalize"
+          w="100%"
+          as={Button}
+          rightIcon={<Icon as={IoChevronDownCircleOutline} />}
+        >
+          {type}
+        </MenuButton>
+        <MenuList p={1} borderRadius={20}>
+          {PropertyTypes.map((pType) => (
+            <MenuItem
+              textTransform="capitalize"
+              key={pType}
+              onClick={() => {
+                if (pType === "hotel" || pType === "hostel")
+                  setRentWithin(true);
+                setType(pType as PropertyType);
+              }}
+            >
+              {pType}
+            </MenuItem>
+          ))}
+        </MenuList>
+      </Menu>
+    </Box>
   );
 };
 

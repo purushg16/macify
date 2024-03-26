@@ -17,9 +17,7 @@ import { usePostProperty } from "../../../hooks/usePropertyServices";
 
 const AssignManagerPage = () => {
   const manager = useAddPropertyStore((s) => s.manager);
-
   const { mutate, isPending } = usePostProperty();
-  const handleSubmit = () => mutate();
 
   return (
     <>
@@ -66,11 +64,11 @@ const AssignManagerPage = () => {
         <Title
           heading="Assign Manager"
           subtitle="Assign manager for this property or create a new one"
+          size="lg"
+          substitleSize="xs"
         />
-      </AnimateMove>
 
-      <AnimateMove delay={0.4}>
-        <HStack>
+        <HStack mt={2}>
           <NavigatorWrapper to="/admin/properties/add/6">
             <Button id="extra">Back</Button>
           </NavigatorWrapper>
@@ -80,7 +78,7 @@ const AssignManagerPage = () => {
             colorScheme="primary"
             isLoading={isPending}
             isDisabled={!manager}
-            onClick={handleSubmit}
+            onClick={() => mutate()}
           >
             Finish
           </Button>

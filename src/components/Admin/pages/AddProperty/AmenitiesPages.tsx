@@ -17,11 +17,10 @@ const AmenitiesPages = () => {
         <Title
           heading="Choose Amenities"
           subtitle="Select all the amenities available. Select atleast one!"
+          size="lg"
+          substitleSize="xs"
         />
-      </AnimateMove>
-
-      <AnimateMove delay={0.4}>
-        <HStack>
+        <HStack mt={2}>
           <NavigatorWrapper to="/admin/properties/add/4">
             <Button id="extra">Back</Button>
           </NavigatorWrapper>

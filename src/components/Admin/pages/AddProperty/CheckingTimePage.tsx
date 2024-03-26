@@ -23,11 +23,13 @@ const CheckingTimePage = () => {
         <Title
           heading="Checking Time Details"
           subtitle="Enter checking time details for this property"
+          size="lg"
+          substitleSize="xs"
         />
       </AnimateMove>
 
-      <AnimateMove delay={0.4}>
-        <VStack gap={4}>
+      <AnimateMove delay={0.4} noWidth>
+        <VStack gap={4} w="100%" px={10}>
           <CheckInTimePicker />
           <CheckOutTimePicker />
         </VStack>

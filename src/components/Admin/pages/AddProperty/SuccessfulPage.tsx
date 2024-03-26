@@ -27,6 +27,8 @@ const SuccessfulPage = () => {
         <Title
           heading="Successfully Created 🎉"
           subtitle="A new Property has been now added to dashboard"
+          size="lg"
+          substitleSize="xs"
         />
       </AnimateMove>
 

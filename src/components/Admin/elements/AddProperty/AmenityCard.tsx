@@ -1,4 +1,4 @@
-import { Box, Icon, Spacer, Text } from "@chakra-ui/react";
+import { Flex, Icon, Text } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 
 interface AmenityCardProps {
@@ -9,7 +9,10 @@ interface AmenityCardProps {
 
 const AmenityCard = ({ title, icon, selected = false }: AmenityCardProps) => {
   return (
-    <Box
+    <Flex
+      flexDir="column"
+      align="start"
+      justify="end"
       cursor="pointer"
       textAlign="left"
       h={130}
@@ -19,13 +22,13 @@ const AmenityCard = ({ title, icon, selected = false }: AmenityCardProps) => {
       borderColor={selected ? "primary.300" : "none"}
       transition="all 0.5s"
       p={4}
-      display="flex"
-      flexDir="column"
     >
-      <Spacer />
-      <Icon as={icon} boxSize={49} mb={2} />
-      <Text>{title}</Text>
-    </Box>
+      <Icon as={icon} boxSize={{ base: 45, md: 49 }} mb={2} />
+      <Text fontSize="sm">
+        {title}
+        {/* {title.length > 15 ? title.substring(0, 13) + ".." : title} */}
+      </Text>
+    </Flex>
   );
 };
 

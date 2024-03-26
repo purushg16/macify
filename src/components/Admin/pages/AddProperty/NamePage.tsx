@@ -1,7 +1,9 @@
-import { Button, HStack, Image, Input, VStack } from "@chakra-ui/react";
+import { Button, HStack, Image, VStack } from "@chakra-ui/react";
+import { BsBuilding } from "react-icons/bs";
 import building from "../../../../assets/app/building.png";
 import AnimateMove from "../../../motions/Move";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
+import LabelInput from "../../elements/LabelInput";
 import NavigatorWrapper from "../../elements/NavigatorWrapper";
 import Title from "../../elements/Title";
 
@@ -16,22 +18,23 @@ const NamePage = () => {
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
-        <Title heading="Add New Property" subtitle="Enter Property Name" />
-      </AnimateMove>
+        <Title
+          heading="Add New Property"
+          subtitle="Enter Property Name"
+          size="lg"
+          substitleSize="xs"
+        />
 
-      <AnimateMove delay={0.4}>
-        <VStack gap={4}>
-          <Input
-            bg="gray.50"
-            placeholder="Property Name"
+        <VStack gap={4} mt={4}>
+          <LabelInput
+            icon={BsBuilding}
+            label="Property Name"
             value={name || ""}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(value) => setName(value)}
           />
         </VStack>
-      </AnimateMove>
 
-      <AnimateMove delay={0.4}>
-        <HStack>
+        <HStack mt={4}>
           <NavigatorWrapper to="/admin/properties">
             <Button id="extra"> Cancel </Button>
           </NavigatorWrapper>

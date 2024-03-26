@@ -1,13 +1,4 @@
-import {
-  Button,
-  HStack,
-  Image,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Switch,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Checkbox, HStack, Image, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -19,6 +10,8 @@ import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomS
 import PropertyTypeSelector from "../../elements/AddProperty/PropertyTypeSelector";
 import NavigatorWrapper from "../../elements/NavigatorWrapper";
 import Title from "../../elements/Title";
+import LabelInput from "../../elements/LabelInput";
+import { BiGrid } from "react-icons/bi";
 
 const RentalPage = () => {
   const numberOfRooms = useAddPropertyRoomStore((s) => s.numberOfRooms);
@@ -35,8 +28,9 @@ const RentalPage = () => {
   const createRooms = () => {
     setLoading(true);
     const propertyRooms = [] as Room[];
+    const roomsCount = rentWithin ? numberOfRooms! : 1;
 
-    for (let index = 0; index < numberOfRooms!; index++)
+    for (let index = 0; index < roomsCount; index++)
       propertyRooms.push({
         roomId: uuidv4(),
         roomName: `Room ${index + 1}`,
@@ -58,7 +52,9 @@ const RentalPage = () => {
       <AnimateMove delay={0.4}>
         <Title
           heading="Rental Details"
-          subtitle="Please select whether this property is rented inside"
+          subtitle="Enter property's rental details"
+          size="lg"
+          substitleSize="xs"
         />
       </AnimateMove>
 
@@ -66,32 +62,22 @@ const RentalPage = () => {
         <VStack gap={4}>
           <PropertyTypeSelector />
 
-          {propertyType &&
-            propertyType !== "hostel" &&
-            propertyType !== "hotel" && (
-              <InputGroup size="md" bg="gray.50" borderRadius={99}>
-                <Input defaultValue="Rental Within" pointerEvents="none" />
-                <InputRightElement width="4.5rem">
-                  <Switch
-                    isChecked={rentWithin}
-                    colorScheme="primary"
-                    onChange={() => {
-                      if (rentWithin) setNumberOfRooms(0);
-                      setRentWithin(!rentWithin);
-                    }}
-                  />
-                </InputRightElement>
-              </InputGroup>
-            )}
-
-          <Input
-            type="number"
-            bg="gray.50"
-            placeholder="Number of rooms available"
-            isDisabled={!rentWithin}
-            value={rentWithin ? numberOfRooms || "" : ""}
-            onChange={(event) => setNumberOfRooms(parseInt(event.target.value))}
-          />
+          <VStack>
+            <LabelInput
+              icon={BiGrid}
+              label="Number of rooms available"
+              value={numberOfRooms || ""}
+              onChange={(value) => setNumberOfRooms(parseInt(value))}
+            />
+            <Checkbox
+              size="sm"
+              isChecked={rentWithin}
+              colorScheme="primary"
+              onChange={() => setRentWithin(!rentWithin)}
+            >
+              Is each room rented separately?
+            </Checkbox>
+          </VStack>
         </VStack>
       </AnimateMove>
 
@@ -107,13 +93,13 @@ const RentalPage = () => {
             onClick={createRooms}
             isLoading={isLoading}
             isDisabled={
-              propertyType
-                ? rentWithin
-                  ? numberOfRooms
-                    ? false
-                    : true
-                  : false
-                : true
+              !propertyType
+              // ? rentWithin
+              //   ? numberOfRooms
+              //     ? false
+              //     : true
+              //   : false
+              // : true
             }
           >
             Next

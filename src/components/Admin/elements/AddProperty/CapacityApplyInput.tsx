@@ -1,4 +1,11 @@
-import { Button, Flex, Input, Switch } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Switch,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import useAddPropertyStore from "../../../store/AddProperty/addPropertyBasicStore";
 import useAddPropertyRoomStore from "../../../store/AddProperty/addPropertyRoomStore";
@@ -16,45 +23,34 @@ const CapacityApplyInput = () => {
   };
 
   return (
-    <Flex gap={2}>
-      {propertyType === "hostel" ? (
+    <FormControl px={4} w="90%" mx="auto">
+      <FormLabel fontSize="xs" m={0} ml={2}>
+        Apply {propertyType === "hostel" ? "Bed" : "Guest"} count to all rooms
+      </FormLabel>
+      <InputGroup>
         <Input
-          placeholder="Number of beds"
-          bg="gray.50"
-          flex={1}
-          value={capacity || ""}
-          onChange={(e) => {
-            isAppliedAll(false);
-            setCapacity(parseInt(e.target.value));
-          }}
-        />
-      ) : (
-        <Input
-          placeholder="Capacity"
-          bg="gray.50"
-          flex={1}
           type="number"
+          placeholder={
+            propertyType === "hostel" ? "Number of beds" : "Guest Capacity"
+          }
+          bg="gray.50"
+          flex={1}
           value={capacity || ""}
           onChange={(e) => {
             isAppliedAll(false);
             setCapacity(parseInt(e.target.value));
           }}
         />
-      )}
-      <Switch
-        w={130}
-        as={Button}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        colorScheme="primary"
-        isChecked={applyAll}
-        onChange={doApplyAll}
-        isDisabled={!capacity}
-      >
-        Apply All
-      </Switch>
-    </Flex>
+        <InputRightElement bg="none" right={2}>
+          <Switch
+            colorScheme="primary"
+            isChecked={applyAll}
+            onChange={doApplyAll}
+            isDisabled={!capacity}
+          />
+        </InputRightElement>
+      </InputGroup>
+    </FormControl>
   );
 };
 

@@ -23,8 +23,16 @@ const RoomDetailsPage = () => {
           <Title
             heading="Room Details"
             subtitle="Edit individual room name & numbers"
+            size="lg"
+            substitleSize="xs"
           />
-          <Text w="85%" textAlign="center" m="auto">
+          <Text
+            w="85%"
+            textAlign="center"
+            m="auto"
+            fontSize="xs"
+            fontStyle="italic"
+          >
             You can assign each room its name and capacity by tapping on the
             room card
           </Text>
