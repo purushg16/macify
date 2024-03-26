@@ -130,6 +130,8 @@ const useApproveBooking = (groupId: string) => {
 
   const remove = useApproveBookingStore((s) => s.removeBooking);
 
+  console.log(store);
+
   const postValue = {
     propertyId: store?.propertyId,
     groupId: store?.groupId,
@@ -139,6 +141,7 @@ const useApproveBooking = (groupId: string) => {
     paid: store?.paid,
     balance: store?.balance,
   } as ApproveBooking;
+
   return useMutation({
     mutationFn: () => approveBooking.postRequest(postValue),
 

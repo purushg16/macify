@@ -40,7 +40,7 @@ const ApproveBookingPage = () => {
     (b) => b.groupId === booking?._id
   )?.bookings;
 
-  const assignGroup = useApproveBookingStore((s) => s.setSingleBooking);
+  // const assignGroup = useApproveBookingStore((s) => s.setSingleBooking);
 
   const storeCheckIn = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === booking?._id
@@ -81,7 +81,6 @@ const ApproveBookingPage = () => {
 
     const hasValidAssignment = booking.bookings.every((b) => {
       const bookingId = b._id;
-
       const group = assignedRooms.find((room) => room.bookingId === bookingId);
 
       // If the group was not found, disable and exit early
@@ -171,12 +170,11 @@ const ApproveBookingPage = () => {
           <RejectBookingButton groupId={booking._id} />
           <Button
             colorScheme="primary"
-            onClick={() => {
-              assignGroup(booking._id, "bookings", [
-                { bookingId: booking.bookings[0]._id },
-              ]);
-              onOpen();
-            }}
+            onClick={onOpen}
+            // assignGroup(booking._id, "bookings", [
+            //   { bookingId: booking.bookings[0]._id },
+            // ]);
+
             isDisabled={isDisabled}
           >
             Proceed

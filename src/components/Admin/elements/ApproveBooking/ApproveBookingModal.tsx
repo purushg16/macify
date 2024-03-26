@@ -26,6 +26,7 @@ const ApproveBookingModal = ({ onClose, isOpen, groupId }: Props) => {
   const singleBooking = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === groupId
   );
+  console.log(singleBooking);
   const paid = singleBooking?.paid;
   const balance = singleBooking?.balance;
   const set = useApproveBookingStore((s) => s.setSingleBooking);
