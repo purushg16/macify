@@ -7,10 +7,12 @@ interface Props {
   BedSelector?: ReactNode;
   DatePicker?: ReactNode;
   title: string;
+  same?: boolean;
 }
 
 const SingleCalendarButtonStack = ({
   title,
+  same = false,
   PropertySelector,
   RoomSelector,
   BedSelector,
@@ -24,13 +26,22 @@ const SingleCalendarButtonStack = ({
         {DatePicker && DatePicker}
       </Flex>
 
-      <Flex gap={RoomSelector ? 4 : 0} flexDir="column">
-        {PropertySelector}
+      {same && (
         <HStack gap={4}>
+          {PropertySelector}
           {RoomSelector}
-          {BedSelector}
         </HStack>
-      </Flex>
+      )}
+
+      {!same && (
+        <Flex gap={RoomSelector ? 4 : 0} flexDir="column">
+          {PropertySelector}
+          <HStack gap={4}>
+            {RoomSelector}
+            {BedSelector}
+          </HStack>
+        </Flex>
+      )}
     </Flex>
   );
 };

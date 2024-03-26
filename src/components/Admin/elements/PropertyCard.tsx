@@ -97,24 +97,6 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
                   Available
                 </Text>
               </Flex>
-
-              {/* <Flex
-                flexDir="column"
-                justify="end"
-                p={4}
-                bg="#f4f4f4"
-                borderRadius={10}
-                gap={2}
-              >
-                <Flex pos="relative">
-                  <AmenititesCircle />
-                  <AmenititesCircle />
-                </Flex>
-                <Text color="gray" fontSize="sm">
-                  Amenities <br />
-                  Provided
-                </Text>
-              </Flex> */}
               <Flex
                 flexDir="column"
                 justify="end"

@@ -1,6 +1,5 @@
 import { Grid, GridItem, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
-import propertyResponses from "../../data/propertyResponses";
 import PropertyRespone from "../../entities/PropertyResponse";
 import { PropertyRoom } from "../../entities/property";
 import { useGetAllProperties } from "../../hooks/usePropertyServices";
@@ -10,12 +9,11 @@ import RoomSelector from "../elements/RoomSelector";
 import SingleCalendarButtonStack from "../elements/SingleCalendar/SingleCalendarButtonStack";
 import SingleDatePicker from "../elements/HostelCalendar/HostelDatePicker";
 import { useGetBedBooking } from "../../hooks/useAdmin";
+import HostelBedGrid from "../elements/HostelCalendar/HostelBedGrid";
 
 const HostelCalendarPage = () => {
-  const {
-    // data: properties,
-    isLoading: isPropertiesLoading,
-  } = useGetAllProperties();
+  const { data: properties, isLoading: isPropertiesLoading } =
+    useGetAllProperties();
 
   const [title, setTitle] = useState<string>("Property");
   const [property, setProperty] = useState<PropertyRespone>();
@@ -28,12 +26,14 @@ const HostelCalendarPage = () => {
   );
 
   const onPropertySelect = (id: string) => {
-    const selectedProperty = propertyResponses.find(
+    const selectedProperty = properties?.data.find(
       (property) => property._id === id
     );
+    if (property !== selectedProperty) {
+      setRoom(undefined);
+      setTitle("Room");
+    }
     setProperty(selectedProperty);
-    setTitle("Room");
-    setRoom(undefined);
   };
 
   const onRoomSelect = (id: string) => {
@@ -52,13 +52,14 @@ const HostelCalendarPage = () => {
         <AnimateMove>
           <SingleCalendarButtonStack
             title={title}
+            same
             PropertySelector={
               isPropertiesLoading ? (
                 <Spinner />
               ) : (
                 <PropertySelector
                   onSelect={onPropertySelect}
-                  properties={propertyResponses.filter(
+                  properties={properties?.data.filter(
                     (p) => p.propertyType === "hostel"
                   )}
                   selectedProperty={property}
@@ -85,7 +86,10 @@ const HostelCalendarPage = () => {
         </AnimateMove>
       </GridItem>
 
-      <GridItem>{(isLoading || isRefetching) && <Spinner />}</GridItem>
+      <GridItem>
+        {isLoading || (isRefetching && <Spinner />)}
+        {room && room.beds && <HostelBedGrid beds={room?.beds} />}
+      </GridItem>
     </Grid>
   );
 };
