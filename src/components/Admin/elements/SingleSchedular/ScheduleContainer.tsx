@@ -36,6 +36,8 @@ const ScheduleContainer = () => {
 
   return (
     <Box
+      maxH="90%"
+      overflowY="auto"
       ref={boxRef}
       onScroll={handleScroll}
       borderTop="1px solid #e2e2e2"
@@ -44,13 +46,11 @@ const ScheduleContainer = () => {
       sx={{ "&::-webkit-scrollbar": { height: 0 } }}
     >
       {/* Redering Date Blocks */}
-      <Box>
-        <Flex pt={3}>
-          {dates.map((date, i) => (
-            <DateBlock key={i} currentDate={date} />
-          ))}
-        </Flex>
-      </Box>
+      <Flex mt={3} zIndex={999} pos="sticky" top={0} bg="white">
+        {dates.map((date, i) => (
+          <DateBlock key={i} currentDate={date} />
+        ))}
+      </Flex>
 
       {/* Rendering List of Properties Schedules */}
       <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>

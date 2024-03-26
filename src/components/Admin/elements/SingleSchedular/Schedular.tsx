@@ -19,7 +19,7 @@ const Schedular = ({
     <Box
       borderTop="1px solid"
       borderColor="gray.200"
-      bg="gray.50"
+      bg="#f4f4f4"
       w="fit-content"
     >
       {/* Propert Name with Number */}
@@ -31,7 +31,7 @@ const Schedular = ({
         fontSize="md"
         pl={2}
         borderLeft="5px solid #7edf9a"
-        bg="gray.100"
+        bg="gray.50"
         textTransform="capitalize"
       >
         {propertyName} - {propertyNumber && `${propertyNumber}`}

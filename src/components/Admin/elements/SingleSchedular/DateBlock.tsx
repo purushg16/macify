@@ -9,7 +9,13 @@ const DateBlock = ({ currentDate }: DateBlockProps) => {
   const date = currentDate.toDateString().split(" ").slice(1, 3)[1];
 
   return (
-    <Box minW={{ base: 61, md: 110, lg: 160 }} display="flex" flexDir="column">
+    <Box
+      minW={{ base: 61, md: 110, lg: 160 }}
+      display="flex"
+      flexDir="column"
+      bg="white"
+      pt={2}
+    >
       <SimpleGrid
         pos="relative"
         id="date-block"

@@ -2,9 +2,10 @@ import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import AdminNavbar from "../Admin/elements/AdminNavbar";
 import AdminLinkStack from "../Admin/elements/AdminLinkStack";
 import AppBar from "../Admin/elements/AppBar";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const AdminLayout = () => {
+  const multi = useLocation().pathname;
   if (!localStorage.getItem("token")) return <Navigate to="/auth/login" />;
   if (localStorage.getItem("manager") === "true")
     return <Navigate to="/unauthorized" />;
@@ -47,12 +48,10 @@ const AdminLayout = () => {
           maxW="100%"
           overflowX="auto"
           maxH="100%"
-          overflowY="auto"
+          overflowY={multi === "/admin/calendar/multi" ? "hidden" : "auto"}
           pb={8}
         >
-          <Box>
-            <Outlet />
-          </Box>
+          <Outlet />
 
           <Show below="lg">
             <Box py={8} />
