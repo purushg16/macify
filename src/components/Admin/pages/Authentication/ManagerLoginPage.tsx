@@ -30,8 +30,7 @@ const ManagerLoginPage = () => {
     useManagerChangePassword();
 
   const login = () => mutate({ userName: email, password });
-  const submit = () =>
-    changePassword({ userName: email, password: newPassword });
+  const submit = () => changePassword({ password: newPassword });
 
   return (
     <>

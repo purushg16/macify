@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { managerLogin } from "../api/auth-client";
+import { managerChangePassword, managerLogin } from "../api/auth-client";
 import { AxiosError } from "axios";
 import { APIError } from "../entities/Error";
 import { useToast } from "@chakra-ui/react";
@@ -32,7 +32,7 @@ const useManagerChangePassword = () => {
   const toast = useToast();
 
   return useMutation({
-    mutationFn: managerLogin.authorizationPost,
+    mutationFn: managerChangePassword.postRequest,
     onSuccess: () => navigate("/manager"),
     onError: (err: AxiosError<APIError>) =>
       toast({

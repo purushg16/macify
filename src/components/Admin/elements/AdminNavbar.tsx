@@ -35,7 +35,8 @@ const AdminNavbar = () => {
             cursor="pointer"
             onClick={() => {
               localStorage.removeItem("token");
-              navigate("/auth/login");
+              if (role === "Admin") navigate("/auth/mLogin");
+              if (role === "Manager") navigate("/auth/login");
             }}
           >
             <Icon as={IoMdLogOut} boxSize={6} />
