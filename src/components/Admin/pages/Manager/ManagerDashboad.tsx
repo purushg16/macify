@@ -4,7 +4,6 @@ import {
   Heading,
   Highlight,
   SimpleGrid,
-  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -17,11 +16,12 @@ import HostingButton from "../../elements/Dashboard/HostingButton";
 import TodayBanner from "../../elements/Dashboard/TodayBanner";
 import UpcomingCheckInGrid from "../../elements/Dashboard/UpcomingCheckInGrid";
 import UpcomingCheckOutGrid from "../../elements/Dashboard/UpcomingCheckOuts";
+import LoadingIndicator from "../../elements/LoadingIndicator";
 
 const ManagerDashBoardPage = () => {
   const [tab, setTab] = useState(0);
   const handleTabChange = (t: number) => setTab(t);
-  const { data: user } = useGetProfile();
+  const { data: user, isLoading } = useGetProfile();
 
   return (
     <Flex flexDir="column" w="100%" gap={8}>
@@ -29,13 +29,12 @@ const ManagerDashBoardPage = () => {
         <Flex gap={4} align="start">
           <Box>
             Hello,
+            <span>{isLoading && <LoadingIndicator text="user" inline />}</span>
             <Heading>
-              {user && user.firstName && user.lastName ? (
+              {user && user.firstName && user.lastName && (
                 <Highlight query="Dayalan S" styles={{ color: "primary.500" }}>
                   {user.firstName + " " + user.lastName + " 👋"}
                 </Highlight>
-              ) : (
-                <Spinner />
               )}
             </Heading>
             <Text color="gray" fontSize="xs">
