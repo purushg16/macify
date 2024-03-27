@@ -125,7 +125,7 @@ const useEditProperty = () => {
 
     onSuccess: () => {
       toast({
-        title: "Property Editted created",
+        title: "Property edited successfully",
         status: "success",
         position: "top",
         duration: 3000,

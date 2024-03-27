@@ -243,8 +243,8 @@ const useEditBooking = (
   const postDate = {
     bookingId: bookingId,
     propertyId: entry?.propertyId,
-    checkIn: entry?.checkIn,
-    checkOut: entry?.checkOut,
+    checkIn: entry?.checkIn?.toString(),
+    checkOut: entry?.checkOut?.toString(),
     bedId: entry?.bedId || null,
     roomId: entry?.roomId || null,
   } as EditBooking;
@@ -260,6 +260,15 @@ const useEditBooking = (
         duration: 3000,
       });
       queryClient.invalidateQueries({ queryKey: ["booking", "allBookings"] });
+      queryClient.invalidateQueries({
+        queryKey: ["admin", "upcomingCheckIns"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["admin", "upcomingCheckOuts"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["admin", "currentHosting"],
+      });
       callback();
     },
 

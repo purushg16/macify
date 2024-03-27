@@ -10,7 +10,6 @@ import Title from "../elements/Title";
 import NotificationCard from "../elements/NotificationCard";
 import { useGetBookingsToApprove } from "../../hooks/useAdmin";
 import AnimateMove from "../../motions/Move";
-// import notifications from "../../data/notifications";
 import { Link } from "react-router-dom";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
@@ -27,7 +26,7 @@ const AdminNotificationsPage = () => {
             subtitle="See all the bookings here"
             align="left"
           />
-          <Link to="">
+          <Link to="/admin/properties">
             <Button
               leftIcon={<Icon as={BsFillPlusCircleFill} />}
               colorScheme="primary"

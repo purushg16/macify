@@ -47,7 +47,7 @@ const extractData = async (file: string) => {
         age: age!,
         phone: phoneNumbers ? parseInt(phoneNumbers[0]) : parseInt(""),
         dob: splittedDate!,
-        gender: gender ? gender[0] : null,
+        gender: gender ? gender[0].toLowerCase() : null,
         idProof: file,
         idProofType: "aadhar",
       } as Guest;
