@@ -3,15 +3,22 @@ import HotelBedCard from "./HotelBedCard";
 import { PropertyBed } from "../../../entities/property";
 import Title from "../Title";
 import { useState } from "react";
-import img from "../../../../assets/app/bed/empty_bed.jpeg";
-import img1 from "../../../../assets/app/bed/male_bed.jpeg";
-
-const HostelBedGrid = ({ beds }: { beds: PropertyBed[] }) => {
-  const images = [img, img1];
-
-  const [selectedGroupId, selectGroupId] = useState<number | undefined>(
+import unoccupiedImg from "../../../../assets/app/bed/empty_bed.jpeg";
+import occupiedImg from "../../../../assets/app/bed/male_bed.jpeg";
+import BedBooking from "../../../entities/BedBookings";
+const HostelBedGrid = ({
+  beds,
+  bookedBeds,
+}: {
+  beds: PropertyBed[];
+  bookedBeds: BedBooking[];
+}) => {
+  const [selectedGroupId, selectGroupId] = useState<string | undefined>(
     undefined
   );
+
+  const occupiedBedIds = new Set(bookedBeds?.map((b) => b.bed));
+
   return (
     <Box p={4} bg="#f4f4f4" borderRadius={20}>
       <Title
@@ -30,17 +37,25 @@ const HostelBedGrid = ({ beds }: { beds: PropertyBed[] }) => {
         borderTop="1px solid"
         borderColor="gray.100"
       >
-        {beds.map((bed, i) => (
-          <HotelBedCard
-            img={i % 2 == 0 ? images[0] : images[1]}
-            key={bed._id}
-            bed={bed}
-            groupId={i + 1}
-            group={selectedGroupId ? i % selectedGroupId == 0 : false}
-            defualt={!selectedGroupId}
-            onClick={selectGroupId}
-          />
-        ))}
+        {beds.map((bed) => {
+          const isOccupied = occupiedBedIds?.has(bed._id);
+          const groupId = bookedBeds?.find((b) => b.bed === bed._id)?.group;
+          const isSelectedGroup = groupId
+            ? selectedGroupId === groupId
+            : undefined;
+
+          return (
+            <HotelBedCard
+              img={isOccupied ? occupiedImg : unoccupiedImg}
+              key={bed._id}
+              bed={bed}
+              groupId={groupId}
+              group={isSelectedGroup}
+              defualt={!selectedGroupId}
+              onClick={selectGroupId}
+            />
+          );
+        })}
       </SimpleGrid>
     </Box>
   );

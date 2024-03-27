@@ -292,19 +292,21 @@ const useGetAllBooking = (ids: AllBookingsInterface, enabled?: boolean) => {
 };
 
 const useGetBedBooking = (
-  { roomId }: BedBookingInterface,
+  { roomId, checkIn }: BedBookingInterface,
   enabled: boolean
 ) => {
+  console.log(roomId, checkIn);
   return useQuery({
-    queryKey: ["booking", "allBookings", roomId],
+    queryKey: ["booking", "allBookings", roomId, checkIn],
     queryFn: () =>
       getBedBookings
-        .getSingleItem({
+        .getRequest({
           params: {
             roomId: roomId,
+            checkIn: checkIn,
           },
         })
-        .then((res) => res),
+        .then((res) => res.data),
     retry: 2,
     enabled: enabled,
     refetchOnWindowFocus: false,

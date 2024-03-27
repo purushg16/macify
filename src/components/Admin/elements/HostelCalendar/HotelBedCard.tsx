@@ -1,37 +1,31 @@
-import {
-  Flex,
-  // Heading, Icon,
-  Image,
-} from "@chakra-ui/react";
+import { Flex, Image } from "@chakra-ui/react";
 import { PropertyBed } from "../../../entities/property";
-// import { IoBedOutline } from "react-icons/io5";
 
 const HotelBedCard = ({
-  //   bed,
-  groupId,
   img,
+  groupId,
   group = false,
   defualt = true,
   onClick,
 }: {
   bed: PropertyBed;
-  groupId: number;
   img: string;
-  onClick: (groupId: number | undefined) => void;
+  onClick: (groupId: string | undefined) => void;
+  groupId?: string;
   group?: boolean;
   defualt?: boolean;
 }) => {
   return (
     <Flex
-      cursor="pointer"
       //   p={4}
+      //   bg="white"
+      //   pb={12}
+      cursor="pointer"
       align="center"
       flexDir="column"
-      //   bg="white"
       borderRadius={10}
       pos="relative"
       overflowY="clip"
-      //   pb={12}
       transform={group ? "scale(1.1)" : "scale(1)"}
       transition="all 0.7s"
       opacity={defualt ? 1 : group ? 1 : 0.3}

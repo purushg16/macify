@@ -1,5 +1,5 @@
-import { Grid, GridItem, Spinner } from "@chakra-ui/react";
-import { useState } from "react";
+import { Grid, GridItem } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 import PropertyRespone from "../../entities/PropertyResponse";
 import { PropertyRoom } from "../../entities/property";
 import { useGetAllProperties } from "../../hooks/usePropertyServices";
@@ -10,6 +10,7 @@ import SingleCalendarButtonStack from "../elements/SingleCalendar/SingleCalendar
 import SingleDatePicker from "../elements/HostelCalendar/HostelDatePicker";
 import { useGetBedBooking } from "../../hooks/useAdmin";
 import HostelBedGrid from "../elements/HostelCalendar/HostelBedGrid";
+import LoadingIndicator from "../elements/LoadingIndicator";
 
 const HostelCalendarPage = () => {
   const { data: properties, isLoading: isPropertiesLoading } =
@@ -20,10 +21,20 @@ const HostelCalendarPage = () => {
   const [room, setRoom] = useState<PropertyRoom>();
   const [date, setDate] = useState<Date | undefined>(undefined);
 
-  const { refetch, isLoading, isRefetching } = useGetBedBooking(
+  const {
+    data: bookings,
+    refetch,
+    isLoading: isBookingLoading,
+  } = useGetBedBooking(
     { roomId: room?._id, checkIn: date },
-    !!date
+    !!date && !!room?._id
   );
+
+  useEffect(() => {
+    if (room && date) {
+      refetch();
+    }
+  }, [room, date, refetch]);
 
   const onPropertySelect = (id: string) => {
     const selectedProperty = properties?.data.find(
@@ -43,7 +54,6 @@ const HostelCalendarPage = () => {
 
   const onDateSelect = (date: Date | undefined) => {
     setDate(date);
-    if (room && room._id) refetch();
   };
 
   return (
@@ -55,7 +65,7 @@ const HostelCalendarPage = () => {
             same
             PropertySelector={
               isPropertiesLoading ? (
-                <Spinner />
+                <LoadingIndicator text="Properties" />
               ) : (
                 <PropertySelector
                   onSelect={onPropertySelect}
@@ -87,8 +97,12 @@ const HostelCalendarPage = () => {
       </GridItem>
 
       <GridItem>
-        {isLoading || (isRefetching && <Spinner />)}
-        {room && room.beds && <HostelBedGrid beds={room?.beds} />}
+        {(isBookingLoading || isPropertiesLoading) && (
+          <LoadingIndicator text="Bookings" />
+        )}
+        {room && room.beds && (
+          <HostelBedGrid beds={room?.beds} bookedBeds={bookings!} />
+        )}
       </GridItem>
     </Grid>
   );

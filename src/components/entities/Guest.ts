@@ -4,7 +4,7 @@ export default interface Guest {
   age: number;
   phone: number;
   dob: Date;
-  gender: string | "Male" | "Female" | null;
+  gender: string | "Male" | "Female" | "male" | "female" | null;
   idProof: string;
   idProofType: "passport" | "aadhar" | null;
 }

@@ -8,6 +8,7 @@ import CurrentHosting from "../entities/CurrentHosting";
 import Profile from "../entities/profile";
 import SingleBooking from "../entities/singleBooking";
 import Guest from "../entities/Guest";
+import BedBooking from "../entities/BedBookings";
 
 interface RejectBookingInterface {
   groupId: string;
@@ -60,9 +61,7 @@ const getAllBookings = new APIClient<BookingTimelineInterface>(
   "/booking/allBookings"
 );
 
-const getBedBookings = new APIClient<BedBookingInterface>(
-  "/booking/bedBookings"
-);
+const getBedBookings = new APIClient<BedBooking>("/booking/bedBookings");
 const editBooking = new APIClient<EditBooking>("/booking/editBooking");
 
 const getAllManagers = new APIClient<Manager>("/manager/allManager").getRequest;
