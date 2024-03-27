@@ -71,6 +71,7 @@ const RentalPage = () => {
             />
             <Checkbox
               size="sm"
+              isDisabled={propertyType === "hostel"}
               isChecked={rentWithin}
               colorScheme="primary"
               onChange={() => setRentWithin(!rentWithin)}
