@@ -19,8 +19,10 @@ import { Link } from "react-router-dom";
 import DateFormatter from "../../../functions/dateFormatter";
 
 const TodayBanner = () => {
-  const { data: ciData, isLoading: CIisLoading } = useAdminUpcomingCheckIns();
-  const { data: coData, isLoading: COisLoading } = useAdminUpcomingCheckOuts();
+  const { data: ciData, isLoading: CIisLoading } =
+    useAdminUpcomingCheckIns(true);
+  const { data: coData, isLoading: COisLoading } =
+    useAdminUpcomingCheckOuts(true);
 
   return (
     <Flex flexDir="column" p={4} borderRadius={20} bg="#f4f4f4">

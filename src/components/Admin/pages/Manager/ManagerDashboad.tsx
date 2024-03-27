@@ -4,25 +4,24 @@ import {
   Heading,
   Highlight,
   SimpleGrid,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import CurrentHostingGrid from "../elements/Dashboard/CurrentHostingGrid";
-import UpcomingCheckInGrid from "../elements/Dashboard/UpcomingCheckInGrid";
-import UpcomingCheckOutGrid from "../elements/Dashboard/UpcomingCheckOuts";
-import { MdChecklistRtl, MdEmojiFlags } from "react-icons/md";
-import HostingButton from "../elements/Dashboard/HostingButton";
 import { FaRunning } from "react-icons/fa";
-import AnimateMove from "../../motions/Move";
-import TodayBanner from "../elements/Dashboard/TodayBanner";
-import { useGetProfile } from "../../hooks/useAdmin";
-import LoadingIndicator from "../elements/LoadingIndicator";
-import AddSlider from "../elements/Dashboard/AddSlider";
+import { MdChecklistRtl, MdEmojiFlags } from "react-icons/md";
+import { useGetProfile } from "../../../hooks/useAdmin";
+import AnimateMove from "../../../motions/Move";
+import CurrentHostingGrid from "../../elements/Dashboard/CurrentHostingGrid";
+import HostingButton from "../../elements/Dashboard/HostingButton";
+import TodayBanner from "../../elements/Dashboard/TodayBanner";
+import UpcomingCheckInGrid from "../../elements/Dashboard/UpcomingCheckInGrid";
+import UpcomingCheckOutGrid from "../../elements/Dashboard/UpcomingCheckOuts";
 
-const DashBoardPage = () => {
+const ManagerDashBoardPage = () => {
   const [tab, setTab] = useState(0);
   const handleTabChange = (t: number) => setTab(t);
-  const { data: user, isLoading } = useGetProfile();
+  const { data: user } = useGetProfile();
 
   return (
     <Flex flexDir="column" w="100%" gap={8}>
@@ -31,11 +30,12 @@ const DashBoardPage = () => {
           <Box>
             Hello,
             <Heading>
-              {isLoading && <LoadingIndicator text="user" />}
-              {user && user.firstName && user.lastName && (
+              {user && user.firstName && user.lastName ? (
                 <Highlight query="Dayalan S" styles={{ color: "primary.500" }}>
                   {user.firstName + " " + user.lastName + " 👋"}
                 </Highlight>
+              ) : (
+                <Spinner />
               )}
             </Heading>
             <Text color="gray" fontSize="xs">
@@ -49,18 +49,10 @@ const DashBoardPage = () => {
         <TodayBanner />
       </AnimateMove>
 
-      <AnimateMove delay={0.6}>
-        <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={12}>
-          <Text fontSize="md"> New Beginning, </Text>
-          <AddSlider />
-        </Flex>
-      </AnimateMove>
-
       <AnimateMove delay={0.8}>
         <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={4}>
           <Text fontSize="md" mb={8}>
-            {" "}
-            What's Happening,{" "}
+            What's Happening,
           </Text>
           <SimpleGrid columns={3} justifyContent="space-between" spacing={2}>
             <HostingButton
@@ -85,17 +77,17 @@ const DashBoardPage = () => {
 
           {tab === 0 && (
             <AnimateMove>
-              <CurrentHostingGrid />
+              <CurrentHostingGrid manager />
             </AnimateMove>
           )}
           {tab === 1 && (
             <AnimateMove>
-              <UpcomingCheckInGrid />
+              <UpcomingCheckInGrid manager />
             </AnimateMove>
           )}
           {tab === 2 && (
             <AnimateMove>
-              <UpcomingCheckOutGrid />
+              <UpcomingCheckOutGrid manager />
             </AnimateMove>
           )}
         </Flex>
@@ -104,4 +96,4 @@ const DashBoardPage = () => {
   );
 };
 
-export default DashBoardPage;
+export default ManagerDashBoardPage;

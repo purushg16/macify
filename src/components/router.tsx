@@ -42,6 +42,7 @@ import EditBookingPage from "./Admin/pages/EditBookingPage";
 import AddRoomsPage from "./Admin/pages/AddRoomsPage";
 import AddBedsPage from "./Admin/pages/AddBedsPage";
 import HostelCalendarPage from "./Admin/pages/HostelCalendarPage";
+import ManagerDashBoardPage from "./Admin/pages/Manager/ManagerDashboad";
 
 const router = createBrowserRouter([
   {
@@ -107,7 +108,7 @@ const router = createBrowserRouter([
     path: "/manager",
     element: <ManagerLayout />,
     children: [
-      { index: true, element: <DashBoardPage /> },
+      { index: true, element: <ManagerDashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
       { path: "notifications", element: <ManagerNofiticationsPage /> },
     ],
