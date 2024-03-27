@@ -18,7 +18,7 @@ interface Props {
 const EditPropertyValue = ({ icon, label, value, onchange }: Props) => {
   return (
     <Box w="max-content">
-      <Text mb={2} fontSize="sm" color="gray">
+      <Text mb={2} fontSize="xs" color="gray">
         {label}
       </Text>
       <InputGroup>
@@ -32,8 +32,7 @@ const EditPropertyValue = ({ icon, label, value, onchange }: Props) => {
           onChange={(e) => onchange(e.target.value)}
         />
         <InputRightElement>
-          {" "}
-          <Icon as={icon} />{" "}
+          <Icon as={icon} />
         </InputRightElement>
       </InputGroup>
     </Box>

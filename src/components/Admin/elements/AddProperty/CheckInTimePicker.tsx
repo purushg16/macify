@@ -9,7 +9,7 @@ const CheckInTimePicker = () => {
   return (
     <Menu placement="top">
       <MenuButton textAlign="left" w="100%" as={Button} rightIcon={<BsClock />}>
-        {checkInTime}
+        {checkInTime || "Check In Time"}
       </MenuButton>
       <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
         {timeList.map((time, i) => (

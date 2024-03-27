@@ -15,9 +15,11 @@ interface Props {
   icon: IconType;
   number?: boolean;
   isDisabled?: boolean;
+  small?: boolean;
 }
 
 const LabelInput = ({
+  small,
   label,
   value,
   onChange,
@@ -26,7 +28,7 @@ const LabelInput = ({
   isDisabled = false,
 }: Props) => {
   return (
-    <FormControl>
+    <FormControl w={small ? "max-content" : "100%"}>
       <FormLabel fontSize="xs" textTransform="capitalize" mb={0} ml={2}>
         {label}
       </FormLabel>

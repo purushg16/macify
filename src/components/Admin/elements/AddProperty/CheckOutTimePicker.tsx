@@ -21,7 +21,7 @@ const CheckOutTimePicker = () => {
         as={Button}
         rightIcon={<Icon as={BsClock} transform="rotate(-180deg)" />}
       >
-        {checkOutTime}
+        {checkOutTime || "Check Out Time"}
       </MenuButton>
       <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
         {timeList.map((time, i) => (

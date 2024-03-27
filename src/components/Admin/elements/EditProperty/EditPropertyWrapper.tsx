@@ -1,4 +1,12 @@
-import { Box, Button, Flex, GridItem, Spacer, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  GridItem,
+  HStack,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { BiGlobe, BiTag } from "react-icons/bi";
 import { BsArrowLeftCircle, BsBuilding } from "react-icons/bs";
@@ -49,8 +57,8 @@ const EditPropertyWrapper = ({ property }: Props) => {
       gap={8}
       flexDir="column"
       border="1px solid"
-      borderColor="gray.100"
-      bg="#f6f6f6"
+      borderColor="gray.50"
+      bg="#f4f4f4"
       borderRadius={10}
       p={2}
     >
@@ -100,18 +108,20 @@ const EditPropertyWrapper = ({ property }: Props) => {
 
       <GridItem>
         <PropertyField fieldTitle="Checking Time">
-          <CheckingTimePicker
-            title="Check In Time"
-            time={checkInTime!}
-            onSelect={setCheckInTime}
-            zindex={3}
-          />
-          <CheckingTimePicker
-            title="Check Out Time"
-            time={checkOutTime!}
-            onSelect={setCheckOutTime}
-            zindex={3}
-          />
+          <HStack justify="space-between" gap={4}>
+            <CheckingTimePicker
+              title="Check In Time"
+              time={checkInTime!}
+              onSelect={setCheckInTime}
+              zindex={3}
+            />
+            <CheckingTimePicker
+              title="Check Out Time"
+              time={checkOutTime!}
+              onSelect={setCheckOutTime}
+              zindex={3}
+            />
+          </HStack>
         </PropertyField>
       </GridItem>
 
