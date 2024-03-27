@@ -1,15 +1,18 @@
-import { Flex, Image } from "@chakra-ui/react";
+import { Flex, Heading, Image } from "@chakra-ui/react";
 import { PropertyBed } from "../../../entities/property";
 
 const HotelBedCard = ({
-  img,
+  isOccupied,
+  gender,
+  bed,
   groupId,
   group = false,
   defualt = true,
   onClick,
 }: {
   bed: PropertyBed;
-  img: string;
+  isOccupied: boolean;
+  gender: string | undefined;
   onClick: (groupId: string | undefined) => void;
   groupId?: string;
   group?: boolean;
@@ -17,9 +20,9 @@ const HotelBedCard = ({
 }) => {
   return (
     <Flex
-      //   p={4}
-      //   bg="white"
-      //   pb={12}
+      p={4}
+      pt={6}
+      bg="white"
       cursor="pointer"
       align="center"
       flexDir="column"
@@ -31,9 +34,39 @@ const HotelBedCard = ({
       opacity={defualt ? 1 : group ? 1 : 0.3}
       onClick={() => onClick(defualt ? groupId : undefined)}
     >
-      {/* <Heading fontSize="md">{bed.bedNo}</Heading> */}
-      <Image src={img} boxSize={150} borderRadius={20} />
-      {/* <Icon as={IoBedOutline} boxSize={20} bottom={-8} /> */}
+      {isOccupied && (
+        <>
+          <Image
+            pos="absolute"
+            top={3}
+            src="https://img.icons8.com/ios-filled/15/sleep.png"
+            alt="sleep"
+          />
+          {gender && gender === "male" && (
+            <Image
+              src="https://img.icons8.com/color/15/male.png"
+              alt="male"
+              pos="absolute"
+              right={2}
+              top={2}
+            />
+          )}
+          {gender && gender === "female" && (
+            <Image
+              src="https://img.icons8.com/office/15/female.png"
+              alt="male"
+              pos="absolute"
+              right={2}
+              top={2}
+            />
+          )}
+        </>
+      )}
+
+      <img src="https://img.icons8.com/isometric-line/50/bed.png" alt="bed" />
+      <Heading fontSize="xs" color="gray" mt={2}>
+        Bed {bed.bedNo}
+      </Heading>
     </Flex>
   );
 };

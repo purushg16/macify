@@ -107,9 +107,11 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
       </GridItem>
 
       <GridItem>
-        {(isBookingLoading || isPropertiesLoading) && (
-          <LoadingIndicator text="Bookings" />
-        )}
+        {properties &&
+          room?.beds &&
+          (isBookingLoading || isPropertiesLoading) && (
+            <LoadingIndicator text="Bookings" />
+          )}
         {room && room.beds && (
           <HostelBedGrid beds={room?.beds} bookedBeds={bookings!} />
         )}

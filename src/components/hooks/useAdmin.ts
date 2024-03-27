@@ -304,7 +304,6 @@ const useGetBedBooking = (
   { roomId, checkIn }: BedBookingInterface,
   enabled: boolean
 ) => {
-  console.log(roomId, checkIn);
   return useQuery({
     queryKey: ["booking", "allBookings", roomId, checkIn],
     queryFn: () =>

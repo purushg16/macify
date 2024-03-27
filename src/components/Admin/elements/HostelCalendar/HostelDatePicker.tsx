@@ -15,7 +15,7 @@ const SingleDatePicker = ({
   lite?: boolean;
 }) => {
   return (
-    <Menu>
+    <Menu closeOnBlur={false} closeOnSelect={false}>
       <MenuButton
         isDisabled={isDisabled}
         w="max-content"

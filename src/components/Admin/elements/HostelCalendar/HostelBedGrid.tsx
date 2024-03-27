@@ -3,8 +3,6 @@ import HotelBedCard from "./HotelBedCard";
 import { PropertyBed } from "../../../entities/property";
 import Title from "../Title";
 import { useState } from "react";
-import unoccupiedImg from "../../../../assets/app/bed/empty_bed.jpeg";
-import occupiedImg from "../../../../assets/app/bed/male_bed.jpeg";
 import BedBooking from "../../../entities/BedBookings";
 const HostelBedGrid = ({
   beds,
@@ -39,20 +37,25 @@ const HostelBedGrid = ({
       >
         {beds.map((bed) => {
           const isOccupied = occupiedBedIds?.has(bed._id);
-          const groupId = bookedBeds?.find((b) => b.bed === bed._id)?.group;
-          const isSelectedGroup = groupId
-            ? selectedGroupId === groupId
+          const bookedBed = bookedBeds?.find((b) => b.bed === bed._id);
+          const isSelectedGroup = bookedBed
+            ? selectedGroupId === bookedBed.group
             : undefined;
 
           return (
             <HotelBedCard
-              img={isOccupied ? occupiedImg : unoccupiedImg}
+              isOccupied={isOccupied}
               key={bed._id}
               bed={bed}
-              groupId={groupId}
+              groupId={bookedBed?.group}
               group={isSelectedGroup}
               defualt={!selectedGroupId}
               onClick={selectGroupId}
+              gender={
+                bookedBed?.guests[0].gender !== null
+                  ? bookedBed?.guests[0].gender
+                  : undefined
+              }
             />
           );
         })}
