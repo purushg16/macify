@@ -22,7 +22,7 @@ import AuthLayout from "./Layouts/AuthLayout";
 import RegisterPage from "./Admin/pages/Authentication/RegisterPage";
 import ForgotPasswordPage from "./Admin/pages/Authentication/ForgotPasswordPage";
 import AdminNotificationsPage from "./Admin/pages/AdminNotificationsPage";
-import ManagerNofiticationsPage from "./Admin/pages/ManagerNofiticationsPage";
+import ManagerAccountPage from "./Admin/pages/ManagerAccountPage";
 import EMailVerificationPage from "./Admin/pages/Authentication/EMailVerificationPage";
 import UnAuthorizedPage from "./Admin/pages/UnAuthorizedPage";
 import ManagerLayout from "./Layouts/ManagerLayout";
@@ -110,7 +110,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <ManagerDashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
-      { path: "notifications", element: <ManagerNofiticationsPage /> },
+      { path: "account", element: <ManagerAccountPage /> },
     ],
   },
   {

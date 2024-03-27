@@ -2,11 +2,12 @@ import { Box, Grid, GridItem, Show } from "@chakra-ui/react";
 import AdminNavbar from "../Admin/elements/AdminNavbar";
 import AdminLinkStack from "../Admin/elements/AdminLinkStack";
 import AppBar from "../Admin/elements/AppBar";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 const ManagerLayout = () => {
-  if (!localStorage.getItem("token")) return <Navigate to="/auth/login" />;
+  const multi = useLocation().pathname;
 
+  if (!localStorage.getItem("token")) return <Navigate to="/auth/login" />;
   return (
     <>
       <Grid
@@ -25,11 +26,12 @@ const ManagerLayout = () => {
         rowGap={{ base: 2, md: 4, lg: 8 }}
         color="blackAlpha.700"
         h="100vh" // Set the height of the grid to the viewport height
-        overflowY="hidden"
+        overflow="hidden"
         px={{ base: 4, md: 8, lg: 16 }}
+        pos="relative"
       >
         <GridItem area={"header"}>
-          <AdminNavbar />
+          <AdminNavbar manager />
         </GridItem>
 
         <Show above="lg">
@@ -44,7 +46,7 @@ const ManagerLayout = () => {
           maxW="100%"
           overflowX="auto"
           maxH="100%"
-          overflowY="auto"
+          overflowY={multi === "/admin/calendar/multi" ? "hidden" : "auto"}
           pb={8}
         >
           <Box>
@@ -53,7 +55,16 @@ const ManagerLayout = () => {
 
           <Show below="lg">
             <Box py={8} />
-            <AppBar />
+            <AppBar manager />
+            <Box
+              w="100%"
+              pos="fixed"
+              bottom={-5}
+              h={2}
+              bg="none"
+              borderRadius="100%"
+              boxShadow="-11px -12px 20px 20px #b8d4c0d4"
+            />
           </Show>
         </GridItem>
       </Grid>

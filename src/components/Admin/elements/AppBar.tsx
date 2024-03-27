@@ -5,10 +5,10 @@ import DashboardIcon from "../../../assets/icons/dashbaord.json";
 import CalendarIcon from "../../../assets/icons/calendar.json";
 import WorkIcon from "../../../assets/icons/work.json";
 import PropertyIcon from "../../../assets/icons/property.json";
+import AccountIcon from "../../../assets/icons/account.json";
 
-const AppBar = () => {
+const AppBar = ({ manager = false }: { manager?: boolean }) => {
   const location = useLocation().pathname.split("/")[2];
-  const role = localStorage.getItem("manager") === "true" ? "Manager" : "Admin";
 
   return (
     <Box
@@ -27,33 +27,41 @@ const AppBar = () => {
           title="Dashboard"
           icon={DashboardIcon}
           active={!location}
-          route={role === "Admin" ? "/admin" : "/manager"}
-          admin={role === "Admin"}
+          route={!manager ? "/admin" : "/manager"}
+          admin={!manager}
         />
 
         <SmallButton
           title="Calender"
           icon={CalendarIcon}
           active={location === "calendar"}
-          route={role === "Admin" ? "/admin/calendar" : "/manager/calendar"}
-          admin={role === "Admin"}
+          route={!manager ? "/admin/calendar" : "/manager/calendar"}
+          admin={!manager}
         />
-        {/* {role === "Admin" && ( */}
-        <>
+        {manager && (
           <SmallButton
-            title="Property"
-            icon={PropertyIcon}
-            active={location === "properties"}
-            route="/admin/properties"
+            title="Account"
+            icon={AccountIcon}
+            active={location === "account"}
+            route="/manager/account"
           />
-          <SmallButton
-            title="Manager"
-            icon={WorkIcon}
-            active={location === "manager"}
-            route="/admin/manager"
-          />
-        </>
-        {/* )} */}
+        )}
+        {!manager && (
+          <>
+            <SmallButton
+              title="Property"
+              icon={PropertyIcon}
+              active={location === "properties"}
+              route="/admin/properties"
+            />
+            <SmallButton
+              title="Manager"
+              icon={WorkIcon}
+              active={location === "manager"}
+              route="/admin/manager"
+            />
+          </>
+        )}
       </Flex>
     </Box>
   );
