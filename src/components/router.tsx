@@ -111,6 +111,9 @@ const router = createBrowserRouter([
       { index: true, element: <ManagerDashBoardPage /> },
       { path: "calendar", element: <CalendarPage /> },
       { path: "account", element: <ManagerAccountPage /> },
+      { path: "calendar/single", element: <SingleCalendarPage manager /> },
+      { path: "calendar/multi", element: <ScheduleContainer manager /> },
+      { path: "calendar/hostel", element: <HostelCalendarPage manager /> },
     ],
   },
   {

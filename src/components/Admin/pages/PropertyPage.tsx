@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 const PropertyPage = () => {
-  const { data: properties, isLoading } = useGetAllProperties();
+  const { data: properties, isLoading } = useGetAllProperties(true);
 
   return (
     <Flex flexDir="column" gap={8}>

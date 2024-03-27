@@ -11,10 +11,13 @@ import SingleDatePicker from "../elements/HostelCalendar/HostelDatePicker";
 import { useGetBedBooking } from "../../hooks/useAdmin";
 import HostelBedGrid from "../elements/HostelCalendar/HostelBedGrid";
 import LoadingIndicator from "../elements/LoadingIndicator";
+import { useGetManagerProperties } from "../../hooks/useManagerAuth";
 
-const HostelCalendarPage = () => {
+const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
   const { data: properties, isLoading: isPropertiesLoading } =
-    useGetAllProperties();
+    useGetAllProperties(!manager);
+  const { data: mProperties, isLoading: isMPropertiesLoading } =
+    useGetManagerProperties(!manager);
 
   const [title, setTitle] = useState<string>("Property");
   const [property, setProperty] = useState<PropertyRespone>();
@@ -37,9 +40,10 @@ const HostelCalendarPage = () => {
   }, [room, date, refetch]);
 
   const onPropertySelect = (id: string) => {
-    const selectedProperty = properties?.data.find(
-      (property) => property._id === id
-    );
+    const selectedProperty = manager
+      ? mProperties?.data.find((property) => property._id === id)
+      : properties?.data.find((property) => property._id === id);
+
     if (property !== selectedProperty) {
       setRoom(undefined);
       setTitle("Room");
@@ -64,14 +68,20 @@ const HostelCalendarPage = () => {
             title={title}
             same
             PropertySelector={
-              isPropertiesLoading ? (
+              isPropertiesLoading || isMPropertiesLoading ? (
                 <LoadingIndicator text="Properties" />
               ) : (
                 <PropertySelector
                   onSelect={onPropertySelect}
-                  properties={properties?.data.filter(
-                    (p) => p.propertyType === "hostel"
-                  )}
+                  properties={
+                    manager
+                      ? mProperties?.data.filter(
+                          (p) => p.propertyType === "hostel"
+                        )
+                      : properties?.data.filter(
+                          (p) => p.propertyType === "hostel"
+                        )
+                  }
                   selectedProperty={property}
                 />
               )

@@ -6,15 +6,27 @@ import { useGetAllBooking } from "../../../hooks/useAdmin";
 import { useRef, useState } from "react";
 import BookingDetailsModal from "./BookingDetailsModal";
 import { useGetAllProperties } from "../../../hooks/usePropertyServices";
+import {
+  useGetManagerBookings,
+  useGetManagerProperties,
+} from "../../../hooks/useManagerAuth";
 
-const ScheduleContainer = () => {
-  const { data: properties } = useGetAllProperties();
+const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
+  const { data: properties } = useGetAllProperties(!manager);
+  const { data: mProperties } = useGetManagerProperties(manager);
 
   const { data: scheduleData, isLoading } = useGetAllBooking(
     {
       ids: properties?.data.map((p) => p._id),
     },
-    !!properties
+    !!properties && !manager
+  );
+
+  const { data: mScheduleData, isLoading: isMLoading } = useGetManagerBookings(
+    {
+      ids: mProperties?.data.map((p) => p._id),
+    },
+    !!mProperties && manager
   );
 
   const [visibleMonth, setVisibleMonth] = useState(1);
@@ -28,11 +40,13 @@ const ScheduleContainer = () => {
     else if (box.scrollLeft === 0) setVisibleMonth(1);
   };
 
-  if (isLoading) return <Spinner />;
-  if (!scheduleData) return null;
-  if (!properties) return <Spinner />;
+  if (!scheduleData || !mScheduleData) return null;
 
   const bookingDates = Object.keys(scheduleData);
+  const mBookingDates = Object.keys(mScheduleData);
+
+  if (isLoading || isMLoading || !properties || !mProperties)
+    return <Spinner />;
 
   return (
     <Box
@@ -53,33 +67,66 @@ const ScheduleContainer = () => {
       </Flex>
 
       {/* Rendering List of Properties Schedules */}
-      <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
-        {properties?.data.map((property) =>
-          !property.rentWithin ? (
-            <Schedular
-              key={property._id}
-              propertyName={property.propertyName}
-              propertyNumber=""
-              dates={dates}
-              scheduleData={
-                scheduleData[bookingDates.find((s) => s === property._id)!]
-              }
-            />
-          ) : (
-            property.rooms.map((room) => (
+      {manager && (
+        <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
+          {mProperties?.data.map((property) =>
+            !property.rentWithin ? (
               <Schedular
-                key={room._id}
+                key={property._id}
                 propertyName={property.propertyName}
-                propertyNumber={room.roomName}
+                propertyNumber=""
                 dates={dates}
                 scheduleData={
-                  scheduleData[bookingDates.find((s) => s === room._id)!]
+                  mScheduleData[mBookingDates.find((s) => s === property._id)!]
                 }
               />
-            ))
-          )
-        )}
-      </Flex>
+            ) : (
+              property.rooms.map((room) => (
+                <Schedular
+                  key={room._id}
+                  propertyName={property.propertyName}
+                  propertyNumber={room.roomName}
+                  dates={dates}
+                  scheduleData={
+                    mScheduleData[mBookingDates.find((s) => s === room._id)!]
+                  }
+                />
+              ))
+            )
+          )}
+        </Flex>
+      )}
+
+      {!manager && (
+        <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
+          {properties?.data.map((property) =>
+            !property.rentWithin ? (
+              <Schedular
+                key={property._id}
+                propertyName={property.propertyName}
+                propertyNumber=""
+                dates={dates}
+                scheduleData={
+                  scheduleData[bookingDates.find((s) => s === property._id)!]
+                }
+              />
+            ) : (
+              property.rooms.map((room) => (
+                <Schedular
+                  key={room._id}
+                  propertyName={property.propertyName}
+                  propertyNumber={room.roomName}
+                  dates={dates}
+                  scheduleData={
+                    scheduleData[bookingDates.find((s) => s === room._id)!]
+                  }
+                />
+              ))
+            )
+          )}
+        </Flex>
+      )}
+
       <BookingDetailsModal />
     </Box>
   );

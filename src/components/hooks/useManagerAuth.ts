@@ -84,21 +84,30 @@ const useGetManagerUpcomingCheckOuts = (enabled: boolean) =>
     refetchOnWindowFocus: false,
   });
 
-const useGetManagerProperties = () =>
+const useGetManagerProperties = (enabled: boolean) =>
   useQuery({
     queryKey: ["manager", "properties"],
     queryFn: getAllProperty.getRequest,
+    enabled: enabled,
+    staleTime: ms("5m"),
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 
-const useGetManagerBookings = (ids: AllBookingsInterface) =>
+const useGetManagerBookings = (ids: AllBookingsInterface, enabled: boolean) =>
   useQuery({
-    queryKey: [],
+    queryKey: ["manager", "bookings", ids.ids],
     queryFn: () =>
-      getAllManagerBookings.getRequest({
-        params: {
-          ids: ids,
-        },
-      }),
+      getAllManagerBookings
+        .getSingleItem({
+          params: {
+            ids: ids,
+          },
+        })
+        .then((res) => res),
+    enabled: enabled,
+    retry: 2,
+    refetchOnWindowFocus: false,
   });
 
 export {

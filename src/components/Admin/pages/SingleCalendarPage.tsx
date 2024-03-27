@@ -10,10 +10,18 @@ import SingleCalendar from "../elements/SingleCalendar/SingleCalendar";
 import SingleCalendarButtonStack from "../elements/SingleCalendar/SingleCalendarButtonStack";
 import AnimateMove from "../../motions/Move";
 import { useGetAllBooking } from "../../hooks/useAdmin";
+import { useGetManagerProperties } from "../../hooks/useManagerAuth";
 
-export const SingleCalendarPage = () => {
+export const SingleCalendarPage = ({
+  manager = false,
+}: {
+  manager?: boolean;
+}) => {
   const { data: properties, isLoading: isPropertiesLoading } =
-    useGetAllProperties();
+    useGetAllProperties(!manager);
+
+  const { data: mProperties, isLoading: isMPropertiesLoading } =
+    useGetManagerProperties(manager);
 
   const [title, setTitle] = useState<string>("Property");
   const [property, setProperty] = useState<PropertyRespone>();
@@ -26,9 +34,10 @@ export const SingleCalendarPage = () => {
   );
 
   const onPropertySelect = (id: string) => {
-    const selectedProperty = properties?.data.find(
-      (property) => property._id === id
-    );
+    const selectedProperty = manager
+      ? mProperties?.data.find((property) => property._id === id)
+      : properties?.data.find((property) => property._id === id);
+
     setProperty(selectedProperty);
     setRoom(undefined);
 
@@ -66,12 +75,12 @@ export const SingleCalendarPage = () => {
           <SingleCalendarButtonStack
             title={title}
             PropertySelector={
-              isPropertiesLoading ? (
+              isPropertiesLoading || isMPropertiesLoading ? (
                 <Spinner />
               ) : (
                 <PropertySelector
                   onSelect={onPropertySelect}
-                  properties={properties?.data}
+                  properties={manager ? mProperties?.data : properties?.data}
                   selectedProperty={property}
                 />
               )

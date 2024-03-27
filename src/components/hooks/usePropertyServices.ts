@@ -145,11 +145,12 @@ const useEditProperty = () => {
   });
 };
 
-const useGetAllProperties = () => {
+const useGetAllProperties = (enabled: boolean) => {
   return useQuery({
     queryKey: ["property", "getAllProperty"],
     queryFn: getAllProperties.getRequest,
     retry: 2,
+    enabled: enabled,
     refetchOnWindowFocus: false,
     staleTime: ms("5m"),
   });

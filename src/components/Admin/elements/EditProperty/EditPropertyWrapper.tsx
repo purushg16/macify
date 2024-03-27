@@ -104,13 +104,13 @@ const EditPropertyWrapper = ({ property }: Props) => {
             title="Check In Time"
             time={checkInTime!}
             onSelect={setCheckInTime}
-            zindex={2}
+            zindex={3}
           />
           <CheckingTimePicker
             title="Check Out Time"
             time={checkOutTime!}
             onSelect={setCheckOutTime}
-            zindex={1}
+            zindex={3}
           />
         </PropertyField>
       </GridItem>
