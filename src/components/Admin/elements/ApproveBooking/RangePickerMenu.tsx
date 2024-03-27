@@ -54,9 +54,13 @@ const RangePickerMenu = ({
             if (editBooking) {
               setforEdit(groupId, "checkIn", item.selection.startDate!);
               setforEdit(groupId, "checkOut", item.selection.endDate!);
+              setforEdit(groupId, "roomId", "");
+              setforEdit(groupId, "bedId", "");
             } else {
               setforApproval(groupId, "checkIn", item.selection.startDate!);
               setforApproval(groupId, "checkOut", item.selection.endDate!);
+              setforEdit(groupId, "roomId", "");
+              setforEdit(groupId, "bedId", "");
             }
           }}
           moveRangeOnFirstSelection={false}
