@@ -30,23 +30,27 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
     !!mProperties && manager
   );
 
-  const [visibleMonth, setVisibleMonth] = useState(1);
+  const [visibleMonth, setVisibleMonth] = useState(3);
   const boxRef = useRef<HTMLDivElement>(null);
   const dates = DateGenerator({ months: visibleMonth });
 
   const handleScroll = () => {
     const box = boxRef.current!;
-    if (box.scrollLeft + box.clientWidth === box.scrollWidth)
-      setVisibleMonth(visibleMonth + 1);
-    else if (box.scrollLeft === 0) setVisibleMonth(1);
+    const threshold = 2000;
+    if (box.scrollLeft + box.clientWidth >= box.scrollWidth - threshold)
+      setVisibleMonth(visibleMonth + 3);
+    else if (box.scrollLeft === 0) setVisibleMonth(3);
   };
 
-  if (!scheduleData || !mScheduleData) return null;
+  if (!manager && !scheduleData) return null;
+  if (manager && !mScheduleData) return null;
+  const bookingDates = scheduleData ? Object.keys(scheduleData) : [];
+  const mBookingDates = mScheduleData ? Object.keys(mScheduleData) : [];
 
-  const bookingDates = Object.keys(scheduleData);
-  const mBookingDates = Object.keys(mScheduleData);
+  if (!manager && (isLoading || !properties))
+    return <LoadingIndicator text="Properties" />;
 
-  if (isLoading || isMLoading || !properties || !mProperties)
+  if (manager && (isMLoading || !mProperties))
     return <LoadingIndicator text="Properties" />;
 
   return (
@@ -61,7 +65,7 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
       sx={{ "&::-webkit-scrollbar": { height: 0 } }}
     >
       {/* Redering Date Blocks */}
-      <Flex mt={3} zIndex={999} pos="sticky" top={0} bg="white">
+      <Flex zIndex={999} pos="sticky" top={0} bg="white">
         {dates.map((date, i) => (
           <DateBlock key={i} currentDate={date} />
         ))}
@@ -78,7 +82,9 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
                 propertyNumber=""
                 dates={dates}
                 scheduleData={
-                  mScheduleData[mBookingDates.find((s) => s === property._id)!]
+                  mScheduleData?.[
+                    mBookingDates.find((s) => s === property._id)!
+                  ]
                 }
               />
             ) : (
@@ -89,7 +95,7 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
                   propertyNumber={room.roomName}
                   dates={dates}
                   scheduleData={
-                    mScheduleData[mBookingDates.find((s) => s === room._id)!]
+                    mScheduleData?.[mBookingDates.find((s) => s === room._id)!]
                   }
                 />
               ))
@@ -108,7 +114,7 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
                 propertyNumber=""
                 dates={dates}
                 scheduleData={
-                  scheduleData[bookingDates.find((s) => s === property._id)!]
+                  scheduleData?.[bookingDates.find((s) => s === property._id)!]
                 }
               />
             ) : (
@@ -119,7 +125,7 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
                   propertyNumber={room.roomName}
                   dates={dates}
                   scheduleData={
-                    scheduleData[bookingDates.find((s) => s === room._id)!]
+                    scheduleData?.[bookingDates.find((s) => s === room._id)!]
                   }
                 />
               ))

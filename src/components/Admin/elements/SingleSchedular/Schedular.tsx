@@ -6,7 +6,7 @@ interface SchedularProps {
   dates: Date[];
   propertyName: string;
   propertyNumber?: string;
-  scheduleData: TimelineBookings;
+  scheduleData: TimelineBookings | undefined;
 }
 
 const Schedular = ({
@@ -34,7 +34,8 @@ const Schedular = ({
         bg="gray.50"
         textTransform="capitalize"
       >
-        {propertyName} - {propertyNumber && `${propertyNumber}`}
+        {propertyName}
+        {propertyNumber && ` - ${propertyNumber}`}
       </Text>
 
       <Flex>

@@ -20,15 +20,15 @@ const DateBlock = ({ currentDate }: DateBlockProps) => {
         pos="relative"
         id="date-block"
         borderBottom="1px solid #ECF2F3"
-        pb={5}
+        pb={2}
       >
-        <Text textAlign="center" fontWeight={700} fontSize="md" opacity={0.7}>
-          {month} {/* month */}
+        <Text textAlign="center" fontWeight={700} fontSize="xs" color="gray">
+          {month}
         </Text>
         <Text
           textAlign="center"
           fontWeight={700}
-          fontSize="2xl"
+          fontSize="lg"
           lineHeight="normal"
         >
           {date} {/* date */}
