@@ -34,13 +34,25 @@ const useManagerLogin = () => {
   });
 };
 
-const useManagerChangePassword = () => {
+const useManagerChangePassword = (redirect: boolean, callback?: () => void) => {
   const navigate = useNavigate();
   const toast = useToast();
 
   return useMutation({
     mutationFn: managerChangePassword.postRequest,
-    onSuccess: () => navigate("/manager"),
+    onSuccess: () => {
+      if (redirect) navigate("/manager");
+      else {
+        toast({
+          title: "Password Updated Successfully",
+          status: "success",
+          position: "top",
+          duration: 3000,
+        });
+        callback && callback();
+        navigate("/manager/account");
+      }
+    },
     onError: (err: AxiosError<APIError>) =>
       toast({
         title: err.response?.data?.error,

@@ -27,7 +27,7 @@ const ManagerLoginPage = () => {
 
   const { mutate, data, isSuccess, isPending } = useManagerLogin();
   const { mutate: changePassword, isPending: isReqPending } =
-    useManagerChangePassword();
+    useManagerChangePassword(true);
 
   const login = () => mutate({ userName: email, password });
   const submit = () => changePassword({ password: newPassword });
