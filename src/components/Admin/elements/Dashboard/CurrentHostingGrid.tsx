@@ -1,15 +1,16 @@
-import { Box, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import HostingCard from "./HostingCard";
 import { useAdminCurrentHosting } from "../../../hooks/useDashboard";
 import AnimateMove from "../../../motions/Move";
 import { useGetManagerCurrentHostings } from "../../../hooks/useManagerAuth";
+import LoadingIndicator from "../LoadingIndicator";
 
 const CurrentHostingGrid = ({ manager = false }: { manager?: boolean }) => {
   const { data, isLoading } = useAdminCurrentHosting(!manager);
   const { data: managerData, isLoading: isMLoading } =
     useGetManagerCurrentHostings(manager);
 
-  if (isLoading || isMLoading) return <Spinner />;
+  if (isLoading || isMLoading) return <LoadingIndicator text="hostings" />;
   return (
     <Box mt={4}>
       <Heading fontSize="xl"> Current Hosting </Heading>

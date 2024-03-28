@@ -7,17 +7,17 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { FaRunning } from "react-icons/fa";
+import { MdChecklistRtl, MdEmojiFlags } from "react-icons/md";
+import { useGetProfile } from "../../hooks/useAdmin";
+import AnimateMove from "../../motions/Move";
+import AddSlider from "../elements/Dashboard/AddSlider";
 import CurrentHostingGrid from "../elements/Dashboard/CurrentHostingGrid";
+import HostingButton from "../elements/Dashboard/HostingButton";
+import TodayBanner from "../elements/Dashboard/TodayBanner";
 import UpcomingCheckInGrid from "../elements/Dashboard/UpcomingCheckInGrid";
 import UpcomingCheckOutGrid from "../elements/Dashboard/UpcomingCheckOuts";
-import { MdChecklistRtl, MdEmojiFlags } from "react-icons/md";
-import HostingButton from "../elements/Dashboard/HostingButton";
-import { FaRunning } from "react-icons/fa";
-import AnimateMove from "../../motions/Move";
-import TodayBanner from "../elements/Dashboard/TodayBanner";
-import { useGetProfile } from "../../hooks/useAdmin";
 import LoadingIndicator from "../elements/LoadingIndicator";
-import AddSlider from "../elements/Dashboard/AddSlider";
 
 const DashBoardPage = () => {
   const [tab, setTab] = useState(0);

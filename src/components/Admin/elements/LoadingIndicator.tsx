@@ -4,7 +4,7 @@ const LoadingIndicator = ({
   text,
   inline,
 }: {
-  text: string;
+  text?: string;
   inline?: boolean;
 }) => {
   return (
@@ -18,7 +18,7 @@ const LoadingIndicator = ({
       ml={inline ? 2 : 0}
     >
       <Spinner color="primary.500" size="sm" opacity={0.5} />
-      Loading {text}
+      {text && `Loading ${text}`}
     </Text>
   );
 };

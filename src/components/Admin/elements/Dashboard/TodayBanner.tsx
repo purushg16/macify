@@ -6,7 +6,6 @@ import {
   IconButton,
   SimpleGrid,
   Spacer,
-  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { BsArrowRightCircle } from "react-icons/bs";
@@ -17,6 +16,7 @@ import {
 } from "../../../hooks/useDashboard";
 import { Link } from "react-router-dom";
 import DateFormatter from "../../../functions/dateFormatter";
+import LoadingIndicator from "../LoadingIndicator";
 
 const TodayBanner = () => {
   const { data: ciData, isLoading: CIisLoading } =
@@ -54,7 +54,11 @@ const TodayBanner = () => {
           </Flex>
           <Box>
             <Heading fontSize="lg">
-              {!CIisLoading ? ciData?.data.length : <Spinner />}
+              {!CIisLoading ? (
+                ciData?.data.length
+              ) : (
+                <LoadingIndicator text="Check-ins" />
+              )}
             </Heading>
             <Text fontSize="xs"> Check Ins </Text>
           </Box>
@@ -66,7 +70,11 @@ const TodayBanner = () => {
           </Flex>
           <Box>
             <Heading fontSize="lg">
-              {!COisLoading ? coData?.data.length : <Spinner />}
+              {!COisLoading ? (
+                coData?.data.length
+              ) : (
+                <LoadingIndicator text="Check-outs" />
+              )}
             </Heading>
             <Text fontSize="xs"> Check Outs </Text>
           </Box>

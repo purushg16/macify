@@ -1,15 +1,16 @@
-import { Box, Heading, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import { useAdminUpcomingCheckOuts } from "../../../hooks/useDashboard";
 import HostingCard from "./HostingCard";
 import AnimateMove from "../../../motions/Move";
 import { useGetManagerUpcomingCheckOuts } from "../../../hooks/useManagerAuth";
+import LoadingIndicator from "../LoadingIndicator";
 
 const UpcomingCheckOutGrid = ({ manager = false }: { manager?: boolean }) => {
   const { data, isLoading } = useAdminUpcomingCheckOuts(!manager);
   const { data: mData, isLoading: isMLoading } =
     useGetManagerUpcomingCheckOuts(manager);
 
-  if (isLoading || isMLoading) return <Spinner />;
+  if (isLoading || isMLoading) return <LoadingIndicator text="Check-outs" />;
   return (
     <Box mt={4}>
       <Heading fontSize="xl"> Upcoming Check-Outs </Heading>
