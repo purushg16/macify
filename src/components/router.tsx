@@ -22,7 +22,7 @@ import AuthLayout from "./Layouts/AuthLayout";
 import RegisterPage from "./Admin/pages/Authentication/RegisterPage";
 import ForgotPasswordPage from "./Admin/pages/Authentication/ForgotPasswordPage";
 import AdminNotificationsPage from "./Admin/pages/AdminNotificationsPage";
-import ManagerAccountPage from "./Admin/pages/ManagerAccountPage";
+import ManagerAccountPage from "./Admin/pages/Manager/ManagerAccountPage";
 import EMailVerificationPage from "./Admin/pages/Authentication/EMailVerificationPage";
 import UnAuthorizedPage from "./Admin/pages/UnAuthorizedPage";
 import ManagerLayout from "./Layouts/ManagerLayout";
