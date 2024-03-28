@@ -26,6 +26,7 @@ import { useNavigate } from "react-router-dom";
 import useEditBookingStore from "../store/editBookingStore";
 import EditBooking from "../entities/editBooking";
 import APIClient from "../api/api-client";
+import formatDateToYYYYMMDD from "../functions/dateToString";
 
 export const useGetNotificationCount = (enabled: boolean) => {
   const getNotificationCount = new APIClient<number>("/booking/toApproveCount");
@@ -84,7 +85,7 @@ const useGetBookingsToApprove = () =>
     queryFn: bookingsToApprove.getRequest,
     retry: 2,
     refetchOnWindowFocus: false,
-    staleTime: ms("5m"),
+    // staleTime: ms("5m"),
   });
 
 const useGetSingleBookingToApprove = (groupId: string) => {
@@ -146,8 +147,8 @@ const useApproveBooking = (groupId: string) => {
     propertyId: store?.propertyId,
     groupId: store?.groupId,
     bookings: store?.bookings,
-    checkIn: store?.checkIn,
-    checkOut: store?.checkOut,
+    checkIn: formatDateToYYYYMMDD(store?.checkIn),
+    checkOut: formatDateToYYYYMMDD(store?.checkOut),
     paid: store?.paid,
     balance: store?.balance,
   } as ApproveBooking;
@@ -165,6 +166,9 @@ const useApproveBooking = (groupId: string) => {
       remove(groupId);
       queryClient.invalidateQueries({
         queryKey: ["booking", "bookingToApprove"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["booking", "toApproveCount"],
       });
       navigate("/admin/notifications");
     },
@@ -199,6 +203,9 @@ const useRejectBooking = () => {
       remove(variables.groupId);
       queryClient.invalidateQueries({
         queryKey: ["booking", "bookingToApprove"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["booking", "toApproveCount"],
       });
       navigate("/admin/notifications");
     },
@@ -255,8 +262,8 @@ const useEditBooking = (
   const postDate = {
     bookingId: bookingId,
     propertyId: entry?.propertyId,
-    checkIn: entry?.checkIn?.toString(),
-    checkOut: entry?.checkOut?.toString(),
+    checkIn: formatDateToYYYYMMDD(entry?.checkIn),
+    checkOut: formatDateToYYYYMMDD(entry?.checkOut),
     bedId: entry?.bedId || null,
     roomId: entry?.roomId || null,
   } as EditBooking;
@@ -280,6 +287,9 @@ const useEditBooking = (
       });
       queryClient.invalidateQueries({
         queryKey: ["admin", "currentHosting"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["booking", "toApproveCount"],
       });
       callback();
     },

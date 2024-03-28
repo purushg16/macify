@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBooking } from "../api/customer-client";
 import { useToast } from "@chakra-ui/react";
 import { AxiosError } from "axios";
@@ -14,6 +14,7 @@ const useCustomerBooking = (
 ) => {
   const propertyId = useParams().propertyId;
   const toast = useToast();
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const guests = useBookingGuestStore((s) => s.guests);
   const postData = useBookingConverter(
@@ -34,6 +35,10 @@ const useCustomerBooking = (
         duration: 3000,
       });
       navigate("/booking/" + propertyId + "/7");
+
+      queryClient.invalidateQueries({
+        queryKey: ["booking", "bookingToApprove"],
+      });
     },
 
     onError: (err: AxiosError<APIError>) =>

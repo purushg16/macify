@@ -18,6 +18,6 @@ export interface CustomerBookingGuestDetails {
 export default interface CreateBooking {
   propertyId: string;
   bookings: CustomerBookingGuest[];
-  checkIn: Date;
-  checkOut: Date;
+  checkIn: Date | string;
+  checkOut: Date | string;
 }

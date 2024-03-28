@@ -3,6 +3,7 @@ import CreateBooking, {
   CustomerBookingGuest,
   CustomerBookingGuestDetails,
 } from "../entities/createBooking";
+import formatDateToYYYYMMDD from "../functions/dateToString";
 import { PropertyType } from "../store/AddProperty/addPropertyBasicStore";
 import useBookingRoomStore from "../store/bookingRoomStore";
 import useBookingStore from "../store/bookingStore";
@@ -40,8 +41,8 @@ const useBookingConverter = (
         : !rentWithin
         ? rentWithinBookings
         : otherBookings,
-    checkIn: range.startDate!,
-    checkOut: range.endDate!,
+    checkIn: formatDateToYYYYMMDD(range.startDate!),
+    checkOut: formatDateToYYYYMMDD(range.endDate!),
   } as CreateBooking;
 
   return postData;
