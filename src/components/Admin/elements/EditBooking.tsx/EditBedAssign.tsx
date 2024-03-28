@@ -9,24 +9,16 @@ import {
 } from "@chakra-ui/react";
 import useEditBookingStore from "../../../store/editBookingStore";
 import { BsChevronDown } from "react-icons/bs";
-import { PropertyBed } from "../../../entities/property";
 import { AvailableResponse } from "../../../entities/AvailableResponse";
 
 interface Props {
-  defualtBed: PropertyBed | undefined;
   data: AvailableResponse[];
   bookingId: string;
   isLoading: boolean;
   isError: boolean;
 }
 
-const EditBedAssign = ({
-  bookingId,
-  isLoading,
-  isError,
-  data,
-  defualtBed,
-}: Props) => {
+const EditBedAssign = ({ bookingId, isLoading, isError, data }: Props) => {
   const bedId = useEditBookingStore((s) => s.editBookingEntries)?.find(
     (entry) => entry.bookingId === bookingId
   )?.bedId;
@@ -48,9 +40,7 @@ const EditBedAssign = ({
         rightIcon={<Icon as={BsChevronDown} />}
         colorScheme="primary"
       >
-        {beds?.find((b) => b._id === bedId)?.bedNo ||
-          (bedId === defualtBed?._id && defualtBed?.bedNo) ||
-          "Select Bed"}
+        {beds?.find((b) => b._id === bedId)?.bedNo || "Select Bed"}
       </MenuButton>
       <MenuList>
         {beds?.length === 0 || !beds ? (

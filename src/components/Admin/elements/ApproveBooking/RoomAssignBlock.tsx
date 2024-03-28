@@ -11,7 +11,6 @@ import {
 import useApproveBookingStore from "../../../store/approveBookingStore";
 import useEditBookingStore from "../../../store/editBookingStore";
 import { AvailableResponse } from "../../../entities/AvailableResponse";
-import { PropertyRoom } from "../../../entities/property";
 
 interface Props {
   groupId: string;
@@ -20,11 +19,9 @@ interface Props {
   isLoading: boolean;
   isError: boolean;
   editBooking?: boolean;
-  defaultRoom?: PropertyRoom;
 }
 
 const RoomAssignBlock = ({
-  defaultRoom,
   groupId,
   rooms,
   bookingId,
@@ -58,7 +55,6 @@ const RoomAssignBlock = ({
       >
         {editBooking
           ? rooms.find((r) => r.roomId === editEntry?.roomId)?.roomName ||
-            defaultRoom?.roomName ||
             "Select Room"
           : rooms.find((r) => r.roomId === currentRoom?.roomId)?.roomName ||
             "Select Room"}

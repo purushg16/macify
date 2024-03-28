@@ -10,6 +10,7 @@ interface Props {
   checkOut: Date;
   groupId: string;
   editBooking?: boolean;
+  disabled?: boolean;
 }
 
 const CheckingRangeSelector = ({
@@ -17,6 +18,7 @@ const CheckingRangeSelector = ({
   checkOut,
   groupId,
   editBooking = false,
+  disabled = false,
 }: Props) => {
   const storeCheckIn = useApproveBookingStore((s) => s.singlBooking)?.find(
     (b) => b.groupId === groupId!
@@ -43,14 +45,15 @@ const CheckingRangeSelector = ({
         pb={8}
       >
         <Text>Checking Time Details</Text>
-        {editBooking ? (
+        {editBooking && !disabled && (
           <RangePickerMenu
             startDate={editStoreCheckIn! || checkIn}
             endDate={editStoreCheckOut! || checkOut}
             groupId={groupId}
             editBooking
           />
-        ) : (
+        )}
+        {!editBooking && (
           <RangePickerMenu
             startDate={storeCheckIn! || checkIn}
             endDate={storeCheckOut! || checkOut}
