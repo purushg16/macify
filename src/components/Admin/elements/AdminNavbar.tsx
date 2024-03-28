@@ -4,9 +4,11 @@ import IconWrapper from "./Icons";
 import NotificationIcon from "../../../assets/icons/notification.json";
 import logo from "../../../macify.svg";
 import { IoMdLogOut } from "react-icons/io";
+import { useGetNotificationCount } from "../../hooks/useAdmin";
 const AdminNavbar = ({ manager = false }: { manager?: boolean }) => {
   const navigate = useNavigate();
   const location = useLocation().pathname.split("/")[2];
+  const { data: notificationCount } = useGetNotificationCount(!manager);
 
   return (
     <Box bg="white">
@@ -19,6 +21,7 @@ const AdminNavbar = ({ manager = false }: { manager?: boolean }) => {
           {!manager && (
             <Link to="notifications">
               <IconWrapper
+                count={notificationCount}
                 icon={NotificationIcon}
                 active={location === "notifications"}
                 bg="#f6f6f6"

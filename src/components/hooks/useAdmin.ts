@@ -25,6 +25,18 @@ import ApproveBooking from "../entities/approveBooking";
 import { useNavigate } from "react-router-dom";
 import useEditBookingStore from "../store/editBookingStore";
 import EditBooking from "../entities/editBooking";
+import APIClient from "../api/api-client";
+
+export const useGetNotificationCount = (enabled: boolean) => {
+  const getNotificationCount = new APIClient<number>("/booking/toApproveCount");
+  return useQuery({
+    queryKey: ["booking", "toApproveCount"],
+    queryFn: getNotificationCount.getSingleItem,
+    retry: 2,
+    enabled: enabled,
+    refetchOnWindowFocus: false,
+  });
+};
 
 const useGetProfile = () =>
   useQuery({
