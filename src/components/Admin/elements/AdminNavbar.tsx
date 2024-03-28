@@ -2,7 +2,7 @@ import { Box, Flex, HStack, Icon, Image, Spacer } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import IconWrapper from "./Icons";
 import NotificationIcon from "../../../assets/icons/notification.json";
-import logo from "../../../../public/macify.svg";
+import logo from "../../../macify.svg";
 import { IoMdLogOut } from "react-icons/io";
 const AdminNavbar = ({ manager = false }: { manager?: boolean }) => {
   const navigate = useNavigate();
