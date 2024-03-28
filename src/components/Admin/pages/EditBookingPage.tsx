@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Spinner,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEditBooking, useGetSingleBooking } from "../../hooks/useAdmin";
 import {
@@ -23,6 +15,7 @@ import EditBookingGuestWrapper from "../elements/EditBooking.tsx/EditBookingGues
 import useBookingModalStore from "../../store/bookingDetailsModalStore";
 import Title from "../elements/Title";
 import { BsArrowLeftCircle } from "react-icons/bs";
+import LoadingIndicator from "../elements/LoadingIndicator";
 
 interface Props {
   bookingId?: string | undefined;
@@ -87,7 +80,7 @@ const EditBookingPage = ({ bookingId }: Props) => {
     !id ? () => toggleModal() : () => navigate("/admin")
   );
 
-  if (isLoading || !booking) return <Spinner />;
+  if (isLoading || !booking) return <LoadingIndicator text="Details" />;
   if (isError) return <Text> Error Getting the data </Text>;
   if (property)
     return (

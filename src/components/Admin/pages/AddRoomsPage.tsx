@@ -5,7 +5,6 @@ import {
   Flex,
   Heading,
   SimpleGrid,
-  Spinner,
   VStack,
 } from "@chakra-ui/react";
 import Title from "../elements/Title";
@@ -16,6 +15,7 @@ import AddRoomSection from "../elements/AddRoom/AddRoomSection";
 import AddRoomSubmitButton from "../elements/AddRoom/AddRoomSubmitButton";
 import AnimateMove from "../../motions/Move";
 import RoomTile from "../elements/AddRoom/RoomTile";
+import LoadingIndicator from "../elements/LoadingIndicator";
 
 const AddRoomsPage = () => {
   const propertyId = useParams().id;
@@ -24,7 +24,7 @@ const AddRoomsPage = () => {
     !!propertyId
   );
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <LoadingIndicator text="Rooms" />;
   return (
     <Flex gap={12} flexDir="column">
       <Box>

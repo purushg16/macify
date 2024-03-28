@@ -9,7 +9,6 @@ import {
   MenuItem,
   MenuList,
   SimpleGrid,
-  Spinner,
   VStack,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
@@ -22,6 +21,7 @@ import AddBedSection from "../elements/AddRoom/AddBedSection";
 import BedTile from "../elements/AddRoom/BedTile";
 import Title from "../elements/Title";
 import AddBedSubmitButton from "../elements/AddRoom/AddBedSubmitButton";
+import LoadingIndicator from "../elements/LoadingIndicator";
 
 const AddBedsPage = () => {
   const propertyId = useParams().id;
@@ -31,7 +31,7 @@ const AddBedsPage = () => {
   );
   const ref = useRef(null);
   const [room, setRoom] = useState<PropertyRoom | undefined>();
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <LoadingIndicator text="Beds" />;
   return (
     <Flex gap={4} flexDir="column">
       <Box>

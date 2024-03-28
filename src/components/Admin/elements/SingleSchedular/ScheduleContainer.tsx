@@ -1,4 +1,4 @@
-import { Box, Flex, Spinner } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import DateBlock from "./DateBlock";
 import Schedular from "./Schedular";
 import DateGenerator from "../../../functions/dateGenerator";
@@ -10,6 +10,7 @@ import {
   useGetManagerBookings,
   useGetManagerProperties,
 } from "../../../hooks/useManagerAuth";
+import LoadingIndicator from "../LoadingIndicator";
 
 const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
   const { data: properties } = useGetAllProperties(!manager);
@@ -46,7 +47,7 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
   const mBookingDates = Object.keys(mScheduleData);
 
   if (isLoading || isMLoading || !properties || !mProperties)
-    return <Spinner />;
+    return <LoadingIndicator text="Properties" />;
 
   return (
     <Box

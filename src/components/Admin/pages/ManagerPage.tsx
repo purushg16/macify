@@ -1,9 +1,10 @@
-import { Flex, SimpleGrid, Spinner, VStack } from "@chakra-ui/react";
+import { Flex, SimpleGrid, VStack } from "@chakra-ui/react";
 import Title from "../elements/Title";
 import ManagerCard from "../elements/manager/ManagerCard";
 import AnimateMove from "../../motions/Move";
 import { useGetAllManagers } from "../../hooks/useAdmin";
 import AddManagerModal from "../elements/AddProperty/AddManagerModal";
+import LoadingIndicator from "../elements/LoadingIndicator";
 
 const ManagerPage = () => {
   const { data } = useGetAllManagers();
@@ -22,7 +23,7 @@ const ManagerPage = () => {
         </VStack>
       </AnimateMove>
 
-      {!data && <Spinner />}
+      {!data && <LoadingIndicator text="Managers" />}
       {data && (
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} mt={4}>
           {data.data.map((manager, i) => (

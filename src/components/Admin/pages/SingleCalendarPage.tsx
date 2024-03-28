@@ -1,4 +1,4 @@
-import { Grid, GridItem, Spinner } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 import PropertySelector from "../elements/PropertySelector";
 import { useState } from "react";
 import { PropertyBed, PropertyRoom } from "../../entities/property";
@@ -11,6 +11,7 @@ import SingleCalendarButtonStack from "../elements/SingleCalendar/SingleCalendar
 import AnimateMove from "../../motions/Move";
 import { useGetAllBooking } from "../../hooks/useAdmin";
 import { useGetManagerProperties } from "../../hooks/useManagerAuth";
+import LoadingIndicator from "../elements/LoadingIndicator";
 
 export const SingleCalendarPage = ({
   manager = false,
@@ -76,7 +77,7 @@ export const SingleCalendarPage = ({
             title={title}
             PropertySelector={
               isPropertiesLoading || isMPropertiesLoading ? (
-                <Spinner />
+                <LoadingIndicator text="Properties" />
               ) : (
                 <PropertySelector
                   onSelect={onPropertySelect}
@@ -110,7 +111,7 @@ export const SingleCalendarPage = ({
         </AnimateMove>
       </GridItem>
       {isRefetching || isLoading ? (
-        <Spinner />
+        <LoadingIndicator text="Bookings" />
       ) : (
         <GridItem>
           {data && (

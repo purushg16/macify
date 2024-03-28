@@ -5,7 +5,6 @@ import {
   HStack,
   Heading,
   IconButton,
-  Spinner,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -25,6 +24,7 @@ import RoomAssignBlock from "../elements/ApproveBooking/RoomAssignBlock";
 import Title from "../elements/Title";
 import useApproveBookingStore from "../../store/approveBookingStore";
 import RejectBookingButton from "../elements/ApproveBooking/RejectBookingButton";
+import LoadingIndicator from "../elements/LoadingIndicator";
 
 const ApproveBookingPage = () => {
   const singleBookingId = useParams().id;
@@ -105,7 +105,7 @@ const ApproveBookingPage = () => {
     setDisabled(!hasValidAssignment);
   }, [assignedRooms, booking, store]);
 
-  if (!booking) return <Spinner />;
+  if (!booking) return <LoadingIndicator text="details" />;
   return (
     <Flex flexDir="column" gap={8}>
       <Flex gap={2} alignItems="center">
