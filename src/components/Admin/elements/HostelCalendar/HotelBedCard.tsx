@@ -1,8 +1,10 @@
 import { Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { PropertyBed } from "../../../entities/property";
 import AnimateMove from "../../../motions/Move";
+import Guest from "../../../entities/Guest";
 
 const HotelBedCard = ({
+  guest,
   isOccupied,
   image,
   gender,
@@ -11,15 +13,18 @@ const HotelBedCard = ({
   group = false,
   defualt = true,
   onClick,
+  openModal,
 }: {
+  guest: Guest | undefined;
   image: string;
   bed: PropertyBed;
   isOccupied: boolean;
   gender: string | undefined;
-  onClick: (groupId: string | undefined) => void;
+  onClick: (groupId: string | undefined, guest: Guest) => void;
   groupId?: string;
   group?: boolean;
   defualt?: boolean;
+  openModal: () => void;
 }) => {
   return (
     <Flex
@@ -35,7 +40,7 @@ const HotelBedCard = ({
       transform={group ? "scale(1.1)" : "scale(1)"}
       transition="all 0.7s"
       opacity={defualt ? 1 : group ? 1 : 0.3}
-      onClick={() => onClick(defualt ? groupId : undefined)}
+      onClick={() => onClick(defualt ? groupId : undefined, guest!)}
     >
       {isOccupied && (
         <>
@@ -70,9 +75,17 @@ const HotelBedCard = ({
       <Heading fontSize="xs" color="gray" mt={2}>
         Bed {bed.bedNo}
       </Heading>
-      {group && (
+      {group && guest && (
         <AnimateMove>
-          <Button size="xs">View</Button>
+          <Button
+            size="xs"
+            onClick={(e) => {
+              e.stopPropagation();
+              openModal();
+            }}
+          >
+            View
+          </Button>
         </AnimateMove>
       )}
     </Flex>
