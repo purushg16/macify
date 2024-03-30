@@ -130,7 +130,6 @@ const EditBookingPage = ({ bookingId }: Props) => {
             {edit ? `Discard` : `Edit`}
           </Button>
         </Flex>
-
         <CheckingRangeSelector
           checkIn={new Date(booking.data[0].checkIn)}
           checkOut={new Date(booking.data[0].checkOut)}
@@ -138,16 +137,17 @@ const EditBookingPage = ({ bookingId }: Props) => {
           editBooking
           disabled={!edit}
         />
-
         <EditBookingGuestWrapper>
           {!edit && (
             <HStack mb={2}>
-              <Button size="sm">
-                {
-                  property.rooms.find((r) => r._id === booking.data[0].room)
-                    ?.roomName
-                }
-              </Button>
+              {property.rentWithin && (
+                <Button size="sm">
+                  {
+                    property.rooms.find((r) => r._id === booking.data[0].room)
+                      ?.roomName
+                  }
+                </Button>
+              )}
               {property.propertyType === "hostel" && (
                 <Button size="sm">
                   Bed{" "}
@@ -196,7 +196,6 @@ const EditBookingPage = ({ bookingId }: Props) => {
           )}
           <GuestGrid guests={booking.data[0].guests} />
         </EditBookingGuestWrapper>
-
         {edit && (
           <VStack gap={4} mt={4}>
             <Title

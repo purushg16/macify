@@ -1,10 +1,13 @@
-import { Box, HStack, Icon, Show, Text } from "@chakra-ui/react";
-import { BsPersonFill } from "react-icons/bs";
-import { FaMoon } from "react-icons/fa";
-import { durationCalculator } from "../../../functions/durationCalculator";
+import { Box, HStack, Icon, Text } from "@chakra-ui/react";
+import { FaRegMoon } from "react-icons/fa";
+import {
+  daysBetweenDates,
+  durationCalculator,
+} from "../../../functions/durationCalculator";
 import { TimelineBookingDetails } from "../../../api/admin-client";
 import useBookingModalStore from "../../../store/bookingDetailsModalStore";
 import useEditBookingStore from "../../../store/editBookingStore";
+import { BiGroup } from "react-icons/bi";
 
 interface ScheduleTimelineProps {
   data: TimelineBookingDetails;
@@ -84,25 +87,25 @@ const ScheduleTimeline = ({
       bg={bg}
       cursor="pointer"
       p={2}
+      py={0}
     >
-      <Show above="md">
-        <HStack alignItems="center">
-          <Text display="contents">
-            <Icon
-              as={BsPersonFill}
-              color="gray"
-              boxSize={{ sm: 2, md: 2, lg: 4 }}
-            />
-            3
-          </Text>
+      {/* <Show above="md"> */}
+      <HStack alignItems="center">
+        <Text display="contents" fontSize="xs">
+          <Icon as={BiGroup} boxSize={{ sm: 4, md: 2, lg: 4 }} />
+          {data.guests.length}
+        </Text>
 
-          <Text px={{ base: 2, md: 2 }}>|</Text>
+        <Text px={{ base: 2, md: 2 }} fontSize="xs">
+          |
+        </Text>
 
-          <Text display="contents">
-            <Icon as={FaMoon} color="gray" boxSize={{ sm: 2, md: 2, lg: 3 }} />3
-          </Text>
-        </HStack>
-      </Show>
+        <Text display="contents" fontSize="xs">
+          <Icon as={FaRegMoon} boxSize={{ sm: 3, md: 2, lg: 3 }} />
+          {daysBetweenDates(startDate, endDate)}
+        </Text>
+      </HStack>
+      {/* </Show> */}
     </Box>
   );
 };

@@ -26,7 +26,7 @@ const ScheduleBlock = ({
   return (
     <Box
       minW={{ base: 61, md: 110, lg: 160 }}
-      minH={{ base: 35, md: 58 }}
+      minH={43}
       py={2}
       borderRight="1px solid #e1e1e1"
     >
