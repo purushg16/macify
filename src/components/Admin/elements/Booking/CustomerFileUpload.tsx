@@ -92,7 +92,7 @@ function CustomerFileUpload() {
                 w="100%"
                 align="center"
               >
-                <Text fontSize="sm" lineHeight="normal">
+                <Text fontSize="sm" lineHeight="normal" maxW="80%">
                   {file.name}
                 </Text>
                 <Spacer />

@@ -101,7 +101,7 @@ const ScheduleTimeline = ({
         </Text>
 
         <Text display="contents" fontSize="xs">
-          <Icon as={FaRegMoon} boxSize={{ sm: 3, md: 2, lg: 3 }} />
+          <Icon as={FaRegMoon} boxSize={{ sm: 2, md: 2, lg: 3 }} />
           {daysBetweenDates(startDate, endDate)}
         </Text>
       </HStack>
