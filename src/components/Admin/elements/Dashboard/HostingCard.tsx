@@ -46,7 +46,7 @@ const HostingCard = ({ data }: { data: CurrentHosting; color: string }) => {
           </Flex>
           <Flex
             align="center"
-            bg="#F5B7B7"
+            bg="#fddfdf"
             p={2}
             px={4}
             borderRadius={99}

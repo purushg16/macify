@@ -17,7 +17,7 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
   const { data: properties, isLoading: isPropertiesLoading } =
     useGetAllProperties(!manager);
   const { data: mProperties, isLoading: isMPropertiesLoading } =
-    useGetManagerProperties(!manager);
+    useGetManagerProperties(manager);
 
   const [title, setTitle] = useState<string>("Property");
   const [property, setProperty] = useState<PropertyRespone>();

@@ -1,5 +1,6 @@
 export default interface GroupBooking {
   _id: string;
+  createdAt: string;
   property: {
     propertyName: string;
   };

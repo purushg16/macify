@@ -74,63 +74,71 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
       {/* Rendering List of Properties Schedules */}
       {manager && (
         <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
-          {mProperties?.data.map((property) =>
-            !property.rentWithin ? (
-              <Schedular
-                key={property._id}
-                propertyName={property.propertyName}
-                propertyNumber=""
-                dates={dates}
-                scheduleData={
-                  mScheduleData?.[
-                    mBookingDates.find((s) => s === property._id)!
-                  ]
-                }
-              />
-            ) : (
-              property.rooms.map((room) => (
+          {mProperties?.data
+            .filter((p) => p.propertyType !== "hostel")
+            .map((property) =>
+              !property.rentWithin ? (
                 <Schedular
-                  key={room._id}
+                  key={property._id}
                   propertyName={property.propertyName}
-                  propertyNumber={room.roomName}
+                  propertyNumber=""
                   dates={dates}
                   scheduleData={
-                    mScheduleData?.[mBookingDates.find((s) => s === room._id)!]
+                    mScheduleData?.[
+                      mBookingDates.find((s) => s === property._id)!
+                    ]
                   }
                 />
-              ))
-            )
-          )}
+              ) : (
+                property.rooms.map((room) => (
+                  <Schedular
+                    key={room._id}
+                    propertyName={property.propertyName}
+                    propertyNumber={room.roomName}
+                    dates={dates}
+                    scheduleData={
+                      mScheduleData?.[
+                        mBookingDates.find((s) => s === room._id)!
+                      ]
+                    }
+                  />
+                ))
+              )
+            )}
         </Flex>
       )}
 
       {!manager && (
         <Flex flexDir="column" gap={{ base: 4, md: 4, lg: 8 }}>
-          {properties?.data.map((property) =>
-            !property.rentWithin ? (
-              <Schedular
-                key={property._id}
-                propertyName={property.propertyName}
-                propertyNumber=""
-                dates={dates}
-                scheduleData={
-                  scheduleData?.[bookingDates.find((s) => s === property._id)!]
-                }
-              />
-            ) : (
-              property.rooms.map((room) => (
+          {properties?.data
+            .filter((p) => p.propertyType !== "hostel")
+            .map((property) =>
+              !property.rentWithin ? (
                 <Schedular
-                  key={room._id}
+                  key={property._id}
                   propertyName={property.propertyName}
-                  propertyNumber={room.roomName}
+                  propertyNumber=""
                   dates={dates}
                   scheduleData={
-                    scheduleData?.[bookingDates.find((s) => s === room._id)!]
+                    scheduleData?.[
+                      bookingDates.find((s) => s === property._id)!
+                    ]
                   }
                 />
-              ))
-            )
-          )}
+              ) : (
+                property.rooms.map((room) => (
+                  <Schedular
+                    key={room._id}
+                    propertyName={property.propertyName}
+                    propertyNumber={room.roomName}
+                    dates={dates}
+                    scheduleData={
+                      scheduleData?.[bookingDates.find((s) => s === room._id)!]
+                    }
+                  />
+                ))
+              )
+            )}
         </Flex>
       )}
 

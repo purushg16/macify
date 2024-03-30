@@ -4,6 +4,10 @@ import { PropertyBed } from "../../../entities/property";
 import Title from "../Title";
 import { useState } from "react";
 import BedBooking from "../../../entities/BedBookings";
+import maleBed from "../../../../assets/Bed/male-bed.png";
+import femaleBed from "../../../../assets/Bed/female-bed.png";
+import availableBed from "../../../../assets/Bed/available-bed.png";
+
 const HostelBedGrid = ({
   beds,
   bookedBeds,
@@ -44,6 +48,17 @@ const HostelBedGrid = ({
 
           return (
             <HotelBedCard
+              image={
+                isOccupied
+                  ? bookedBed?.guests[0].gender !== null &&
+                    bookedBed?.guests[0].gender === "male"
+                    ? maleBed
+                    : bookedBed?.guests[0].gender !== null &&
+                      bookedBed?.guests[0].gender === "female"
+                    ? femaleBed
+                    : ""
+                  : availableBed
+              }
               isOccupied={isOccupied}
               key={bed._id}
               bed={bed}

@@ -318,7 +318,6 @@ const useGetAllBooking = (ids: AllBookingsInterface, enabled?: boolean) => {
     retry: 2,
     enabled: enabled,
     refetchOnWindowFocus: false,
-    staleTime: ms("24hr"),
   });
 };
 
@@ -340,7 +339,6 @@ const useGetBedBooking = (
     retry: 2,
     enabled: enabled,
     refetchOnWindowFocus: false,
-    staleTime: ms("24hr"),
   });
 };
 

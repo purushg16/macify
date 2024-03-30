@@ -34,13 +34,13 @@ const SingleCalendarButtonStack = ({
       )}
 
       {!same && (
-        <Flex gap={RoomSelector ? 4 : 0} flexDir="column">
+        // <Flex gap={RoomSelector ? 4 : 0} flexDir="column">
+        <HStack gap={4}>
           {PropertySelector}
-          <HStack gap={4}>
-            {RoomSelector}
-            {BedSelector}
-          </HStack>
-        </Flex>
+          {RoomSelector}
+          {BedSelector}
+        </HStack>
+        // </Flex>
       )}
     </Flex>
   );

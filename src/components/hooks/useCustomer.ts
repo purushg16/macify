@@ -39,6 +39,9 @@ const useCustomerBooking = (
       queryClient.invalidateQueries({
         queryKey: ["booking", "bookingToApprove"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["booking", "toApproveCount"],
+      });
     },
 
     onError: (err: AxiosError<APIError>) =>

@@ -3,6 +3,7 @@ import { PropertyBed } from "../../../entities/property";
 
 const HotelBedCard = ({
   isOccupied,
+  image,
   gender,
   bed,
   groupId,
@@ -10,6 +11,7 @@ const HotelBedCard = ({
   defualt = true,
   onClick,
 }: {
+  image: string;
   bed: PropertyBed;
   isOccupied: boolean;
   gender: string | undefined;
@@ -39,7 +41,7 @@ const HotelBedCard = ({
           <Image
             pos="absolute"
             top={3}
-            src="https://img.icons8.com/ios-filled/15/sleep.png"
+            src={"https://img.icons8.com/ios-filled/15/sleep.png"}
             alt="sleep"
           />
           {gender && gender === "male" && (
@@ -63,7 +65,7 @@ const HotelBedCard = ({
         </>
       )}
 
-      <img src="https://img.icons8.com/isometric-line/50/bed.png" alt="bed" />
+      <Image src={image} alt="bed" w="100px" />
       <Heading fontSize="xs" color="gray" mt={2}>
         Bed {bed.bedNo}
       </Heading>
