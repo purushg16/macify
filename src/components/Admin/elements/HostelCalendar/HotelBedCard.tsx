@@ -1,10 +1,10 @@
 import { Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { PropertyBed } from "../../../entities/property";
 import AnimateMove from "../../../motions/Move";
-import Guest from "../../../entities/Guest";
+import { useNavigate } from "react-router-dom";
 
 const HotelBedCard = ({
-  guest,
+  bookingId,
   isOccupied,
   image,
   gender,
@@ -13,19 +13,19 @@ const HotelBedCard = ({
   group = false,
   defualt = true,
   onClick,
-  openModal,
 }: {
-  guest: Guest | undefined;
+  bookingId: string | undefined;
   image: string;
   bed: PropertyBed;
   isOccupied: boolean;
   gender: string | undefined;
-  onClick: (groupId: string | undefined, guest: Guest) => void;
+  onClick: (groupId: string | undefined) => void;
   groupId?: string;
   group?: boolean;
   defualt?: boolean;
-  openModal: () => void;
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       p={4}
@@ -40,7 +40,7 @@ const HotelBedCard = ({
       transform={group ? "scale(1.1)" : "scale(1)"}
       transition="all 0.7s"
       opacity={defualt ? 1 : group ? 1 : 0.3}
-      onClick={() => onClick(defualt ? groupId : undefined, guest!)}
+      onClick={() => onClick(defualt ? groupId : undefined)}
     >
       {isOccupied && (
         <>
@@ -75,13 +75,13 @@ const HotelBedCard = ({
       <Heading fontSize="xs" color="gray" mt={2}>
         Bed {bed.bedNo}
       </Heading>
-      {group && guest && (
+      {group && bookingId && (
         <AnimateMove>
           <Button
             size="xs"
             onClick={(e) => {
               e.stopPropagation();
-              openModal();
+              navigate(`/admin/editBooking/${bookingId}`);
             }}
           >
             View
