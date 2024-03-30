@@ -7,6 +7,8 @@ import BedBooking from "../../../entities/BedBookings";
 import maleBed from "../../../../assets/Bed/hostel-male-bed.png";
 import femaleBed from "../../../../assets/Bed/hostel-female-bed.png";
 import availableBed from "../../../../assets/Bed/hostel-available-bed.png";
+import useBookingModalStore from "../../../store/bookingDetailsModalStore";
+import BookingDetailsModal from "../SingleSchedular/BookingDetailsModal";
 
 const HostelBedGrid = ({
   beds,
@@ -19,6 +21,15 @@ const HostelBedGrid = ({
     undefined
   );
   const occupiedBedIds = new Set(bookedBeds?.map((b) => b.bed));
+  const toggleModal = useBookingModalStore((s) => s.toggleModal);
+  const setCurrentDetail = useBookingModalStore((s) => s.setCurrentDetail);
+  const isOpen = useBookingModalStore((s) => s.isOpen);
+
+  const handleClick = (detail: BedBooking) => {
+    if (isOpen) setCurrentDetail(undefined);
+    else setCurrentDetail({ ...detail, approve: detail.approved });
+    toggleModal();
+  };
 
   return (
     <Box p={4} bg="#f4f4f4" borderRadius={20}>
@@ -71,10 +82,14 @@ const HostelBedGrid = ({
                   ? bookedBed?.guests[0].gender
                   : undefined
               }
+              booking={bookedBed}
+              selectBooking={handleClick}
             />
           );
         })}
       </SimpleGrid>
+
+      <BookingDetailsModal />
     </Box>
   );
 };

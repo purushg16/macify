@@ -1,7 +1,7 @@
 import { Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { PropertyBed } from "../../../entities/property";
 import AnimateMove from "../../../motions/Move";
-import { useNavigate } from "react-router-dom";
+import BedBooking from "../../../entities/BedBookings";
 
 const HotelBedCard = ({
   bookingId,
@@ -12,20 +12,22 @@ const HotelBedCard = ({
   groupId,
   group = false,
   defualt = true,
+  booking,
   onClick,
+  selectBooking,
 }: {
   bookingId: string | undefined;
   image: string;
   bed: PropertyBed;
   isOccupied: boolean;
   gender: string | undefined;
-  onClick: (groupId: string | undefined) => void;
   groupId?: string;
   group?: boolean;
   defualt?: boolean;
+  booking: BedBooking | undefined;
+  onClick: (groupId: string | undefined) => void;
+  selectBooking: (booking: BedBooking) => void;
 }) => {
-  const navigate = useNavigate();
-
   return (
     <Flex
       p={4}
@@ -81,7 +83,7 @@ const HotelBedCard = ({
             size="xs"
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/admin/editBooking/${bookingId}`);
+              booking && selectBooking(booking);
             }}
           >
             View

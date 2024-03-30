@@ -238,8 +238,6 @@ const useGetSingleBooking = (bookingId: string, enabled: boolean) => {
           checkIn: new Date(booking.checkIn),
           checkOut: new Date(booking.checkOut),
           propertyId: booking.property._id,
-          roomId: booking.room,
-          bedId: booking.bed,
         });
         return res;
       }),

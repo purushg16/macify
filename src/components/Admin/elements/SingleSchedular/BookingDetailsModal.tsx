@@ -1,10 +1,4 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalBody,
-  ModalCloseButton,
-} from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent, ModalBody } from "@chakra-ui/react";
 import useBookingModalStore from "../../../store/bookingDetailsModalStore";
 import EditBookingPage from "../../pages/EditBookingPage";
 
@@ -23,8 +17,7 @@ const BookingDetailsModal = () => {
         size="full"
       >
         <ModalOverlay />
-        <ModalContent pt={2}>
-          <ModalCloseButton />
+        <ModalContent pt={4}>
           <ModalBody>
             <EditBookingPage bookingId={currentDetail?._id} />
           </ModalBody>
