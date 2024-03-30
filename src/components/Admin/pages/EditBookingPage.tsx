@@ -28,6 +28,7 @@ import { BiEdit } from "react-icons/bi";
 import { useState } from "react";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { CiCircleCheck } from "react-icons/ci";
+import formatDateToYYYYMMDD from "../../functions/dateToString";
 
 interface Props {
   bookingId?: string | undefined;
@@ -61,8 +62,8 @@ const EditBookingPage = ({ bookingId }: Props) => {
     isError: isNHPError,
   } = useGetAvailableRooms(
     booking?.data[0].property._id,
-    storeCheckIn!,
-    storeCheckOut!,
+    formatDateToYYYYMMDD(storeCheckIn!),
+    formatDateToYYYYMMDD(storeCheckOut!),
     !!booking?.data[0].property._id &&
       booking.data[0].property.rentWithin &&
       booking?.data[0].property.propertyType !== "hostel"
@@ -74,8 +75,8 @@ const EditBookingPage = ({ bookingId }: Props) => {
     isError: isHPError,
   } = useGetAvailableBeds(
     booking?.data[0].property._id,
-    storeCheckIn!,
-    storeCheckOut!,
+    formatDateToYYYYMMDD(storeCheckIn!),
+    formatDateToYYYYMMDD(storeCheckOut!),
     !!booking?.data[0].property._id &&
       booking.data[0].property.rentWithin &&
       booking?.data[0].property.propertyType === "hostel"

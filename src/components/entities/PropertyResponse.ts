@@ -7,5 +7,6 @@ export default interface PropertyRespone {
   propertyType: PropertyType;
   rentWithin: boolean;
   rooms: PropertyRoom[];
+  checkIn?: string;
   __v: 0;
 }

@@ -40,6 +40,8 @@ export interface BookingTimelineInterface {
 export interface BedBookingInterface {
   roomId: string | undefined;
   checkIn: Date | string | undefined;
+  shift: "before" | "after" | undefined;
+  propertyId: string | undefined;
 }
 
 const getProfile = new APIClient<Profile>("/user/profile").getSingleItem;

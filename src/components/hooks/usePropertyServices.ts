@@ -158,8 +158,8 @@ const useGetAllProperties = (enabled: boolean) => {
 
 const useGetAvailableRooms = (
   propertyId: string | undefined,
-  checkIn: Date,
-  checkOut: Date,
+  checkIn: Date | string,
+  checkOut: Date | string,
   enabled: boolean
 ) => {
   return useQuery({
@@ -182,8 +182,8 @@ const useGetAvailableRooms = (
 
 const useGetAvailableBeds = (
   propertyId: string | undefined,
-  checkIn: Date,
-  checkOut: Date,
+  checkIn: Date | string,
+  checkOut: Date | string,
   enabled: boolean
 ) => {
   return useQuery({

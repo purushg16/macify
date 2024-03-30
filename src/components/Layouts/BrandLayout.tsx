@@ -7,7 +7,7 @@ const BrandLayout = () => {
   // if (colorMode === "dark") toggleColorMode();
 
   return (
-    <Box>
+    <Box h="100vh">
       <Outlet />
     </Box>
   );

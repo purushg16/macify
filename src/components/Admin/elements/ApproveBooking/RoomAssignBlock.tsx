@@ -59,7 +59,7 @@ const RoomAssignBlock = ({
           : rooms.find((r) => r.roomId === currentRoom?.roomId)?.roomName ||
             "Select Room"}
       </MenuButton>
-      <MenuList borderRadius={10}>
+      <MenuList borderRadius={20} p={2} maxH={250} overflowY="auto">
         {rooms.length > 0 ? (
           rooms.map((room, i) => (
             <MenuItem

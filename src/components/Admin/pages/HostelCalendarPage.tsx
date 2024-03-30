@@ -1,18 +1,18 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import PropertyRespone from "../../entities/PropertyResponse";
 import { PropertyRoom } from "../../entities/property";
+import formatDateToYYYYMMDD from "../../functions/dateToString";
+import { useGetBedBooking } from "../../hooks/useAdmin";
+import { useGetManagerProperties } from "../../hooks/useManagerAuth";
 import { useGetAllProperties } from "../../hooks/usePropertyServices";
 import AnimateMove from "../../motions/Move";
+import HostelBedGrid from "../elements/HostelCalendar/HostelBedGrid";
+import SingleDatePicker from "../elements/HostelCalendar/HostelDatePicker";
+import LoadingIndicator from "../elements/LoadingIndicator";
 import PropertySelector from "../elements/PropertySelector";
 import RoomSelector from "../elements/RoomSelector";
 import SingleCalendarButtonStack from "../elements/SingleCalendar/SingleCalendarButtonStack";
-import SingleDatePicker from "../elements/HostelCalendar/HostelDatePicker";
-import { useGetBedBooking } from "../../hooks/useAdmin";
-import HostelBedGrid from "../elements/HostelCalendar/HostelBedGrid";
-import LoadingIndicator from "../elements/LoadingIndicator";
-import { useGetManagerProperties } from "../../hooks/useManagerAuth";
-import formatDateToYYYYMMDD from "../../functions/dateToString";
 
 const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
   const { data: properties, isLoading: isPropertiesLoading } =
@@ -24,21 +24,27 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
   const [property, setProperty] = useState<PropertyRespone>();
   const [room, setRoom] = useState<PropertyRoom>();
   const [date, setDate] = useState<Date | undefined>(undefined);
+  const [shift, setShift] = useState<"before" | "after" | undefined>(undefined);
 
   const {
     data: bookings,
     refetch,
     isLoading: isBookingLoading,
   } = useGetBedBooking(
-    { roomId: room?._id, checkIn: formatDateToYYYYMMDD(date) },
+    {
+      roomId: room?._id,
+      checkIn: formatDateToYYYYMMDD(date!),
+      propertyId: property?._id,
+      shift: shift,
+    },
     !!date && !!room?._id
   );
 
   useEffect(() => {
-    if (room && date) {
+    if (room && date && shift) {
       refetch();
     }
-  }, [room, date, refetch]);
+  }, [room, date, shift, refetch]);
 
   const onPropertySelect = (id: string) => {
     const selectedProperty = manager
@@ -55,10 +61,6 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
   const onRoomSelect = (id: string) => {
     setTitle("Date");
     setRoom(property?.rooms.find((room) => room._id === id));
-  };
-
-  const onDateSelect = (date: Date | undefined) => {
-    setDate(date);
   };
 
   return (
@@ -99,8 +101,11 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
             DatePicker={
               <SingleDatePicker
                 date={date}
-                setDate={onDateSelect}
+                setDate={setDate}
+                time={property?.checkIn}
                 isDisabled={!property || !room}
+                shift={shift}
+                setShift={setShift}
               />
             }
           />

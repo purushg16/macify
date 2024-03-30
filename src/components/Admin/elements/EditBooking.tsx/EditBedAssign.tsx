@@ -42,7 +42,7 @@ const EditBedAssign = ({ bookingId, isLoading, isError, data }: Props) => {
       >
         {beds?.find((b) => b._id === bedId)?.bedNo || "Select Bed"}
       </MenuButton>
-      <MenuList>
+      <MenuList borderRadius={20} p={2} maxH={250} overflowY="auto">
         {beds?.length === 0 || !beds ? (
           <Text textAlign="center"> No Beds available </Text>
         ) : (
