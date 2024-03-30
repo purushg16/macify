@@ -1,5 +1,6 @@
-import { Flex, Heading, Image } from "@chakra-ui/react";
+import { Button, Flex, Heading, Image } from "@chakra-ui/react";
 import { PropertyBed } from "../../../entities/property";
+import AnimateMove from "../../../motions/Move";
 
 const HotelBedCard = ({
   isOccupied,
@@ -41,7 +42,7 @@ const HotelBedCard = ({
           <Image
             pos="absolute"
             top={3}
-            src={"https://img.icons8.com/ios-filled/15/sleep.png"}
+            src={"https://img.icons8.com/ios-filled/10/sleep.png"}
             alt="sleep"
           />
           {gender && gender === "male" && (
@@ -65,10 +66,15 @@ const HotelBedCard = ({
         </>
       )}
 
-      <Image src={image} alt="bed" w="100px" />
+      <Image src={image} alt="bed" w={45} />
       <Heading fontSize="xs" color="gray" mt={2}>
         Bed {bed.bedNo}
       </Heading>
+      {group && (
+        <AnimateMove>
+          <Button size="xs">View</Button>
+        </AnimateMove>
+      )}
     </Flex>
   );
 };

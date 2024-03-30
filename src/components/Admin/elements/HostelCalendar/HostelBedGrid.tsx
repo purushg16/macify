@@ -4,9 +4,9 @@ import { PropertyBed } from "../../../entities/property";
 import Title from "../Title";
 import { useState } from "react";
 import BedBooking from "../../../entities/BedBookings";
-import maleBed from "../../../../assets/Bed/male-bed.png";
-import femaleBed from "../../../../assets/Bed/female-bed.png";
-import availableBed from "../../../../assets/Bed/available-bed.png";
+import maleBed from "../../../../assets/Bed/hostel-male-bed.png";
+import femaleBed from "../../../../assets/Bed/hostel-female-bed.png";
+import availableBed from "../../../../assets/Bed/hostel-available-bed.png";
 
 const HostelBedGrid = ({
   beds,
@@ -18,7 +18,6 @@ const HostelBedGrid = ({
   const [selectedGroupId, selectGroupId] = useState<string | undefined>(
     undefined
   );
-
   const occupiedBedIds = new Set(bookedBeds?.map((b) => b.bed));
 
   return (
