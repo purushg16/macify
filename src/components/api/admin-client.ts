@@ -39,7 +39,7 @@ export interface BookingTimelineInterface {
 
 export interface BedBookingInterface {
   roomId: string | undefined;
-  checkIn: Date | string | undefined;
+  reqDate: Date | string | undefined;
   shift: "before" | "after" | undefined;
   propertyId: string | undefined;
 }

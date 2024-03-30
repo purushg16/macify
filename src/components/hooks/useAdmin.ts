@@ -320,17 +320,17 @@ const useGetAllBooking = (ids: AllBookingsInterface, enabled?: boolean) => {
 };
 
 const useGetBedBooking = (
-  { roomId, checkIn, shift, propertyId }: BedBookingInterface,
+  { roomId, reqDate, shift, propertyId }: BedBookingInterface,
   enabled: boolean
 ) => {
   return useQuery({
-    queryKey: ["booking", "allBookings", roomId, checkIn],
+    queryKey: ["booking", "allBookings", roomId, reqDate],
     queryFn: () =>
       getBedBookings
         .getRequest({
           params: {
             roomId: roomId,
-            checkIn: checkIn,
+            reqDate: reqDate,
             propertyId: propertyId,
             shift: shift,
           },

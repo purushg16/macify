@@ -33,7 +33,7 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
   } = useGetBedBooking(
     {
       roomId: room?._id,
-      checkIn: formatDateToYYYYMMDD(date!),
+      reqDate: formatDateToYYYYMMDD(date!),
       propertyId: property?._id,
       shift: shift,
     },
@@ -102,7 +102,7 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
               <SingleDatePicker
                 date={date}
                 setDate={setDate}
-                time={property?.checkIn}
+                time={property?.checkInTime}
                 isDisabled={!property || !room}
                 shift={shift}
                 setShift={setShift}
