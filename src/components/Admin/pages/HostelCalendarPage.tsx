@@ -12,6 +12,7 @@ import { useGetBedBooking } from "../../hooks/useAdmin";
 import HostelBedGrid from "../elements/HostelCalendar/HostelBedGrid";
 import LoadingIndicator from "../elements/LoadingIndicator";
 import { useGetManagerProperties } from "../../hooks/useManagerAuth";
+import formatDateToYYYYMMDD from "../../functions/dateToString";
 
 const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
   const { data: properties, isLoading: isPropertiesLoading } =
@@ -29,7 +30,7 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
     refetch,
     isLoading: isBookingLoading,
   } = useGetBedBooking(
-    { roomId: room?._id, checkIn: date },
+    { roomId: room?._id, checkIn: formatDateToYYYYMMDD(date) },
     !!date && !!room?._id
   );
 
