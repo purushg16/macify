@@ -1,15 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import { VStack } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 
 const BrandLayout = () => {
-  // const { colorMode, toggleColorMode } = useColorMode();
-  // if (colorMode === "light") toggleColorMode();
-  // if (colorMode === "dark") toggleColorMode();
-
   return (
-    <Box h="100vh">
+    <VStack p={8} gap={8} align="center" justify="center" w="100%">
       <Outlet />
-    </Box>
+    </VStack>
   );
 };
 

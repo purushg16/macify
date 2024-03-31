@@ -40,6 +40,9 @@ const EditBookingPage = ({ bookingId }: Props) => {
   if (!bookingId) bookingId = id;
 
   const { data: booking } = useGetSingleBooking(bookingId!, !!bookingId);
+  const selectedRoom = useEditBookingStore((s) => s.editBookingEntries)?.find(
+    (b) => b.bookingId === bookingId
+  )?.roomId;
   const storeCheckIn = useEditBookingStore((s) => s.editBookingEntries)?.find(
     (b) => b.bookingId === bookingId
   )?.checkIn;
@@ -185,14 +188,16 @@ const EditBookingPage = ({ bookingId }: Props) => {
                   editBooking
                 />
               )}
-              {property.propertyType === "hostel" && (
-                <EditBedAssign
-                  data={hostelProperty!}
-                  bookingId={booking.data[0]._id}
-                  isLoading={isHPLoading}
-                  isError={isHPError}
-                />
-              )}
+              {selectedRoom &&
+                hostelProperty &&
+                property.propertyType === "hostel" && (
+                  <EditBedAssign
+                    data={hostelProperty!}
+                    bookingId={booking.data[0]._id}
+                    isLoading={isHPLoading}
+                    isError={isHPError}
+                  />
+                )}
             </HStack>
           )}
           <GuestGrid guests={booking.data[0].guests} />

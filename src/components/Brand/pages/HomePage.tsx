@@ -2,80 +2,76 @@ import {
   Heading,
   Text,
   VStack,
-  Highlight,
-  SimpleGrid,
-  GridItem,
+  Button,
+  Flex,
+  Box,
+  Spacer,
 } from "@chakra-ui/react";
+import { BsArrowRightCircle } from "react-icons/bs";
+import AnimateMove from "../../motions/Move";
+import land from "../../../assets/landing.png";
+import BrandModal from "../elements/BrandModal";
 
 const HomePage = () => {
   return (
-    <SimpleGrid
-      h="100%"
-      columns={{ base: 1, md: 2 }}
-      spacing={4}
-      px={{ base: 12, md: 24, lg: 32 }}
-      alignItems="center"
-    >
-      <GridItem>
-        <VStack align="start" gap={4}>
-          <VStack align="start" gap={4}>
-            <Text m={0}> with Macify, </Text>
+    <VStack gap={8} w="100%">
+      <Flex w="100%" align="center" mb={12}>
+        <Heading fontSize="2xl" textAlign="left" alignSelf="start">
+          Macify
+        </Heading>
+        <Spacer />
+        <BrandModal />
+      </Flex>
+      <VStack>
+        <AnimateMove delay={0.2}>
+          <Box textAlign="center">
+            <Text m={0} fontSize="sm" color="gray">
+              with Macify,
+            </Text>
             <Heading fontSize={{ base: "4xl", md: "4xl", lg: "6xl" }} m={0}>
               Unlock simple
-              <br />
-              <Highlight
-                query="property"
-                styles={{
-                  color: "primary.500",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                property
-              </Highlight>
-              <br />
-              <Highlight
-                query="management."
-                styles={{
-                  color: "primary.500",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                management.
-              </Highlight>
             </Heading>
-            <Text>
+            <Heading
+              fontSize={{ base: "4xl", md: "4xl", lg: "6xl" }}
+              m={0}
+              color="primary.500"
+            >
+              property management.
+            </Heading>
+          </Box>
+        </AnimateMove>
+
+        <AnimateMove delay={0.4}>
+          <VStack gap={8} maxW={{ base: 350, md: 400, lg: 630 }}>
+            <Text fontSize="xs" textAlign="center">
               Handle all your properties in single place, right at your palm!
               You can start managing right away!
             </Text>
+            <Flex align="center" justify="center" gap={4}>
+              <Button> Sign In </Button>
+              <Button colorScheme="primary" rightIcon={<BsArrowRightCircle />}>
+                Register
+              </Button>
+            </Flex>
           </VStack>
-        </VStack>
-      </GridItem>
-      <GridItem></GridItem>
-    </SimpleGrid>
-    // <Flex flexDir="column">
-    //   <Flex
-    //     minHeight="100vh"
-    //     px={16}
-    //     py={8}
-    //     flexDir="column"
-    //     gap={8}
-    //     justifyContent="center"
-    //     alignItems="center"
-    //   >
-    //     <VStack maxW={800}>
+        </AnimateMove>
+      </VStack>
 
-    //     </VStack>
-
-    //     <HStack gap={4}>
-    //       <InputGroup>
-    //         <Input />
-    //         <InputRightElement>
-    //           <Btn text={<Icon as={TbArrowRight} />} primary />
-    //         </InputRightElement>
-    //       </InputGroup>
-    //     </HStack>
-    //   </Flex>
-    // </Flex>
+      <AnimateMove delay={0.6}>
+        <Box
+          mt={8}
+          id="land-img-container"
+          pos="relative"
+          bg="#2b443f"
+          aspectRatio="16/9"
+          w={{ base: 330, md: 500, lg: 600 }}
+          bgImg={land}
+          bgRepeat="no-repeat"
+          bgPos="center 40px"
+          borderRadius={20}
+        />
+      </AnimateMove>
+    </VStack>
   );
 };
 
