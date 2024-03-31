@@ -11,6 +11,7 @@ import { BsArrowRightCircle } from "react-icons/bs";
 import AnimateMove from "../../motions/Move";
 import land from "../../../assets/landing.png";
 import BrandModal from "../elements/BrandModal";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -48,10 +49,17 @@ const HomePage = () => {
               You can start managing right away!
             </Text>
             <Flex align="center" justify="center" gap={4}>
-              <Button> Sign In </Button>
-              <Button colorScheme="primary" rightIcon={<BsArrowRightCircle />}>
-                Register
-              </Button>
+              <Link to="/auth/login">
+                <Button> Sign In </Button>
+              </Link>
+              <Link to="/auth/register">
+                <Button
+                  colorScheme="primary"
+                  rightIcon={<BsArrowRightCircle />}
+                >
+                  Register
+                </Button>
+              </Link>
             </Flex>
           </VStack>
         </AnimateMove>
