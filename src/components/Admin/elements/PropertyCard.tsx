@@ -55,8 +55,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
                 icon={<Icon as={IoCopyOutline} />}
                 border="1px solid"
                 borderColor="gray.50"
-                bg="primary.200"
-                _hover={{ bg: "primary.300" }}
+                colorScheme="primary"
                 onClick={(event) => {
                   event.stopPropagation();
                   navigator.clipboard

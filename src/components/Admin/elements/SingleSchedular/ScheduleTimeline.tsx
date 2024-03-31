@@ -88,6 +88,7 @@ const ScheduleTimeline = ({
       cursor="pointer"
       p={2}
       py={0}
+      overflowX="hidden"
     >
       {/* <Show above="md"> */}
       <HStack alignItems="center">

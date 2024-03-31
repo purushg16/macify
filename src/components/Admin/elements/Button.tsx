@@ -64,7 +64,7 @@ const SmallButton = ({ active = false, icon, route }: Props) => {
       // pr={4}
       onClick={() => navigate(route!)}
       align="center"
-      bg={active ? "white" : "none"}
+      bg={active ? "secondary.200" : "none"}
       transition="all 0.5s"
     >
       <IconWrapper

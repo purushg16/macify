@@ -46,7 +46,7 @@ const AddManagerModal = ({ small }: { small?: boolean }) => {
         w="max-content"
         my={small ? 0 : 4}
         leftIcon={<Icon as={BsFillPlusCircleFill} />}
-        colorScheme="primary"
+        colorScheme="secondary"
         onClick={onOpen}
       >
         {small ? "Add" : "New Manager"}

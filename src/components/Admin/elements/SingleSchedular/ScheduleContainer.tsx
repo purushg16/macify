@@ -42,16 +42,16 @@ const ScheduleContainer = ({ manager = false }: { manager?: boolean }) => {
     else if (box.scrollLeft === 0) setVisibleMonth(3);
   };
 
-  if (!manager && !scheduleData) return null;
-  if (manager && !mScheduleData) return null;
-  const bookingDates = scheduleData ? Object.keys(scheduleData) : [];
-  const mBookingDates = mScheduleData ? Object.keys(mScheduleData) : [];
-
   if (!manager && (isLoading || !properties))
     return <LoadingIndicator text="Properties" />;
 
   if (manager && (isMLoading || !mProperties))
     return <LoadingIndicator text="Properties" />;
+
+  if (!manager && !scheduleData) return null;
+  if (manager && !mScheduleData) return null;
+  const bookingDates = scheduleData ? Object.keys(scheduleData) : [];
+  const mBookingDates = mScheduleData ? Object.keys(mScheduleData) : [];
 
   return (
     <Box

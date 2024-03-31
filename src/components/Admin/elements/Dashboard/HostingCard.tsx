@@ -7,10 +7,10 @@ import {
   Icon,
   Text,
 } from "@chakra-ui/react";
-import { FaLocationArrow } from "react-icons/fa";
 import CurrentHosting from "../../../entities/CurrentHosting";
 import DateFormatter from "../../../functions/dateFormatter";
 import { useNavigate } from "react-router-dom";
+import { IoArrowForwardCircle } from "react-icons/io5";
 
 const HostingCard = ({ data }: { data: CurrentHosting; color: string }) => {
   const navigate = useNavigate();
@@ -59,15 +59,20 @@ const HostingCard = ({ data }: { data: CurrentHosting; color: string }) => {
         </HStack>
       </Flex>
       <Button
-        px={{ base: 4, md: 8 }}
+        px={{ base: 2, md: 8 }}
         py={{ base: 2, md: 4 }}
         h="100%"
         aspectRatio="1/1"
-        bg="green.100"
-        _hover={{ bg: "green.200" }}
+        bg="secondary.300"
+        transition="all 0.7s"
+        _hover={{ bg: "secondary.400" }}
         onClick={() => navigate("editBooking/" + data._id)}
       >
-        <Icon as={FaLocationArrow} />
+        <Icon
+          as={IoArrowForwardCircle}
+          transform="rotate(320deg)"
+          color="white"
+        />
       </Button>
     </Flex>
   );

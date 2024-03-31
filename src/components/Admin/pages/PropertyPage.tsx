@@ -23,7 +23,7 @@ const PropertyPage = () => {
           <Button
             my={4}
             leftIcon={<Icon as={BsFillPlusCircleFill} />}
-            colorScheme="primary"
+            colorScheme="secondary"
           >
             New Property
           </Button>
