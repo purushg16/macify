@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Button, ButtonGroup, Grid, GridItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import PropertyRespone from "../../entities/PropertyResponse";
 import { PropertyRoom } from "../../entities/property";
@@ -37,7 +37,7 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
       propertyId: property?._id,
       shift: shift,
     },
-    !!date && !!room?._id
+    !!date && !!room?._id && !!shift
   );
 
   useEffect(() => {
@@ -98,14 +98,33 @@ const HostelCalendarPage = ({ manager = false }: { manager?: boolean }) => {
                 />
               )
             }
+            BedSelector={
+              property && (
+                <ButtonGroup size="sm">
+                  <Button
+                    colorScheme={
+                      shift ? (shift === "before" ? "primary" : "gray") : "gray"
+                    }
+                    onClick={() => setShift && setShift("before")}
+                  >
+                    Before {property?.checkInTime}
+                  </Button>
+                  <Button
+                    colorScheme={
+                      shift ? (shift === "after" ? "primary" : "gray") : "gray"
+                    }
+                    onClick={() => setShift && setShift("after")}
+                  >
+                    After {property?.checkInTime}
+                  </Button>
+                </ButtonGroup>
+              )
+            }
             DatePicker={
               <SingleDatePicker
                 date={date}
                 setDate={setDate}
-                time={property?.checkInTime}
                 isDisabled={!property || !room}
-                shift={shift}
-                setShift={setShift}
               />
             }
           />

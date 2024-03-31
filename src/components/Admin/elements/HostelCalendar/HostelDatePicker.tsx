@@ -1,34 +1,21 @@
-import {
-  Button,
-  ButtonGroup,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-} from "@chakra-ui/react";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { Calendar } from "react-date-range";
 import { BiChevronDownCircle } from "react-icons/bi";
 import DateFormatter from "../../../functions/dateFormatter";
 
 const SingleDatePicker = ({
-  time,
-  shift,
   date,
   isDisabled,
   lite = false,
   setDate,
-  setShift,
 }: {
-  time?: string | undefined;
-  shift?: string | undefined;
   date: Date | undefined;
   setDate: (date: Date) => void;
   isDisabled: boolean;
   lite?: boolean;
-  setShift?: (shift: "before" | "after") => void;
 }) => {
   return (
-    <Menu closeOnBlur={false} closeOnSelect={false}>
+    <Menu>
       <MenuButton
         isDisabled={isDisabled}
         w="max-content"
@@ -42,26 +29,6 @@ const SingleDatePicker = ({
         {date ? DateFormatter(date) : "Pick a Date"}
       </MenuButton>
       <MenuList>
-        <MenuItem bg="none" w="fit-content">
-          <ButtonGroup size="sm">
-            <Button
-              colorScheme={
-                shift ? (shift === "before" ? "primary" : "gray") : "gray"
-              }
-              onClick={() => setShift && setShift("before")}
-            >
-              Before {time}
-            </Button>
-            <Button
-              colorScheme={
-                shift ? (shift === "after" ? "primary" : "gray") : "gray"
-              }
-              onClick={() => setShift && setShift("after")}
-            >
-              After {time}
-            </Button>
-          </ButtonGroup>
-        </MenuItem>
         <MenuItem bg="none" p={0} w="fit-content">
           <Calendar onChange={(item) => setDate(item)} date={date} />
         </MenuItem>

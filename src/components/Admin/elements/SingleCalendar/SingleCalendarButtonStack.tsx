@@ -1,4 +1,4 @@
-import { Flex, HStack, Heading, Spacer } from "@chakra-ui/react";
+import { Flex, HStack, Heading, Spacer, VStack } from "@chakra-ui/react";
 import { ReactNode } from "react";
 
 interface Props {
@@ -27,10 +27,13 @@ const SingleCalendarButtonStack = ({
       </Flex>
 
       {same && (
-        <HStack gap={4}>
-          {PropertySelector}
-          {RoomSelector}
-        </HStack>
+        <VStack gap={4} align="start">
+          <HStack gap={4}>
+            {PropertySelector}
+            {RoomSelector}
+          </HStack>
+          {BedSelector}
+        </VStack>
       )}
 
       {!same && (

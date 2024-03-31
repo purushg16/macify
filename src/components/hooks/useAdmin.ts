@@ -324,7 +324,7 @@ const useGetBedBooking = (
   enabled: boolean
 ) => {
   return useQuery({
-    queryKey: ["booking", "allBookings", roomId, reqDate],
+    queryKey: ["booking", "allBookings", roomId, reqDate, shift],
     queryFn: () =>
       getBedBookings
         .getRequest({
