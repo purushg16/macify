@@ -9,7 +9,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import Manager from "../../../entities/manager";
-import Title from "../Title";
 import { MdDeleteOutline } from "react-icons/md";
 interface ManagerCardProps {
   manager: Manager;
@@ -39,13 +38,7 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
       borderColor="gray.100"
     >
       <Flex>
-        <Title
-          size="2xl"
-          heading={manager.name}
-          subtitle=""
-          substitleSize="xs"
-          align="left"
-        />
+        <Heading size="md" children={manager.name} />
         <Spacer />
         <HStack>
           <IconButton
@@ -72,7 +65,7 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
           justify="end"
           p={4}
           px={2}
-          bg="#f4f4f4"
+          bg="secondary.50"
           borderRadius={10}
           flex={1}
           onClick={() => handleCopy("Number", manager.phone.toString())}
@@ -87,7 +80,7 @@ const ManagerCard = ({ manager }: ManagerCardProps) => {
           justify="end"
           py={4}
           px={2}
-          bg="#f4f4f4"
+          bg="secondary.50"
           borderRadius={10}
           flex={1}
           onClick={() => handleCopy("Mail", manager.email)}

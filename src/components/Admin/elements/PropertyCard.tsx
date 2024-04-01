@@ -86,7 +86,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
                 flexDir="column"
                 justify="end"
                 p={4}
-                bg="#f4f4f4"
+                bg="secondary.50"
                 borderRadius={10}
                 gap={2}
               >
@@ -100,7 +100,7 @@ const PropertyCard = ({ property }: { property: PropertyRespone }) => {
                 flexDir="column"
                 justify="end"
                 p={4}
-                bg="#f4f4f4"
+                bg="secondary.50"
                 borderRadius={10}
                 gap={2}
               >

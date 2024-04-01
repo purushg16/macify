@@ -49,14 +49,14 @@ const CalendarCard = ({ title, subtitle, number, route }: Props) => {
 
       <HStack justify="space-between">
         <Box>
-          <Heading fontSize="xl" mb={2}>
+          <Heading fontSize="xl" color="primary.400" mb={2}>
             {title}
           </Heading>
           <Text color="gray" maxW={"90%"} fontSize="xs">
             {subtitle}
           </Text>
         </Box>
-        <Box p={4} lineHeight="normal" bg="primary.100" borderRadius={10}>
+        <Box p={4} lineHeight="normal" bg="secondary.100" borderRadius={10}>
           <Icon as={BsArrowRight} boxSize={4} transform="rotate(320deg)" />
         </Box>
       </HStack>
