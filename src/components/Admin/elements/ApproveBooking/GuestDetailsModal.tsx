@@ -16,6 +16,7 @@ import DateFormatter from "../../../functions/dateFormatter";
 import { FaGenderless } from "react-icons/fa";
 import { MdOutlineBadge, MdOutlineCake } from "react-icons/md";
 import { TiPhoneOutline } from "react-icons/ti";
+import GuestIdProofImageAccordian from "./GuestIdProofImageAccordian";
 
 interface Props {
   guest: Guest;
@@ -73,6 +74,7 @@ const GuestDetailsModal = ({ guest, isOpen, onClose }: Props) => {
               icon={MdOutlineBadge}
               label="Id Proof Type"
             />
+            <GuestIdProofImageAccordian image={guest.idProof} />
           </VStack>
         </ModalBody>
 

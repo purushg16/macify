@@ -1,4 +1,11 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { Calendar } from "react-date-range";
 import { BiChevronDownCircle } from "react-icons/bi";
 import DateFormatter from "../../../functions/dateFormatter";
@@ -14,9 +21,17 @@ const SingleDatePicker = ({
   isDisabled: boolean;
   lite?: boolean;
 }) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
   return (
-    <Menu>
+    <Menu
+      isOpen={isOpen}
+      onClose={onClose}
+      onOpen={onOpen}
+      closeOnSelect={false}
+    >
       <MenuButton
+        onClick={onOpen}
         isDisabled={isDisabled}
         w="max-content"
         as={Button}
@@ -30,7 +45,13 @@ const SingleDatePicker = ({
       </MenuButton>
       <MenuList>
         <MenuItem bg="none" p={0} w="fit-content">
-          <Calendar onChange={(item) => setDate(item)} date={date} />
+          <Calendar
+            onChange={(item) => {
+              setDate(item);
+              onClose();
+            }}
+            date={date}
+          />
         </MenuItem>
       </MenuList>
     </Menu>
