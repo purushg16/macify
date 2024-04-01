@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 
 interface DateBlockProps {
   currentDate: Date;
@@ -22,17 +22,23 @@ const DateBlock = ({ currentDate }: DateBlockProps) => {
         borderBottom="1px solid #ECF2F3"
         pb={2}
       >
-        <Text textAlign="center" fontWeight={700} fontSize="xs" color="gray">
+        <Text
+          textAlign="center"
+          fontWeight={700}
+          fontSize="xs"
+          color="gray.200"
+        >
           {month}
         </Text>
-        <Text
+        <Heading
           textAlign="center"
           fontWeight={700}
           fontSize="lg"
           lineHeight="normal"
+          color="secondary.300"
         >
           {date} {/* date */}
-        </Text>
+        </Heading>
       </SimpleGrid>
     </Box>
   );

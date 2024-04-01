@@ -73,8 +73,8 @@ const ScheduleTimeline = ({
         md: behind ? 0 : 14,
         lg: behind ? 0 : 20,
       }} // 20 is perfect centre day
-      borderRadius={10}
-      borderStartRadius={behind ? 0 : 10}
+      borderRadius={5}
+      borderStartRadius={behind ? 0 : 5}
       zIndex={10}
       onClick={handleToggle}
       w={{

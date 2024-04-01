@@ -23,6 +23,7 @@ const BookingContainer = ({
 
   const currentHosting: boolean =
     date in scheduleData &&
+    !behindHosting &&
     isDateBetween(new Date(firstData.checkIn), new Date(firstData.checkOut)) &&
     Object.keys(scheduleData).indexOf(date) === 0;
 
