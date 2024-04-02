@@ -37,7 +37,7 @@ const ScheduleTimeline = ({
   const border = current ? "#7edf9a" : upcoming ? "#b793f3" : "#ffe36e";
 
   const scheduleBlockWidth = durationCalculator(
-    behind ? new Date().getTime() : startDate.getTime(),
+    behind ? new Date().setHours(0) : startDate.getTime(),
     endDate.getTime()
   );
 
