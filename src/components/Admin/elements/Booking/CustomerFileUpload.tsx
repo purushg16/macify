@@ -127,7 +127,7 @@ function CustomerFileUpload() {
         }
         buttons={
           <>
-            <Link to={"/booking/" + propertyId}>
+            <Link to={"/booking/" + propertyId + "/1"}>
               <Button>Back</Button>
             </Link>
 

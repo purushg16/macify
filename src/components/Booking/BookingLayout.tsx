@@ -12,6 +12,7 @@ const BookingLayout = () => {
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
+  if (location.href.split("/").length === 5) return <Outlet />;
   return (
     <Flex gap={8} p={4} flexDir="column">
       <GridItem h="max-content">

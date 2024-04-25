@@ -12,10 +12,12 @@ import { TbMinus } from "react-icons/tb";
 import homies from "../../../../assets/booking/friends.png";
 import AnimateMove from "../../../motions/Move";
 import useBookingStore from "../../../store/bookingStore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import BookingFooter from "./BookingFooter";
 
 const NumberOfGuestsForm = () => {
+  const propertyId = useParams().propertyId;
+
   const navigate = useNavigate();
   const numberOfGuests = useBookingStore((s) => s.numberOfGuests);
   const setNumberOfGuests = useBookingStore((s) => s.setNumberOfGuests);
@@ -84,17 +86,23 @@ const NumberOfGuestsForm = () => {
           </AnimateMove>
         }
         buttons={
-          <Button
-            isDisabled={!(valueAsNumber >= 1)}
-            colorScheme="primary"
-            onClick={() => {
-              setNumberOfGuests(valueAsNumber);
-              isNumberOfGuestsSelected(true);
-              navigate("2");
-            }}
-          >
-            Continue
-          </Button>
+          <>
+            <Link to={"/booking/" + propertyId}>
+              <Button>Back</Button>
+            </Link>
+
+            <Button
+              isDisabled={!(valueAsNumber >= 1)}
+              colorScheme="primary"
+              onClick={() => {
+                setNumberOfGuests(valueAsNumber);
+                isNumberOfGuestsSelected(true);
+                navigate("2");
+              }}
+            >
+              Continue
+            </Button>
+          </>
         }
       />
     </>

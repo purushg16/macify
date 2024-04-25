@@ -13,7 +13,7 @@ const FinalPage = () => {
         subheading="Your booking has been confirmed"
         buttons={
           <>
-            <NavigatorWrapper to={"/booking/" + propertyId}>
+            <NavigatorWrapper to={"/booking/" + propertyId + "/1"}>
               <Button colorScheme="primary">New Booking!</Button>
             </NavigatorWrapper>
           </>
