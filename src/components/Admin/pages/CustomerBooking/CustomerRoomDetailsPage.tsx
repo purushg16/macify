@@ -30,7 +30,7 @@ const ReportTimePage = () => {
   };
 
   const navigate = useNavigate();
-  if (!numberOfGuests) return <Navigate to="/booking" />;
+  if (!numberOfGuests) return <Navigate to={"/booking/" + propertyId} />;
   return (
     <>
       <BookingFooter

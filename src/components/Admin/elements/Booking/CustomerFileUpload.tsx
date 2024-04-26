@@ -28,6 +28,7 @@ function CustomerFileUpload() {
   const propertyId = useParams().propertyId;
 
   const count = useBookingStore((s) => s.numberOfGuests);
+  const addFiles = useBookingStore((s) => s.addFiles);
   const files = useBookingStore((s) => s.filesUploaded);
   const removeFiles = useBookingStore((s) => s.removeFiles);
   const clearGuests = useBookingGuestStore((s) => s.clearGuests);
@@ -74,7 +75,7 @@ function CustomerFileUpload() {
     navigate("/booking/" + propertyId + "/3");
   };
 
-  if (!count) return <Navigate to="/booking" />;
+  if (!count) return <Navigate to={"/booking/" + propertyId} />;
   return (
     <>
       <Box w="100%" p={4} bg="#f4f4f4" borderRadius={10}>
@@ -121,7 +122,11 @@ function CustomerFileUpload() {
               pointerEvents={count === files?.length ? "none" : "all"}
               opacity={count === files?.length ? 0.5 : 1}
             >
-              <DropZone />
+              <DropZone
+                limit={count}
+                callback={addFiles}
+                isDisabled={files?.length === count}
+              />
             </Box>
           </AnimateMove>
         }

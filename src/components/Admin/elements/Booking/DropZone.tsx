@@ -2,13 +2,16 @@ import { Box, Text, Button, useToast } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { useDropzone, FileWithPath } from "react-dropzone";
 import { acceptStyle, focusedStyle, rejectStyle } from "./DropZoneStyles";
-import useBookingStore from "../../../store/bookingStore";
 import { MdUploadFile } from "react-icons/md";
 
-const DropZone = () => {
+interface Props {
+  limit: number | undefined;
+  callback: (file: FileWithPath | FileWithPath[]) => void;
+  isDisabled: boolean;
+}
+
+const DropZone = ({ limit, callback, isDisabled }: Props) => {
   const toast = useToast();
-  const count = useBookingStore((s) => s.numberOfGuests);
-  const addFiles = useBookingStore((s) => s.addFiles);
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
     useDropzone({
@@ -16,7 +19,7 @@ const DropZone = () => {
         "application/pdf": [],
         "image/png": [".png", ".img", ".jpg", ".jpeg"],
       },
-      maxFiles: count,
+      maxFiles: limit,
 
       onDropRejected: (rej) => {
         toast({
@@ -28,7 +31,7 @@ const DropZone = () => {
       },
 
       onDrop: async (acceptedFiles: FileWithPath[]) => {
-        if (acceptedFiles.length > 0) addFiles(acceptedFiles);
+        if (acceptedFiles.length > 0 && !isDisabled) callback(acceptedFiles);
       },
     });
 

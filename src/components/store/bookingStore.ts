@@ -21,6 +21,13 @@ interface BookingStoreInterface {
 
   cloudinaryLink: string | undefined;
   setCloudinaryLink: (link: string | undefined) => void;
+
+  paymentProofFile: FileWithPath[] | undefined;
+  addPaymentProof: (files: FileWithPath[] | FileWithPath) => void;
+  removePaymentProof: (files: FileWithPath[] | FileWithPath) => void;
+
+  arrivalTime: string | undefined;
+  setArrivalTime: (time: string) => void;
 }
 
 const useBookingStore = create<BookingStoreInterface>((set) => ({
@@ -28,6 +35,10 @@ const useBookingStore = create<BookingStoreInterface>((set) => ({
   setNumberOfGuests: (count) => {
     set(() => ({ numberOfGuests: count }));
   },
+
+  arrivalTime: undefined,
+  setArrivalTime: (arrivalTime) => set({ arrivalTime }),
+
   numberOfGuestsSelected: false,
   isNumberOfGuestsSelected: (status) => {
     set(() => ({ numberOfGuestsSelected: status }));
@@ -45,6 +56,25 @@ const useBookingStore = create<BookingStoreInterface>((set) => ({
       filesUploaded: Array.isArray(files)
         ? [...(store.filesUploaded || []), ...files]
         : [...(store.filesUploaded || []), files],
+    }));
+  },
+
+  paymentProofFile: undefined,
+  addPaymentProof: (files) => {
+    set((store) => ({
+      paymentProofFile: Array.isArray(files)
+        ? [...(store.paymentProofFile || []), ...files]
+        : [...(store.paymentProofFile || []), files],
+    }));
+  },
+
+  removePaymentProof: (file) => {
+    set((store) => ({
+      paymentProofFile:
+        store.paymentProofFile?.find((f) => f === file) &&
+        store.paymentProofFile.length == 1
+          ? undefined
+          : store.paymentProofFile?.filter((f) => f !== file),
     }));
   },
 

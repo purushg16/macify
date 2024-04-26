@@ -1,8 +1,10 @@
 import { Flex, GridItem, Heading } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const BookingLayout = () => {
+  const location = useLocation();
+
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       event.preventDefault();
@@ -12,8 +14,9 @@ const BookingLayout = () => {
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, []);
 
-  if (location.href.split("/").length === 5) return <Outlet />;
-  return (
+  return location.pathname.split("/").length === 3 ? (
+    <Outlet />
+  ) : (
     <Flex gap={8} p={4} flexDir="column">
       <GridItem h="max-content">
         <Heading fontSize="2xl" children="Macify" />
@@ -30,51 +33,6 @@ const BookingLayout = () => {
         </Flex>
       </GridItem>
     </Flex>
-    // <Box
-    //   px={10}
-    //   h="100vh"
-    //   maxH="100vh"
-    //   display="flex"
-    //   alignItems="center"
-    //   justifyContent="center"
-    // >
-    //   <Flex
-    //     pos="relative"
-    //     w="100%"
-    //     alignItems="center"
-    //     justifyContent="center"
-    //     m="auto"
-    //     maxW={600}
-    //     minH={700}
-    //     maxH={700}
-    //     my={{ base: 8, md: 16 }}
-    //     p={8}
-    //     borderRadius={20}
-    //     border="1px solid"
-    //     borderColor="gray.100"
-    //   >
-    //     <Flex
-    //       w="100%"
-    //       flexDir="column"
-    //       gap={12}
-    //       textAlign="center"
-    //       alignItems="center"
-    //       justifyContent="space-between"
-    //     >
-    //       <Outlet />
-    //     </Flex>
-
-    //     <Heading
-    //       p={{ base: 4, md: 6 }}
-    //       fontSize="lg"
-    //       pos="absolute"
-    //       bottom={0}
-    //       right={0}
-    //     >
-    //       Macify
-    //     </Heading>
-    //   </Flex>
-    // </Box>
   );
 };
 

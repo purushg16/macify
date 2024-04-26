@@ -67,24 +67,21 @@ const extractData = async (file: string) => {
 
       const dobRegex = /(\d{2}\/\d{2}\/\d{4})/;
       const dobMatch = result.match(dobRegex);
-      const dob = dobMatch![1];
-
-      let splittedDate;
-      if (dob) splittedDate = moment(dob, "DD/MM/YYYY").toDate();
+      const dob = moment(dobMatch![1], "DD/MM/YYYY").toDate();
 
       const lines = result.trim().split("\n");
       const line = lines[3].trim();
       const words = line.split(" ");
       const name = words.filter((word) => word.length > 4);
-      const age = calculateAge(dob);
+      const age = calculateAge(dobMatch![1]);
 
       return {
         id: uuidv4(),
         guestName: name[0] || "",
-        age: age!,
+        age: age || null,
         phone: parseInt(""),
-        dob: splittedDate!,
-        gender: gender,
+        dob: dob || null,
+        gender: gender || null,
         idProof: file,
         idProofType: "passport",
       } as Guest;

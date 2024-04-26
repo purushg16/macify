@@ -3,7 +3,6 @@ import BookingFooter from "../../elements/Booking/BookingFooter";
 import { Link, useParams } from "react-router-dom";
 import AssignRoomCard from "../../elements/Booking/AssignRoomCard";
 import useBookingRoomStore from "../../../store/bookingRoomStore";
-import SubmitButton from "../../elements/Booking/SubmitButton";
 
 const RoomAssignPage = () => {
   const rooms = useBookingRoomStore((s) => s.rooms);
@@ -35,7 +34,9 @@ const RoomAssignPage = () => {
             <Link to={"/booking/" + propertyId + "/5"}>
               <Button> Back </Button>
             </Link>
-            <SubmitButton />
+            <Link to={"/booking/" + propertyId + "/7"}>
+              <Button colorScheme="primary"> Next </Button>
+            </Link>
           </>
         }
       />
