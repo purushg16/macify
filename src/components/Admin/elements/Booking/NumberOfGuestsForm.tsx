@@ -97,7 +97,7 @@ const NumberOfGuestsForm = () => {
               onClick={() => {
                 setNumberOfGuests(valueAsNumber);
                 isNumberOfGuestsSelected(true);
-                navigate("2");
+                navigate("/booking/" + propertyId + "/2");
               }}
             >
               Continue

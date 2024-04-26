@@ -42,7 +42,7 @@ const BookingIndexPage = () => {
                 fontsize: "xs",
                 color: "primary.50",
               }}
-              children="powered by Macdasy"
+              children="powered by Macify"
             />
           </Heading>
         </VStack>
@@ -52,21 +52,21 @@ const BookingIndexPage = () => {
             w={currentImageIndex === 0 ? 3 : 2}
             aspectRatio={currentImageIndex === 0 ? "3/2" : "1/1"}
             borderRadius={100}
-            bg={currentImageIndex === 0 ? "secondary.200" : "primary.200"}
+            bg={currentImageIndex === 0 ? "secondary.200" : "white"}
             transition="all 0.7s"
           />
           <Box
             w={currentImageIndex === 1 ? 3 : 2}
             aspectRatio={currentImageIndex === 1 ? "3/2" : "1/1"}
             borderRadius={100}
-            bg={currentImageIndex === 1 ? "secondary.200" : "primary.200"}
+            bg={currentImageIndex === 1 ? "secondary.200" : "white"}
             transition="all 0.7s"
           />
           <Box
             w={currentImageIndex === 2 ? 3 : 2}
             aspectRatio={currentImageIndex === 2 ? "3/2" : "1/1"}
             borderRadius={100}
-            bg={currentImageIndex === 2 ? "secondary.200" : "primary.200"}
+            bg={currentImageIndex === 2 ? "secondary.200" : "white"}
             transition="all 0.7s"
           />
         </HStack>

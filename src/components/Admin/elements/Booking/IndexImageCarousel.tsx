@@ -18,7 +18,7 @@ const IndexImageCarousel = ({
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setOpacity(0); // Fade out
+      setOpacity(0.7); // Fade out
 
       setTimeout(() => {
         callback(
