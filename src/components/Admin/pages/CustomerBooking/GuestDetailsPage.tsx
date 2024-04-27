@@ -17,7 +17,6 @@ const GuestDetailsPage = () => {
   const guests = useBookingGuestStore((s) => s.guests);
   const navigate = useNavigate();
 
-  console.log(guests);
   const isAnyFieldEmpty = () => {
     return guests.some((guest) =>
       Object.keys(guest)

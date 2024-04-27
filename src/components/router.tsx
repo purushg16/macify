@@ -44,7 +44,6 @@ import AddBedsPage from "./Admin/pages/AddBedsPage";
 import HostelCalendarPage from "./Admin/pages/HostelCalendarPage";
 import ManagerDashBoardPage from "./Admin/pages/Manager/ManagerDashboad";
 import BookingIndexPage from "./Admin/elements/Booking/BookingIndexPage";
-import PaymentProofPage from "./Admin/elements/Booking/PaymentProofPage";
 
 const router = createBrowserRouter([
   {
@@ -129,8 +128,7 @@ const router = createBrowserRouter([
       { path: "4", element: <GuestDetailsPage /> },
       { path: "5", element: <CustomerRoomDetailsPage /> },
       { path: "6", element: <RoomAssignPage /> },
-      { path: "7", element: <PaymentProofPage /> },
-      { path: "8", element: <FinalPage /> },
+      { path: "7", element: <FinalPage /> },
     ],
   },
 ]);

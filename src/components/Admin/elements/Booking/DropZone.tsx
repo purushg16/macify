@@ -47,6 +47,7 @@ const DropZone = ({ limit, callback, isDisabled }: Props) => {
   return (
     <>
       <Box
+        w="100%"
         p={2}
         borderRadius={20}
         display="flex"

@@ -8,12 +8,15 @@ const CheckInTimePicker = ({ arrivalTime }: { arrivalTime?: boolean }) => {
   const checkInTime = useAddPropertyStore((s) => s.checkIn);
   const setCheckInTime = useAddPropertyStore((s) => s.setCheckInTime);
 
+  const arrivalT = useBookingStore((s) => s.arrivalTime);
   const setArrivalTime = useBookingStore((s) => s.setArrivalTime);
 
   return (
     <Menu placement="top">
       <MenuButton textAlign="left" w="100%" as={Button} rightIcon={<BsClock />}>
-        {checkInTime || "Check In Time"}
+        {!arrivalTime
+          ? checkInTime || "Check In Time"
+          : arrivalT || "Arrival Time"}
       </MenuButton>
       <MenuList borderRadius={20} p={2} maxH={200} overflowY="scroll">
         {timeList.map((time, i) => (

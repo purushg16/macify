@@ -8,9 +8,10 @@ import {
   AlertDialogBody,
   AlertDialogFooter,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useCustomerBooking } from "../../../hooks/useCustomer";
 import { PropertyType } from "../../../store/AddProperty/addPropertyBasicStore";
+import PaymentProofModal from "./PaymentProofModal";
 
 const HostelSubmitButton = ({
   isDisabled,
@@ -23,6 +24,8 @@ const HostelSubmitButton = ({
   const cancelRef = React.useRef(null);
   const { mutate, isPending } = useCustomerBooking(propertyType, false);
 
+  const [canSubmit, setCanSubmit] = useState(false);
+
   return (
     <>
       <Button colorScheme="primary" onClick={onOpen} isDisabled={isDisabled}>
@@ -30,6 +33,7 @@ const HostelSubmitButton = ({
       </Button>
 
       <AlertDialog
+        size="full"
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
         onClose={onClose}
@@ -41,7 +45,7 @@ const HostelSubmitButton = ({
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure you want to confirm the booking?
+              <PaymentProofModal callback={setCanSubmit} />
             </AlertDialogBody>
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
@@ -52,6 +56,7 @@ const HostelSubmitButton = ({
                 ml={3}
                 onClick={() => mutate()}
                 isLoading={isPending}
+                isDisabled={!canSubmit}
               >
                 Submit Booking
               </Button>

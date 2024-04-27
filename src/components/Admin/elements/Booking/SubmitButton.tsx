@@ -10,7 +10,8 @@ import {
 } from "@chakra-ui/react";
 import useBookingRoomStore from "../../../store/bookingRoomStore";
 import { useCustomerBooking } from "../../../hooks/useCustomer";
-import React from "react";
+import React, { useState } from "react";
+import PaymentProofModal from "./PaymentProofModal";
 
 const SubmitButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -19,6 +20,7 @@ const SubmitButton = () => {
 
   const unassignedGuests = useBookingRoomStore((s) => s.unassignedGuests);
   const rooms = useBookingRoomStore((s) => s.rooms);
+  const [canSubmit, setCanSubmit] = useState(false);
 
   return (
     <>
@@ -33,6 +35,7 @@ const SubmitButton = () => {
         Submit
       </Button>
       <AlertDialog
+        size="full"
         isCentered
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
@@ -45,7 +48,7 @@ const SubmitButton = () => {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure you want to confirm the booking?
+              <PaymentProofModal callback={setCanSubmit} />
             </AlertDialogBody>
 
             <AlertDialogFooter>
@@ -57,6 +60,7 @@ const SubmitButton = () => {
                 onClick={() => mutate()}
                 ml={3}
                 isLoading={isPending}
+                isDisabled={!canSubmit}
               >
                 Submit Booking
               </Button>
