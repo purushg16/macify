@@ -20,6 +20,9 @@ import UpcomingCheckInGrid from "../elements/Dashboard/UpcomingCheckInGrid";
 import UpcomingCheckOutGrid from "../elements/Dashboard/UpcomingCheckOuts";
 import LoadingIndicator from "../elements/LoadingIndicator";
 import MinimalAddButton from "../elements/Dashboard/MinimalAddButton";
+import property from "../../../assets/app/Dashboard/property.png";
+import manager from "../../../assets/app/Dashboard/manager.png";
+import booking from "../../../assets/app/Dashboard/schedule.png";
 
 import { FaRegBuilding } from "react-icons/fa";
 import { FaRegCalendarCheck } from "react-icons/fa";
@@ -80,16 +83,26 @@ const DashBoardPage = () => {
               }}
             >
               <MinimalAddButton
+                bg="#bcd3c7"
+                img={property}
                 title="Property"
-                route=""
+                route="properties/add"
                 icon={FaRegBuilding}
               />
               <MinimalAddButton
+                bg="#b8d7e4"
+                img={booking}
                 title="Booking"
-                route=""
+                route="properties"
                 icon={FaRegCalendarCheck}
               />
-              <MinimalAddButton title="Manager" route="" icon={IoPersonAdd} />
+              <MinimalAddButton
+                bg="#b9b8e4"
+                img={manager}
+                title="Manager"
+                route="manager"
+                icon={IoPersonAdd}
+              />
             </Flex>
           </Box>
         </VStack>
