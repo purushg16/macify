@@ -4,8 +4,8 @@ import {
   Button,
   MenuList,
   MenuItem,
-  Text,
   Box,
+  FormLabel,
 } from "@chakra-ui/react";
 import { IoChevronDownOutline } from "react-icons/io5";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
@@ -20,9 +20,9 @@ const GuestGenderSelector = ({
   const editGuest = useBookingGuestStore((s) => s.editGuests);
   return (
     <Box>
-      <Text fontSize="sm" color="gray" mb={2}>
+      <FormLabel fontSize="xs" color="gray" m={0}>
         Gender
-      </Text>
+      </FormLabel>
       <Menu>
         <MenuButton
           as={Button}

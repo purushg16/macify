@@ -11,6 +11,7 @@ import Guest from "../../../entities/Guest";
 import useBookingGuestStore from "../../../store/bookingGuestStore";
 import SingleDatePicker from "../HostelCalendar/HostelDatePicker";
 import GuestGenderSelector from "./GuestGenderSelector";
+import GuestIdProofTypeSelector from "./GuestIdProofTypeSelector";
 
 const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
   const editGuest = useBookingGuestStore((s) => s.editGuests);
@@ -27,7 +28,7 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
         borderColor="primary.200"
       >
         <FormControl>
-          <FormLabel fontSize="sm" color="gray">
+          <FormLabel m={0} fontSize="xs" color="gray">
             Guest Name
           </FormLabel>
           <Input
@@ -40,7 +41,7 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
         </FormControl>
 
         <FormControl>
-          <FormLabel fontSize="sm" color="gray">
+          <FormLabel m={0} fontSize="xs" color="gray">
             Date Of Birth
           </FormLabel>
           <SingleDatePicker
@@ -53,13 +54,14 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
 
         <SimpleGrid columns={2} maxW="100%" gap={4}>
           <FormControl>
-            <FormLabel fontSize="sm" color="gray">
+            <FormLabel m={0} fontSize="xs" color="gray">
               Age
             </FormLabel>
             <Input
+              type="number"
               placeholder="Age"
               bg="#f4f4f4"
-              value={guest.age}
+              value={guest.age || parseInt("")}
               onChange={(e) => editGuest(guest.id!, "age", e.target.value)}
             />
           </FormControl>
@@ -68,15 +70,23 @@ const GuestDetailsHug = ({ guest, i }: { guest: Guest; i: number }) => {
         </SimpleGrid>
 
         <FormControl>
-          <FormLabel fontSize="sm" color="gray">
+          <FormLabel m={0} fontSize="xs" color="gray">
             Phone
           </FormLabel>
           <Input
+            type="number"
             placeholder="Phone"
             bg="#f4f4f4"
             value={guest.phone || ""}
             onChange={(e) => editGuest(guest.id!, "phone", e.target.value)}
           />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel m={0} fontSize="xs" color="gray">
+            Id Proof Type
+          </FormLabel>
+          <GuestIdProofTypeSelector id={guest.id!} type={guest.idProofType!} />
         </FormControl>
       </Flex>
     </Box>

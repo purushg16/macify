@@ -20,6 +20,7 @@ import useBookingGuestStore from "../../../store/bookingGuestStore";
 import useBookingRoomStore from "../../../store/bookingRoomStore";
 import cloudinaryUpload from "../../../functions/cloudinaryUploader";
 import { useState } from "react";
+import createGuest from "../../../functions/createGuest";
 
 function CustomerFileUpload() {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,30 +38,28 @@ function CustomerFileUpload() {
     (s) => s.resetUnassignedGuests
   );
 
-  const extractDocData = async (uploadedFiles: string) => {
+  const extractDocData = async (uploadedFile: string) => {
     try {
-      await extractData(uploadedFiles).then((res) => {
+      await extractData(uploadedFile).then((res) => {
         appendGuests(res);
       });
     } catch (error) {
-      toast({
-        title: "Try uploading a different file",
-        status: "warning",
-        duration: 2000,
-      });
-      console.error("Error extracting data:", error);
+      appendGuests(createGuest(uploadedFile));
     }
   };
 
   const handleUpload = async () => {
+    clearGuests();
     setIsLoading(true);
 
     try {
       const uploadResponses = await cloudinaryUpload(files!);
 
-      uploadResponses.forEach((response) => {
-        if (response !== undefined) extractDocData(response.secure_url);
-      });
+      await Promise.all(
+        uploadResponses.map(async (response) => {
+          if (response !== undefined) await extractDocData(response.secure_url);
+        })
+      );
     } catch (error) {
       toast({
         title: "Files are not added to the cloud, try again later",
@@ -70,7 +69,6 @@ function CustomerFileUpload() {
     } finally {
       setIsLoading(false);
       resetUnassignedGuests();
-      clearGuests();
     }
     navigate("/booking/" + propertyId + "/3");
   };

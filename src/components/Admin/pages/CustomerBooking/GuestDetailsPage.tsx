@@ -17,6 +17,7 @@ const GuestDetailsPage = () => {
   const guests = useBookingGuestStore((s) => s.guests);
   const navigate = useNavigate();
 
+  console.log(guests);
   const isAnyFieldEmpty = () => {
     return guests.some((guest) =>
       Object.keys(guest)
@@ -29,14 +30,7 @@ const GuestDetailsPage = () => {
   };
 
   return (
-    <Flex
-      gap={4}
-      flexDir="column"
-      overflowY="auto"
-      borderRadius={20}
-      p={4}
-      pt={0}
-    >
+    <Flex gap={4} flexDir="column" overflowY="auto" borderRadius={20} pt={0}>
       {guests.length === 0 ? (
         <Spinner />
       ) : (
@@ -48,7 +42,7 @@ const GuestDetailsPage = () => {
 
       <BookingFooter
         title="Guest Details"
-        subheading="Enter the requried details for all the homies"
+        subheading="Enter the missing details for all the homies"
         buttons={
           <>
             <Link to={"/booking/" + propertyId + "/3"}>

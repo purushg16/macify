@@ -14,7 +14,7 @@ const extractData = async (file: string) => {
     result =
       toOccurrence !== -1 ? result.substring(result.indexOf("To") + 2) : result;
 
-    if (result.includes("Aadhaar")) {
+    if (result.includes("Aadhaar") || result.includes("aadhaar")) {
       const phoneRegex = /\b\d{10}\b/g;
       const dobRegex = /\b\d{2}\/\d{2}\/\d{4}\b/g;
       const genderRegex = /\b(MALE|FEMALE)\b/i;
@@ -78,7 +78,7 @@ const extractData = async (file: string) => {
       return {
         id: uuidv4(),
         guestName: name[0] || "",
-        age: age || null,
+        age: age || parseInt(""),
         phone: parseInt(""),
         dob: dob || null,
         gender: gender || null,
