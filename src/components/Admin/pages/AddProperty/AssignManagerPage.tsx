@@ -69,7 +69,7 @@ const AssignManagerPage = () => {
         />
 
         <HStack mt={2}>
-          <NavigatorWrapper to="/admin/properties/add/6">
+          <NavigatorWrapper to="/admin/properties/add/7">
             <Button id="extra">Back</Button>
           </NavigatorWrapper>
 

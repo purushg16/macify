@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import Manager from "../../entities/manager";
 import { AddPropertyBasicInterface } from "../../entities/addPropertyBasicInterface.ts";
+import { FileWithPath } from "react-dropzone";
 
 export type PropertyType =
   | "hostel"
@@ -24,6 +25,10 @@ interface AddPropertyStoreActions {
   setCountry: (country: string | undefined) => void;
   setManager: (manager: Manager | undefined) => void;
 
+  images: FileWithPath[];
+  appendImages: (files: FileWithPath | FileWithPath[]) => void;
+  removeImages: (files: FileWithPath) => void;
+
   clearStore: () => void;
 }
 
@@ -41,6 +46,17 @@ const useAddPropertyStore = create<
   zipcode: undefined,
   country: undefined,
   manager: undefined,
+
+  images: [],
+  appendImages: (files) =>
+    set((store) => ({
+      images: Array.isArray(files)
+        ? [...store.images, ...files]
+        : [...store.images, files],
+    })),
+  removeImages: (file) =>
+    set((store) => ({ images: store.images.filter((img) => img !== file) })),
+
   setPropertyName: (propertyName) => set({ propertyName }),
   setPropertyType: (propertyType) => set({ propertyType }),
   setRentWithin: (rentWithin) => set({ rentWithin }),

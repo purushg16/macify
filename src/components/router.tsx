@@ -44,6 +44,7 @@ import AddBedsPage from "./Admin/pages/AddBedsPage";
 import HostelCalendarPage from "./Admin/pages/HostelCalendarPage";
 import ManagerDashBoardPage from "./Admin/pages/Manager/ManagerDashboad";
 import BookingIndexPage from "./Admin/elements/Booking/BookingIndexPage";
+import PropertyImageUploadPage from "./Admin/pages/AddProperty/PropertyImageUploadPage";
 
 const router = createBrowserRouter([
   {
@@ -93,7 +94,8 @@ const router = createBrowserRouter([
               { path: "4", element: <CheckingTimePage /> },
               { path: "5", element: <AmenitiesPages /> },
               { path: "6", element: <PropertyAddressPage /> },
-              { path: "7", element: <AssignManagerPage /> },
+              { path: "7", element: <PropertyImageUploadPage /> },
+              { path: "8", element: <AssignManagerPage /> },
               { path: "success", element: <SuccessfulPage /> },
             ],
           },
