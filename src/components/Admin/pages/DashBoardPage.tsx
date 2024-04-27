@@ -1,23 +1,29 @@
 import {
   Box,
+  Divider,
   Flex,
   Heading,
   Highlight,
   SimpleGrid,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaRunning } from "react-icons/fa";
 import { MdChecklistRtl, MdEmojiFlags } from "react-icons/md";
 import { useGetProfile } from "../../hooks/useAdmin";
 import AnimateMove from "../../motions/Move";
-import AddSlider from "../elements/Dashboard/AddSlider";
 import CurrentHostingGrid from "../elements/Dashboard/CurrentHostingGrid";
 import HostingButton from "../elements/Dashboard/HostingButton";
 import TodayBanner from "../elements/Dashboard/TodayBanner";
 import UpcomingCheckInGrid from "../elements/Dashboard/UpcomingCheckInGrid";
 import UpcomingCheckOutGrid from "../elements/Dashboard/UpcomingCheckOuts";
 import LoadingIndicator from "../elements/LoadingIndicator";
+import MinimalAddButton from "../elements/Dashboard/MinimalAddButton";
+
+import { FaRegBuilding } from "react-icons/fa";
+import { FaRegCalendarCheck } from "react-icons/fa";
+import { IoPersonAdd } from "react-icons/io5";
 
 const DashBoardPage = () => {
   const [tab, setTab] = useState(0);
@@ -26,35 +32,60 @@ const DashBoardPage = () => {
 
   return (
     <Flex flexDir="column" w="100%" gap={8}>
-      <AnimateMove delay={0.2}>
-        <Flex gap={4} align="start">
-          <Box>
-            Hello,
-            <Heading>
-              {isLoading && <LoadingIndicator text="user" />}
-              {user && user.firstName && user.lastName && (
-                <Highlight query="Dayalan S" styles={{ color: "primary.500" }}>
-                  {user.firstName + " " + user.lastName + " 👋"}
-                </Highlight>
-              )}
-            </Heading>
-            <Text color="gray" fontSize="xs">
-              What a day to enter earning!
-            </Text>
+      <AnimateMove delay={0.2} noWidth>
+        <VStack
+          w="100%"
+          align="start"
+          gap={0}
+          bg="primary.500"
+          borderRadius={20}
+        >
+          <Flex w="100%" gap={4} p={4} align="start" justify="space-between">
+            <Box color="secondary.50" fontSize="xs">
+              Welcome Back,
+              <Heading fontSize="2xl" color="secondary.50">
+                {isLoading && <LoadingIndicator text="user" />}
+                {user && user.firstName && user.lastName && (
+                  <Highlight
+                    query="Dayalan S"
+                    styles={{ color: "primary.500" }}
+                  >
+                    {user.firstName + " " + user.lastName + " 👋"}
+                  </Highlight>
+                )}
+              </Heading>
+            </Box>
+          </Flex>
+          <Divider borderColor="primary.900" w="95%" m="auto" />
+
+          <Box w="100%" pt={8}>
+            <Flex gap={4} flexWrap="nowrap" overflowX="auto" px={4}>
+              <MinimalAddButton
+                title="Property"
+                route=""
+                icon={FaRegBuilding}
+              />
+              <MinimalAddButton
+                title="Booking"
+                route=""
+                icon={FaRegCalendarCheck}
+              />
+              <MinimalAddButton title="Manager" route="" icon={IoPersonAdd} />
+            </Flex>
           </Box>
-        </Flex>
+        </VStack>
       </AnimateMove>
 
       <AnimateMove delay={0.4}>
         <TodayBanner />
       </AnimateMove>
 
-      <AnimateMove delay={0.6}>
+      {/* <AnimateMove delay={0.6}>
         <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={12}>
           <Text fontSize="md"> New Beginning, </Text>
           <AddSlider />
         </Flex>
-      </AnimateMove>
+      </AnimateMove> */}
 
       <AnimateMove delay={0.8}>
         <Flex flexDir="column" bg="#f2f2f2" borderRadius={20} p={4} gap={4}>
