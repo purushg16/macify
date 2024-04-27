@@ -39,6 +39,14 @@ const DashBoardPage = () => {
           gap={0}
           bg="primary.500"
           borderRadius={20}
+          pb={4}
+          overflowX="auto"
+          css={{
+            "&::-webkit-scrollbar": {
+              width: "0", // Hide scrollbar for Chrome, Safari, and Opera
+            },
+            scrollbarWidth: "none", // Hide scrollbar for Firefox
+          }}
         >
           <Flex w="100%" gap={4} p={4} align="start" justify="space-between">
             <Box color="secondary.50" fontSize="xs">
@@ -59,7 +67,18 @@ const DashBoardPage = () => {
           <Divider borderColor="primary.900" w="95%" m="auto" />
 
           <Box w="100%" pt={8}>
-            <Flex gap={4} flexWrap="nowrap" overflowX="auto" px={4}>
+            <Flex
+              gap={4}
+              flexWrap="nowrap"
+              overflowX="auto"
+              px={4}
+              css={{
+                "&::-webkit-scrollbar": {
+                  width: "0", // Hide scrollbar for Chrome, Safari, and Opera
+                },
+                scrollbarWidth: "none", // Hide scrollbar for Firefox
+              }}
+            >
               <MinimalAddButton
                 title="Property"
                 route=""
